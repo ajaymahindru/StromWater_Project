@@ -1,0 +1,2717 @@
+{
+  "output": {
+    "submission_id": "237806cd-b3be-4022-9aec-667059b87ee1",
+    "catchments": [
+      {
+        "catchment_comid": 22338109,
+        "nhd_waters": [
+          {
+            "gnis_id": "532032",
+            "gnis_name": "Anacostia River",
+            "ftype": "460",
+            "listed_waters": [
+              {
+                "listed_water_id": "DCANA00E_01",
+                "cycle_year": "2012",
+                "state": "DC",
+                "listed_water_name": "ANACOSTIA DC",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "listed_water_causes": [
+                  {
+                    "lw_detailed_cause_id": 145,
+                    "lw_detailed_cause_name": "ARSENIC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01002",
+                    "icis_unit_code": "19",
+                    "icis_description": "Arsenic, total [as As]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 196,
+                    "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                    "lw_parent_cause_id": 1189,
+                    "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "00310",
+                    "icis_unit_code": "19",
+                    "icis_description": "BOD, 5-day, 20 deg. C"
+                  },
+                  {
+                    "lw_detailed_cause_id": 267,
+                    "lw_detailed_cause_name": "CHLORDANE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51032",
+                    "icis_unit_code": "19",
+                    "icis_description": "Chlordane"
+                  },
+                  {
+                    "lw_detailed_cause_id": 345,
+                    "lw_detailed_cause_name": "COPPER",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01042",
+                    "icis_unit_code": "19",
+                    "icis_description": "Copper, total [as Cu]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 367,
+                    "lw_detailed_cause_name": "DDD",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51440",
+                    "icis_unit_code": "19",
+                    "icis_description": "2,4-DDD [O,P-DDD]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 370,
+                    "lw_detailed_cause_name": "DDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39365",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDE"
+                  },
+                  {
+                    "lw_detailed_cause_id": 372,
+                    "lw_detailed_cause_name": "DDT",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39370",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDT"
+                  },
+                  {
+                    "lw_detailed_cause_id": 381,
+                    "lw_detailed_cause_name": "DEBRIS\/FLOATABLES\/TRASH",
+                    "lw_parent_cause_id": 1092,
+                    "lw_parent_cause_name": "TRASH",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01345",
+                    "icis_unit_code": "9A",
+                    "icis_description": "Debris, floating [severity]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 417,
+                    "lw_detailed_cause_name": "DIELDRIN",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39380",
+                    "icis_unit_code": "19",
+                    "icis_description": "Dieldrin"
+                  },
+                  {
+                    "lw_detailed_cause_id": 500,
+                    "lw_detailed_cause_name": "FECAL COLIFORM",
+                    "lw_parent_cause_id": 861,
+                    "lw_parent_cause_name": "PATHOGENS",
+                    "tmdl_flag": "Y",
+                    "icis_parameter_code": "74055",
+                    "icis_unit_code": "30",
+                    "icis_description": "Coliform, fecal general"
+                  },
+                  {
+                    "lw_detailed_cause_id": 603,
+                    "lw_detailed_cause_name": "HEPTACHLOR EPOXIDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39420",
+                    "icis_unit_code": "19",
+                    "icis_description": "Heptachlor epoxide"
+                  },
+                  {
+                    "lw_detailed_cause_id": 663,
+                    "lw_detailed_cause_name": "LEAD",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01051",
+                    "icis_unit_code": "19",
+                    "icis_description": "Lead, total [as Pb]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 772,
+                    "lw_detailed_cause_name": "NITROGEN, TOTAL",
+                    "lw_parent_cause_id": 792,
+                    "lw_parent_cause_name": "NUTRIENTS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "00600",
+                    "icis_unit_code": "19",
+                    "icis_description": "Nitrogen, total"
+                  },
+                  {
+                    "lw_detailed_cause_id": 811,
+                    "lw_detailed_cause_name": "OIL AND GREASE",
+                    "lw_parent_cause_id": 811,
+                    "lw_parent_cause_name": "OIL AND GREASE",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "00556",
+                    "icis_unit_code": "19",
+                    "icis_description": "Oil & Grease"
+                  },
+                  {
+                    "lw_detailed_cause_id": 903,
+                    "lw_detailed_cause_name": "PHOSPHORUS, TOTAL",
+                    "lw_parent_cause_id": 792,
+                    "lw_parent_cause_name": "NUTRIENTS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 918,
+                    "lw_detailed_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "lw_parent_cause_id": 918,
+                    "lw_parent_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39516",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polychlorinated biphenyls [PCBs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 920,
+                    "lw_detailed_cause_name": "POLYCYCLIC AROMATIC HYDROCARBONS (PAHS) (AQUATIC ECOSYSTEMS)",
+                    "lw_parent_cause_id": 1080,
+                    "lw_parent_cause_name": "TOXIC ORGANICS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "22456",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polynuclear Aromatic Hydrocarbons [PAHs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 1070,
+                    "lw_detailed_cause_name": "TOTAL SUSPENDED SOLIDS (TSS)",
+                    "lw_parent_cause_id": 1110,
+                    "lw_parent_cause_name": "TURBIDITY",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "00530",
+                    "icis_unit_code": "19",
+                    "icis_description": "Solids, total suspended"
+                  },
+                  {
+                    "lw_detailed_cause_id": 1169,
+                    "lw_detailed_cause_name": "ZINC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01092",
+                    "icis_unit_code": "19",
+                    "icis_description": "Zinc, total [as Zn]"
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DCANA00E_02",
+                "cycle_year": "2012",
+                "state": "DC",
+                "listed_water_name": "ANACOSTIA DC",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "listed_water_causes": [
+                  {
+                    "lw_detailed_cause_id": 145,
+                    "lw_detailed_cause_name": "ARSENIC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01002",
+                    "icis_unit_code": "19",
+                    "icis_description": "Arsenic, total [as As]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 196,
+                    "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                    "lw_parent_cause_id": 1189,
+                    "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                    "tmdl_flag": "Y",
+                    "icis_parameter_code": "00310",
+                    "icis_unit_code": "19",
+                    "icis_description": "BOD, 5-day, 20 deg. C"
+                  },
+                  {
+                    "lw_detailed_cause_id": 267,
+                    "lw_detailed_cause_name": "CHLORDANE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51032",
+                    "icis_unit_code": "19",
+                    "icis_description": "Chlordane"
+                  },
+                  {
+                    "lw_detailed_cause_id": 345,
+                    "lw_detailed_cause_name": "COPPER",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01042",
+                    "icis_unit_code": "19",
+                    "icis_description": "Copper, total [as Cu]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 367,
+                    "lw_detailed_cause_name": "DDD",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51440",
+                    "icis_unit_code": "19",
+                    "icis_description": "2,4-DDD [O,P-DDD]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 370,
+                    "lw_detailed_cause_name": "DDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39365",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDE"
+                  },
+                  {
+                    "lw_detailed_cause_id": 372,
+                    "lw_detailed_cause_name": "DDT",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39370",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDT"
+                  },
+                  {
+                    "lw_detailed_cause_id": 381,
+                    "lw_detailed_cause_name": "DEBRIS\/FLOATABLES\/TRASH",
+                    "lw_parent_cause_id": 1092,
+                    "lw_parent_cause_name": "TRASH",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01345",
+                    "icis_unit_code": "9A",
+                    "icis_description": "Debris, floating [severity]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 417,
+                    "lw_detailed_cause_name": "DIELDRIN",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39380",
+                    "icis_unit_code": "19",
+                    "icis_description": "Dieldrin"
+                  },
+                  {
+                    "lw_detailed_cause_id": 500,
+                    "lw_detailed_cause_name": "FECAL COLIFORM",
+                    "lw_parent_cause_id": 861,
+                    "lw_parent_cause_name": "PATHOGENS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "74055",
+                    "icis_unit_code": "30",
+                    "icis_description": "Coliform, fecal general"
+                  },
+                  {
+                    "lw_detailed_cause_id": 603,
+                    "lw_detailed_cause_name": "HEPTACHLOR EPOXIDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39420",
+                    "icis_unit_code": "19",
+                    "icis_description": "Heptachlor epoxide"
+                  },
+                  {
+                    "lw_detailed_cause_id": 663,
+                    "lw_detailed_cause_name": "LEAD",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01051",
+                    "icis_unit_code": "19",
+                    "icis_description": "Lead, total [as Pb]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 772,
+                    "lw_detailed_cause_name": "NITROGEN, TOTAL",
+                    "lw_parent_cause_id": 792,
+                    "lw_parent_cause_name": "NUTRIENTS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "00600",
+                    "icis_unit_code": "19",
+                    "icis_description": "Nitrogen, total"
+                  },
+                  {
+                    "lw_detailed_cause_id": 903,
+                    "lw_detailed_cause_name": "PHOSPHORUS, TOTAL",
+                    "lw_parent_cause_id": 792,
+                    "lw_parent_cause_name": "NUTRIENTS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 918,
+                    "lw_detailed_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "lw_parent_cause_id": 918,
+                    "lw_parent_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39516",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polychlorinated biphenyls [PCBs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 920,
+                    "lw_detailed_cause_name": "POLYCYCLIC AROMATIC HYDROCARBONS (PAHS) (AQUATIC ECOSYSTEMS)",
+                    "lw_parent_cause_id": 1080,
+                    "lw_parent_cause_name": "TOXIC ORGANICS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "22456",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polynuclear Aromatic Hydrocarbons [PAHs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 1070,
+                    "lw_detailed_cause_name": "TOTAL SUSPENDED SOLIDS (TSS)",
+                    "lw_parent_cause_id": 1110,
+                    "lw_parent_cause_name": "TURBIDITY",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "00530",
+                    "icis_unit_code": "19",
+                    "icis_description": "Solids, total suspended"
+                  },
+                  {
+                    "lw_detailed_cause_id": 1169,
+                    "lw_detailed_cause_name": "ZINC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01092",
+                    "icis_unit_code": "19",
+                    "icis_description": "Zinc, total [as Zn]"
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DCTDU01R_00",
+                "cycle_year": "2012",
+                "state": "DC",
+                "listed_water_name": "FORT DUPONT CREEK",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "listed_water_causes": [
+                  {
+                    "lw_detailed_cause_id": 918,
+                    "lw_detailed_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "lw_parent_cause_id": 918,
+                    "lw_parent_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39516",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polychlorinated biphenyls [PCBs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 920,
+                    "lw_detailed_cause_name": "POLYCYCLIC AROMATIC HYDROCARBONS (PAHS) (AQUATIC ECOSYSTEMS)",
+                    "lw_parent_cause_id": 1080,
+                    "lw_parent_cause_name": "TOXIC ORGANICS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "22456",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polynuclear Aromatic Hydrocarbons [PAHs]"
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DCTFS01R_00",
+                "cycle_year": "2012",
+                "state": "DC",
+                "listed_water_name": "FORT STANTON TRIBUTARY",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "listed_water_causes": [
+                  {
+                    "lw_detailed_cause_id": 145,
+                    "lw_detailed_cause_name": "ARSENIC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01002",
+                    "icis_unit_code": "19",
+                    "icis_description": "Arsenic, total [as As]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 267,
+                    "lw_detailed_cause_name": "CHLORDANE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51032",
+                    "icis_unit_code": "19",
+                    "icis_description": "Chlordane"
+                  },
+                  {
+                    "lw_detailed_cause_id": 322,
+                    "lw_detailed_cause_name": "COMBINATION BENTHIC\/FISHES BIOASSESSMENTS",
+                    "lw_parent_cause_id": 251,
+                    "lw_parent_cause_name": "CAUSE UNKNOWN - IMPAIRED BIOTA",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 323,
+                    "lw_detailed_cause_name": "COMBINED BIOTA\/HABITAT BIOASSESSMENTS",
+                    "lw_parent_cause_id": 251,
+                    "lw_parent_cause_name": "CAUSE UNKNOWN - IMPAIRED BIOTA",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 345,
+                    "lw_detailed_cause_name": "COPPER",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01042",
+                    "icis_unit_code": "19",
+                    "icis_description": "Copper, total [as Cu]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 367,
+                    "lw_detailed_cause_name": "DDD",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51440",
+                    "icis_unit_code": "19",
+                    "icis_description": "2,4-DDD [O,P-DDD]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 370,
+                    "lw_detailed_cause_name": "DDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39365",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDE"
+                  },
+                  {
+                    "lw_detailed_cause_id": 372,
+                    "lw_detailed_cause_name": "DDT",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39370",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDT"
+                  },
+                  {
+                    "lw_detailed_cause_id": 417,
+                    "lw_detailed_cause_name": "DIELDRIN",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39380",
+                    "icis_unit_code": "19",
+                    "icis_description": "Dieldrin"
+                  },
+                  {
+                    "lw_detailed_cause_id": 603,
+                    "lw_detailed_cause_name": "HEPTACHLOR EPOXIDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39420",
+                    "icis_unit_code": "19",
+                    "icis_description": "Heptachlor epoxide"
+                  },
+                  {
+                    "lw_detailed_cause_id": 663,
+                    "lw_detailed_cause_name": "LEAD",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01051",
+                    "icis_unit_code": "19",
+                    "icis_description": "Lead, total [as Pb]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 860,
+                    "lw_detailed_cause_name": "PARTICLE DISTRIBUTION (EMBEDDEDNESS)",
+                    "lw_parent_cause_id": 974,
+                    "lw_parent_cause_name": "SEDIMENT",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 918,
+                    "lw_detailed_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "lw_parent_cause_id": 918,
+                    "lw_parent_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39516",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polychlorinated biphenyls [PCBs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 920,
+                    "lw_detailed_cause_name": "POLYCYCLIC AROMATIC HYDROCARBONS (PAHS) (AQUATIC ECOSYSTEMS)",
+                    "lw_parent_cause_id": 1080,
+                    "lw_parent_cause_name": "TOXIC ORGANICS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "22456",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polynuclear Aromatic Hydrocarbons [PAHs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 1169,
+                    "lw_detailed_cause_name": "ZINC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01092",
+                    "icis_unit_code": "19",
+                    "icis_description": "Zinc, total [as Zn]"
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DCTPB01R_00",
+                "cycle_year": "2012",
+                "state": "DC",
+                "listed_water_name": "POPES BRANCH (HAWES RUN)",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "listed_water_causes": [
+                  {
+                    "lw_detailed_cause_id": 145,
+                    "lw_detailed_cause_name": "ARSENIC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01002",
+                    "icis_unit_code": "19",
+                    "icis_description": "Arsenic, total [as As]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 267,
+                    "lw_detailed_cause_name": "CHLORDANE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51032",
+                    "icis_unit_code": "19",
+                    "icis_description": "Chlordane"
+                  },
+                  {
+                    "lw_detailed_cause_id": 322,
+                    "lw_detailed_cause_name": "COMBINATION BENTHIC\/FISHES BIOASSESSMENTS",
+                    "lw_parent_cause_id": 251,
+                    "lw_parent_cause_name": "CAUSE UNKNOWN - IMPAIRED BIOTA",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 323,
+                    "lw_detailed_cause_name": "COMBINED BIOTA\/HABITAT BIOASSESSMENTS",
+                    "lw_parent_cause_id": 251,
+                    "lw_parent_cause_name": "CAUSE UNKNOWN - IMPAIRED BIOTA",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 345,
+                    "lw_detailed_cause_name": "COPPER",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01042",
+                    "icis_unit_code": "19",
+                    "icis_description": "Copper, total [as Cu]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 367,
+                    "lw_detailed_cause_name": "DDD",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "51440",
+                    "icis_unit_code": "19",
+                    "icis_description": "2,4-DDD [O,P-DDD]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 370,
+                    "lw_detailed_cause_name": "DDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39365",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDE"
+                  },
+                  {
+                    "lw_detailed_cause_id": 372,
+                    "lw_detailed_cause_name": "DDT",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39370",
+                    "icis_unit_code": "19",
+                    "icis_description": "DDT"
+                  },
+                  {
+                    "lw_detailed_cause_id": 417,
+                    "lw_detailed_cause_name": "DIELDRIN",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39380",
+                    "icis_unit_code": "19",
+                    "icis_description": "Dieldrin"
+                  },
+                  {
+                    "lw_detailed_cause_id": 603,
+                    "lw_detailed_cause_name": "HEPTACHLOR EPOXIDE",
+                    "lw_parent_cause_id": 885,
+                    "lw_parent_cause_name": "PESTICIDES",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39420",
+                    "icis_unit_code": "19",
+                    "icis_description": "Heptachlor epoxide"
+                  },
+                  {
+                    "lw_detailed_cause_id": 663,
+                    "lw_detailed_cause_name": "LEAD",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01051",
+                    "icis_unit_code": "19",
+                    "icis_description": "Lead, total [as Pb]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 860,
+                    "lw_detailed_cause_name": "PARTICLE DISTRIBUTION (EMBEDDEDNESS)",
+                    "lw_parent_cause_id": 974,
+                    "lw_parent_cause_name": "SEDIMENT",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": null,
+                    "icis_unit_code": null,
+                    "icis_description": null
+                  },
+                  {
+                    "lw_detailed_cause_id": 891,
+                    "lw_detailed_cause_name": "PH",
+                    "lw_parent_cause_id": 1188,
+                    "lw_parent_cause_name": "PH\/ACIDITY\/CAUSTIC CONDITIONS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "00400",
+                    "icis_unit_code": "12",
+                    "icis_description": "pH"
+                  },
+                  {
+                    "lw_detailed_cause_id": 918,
+                    "lw_detailed_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "lw_parent_cause_id": 918,
+                    "lw_parent_cause_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "39516",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polychlorinated biphenyls [PCBs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 920,
+                    "lw_detailed_cause_name": "POLYCYCLIC AROMATIC HYDROCARBONS (PAHS) (AQUATIC ECOSYSTEMS)",
+                    "lw_parent_cause_id": 1080,
+                    "lw_parent_cause_name": "TOXIC ORGANICS",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "22456",
+                    "icis_unit_code": "19",
+                    "icis_description": "Polynuclear Aromatic Hydrocarbons [PAHs]"
+                  },
+                  {
+                    "lw_detailed_cause_id": 1169,
+                    "lw_detailed_cause_name": "ZINC",
+                    "lw_parent_cause_id": 706,
+                    "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                    "tmdl_flag": "N",
+                    "icis_parameter_code": "01092",
+                    "icis_unit_code": "19",
+                    "icis_description": "Zinc, total [as Zn]"
+                  }
+                ]
+              }
+            ],
+            "listed_waters_with_tmdls": [
+              {
+                "listed_water_id": "DCANA00E_01",
+                "cycle_year": "2012",
+                "state": "DC",
+                "listed_water_name": "ANACOSTIA DC",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "tmdls": [
+                  {
+                    "tmdl_id": 59541,
+                    "tmdl_name": "ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2014-07-25T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 471,
+                        "tmdl_pollutant_name": "ESCHERICHIA COLI (E. COLI)",
+                        "tmdl_parent_pollutant_id": 861,
+                        "tmdl_parent_pollutant_name": "PATHOGENS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 500,
+                        "lw_detailed_cause_name": "FECAL COLIFORM",
+                        "lw_parent_cause_id": 861,
+                        "lw_parent_cause_name": "PATHOGENS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "74055",
+                        "icis_unit_code": "30",
+                        "icis_description": "Coliform, fecal general"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DCANA00E_02",
+                "cycle_year": "2012",
+                "state": "DC",
+                "listed_water_name": "ANACOSTIA DC",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "tmdls": [
+                  {
+                    "tmdl_id": 40594,
+                    "tmdl_name": "ANACOSTIA DC",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2010-12-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 772,
+                        "tmdl_pollutant_name": "NITROGEN, TOTAL",
+                        "tmdl_parent_pollutant_id": 792,
+                        "tmdl_parent_pollutant_name": "NUTRIENTS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 40597,
+                    "tmdl_name": "ANACOSTIA DC",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2010-12-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 903,
+                        "tmdl_pollutant_name": "PHOSPHORUS, TOTAL",
+                        "tmdl_parent_pollutant_id": 792,
+                        "tmdl_parent_pollutant_name": "NUTRIENTS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 40598,
+                    "tmdl_name": "ANACOSTIA DC",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2010-12-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1070,
+                        "tmdl_pollutant_name": "TOTAL SUSPENDED SOLIDS (TSS)",
+                        "tmdl_parent_pollutant_id": 1110,
+                        "tmdl_parent_pollutant_name": "TURBIDITY"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 1026,
+                        "lw_detailed_cause_name": "SUSPENDED SOLIDS",
+                        "lw_parent_cause_id": 1110,
+                        "lw_parent_cause_name": "TURBIDITY",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DC_01_DCANA00E_01",
+                "cycle_year": "2004",
+                "state": "DC",
+                "listed_water_name": "LOWER ANACOSTIA RIVER",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "tmdls": [
+                  {
+                    "tmdl_id": 26066,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2001-12-14T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 196,
+                        "tmdl_pollutant_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "tmdl_parent_pollutant_id": 1189,
+                        "tmdl_parent_pollutant_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26067,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2002-02-15T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1026,
+                        "tmdl_pollutant_name": "SUSPENDED SOLIDS",
+                        "tmdl_parent_pollutant_id": 1110,
+                        "tmdl_parent_pollutant_name": "TURBIDITY"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 1026,
+                        "lw_detailed_cause_name": "SUSPENDED SOLIDS",
+                        "lw_parent_cause_id": 1110,
+                        "lw_parent_cause_name": "TURBIDITY",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26068,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-28T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 500,
+                        "tmdl_pollutant_name": "FECAL COLIFORM",
+                        "tmdl_parent_pollutant_id": 861,
+                        "tmdl_parent_pollutant_name": "PATHOGENS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 500,
+                        "lw_detailed_cause_name": "FECAL COLIFORM",
+                        "lw_parent_cause_id": 861,
+                        "lw_parent_cause_name": "PATHOGENS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "74055",
+                        "icis_unit_code": "30",
+                        "icis_description": "Coliform, fecal general"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26069,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 372,
+                        "tmdl_pollutant_name": "DDT",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26070,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 267,
+                        "tmdl_pollutant_name": "CHLORDANE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26071,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 417,
+                        "tmdl_pollutant_name": "DIELDRIN",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26072,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 145,
+                        "tmdl_pollutant_name": "ARSENIC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26073,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 345,
+                        "tmdl_pollutant_name": "COPPER",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26074,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 663,
+                        "tmdl_pollutant_name": "LEAD",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26075,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1169,
+                        "tmdl_pollutant_name": "ZINC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26076,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 370,
+                        "tmdl_pollutant_name": "DDE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26077,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 367,
+                        "tmdl_pollutant_name": "DDD",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26078,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 603,
+                        "tmdl_pollutant_name": "HEPTACHLOR EPOXIDE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26079,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 853,
+                        "tmdl_pollutant_name": "PAH1 - 2 & 3 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26080,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 854,
+                        "tmdl_pollutant_name": "PAH2 - 4 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26081,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 855,
+                        "tmdl_pollutant_name": "PAH3 - 5 & 6 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26082,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-10-31T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 811,
+                        "tmdl_pollutant_name": "OIL AND GREASE",
+                        "tmdl_parent_pollutant_id": 811,
+                        "tmdl_parent_pollutant_name": "OIL AND GREASE"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 811,
+                        "lw_detailed_cause_name": "OIL AND GREASE",
+                        "lw_parent_cause_id": 811,
+                        "lw_parent_cause_name": "OIL AND GREASE",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00556",
+                        "icis_unit_code": "19",
+                        "icis_description": "Oil & Grease"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 33802,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2007-07-24T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1024,
+                        "tmdl_pollutant_name": "SUSPENDED SEDIMENT",
+                        "tmdl_parent_pollutant_id": 974,
+                        "tmdl_parent_pollutant_name": "SEDIMENT"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 1026,
+                        "lw_detailed_cause_name": "SUSPENDED SOLIDS",
+                        "lw_parent_cause_id": 1110,
+                        "lw_parent_cause_name": "TURBIDITY",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 33894,
+                    "tmdl_name": "LOWER ANACOSTIA",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2007-10-31T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 918,
+                        "tmdl_pollutant_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                        "tmdl_parent_pollutant_id": 918,
+                        "tmdl_parent_pollutant_name": "POLYCHLORINATED BIPHENYLS (PCBS)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 34412,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2008-06-05T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 196,
+                        "tmdl_pollutant_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "tmdl_parent_pollutant_id": 1189,
+                        "tmdl_parent_pollutant_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 34416,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2008-06-05T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 768,
+                        "tmdl_pollutant_name": "NITROGEN",
+                        "tmdl_parent_pollutant_id": 792,
+                        "tmdl_parent_pollutant_name": "NUTRIENTS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 34417,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2008-06-05T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 901,
+                        "tmdl_pollutant_name": "PHOSPHORUS",
+                        "tmdl_parent_pollutant_id": 792,
+                        "tmdl_parent_pollutant_name": "NUTRIENTS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 39168,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2010-09-21T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1092,
+                        "tmdl_pollutant_name": "TRASH",
+                        "tmdl_parent_pollutant_id": 1092,
+                        "tmdl_parent_pollutant_name": "TRASH"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 9998,
+                        "lw_detailed_cause_name": "UNLISTED BUT IMPAIRED",
+                        "lw_parent_cause_id": 830,
+                        "lw_parent_cause_name": "OTHER CAUSE",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 42380,
+                    "tmdl_name": "LOWER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2012-07-25T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1024,
+                        "tmdl_pollutant_name": "SUSPENDED SEDIMENT",
+                        "tmdl_parent_pollutant_id": 974,
+                        "tmdl_parent_pollutant_name": "SEDIMENT"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 1026,
+                        "lw_detailed_cause_name": "SUSPENDED SOLIDS",
+                        "lw_parent_cause_id": 1110,
+                        "lw_parent_cause_name": "TURBIDITY",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DC_02_DCANA00E_02",
+                "cycle_year": "2004",
+                "state": "DC",
+                "listed_water_name": "UPPER ANACOSTIA RIVER",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "tmdls": [
+                  {
+                    "tmdl_id": 26083,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2001-12-14T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 196,
+                        "tmdl_pollutant_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "tmdl_parent_pollutant_id": 1189,
+                        "tmdl_parent_pollutant_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26084,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2002-02-15T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1026,
+                        "tmdl_pollutant_name": "SUSPENDED SOLIDS",
+                        "tmdl_parent_pollutant_id": 1110,
+                        "tmdl_parent_pollutant_name": "TURBIDITY"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 1026,
+                        "lw_detailed_cause_name": "SUSPENDED SOLIDS",
+                        "lw_parent_cause_id": 1110,
+                        "lw_parent_cause_name": "TURBIDITY",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26085,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 345,
+                        "tmdl_pollutant_name": "COPPER",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26086,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-28T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 500,
+                        "tmdl_pollutant_name": "FECAL COLIFORM",
+                        "tmdl_parent_pollutant_id": 861,
+                        "tmdl_parent_pollutant_name": "PATHOGENS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 500,
+                        "lw_detailed_cause_name": "FECAL COLIFORM",
+                        "lw_parent_cause_id": 861,
+                        "lw_parent_cause_name": "PATHOGENS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "74055",
+                        "icis_unit_code": "30",
+                        "icis_description": "Coliform, fecal general"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26087,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 372,
+                        "tmdl_pollutant_name": "DDT",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26088,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 267,
+                        "tmdl_pollutant_name": "CHLORDANE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26089,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 417,
+                        "tmdl_pollutant_name": "DIELDRIN",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26090,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 918,
+                        "tmdl_pollutant_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                        "tmdl_parent_pollutant_id": 918,
+                        "tmdl_parent_pollutant_name": "POLYCHLORINATED BIPHENYLS (PCBS)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26091,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 145,
+                        "tmdl_pollutant_name": "ARSENIC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26092,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 663,
+                        "tmdl_pollutant_name": "LEAD",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26093,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1169,
+                        "tmdl_pollutant_name": "ZINC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26094,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 370,
+                        "tmdl_pollutant_name": "DDE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26095,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 603,
+                        "tmdl_pollutant_name": "HEPTACHLOR EPOXIDE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26096,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 853,
+                        "tmdl_pollutant_name": "PAH1 - 2 & 3 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26097,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 854,
+                        "tmdl_pollutant_name": "PAH2 - 4 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26098,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 855,
+                        "tmdl_pollutant_name": "PAH3 - 5 & 6 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26099,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-10-31T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 811,
+                        "tmdl_pollutant_name": "OIL AND GREASE",
+                        "tmdl_parent_pollutant_id": 811,
+                        "tmdl_parent_pollutant_name": "OIL AND GREASE"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 811,
+                        "lw_detailed_cause_name": "OIL AND GREASE",
+                        "lw_parent_cause_id": 811,
+                        "lw_parent_cause_name": "OIL AND GREASE",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00556",
+                        "icis_unit_code": "19",
+                        "icis_description": "Oil & Grease"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 33801,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2007-07-24T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1024,
+                        "tmdl_pollutant_name": "SUSPENDED SEDIMENT",
+                        "tmdl_parent_pollutant_id": 974,
+                        "tmdl_parent_pollutant_name": "SEDIMENT"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 1026,
+                        "lw_detailed_cause_name": "SUSPENDED SOLIDS",
+                        "lw_parent_cause_id": 1110,
+                        "lw_parent_cause_name": "TURBIDITY",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 33898,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2007-10-31T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 918,
+                        "tmdl_pollutant_name": "POLYCHLORINATED BIPHENYLS (PCBS)",
+                        "tmdl_parent_pollutant_id": 918,
+                        "tmdl_parent_pollutant_name": "POLYCHLORINATED BIPHENYLS (PCBS)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 34413,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2008-06-05T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 196,
+                        "tmdl_pollutant_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "tmdl_parent_pollutant_id": 1189,
+                        "tmdl_parent_pollutant_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 34414,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2008-06-05T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 768,
+                        "tmdl_pollutant_name": "NITROGEN",
+                        "tmdl_parent_pollutant_id": 792,
+                        "tmdl_parent_pollutant_name": "NUTRIENTS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 34415,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2008-06-05T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 901,
+                        "tmdl_pollutant_name": "PHOSPHORUS",
+                        "tmdl_parent_pollutant_id": 792,
+                        "tmdl_parent_pollutant_name": "NUTRIENTS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 196,
+                        "lw_detailed_cause_name": "BIOCHEMICAL OXYGEN DEMAND (BOD)",
+                        "lw_parent_cause_id": 1189,
+                        "lw_parent_cause_name": "ORGANIC ENRICHMENT\/OXYGEN DEPLETION",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "00310",
+                        "icis_unit_code": "19",
+                        "icis_description": "BOD, 5-day, 20 deg. C"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 39169,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2010-09-21T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1092,
+                        "tmdl_pollutant_name": "TRASH",
+                        "tmdl_parent_pollutant_id": 1092,
+                        "tmdl_parent_pollutant_name": "TRASH"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 9998,
+                        "lw_detailed_cause_name": "UNLISTED BUT IMPAIRED",
+                        "lw_parent_cause_id": 830,
+                        "lw_parent_cause_name": "OTHER CAUSE",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 42379,
+                    "tmdl_name": "UPPER ANACOSTIA RIVER",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2012-07-25T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1024,
+                        "tmdl_pollutant_name": "SUSPENDED SEDIMENT",
+                        "tmdl_parent_pollutant_id": 974,
+                        "tmdl_parent_pollutant_name": "SEDIMENT"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 1026,
+                        "lw_detailed_cause_name": "SUSPENDED SOLIDS",
+                        "lw_parent_cause_id": 1110,
+                        "lw_parent_cause_name": "TURBIDITY",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DC_07_DCTDU01R_00",
+                "cycle_year": "2002",
+                "state": "DC",
+                "listed_water_name": "FORT DUPONT CREEK",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "tmdls": [
+                  {
+                    "tmdl_id": 26150,
+                    "tmdl_name": "FORT DUPONT CREEK",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-28T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 500,
+                        "tmdl_pollutant_name": "FECAL COLIFORM",
+                        "tmdl_parent_pollutant_id": 861,
+                        "tmdl_parent_pollutant_name": "PATHOGENS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 500,
+                        "lw_detailed_cause_name": "FECAL COLIFORM",
+                        "lw_parent_cause_id": 861,
+                        "lw_parent_cause_name": "PATHOGENS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "74055",
+                        "icis_unit_code": "30",
+                        "icis_description": "Coliform, fecal general"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26151,
+                    "tmdl_name": "FORT DUPONT CREEK",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 145,
+                        "tmdl_pollutant_name": "ARSENIC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26152,
+                    "tmdl_name": "FORT DUPONT CREEK",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 345,
+                        "tmdl_pollutant_name": "COPPER",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26153,
+                    "tmdl_name": "FORT DUPONT CREEK",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 663,
+                        "tmdl_pollutant_name": "LEAD",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26154,
+                    "tmdl_name": "FORT DUPONT CREEK",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1169,
+                        "tmdl_pollutant_name": "ZINC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "listed_water_id": "DC_16_DCTPB01R_00",
+                "cycle_year": "2002",
+                "state": "DC",
+                "listed_water_name": "POPES BRANCH",
+                "snapshot_date": "2015-06-18T00:00:00.00+00:00",
+                "tmdls": [
+                  {
+                    "tmdl_id": 26209,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-28T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 500,
+                        "tmdl_pollutant_name": "FECAL COLIFORM",
+                        "tmdl_parent_pollutant_id": 861,
+                        "tmdl_parent_pollutant_name": "PATHOGENS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 500,
+                        "lw_detailed_cause_name": "FECAL COLIFORM",
+                        "lw_parent_cause_id": 861,
+                        "lw_parent_cause_name": "PATHOGENS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "74055",
+                        "icis_unit_code": "30",
+                        "icis_description": "Coliform, fecal general"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26210,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 372,
+                        "tmdl_pollutant_name": "DDT",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26211,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 417,
+                        "tmdl_pollutant_name": "DIELDRIN",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26212,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 145,
+                        "tmdl_pollutant_name": "ARSENIC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26213,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 345,
+                        "tmdl_pollutant_name": "COPPER",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26214,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 663,
+                        "tmdl_pollutant_name": "LEAD",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26215,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 1169,
+                        "tmdl_pollutant_name": "ZINC",
+                        "tmdl_parent_pollutant_id": 706,
+                        "tmdl_parent_pollutant_name": "METALS (OTHER THAN MERCURY)"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 706,
+                        "lw_detailed_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "lw_parent_cause_id": 706,
+                        "lw_parent_cause_name": "METALS (OTHER THAN MERCURY)",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": null,
+                        "icis_unit_code": null,
+                        "icis_description": null
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26216,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 370,
+                        "tmdl_pollutant_name": "DDE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26217,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 367,
+                        "tmdl_pollutant_name": "DDD",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26218,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 603,
+                        "tmdl_pollutant_name": "HEPTACHLOR EPOXIDE",
+                        "tmdl_parent_pollutant_id": 885,
+                        "tmdl_parent_pollutant_name": "PESTICIDES"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26219,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 853,
+                        "tmdl_pollutant_name": "PAH1 - 2 & 3 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26220,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 854,
+                        "tmdl_pollutant_name": "PAH2 - 4 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  },
+                  {
+                    "tmdl_id": 26221,
+                    "tmdl_name": "POPES BRANCH",
+                    "tmdl_status": "APPROVED\/ESTABLISHED",
+                    "tmdl_date": "2003-08-29T00:00:00.00+00:00",
+                    "tmdl_pollutants": [
+                      {
+                        "tmdl_type": "POINT\/NONPOINT SOURCE",
+                        "tmdl_pollutant_id": 855,
+                        "tmdl_pollutant_name": "PAH3 - 5 & 6 RING POLYCYCLIC AROMATIC HYDROCARBONS",
+                        "tmdl_parent_pollutant_id": 1080,
+                        "tmdl_parent_pollutant_name": "TOXIC ORGANICS"
+                      }
+                    ],
+                    "tmdl_lw_causes": [
+                      {
+                        "lw_detailed_cause_id": 822,
+                        "lw_detailed_cause_name": "ORGANICS",
+                        "lw_parent_cause_id": 1080,
+                        "lw_parent_cause_name": "TOXIC ORGANICS",
+                        "tmdl_flag": null,
+                        "icis_parameter_code": "81299",
+                        "icis_unit_code": "19",
+                        "icis_description": "Organics, total"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "status": {
+    "submission_id": "237806cd-b3be-4022-9aec-667059b87ee1",
+    "status_code": 0,
+    "status_message": null,
+    "execution_time": 2.009303,
+    "output_bytes": 152499
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "formData": {
+    "projectSiteInformation": {
+      "siteName": "CGI Site",
+      "siteAddress": "12601 Fair Lakes Circle",
+      "siteAddress2": null,
+      "siteCity": "Fairfax",
+      "siteStateCode": "VA",
+      "siteZipCode": "22033",
+      "siteCounty": "FAIRFAX",
+      "siteLocation": {
+        "latitude": 38.8573,
+        "longitude": -77.3824,
+        "latLongDataSource": "Map",
+        "horizontalReferenceDatum": "NAD 27"
+      },
+      "siteIndianCountry": true,
+      "siteIndianCountryLands": "PAMUNKEY RESERVATION (STATE)",
+      "siteProjectStart": null,
+      "siteProjectEnd": null,
+      "siteAreaDisturbed": null,
+      "siteConstructionTypes": [],
+      "siteStructureDemolitionBefore1980": null,
+      "siteStructureDemolitionBefore198010kSquareFeet": null,
+      "sitePreDevelopmentAgricultural": null,
+      "siteEarthDisturbingActivitiesOccurrence": null,
+      "siteEmergencyRelated": null,
+      "sitePreviousNpdesPermit": null,
+      "sitePreviousNpdesPermitId": null,
+      "siteCgpAuthorizationConfirmation": null,
+      "siteIndianCulturalProperty": null,
+      "siteIndianCulturalPropertyTribe": null
+    },
+    "operatorInformation": {
+      "operatorName": "CGI Operator",
+      "operatorFederal": true,
+      "operatorAddress": "12601 Fair Lakes Circle",
+      "operatorAddress2": null,
+      "operatorCity": "Fairfax",
+      "operatorStateCode": "VA",
+      "operatorZipCode": "22033",
+      "operatorCounty": "FAIRFAX",
+      "operatorPointOfContact": {
+        "userId": null,
+        "firstName": "David",
+        "lastName": "Fladung",
+        "middleInitial": null,
+        "organization": null,
+        "phone": "703-227-6245",
+        "phoneExtension": null,
+        "email": "david.fladung@cgifederal.com",
+        "title": "Boss Guy"
+      },
+      "preparer": {
+        "userId": "DFLADUNG",
+        "firstName": "David",
+        "lastName": "Fladung",
+        "middleInitial": null,
+        "organization": "TST",
+        "phone": "(410) 772-0017",
+        "phoneExtension": null,
+        "email": "david.fladung@cgifederal.com",
+        "title": null
+      },
+      "certifier": null
+    },
+    "dischargeInformation": {
+      "dischargeAllowable": null,
+      "dischargeMunicipalSeparateStormSewerSystem": null,
+      "dischargeUSWatersWithin50Feet": null,
+      "dischargePoints": []
+    },
+    "chemicalTreatmentInformation": {
+      "polymersFlocculantsOtherTreatmentChemicals": null,
+      "cationicTreatmentChemicals": null,
+      "cationicTreatmentChemicalsAuthorization": null,
+      "treatmentChemicals": null
+    },
+    "stormwaterPollutionPreventionPlanInformation": {
+      "preparationInAdvance": null,
+      "contactInformation": null
+    },
+    "endangeredSpeciesProtectionInformation": {
+      "appendixDCriteriaMet": null,
+      "criterion": null,
+      "criteriaSelectionSummary": null,
+      "otherOperatorNpdesId": null,
+      "speciesAndHabitatInActionArea": null,
+      "distanceFromSite": null,
+      "biologicalOpinion": null,
+      "writtenOccurrence": null
+    },
+    "historicPreservation": {
+      "screeningCompleted": null,
+      "appendexEStep1": null,
+      "appendexEStep2": null,
+      "appendexEStep3": null,
+      "appendexEStep4": null,
+      "appendexEStep4Response": null
+    },
+    "lowErosivityWaiver": {
+      "lewProjectStart": "02/01/2017",
+      "lewProjectEnd": "02/28/2017",
+      "lewLessThan5Acres": true,
+      "lewRFactorLessThan5": true,
+      "lewAreaDisturbed": 3,
+      "lewRFactor": 3,
+      "lewRFactorCalculationMethod": "online-calculator",
+      "interimSiteStabilizationMeasures": false
+    }
+  }
+}

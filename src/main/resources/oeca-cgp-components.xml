@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/tx
+           http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd
+           http://www.springframework.org/schema/lang
+           http://www.springframework.org/schema/lang/spring-lang.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/cache
+           http://www.springframework.org/schema/cache/spring-cache.xsd">
+    <!-- ====================================================================== -->
+    <!-- Annotation scanning  -->
+    <!-- ====================================================================== -->
+    <context:annotation-config/>
+    <context:component-scan base-package="gov.epa.oeca.common"/>
+    <context:component-scan base-package="net.exchangenetwork.schema.icis"/>
+    <context:component-scan base-package="gov.epa.oeca.cgp"/>
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!-- ====================================================================== -->
+    <!-- OECA Services Endpoint Configuration  -->
+    <!-- ====================================================================== -->
+    <util:map id="oecaServicesEndpointConfiguration">
+        <entry key="newAccountConfirmation" value="new_account_confirmation"/>
+    </util:map>
+    <util:map id="externalUrls">
+        <entry key="cdxForgotUser" value="https://dev.epacdx.net/AccountRecovery/ForgotUserId"/>
+        <entry key="cdxForgotPass" value="https://dev.epacdx.net/PasswordReset/GetResetCode"/>
+    </util:map>
+    <!-- ====================================================================== -->
+    <!-- OECA General Configuration Options  -->
+    <!-- ====================================================================== -->
+    <util:map id="oecaGeneralConfiguration">
+        <entry key="emailUniquenessEnabled" value="false"/>
+        <entry key="holdPeriodSeconds" value="1209600"/>
+        <entry key="corUrl" value="http://localhost:8080/oeca-cgp-web/action/secured/cor"/>
+        <entry key="icisDataflow" value="ICIS-NPDES"/>
+    </util:map>
+    <!-- ====================================================================== -->
+    <!-- Datasource Configuration  -->
+    <!-- ====================================================================== -->
+    <bean id="baseCgpDataSource" abstract="true">
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="10"/>
+        <property name="maxIdle" value="10"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <property name="validationQuery" value="select 1 from dual"/>
+        <property name="validationQueryTimeout" value="10"/>
+        <property name="jmxEnabled" value="false"/>
+        <property name="fairQueue" value="true"/>
+        <property name="maxWait" value="30000"/>
+    </bean>
+    <bean id="cgpDataSource" class="org.apache.tomcat.jdbc.pool.DataSource" parent="baseCgpDataSource"
+          destroy-method="close" lazy-init="true">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/cgp"/>
+        <property name="username" value="test"/>
+        <property name="password" value="test"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- JDBC Configuration  -->
+    <!-- ====================================================================== -->
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="cgpDataSource"/>
+    </bean>
+    <bean id="lobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler"/>
+    <!-- ====================================================================== -->
+    <!-- Hibernate Configuration -->
+    <!-- ====================================================================== -->
+    <bean id="parentSessionFactory" abstract="true">
+        <property name="dataSource" ref="cgpDataSource"/>
+        <property name="packagesToScan">
+            <list>
+                <value>gov.epa.oeca.cgp.domain</value>
+            </list>
+        </property>
+    </bean>
+    <bean id="cgpSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+          parent="parentSessionFactory">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Flyway database migration  -->
+    <!-- ====================================================================== -->
+    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" depends-on="cgpSessionFactory">
+        <property name="dataSource" ref="cgpDataSource"/>
+        <property name="locations" value="classpath:sql/migrations, classpath:sql/mysql"/>
+        <property name="baselineOnMigrate" value="true"/>
+        <property name="baselineVersionAsString" value="1.0.0"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Transaction Configuration -->
+    <!-- ====================================================================== -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="cgpSessionFactory"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Infrastructure Services -->
+    <!-- ====================================================================== -->
+    <bean id="certificationService" class="gov.epa.oeca.cgp.infrastructure.certification.CromerrServiceImpl"/>
+    <bean id="icisSubmissionService" class="gov.epa.oeca.cgp.infrastructure.icis.IcisSubmissionServiceImpl"/>
+    <bean id="corGeneratorService" class="gov.epa.oeca.cgp.infrastructure.cor.CopyOfRecordGeneratorServiceImpl"/>
+    <bean id="userInformationService" class="gov.epa.oeca.cgp.infrastructure.user.UserInformationServiceImpl"/>
+    <bean id="catchmentImpairmentService"
+          class="gov.epa.oeca.cgp.infrastructure.attains.CatchmentImpairmentServiceImpl"/>
+    <!-- ====================================================================== -->
+    <!-- ATTAINS/Catchment -->
+    <!-- ====================================================================== -->
+    <lang:groovy id="catchmentImpairmentReponseParser"
+                 script-source="classpath:gov/epa/oeca/cgp/infrastructure/attains/CatchmentImpairmentReponseParserImpl.groovy"/>
+    <util:map id="catchmentServiceConfiguration">
+        <entry key="serviceUrl" value="https://ofmpub.epa.gov/waters10/WATERS_SERVICES.CatchmentImpairmentStatus"/>
+    </util:map>
+    <!-- ====================================================================== -->
+    <!-- Caching  -->
+    <!-- ====================================================================== -->
+    <cache:annotation-driven/>
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="states"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="tribes"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="biaTribes"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="counties"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="chemicals"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="overrides"/>
+                </bean>
+                <bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean">
+                    <property name="name" value="rules"/>
+                </bean>
+            </set>
+        </property>
+    </bean>
+</beans>

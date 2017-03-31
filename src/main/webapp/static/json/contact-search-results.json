@@ -1,0 +1,35 @@
+[
+    {
+     	"userId": "joe.certifier",
+	    "firstName": "Joe",
+	    "middleInitial": "",
+	    "lastName": "Certifier",
+	    "phone": "",
+	    "phoneExt": "",
+	    "email": "someone@example.com",
+	    "organization": "EXXON",
+	    "address": "12601 Fair Lakes Cir."
+	},
+	{
+	 	"userId": "jane.smith",
+	    "firstName": "Jane",
+	    "middleInitial": "",
+	    "lastName": "Smith",
+	    "phone": "",
+	    "phoneExt": "",
+	    "email": "jane@example.com",
+	    "organization": "CGI Federal",
+	    "address": "12601 Fair Lakes Cir."
+	},
+	{
+	    "userId": "john.doe",
+	    "firstName": "John",
+	    "middleInitial": "",
+	    "lastName": "Doe",
+	    "phone": "",
+	    "phoneExt": "",
+	    "email": "john@example.com",
+	    "organization": "EXXON",
+	    "address": "12601 Fair Lakes Cir."
+	}
+]

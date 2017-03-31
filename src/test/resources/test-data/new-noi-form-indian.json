@@ -1,0 +1,28 @@
+{
+  "formData": {
+    "projectSiteInformation": {
+      "siteStateCode": "MA",
+      "siteIndianCountry": true,
+      "siteIndianCountryLands": "V003",
+      "sitePreviousNpdesPermit": false,
+      "siteCgpAuthorizationConfirmation": true
+    },
+    "operatorInformation": {
+      "operatorFederal": true
+    },
+    "chemicalTreatmentInformation": {
+      "polymersFlocculantsOtherTreatmentChemicals": true,
+      "cationicTreatmentChemicals": true,
+      "cationicTreatmentChemicalsAuthorization": true
+    },
+    "stormwaterPollutionPreventionPlanInformation": {
+      "preparationInAdvance": true
+    },
+    "endangeredSpeciesProtectionInformation": {
+      "appendixDCriteriaMet": true
+    },
+    "historicPreservation": {
+      "screeningCompleted": true
+    }
+  }
+}

@@ -1,0 +1,175 @@
+{
+  "formData": {
+    "projectSiteInformation": {
+      "siteName": "Test RA #1",
+      "siteAddress": "123 Main St",
+      "siteAddress2": null,
+      "siteCity": "Anywhere",
+      "siteStateCode": "AL",
+      "siteZipCode": "12345",
+      "siteCounty": null,
+      "siteLocation": {
+        "latitude": 33.20429416749842,
+        "longitude": 87.56082057952882,
+        "latLongDataSource": "Map",
+        "horizontalReferenceDatum": "WGS 84"
+      },
+      "siteIndianCountry": true,
+      "siteIndianCountryLands": "POARCH CREEK RESERVATION",
+      "siteProjectStart": "03/01/2017",
+      "siteProjectEnd": "11/30/2017",
+      "siteAreaDisturbed": 60,
+      "siteConstructionTypes": [
+        "industrial",
+        "road",
+        "OTHER"
+      ],
+      "siteStructureDemolitionBefore1980": false,
+      "siteStructureDemolitionBefore198010kSquareFeet": null,
+      "sitePreDevelopmentAgricultural": false,
+      "siteEarthDisturbingActivitiesOccurrence": true,
+      "siteEmergencyRelated": true,
+      "sitePreviousNpdesPermit": true,
+      "sitePreviousNpdesPermitId": "AL0000000",
+      "siteCgpAuthorizationConfirmation": true,
+      "siteIndianCulturalProperty": null,
+      "siteIndianCulturalPropertyTribe": null,
+      "siteTerminationReason": null
+    },
+    "operatorInformation": {
+      "operatorName": "Test RA #1",
+      "operatorFederal": false,
+      "operatorAddress": "123 Main St",
+      "operatorAddress2": null,
+      "operatorCity": "Anywhere",
+      "operatorStateCode": "AL",
+      "operatorZipCode": "12345",
+      "operatorCounty": null,
+      "operatorPointOfContact": {
+        "userId": null,
+        "firstName": "First",
+        "lastName": "Last",
+        "middleInitial": null,
+        "organization": null,
+        "phone": "202-564-0000",
+        "phoneExtension": null,
+        "email": "voisin.edward@epa.gov",
+        "title": null
+      },
+      "preparer": {
+        "userId": "VOISIN.EDWARD@EPA.GOV",
+        "firstName": "Edward",
+        "lastName": "Voisin",
+        "middleInitial": null,
+        "organization": "US EPA",
+        "phone": "(202) 564-0000",
+        "phoneExtension": null,
+        "email": "ednetdmr1internal@yahoo.com",
+        "title": null
+      },
+      "certifier": {
+        "userId": "VOISIN.EDWARD@EPA.GOV",
+        "firstName": "Edward",
+        "lastName": "Voisin",
+        "middleInitial": null,
+        "organization": "US EPA",
+        "phone": "(202) 564-0000",
+        "phoneExtension": null,
+        "email": "ednetdmr1internal@yahoo.com",
+        "title": null
+      }
+    },
+    "dischargeInformation": {
+      "dischargeAllowable": true,
+      "dischargeMunicipalSeparateStormSewerSystem": true,
+      "dischargeUSWatersWithin50Feet": true,
+      "dischargePoints": [
+        {
+          "id": "001",
+          "description": "test",
+          "location": {
+            "latitude": 32.37843925966151,
+            "longitude": 87.3759251832962,
+            "latLongDataSource": "Map",
+            "horizontalReferenceDatum": "WGS 84"
+          },
+          "firstWater": {
+            "receivingWaterId": null,
+            "receivingWaterName": "test",
+            "pollutants": []
+          },
+          "tier": "Tier_3",
+          "impaired": null,
+          "tmdlCompleted": null
+        },
+        {
+          "id": "002",
+          "description": null,
+          "location": {
+            "latitude": 32.59657697101798,
+            "longitude": 86.8352508544922,
+            "latLongDataSource": "Map",
+            "horizontalReferenceDatum": "WGS 84"
+          },
+          "firstWater": {
+            "receivingWaterId": null,
+            "receivingWaterName": "test",
+            "pollutants": []
+          },
+          "tier": "Tier_2",
+          "impaired": null,
+          "tmdlCompleted": null
+        }
+      ]
+    },
+    "chemicalTreatmentInformation": {
+      "polymersFlocculantsOtherTreatmentChemicals": true,
+      "cationicTreatmentChemicals": true,
+      "cationicTreatmentChemicalsAuthorization": true,
+      "treatmentChemicals": [
+        "Lead",
+        "Gold"
+      ]
+    },
+    "stormwaterPollutionPreventionPlanInformation": {
+      "preparationInAdvance": true,
+      "contactInformation": {
+        "userId": null,
+        "firstName": "First",
+        "lastName": "Last",
+        "middleInitial": null,
+        "organization": null,
+        "phone": "202-564-0000",
+        "phoneExtension": null,
+        "email": "voisin.edward@epa.gov",
+        "title": null
+      }
+    },
+    "endangeredSpeciesProtectionInformation": {
+      "appendixDCriteriaMet": true,
+      "criterion": "Criterion_A",
+      "criteriaSelectionSummary": "testing",
+      "otherOperatorNpdesId": null,
+      "speciesAndHabitatInActionArea": null,
+      "distanceFromSite": null
+    },
+    "historicPreservation": {
+      "screeningCompleted": true,
+      "appendexEStep1": true,
+      "appendexEStep2": true,
+      "appendexEStep3": null,
+      "appendexEStep4": null,
+      "appendexEStep4Response": null
+    },
+    "lowErosivityWaiver": {
+      "lewProjectStart": null,
+      "lewProjectEnd": null,
+      "lewLessThan5Acres": null,
+      "lewRFactorLessThan5": null,
+      "lewAreaDisturbed": null,
+      "lewRFactor": null,
+      "lewRFactorCalculationMethod": null,
+      "interimSiteStabilizationMeasures": null
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- ====================================================================== -->
+    <!-- OECA General Configuration Options  -->
+    <!-- ====================================================================== -->
+    <util:map id="oecaGeneralConfiguration">
+        <entry key="emailUniquenessEnabled" value="false"/>
+        <entry key="holdPeriodSeconds" value="1"/>
+        <entry key="corUrl" value="http://localhost:9080/oeca-cgp-web/action/secured/cor"/>
+        <entry key="icisDataflow" value="ICIS-AIR"/>
+    </util:map>
+    <!-- ====================================================================== -->
+    <!-- ICIS Job -->
+    <!-- ====================================================================== -->
+    <bean id="icisDistributionJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="gov.epa.oeca.cgp.infrastructure.icis.IcisDistributionJob"/>
+        <property name="durability" value="true"/>
+    </bean>
+    <bean id="icisDistributionTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
+        <property name="jobDetail" ref="icisDistributionJobDetail" />
+        <!-- 20 seconds -->
+        <property name="repeatInterval" value="20000"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Infrastructure Services -->
+    <!-- ====================================================================== -->
+    <bean id="corGeneratorService" class="gov.epa.oeca.cgp.infrastructure.cor.MockCopyOfRecordGeneratorServiceImpl"/>
+</beans>

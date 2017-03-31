@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            You have indicated in your NOI you will discharge to a surface water that is designated by the state or
+            tribal authority under its antidegradation policy as a Tier 2 (or Tier 2.5) water (water quality exceeds
+            levels necessary to support propagation of fish, shellfish, and wildlife and recreation in and on the water)
+            or as a Tier 3 water (Outstanding Natural Resource Water). (See Appendix F).  Because you are discharging to
+            a Tier 2, Tier 2.5, or Tier 3 water, you are required to comply with additional stormwater control
+            requirements pertaining to the deadline to complete site stabilization in Part 2.2.14(a)(iii)(c) and site
+            inspections in Part 4.3.
+        </p>
+    </body>
+</html>

@@ -1,0 +1,20 @@
+[
+  {
+    "code": 100000,
+    "userRoleId": null,
+    "dataflow": null,
+    "description": "Preparer",
+    "status": "Active",
+    "esaRequirement": "None",
+    "signatureQuestionsRequired": false
+  },
+  {
+    "code": 200000,
+    "userRoleId": null,
+    "dataflow": null,
+    "description": "Certifier",
+    "status": "Active",
+    "esaRequirement": "None",
+    "signatureQuestionsRequired": true
+  }
+]

@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            Your Notice of Intent (NOI) requesting coverage for ${form.formData.projectSiteInformation.siteName},
+            ${form.formData.projectSiteInformation.siteAddress}, under EPA's Construction General Permit (CGP) has been
+            placed on hold by the EPA. Your project site will not be considered authorized to discharge under the CGP
+            until all concerns are resolved and the hold on your authorization is removed. Once all concerns are
+            resolved you will receive an email informing you that your coverage under the CGP is active.
+        </p>
+        <p>
+            Please contact your EPA Regional permitting authority at ${raEmail} for more information.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

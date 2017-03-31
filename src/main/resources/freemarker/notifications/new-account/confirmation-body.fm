@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <p>You are requesting an account with the EPA Central Data Exchange (CDX).  You will be able to add additional Program Services, including the NPDES eReporting Tool (NeT), to meet any additional obligations that require electronic reporting to EPA.</p>
+        <p>In order to complete your registration and begin using the system, you will need to confirm your account by entering the following code in the registration form you are currently editing:<p>
+        <p><span style="font-weight:bold">${ConfirmationCode}</span></p>
+        <p>
+           Once you confirm your account using the code above, you may be required to provide additional information. Any additional information will need to be completed before you are able to access your Program Service.
+           Please do not respond to this message. If you have questions concerning this request, you may contact us by email at ${CdxHelpDeskEmail} or by calling the CDX Technical Support Staff through our toll free telephone support on ${CdxHelpDeskPhone} between ${CdxHelpDeskHours}. For International callers, the CDX Help Desk can also be reached at ${CdxHelpDeskInternationalPhone}.
+        </p>
+        <p>
+            Sincerely<br/>
+            CDX Help Desk<br/>
+            <hr/>
+            United States Environmental Protection Agency - Central Data Exchange
+        </p>
+    </body>
+</html>

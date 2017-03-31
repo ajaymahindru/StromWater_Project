@@ -1,0 +1,30 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            You have indicated in your NOI that there are waters of the U.S. that exist within or immediately adjacent
+            to your site.  Because of the proximity of these waters to your construction activities, be advised that you
+            are required to comply with the buffer requirements in Part 2.2.1.  This provision requires that you comply
+            with one of the following three compliance alternatives:
+            <ul>
+                <li>
+                    Provide and maintain a 50-foot undisturbed natural buffer; or
+                </li>
+                <li>
+                    Provide and maintain an undisturbed natural buffer that is less than 50 feet and is supplemented by
+                    erosion and sediment controls that achieve, in combination, the sediment load reduction equivalent
+                    to a 50-foot undisturbed natural buffer; or
+                </li>
+                <li>
+                    If infeasible to provide and maintain an undisturbed natural buffer of any size, implement erosion
+                    and sediment controls to achieve the sediment load reduction equivalent to a 50-foot undisturbed
+                    natural buffer.
+                </li>
+            </ul>
+        </p>
+        <p>
+            You must document the compliance alternative you have selected in your SWPPP, and comply with the applicable
+            additional requirements described in CGP Appendix G.
+        </p>
+    </body>
+</html>

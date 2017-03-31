@@ -1,0 +1,10 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            You have indicated in your NOI that you will be using polymers, flocculants, or other treatment chemicals at
+            your construction site.  Be advised that you are subject to the specific requirements of Part 2.2.13
+            concerning your use of such chemicals.
+        </p>
+    </body>
+</html>

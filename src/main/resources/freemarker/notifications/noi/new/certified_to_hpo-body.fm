@@ -1,0 +1,23 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            A Notice of Intent (NOI) requesting coverage for ${form.formData.projectSiteInformation.siteName},
+            ${form.formData.projectSiteInformation.siteAddress}, under EPA's Construction General Permit (CGP) was
+            submitted to the EPA. A copy of this NOI and any additional information that was submitted in support of the
+            Project Site's permit eligibility with regard to completing the screening process for historic properties is
+            available at <a href="${portalLink}">${portalLink}</a>.
+        </p>
+        <p>
+            Please review this NOI and contact EPA with any concerns within the 14-day review period at
+            ${raEmail}.
+        </p>
+        <p>
+            The historic property screening process is described in Appendix E of the permit, available at:
+            <a href="${stormwaterCgp}">${stormwaterCgp}</a>.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

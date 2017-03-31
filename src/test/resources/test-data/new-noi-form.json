@@ -1,0 +1,154 @@
+{
+  "formData": {
+    "projectSiteInformation": {
+      "siteName": "CGI NOI Site",
+      "siteAddress": "88 William Street",
+      "siteAddress2": null,
+      "siteCity": "Springfield",
+      "siteStateCode": "MA",
+      "siteZipCode": "01105",
+      "siteCounty": "SUFFOLK",
+      "siteLocation": {
+        "latitude": 42.0970,
+        "longitude": -72.5851,
+        "latLongDataSource": "Map",
+        "horizontalReferenceDatum": "NAD 27"
+      },
+      "siteIndianCountry": true,
+      "siteIndianCountryLands": "MASHPEE WAMPANOAG RESERVATION (STATE)",
+      "siteProjectStart": "02/01/2017",
+      "siteProjectEnd": "02/28/2017",
+      "siteAreaDisturbed": 3,
+      "siteConstructionTypes": [
+        "single",
+        "multi"
+      ],
+      "siteStructureDemolitionBefore1980": false,
+      "siteStructureDemolitionBefore198010kSquareFeet": null,
+      "sitePreDevelopmentAgricultural": false,
+      "siteEarthDisturbingActivitiesOccurrence": false,
+      "siteEmergencyRelated": null,
+      "sitePreviousNpdesPermit": false,
+      "sitePreviousNpdesPermitId": null,
+      "siteCgpAuthorizationConfirmation": true,
+      "siteIndianCulturalProperty": true,
+      "siteIndianCulturalPropertyTribe": "BEAR RIVER"
+    },
+    "operatorInformation": {
+      "operatorName": "CGI NOI",
+      "operatorFederal": true,
+      "operatorAddress": "12601 Fair Lakes Circle",
+      "operatorAddress2": null,
+      "operatorCity": "Fairfax",
+      "operatorStateCode": "VA",
+      "operatorZipCode": "22033",
+      "operatorCounty": "FAIRFAX",
+      "operatorPointOfContact": {
+        "userId": null,
+        "firstName": "David",
+        "lastName": "Fladung",
+        "middleInitial": null,
+        "organization": null,
+        "phone": "703-227-6245",
+        "phoneExtension": null,
+        "email": "david.fladung@cgifederal.com",
+        "title": "Boss Guy"
+      },
+      "preparer": {
+        "userId": "DFLADUNG",
+        "firstName": "David",
+        "lastName": "Fladung",
+        "middleInitial": null,
+        "organization": "TST",
+        "phone": "(410) 772-0017",
+        "phoneExtension": null,
+        "email": "david.fladung@cgifederal.com",
+        "title": null
+      },
+      "certifier": null
+    },
+    "dischargeInformation": {
+      "dischargeAllowable": false,
+      "dischargeMunicipalSeparateStormSewerSystem": false,
+      "dischargeUSWatersWithin50Feet": false,
+      "dischargePoints": [
+        {
+          "id": "001",
+          "description": null,
+          "impaired": true,
+          "tmdlCompleted": true,
+          "location": {
+            "latitude": null,
+            "longitude": null,
+            "latLongDataSource": null,
+            "horizontalReferenceDatum": null
+          },
+          "firstWater": {
+            "receivingWaterId": "DCANA00E_01",
+            "receivingWaterName": "ANACOSTIA DC",
+            "pollutants": [
+              {
+                "pollutantCode": 8298,
+                "pollutantName": "Corrosive waste [solid]",
+                "impaired": true,
+                "tmdl": {
+                  "id": "123",
+                  "name": "TMDL Name"
+                }
+              }
+            ]
+          },
+          "tier": "Tier_2"
+        }
+      ]
+    },
+    "chemicalTreatmentInformation": {
+      "polymersFlocculantsOtherTreatmentChemicals": true,
+      "cationicTreatmentChemicals": false,
+      "cationicTreatmentChemicalsAuthorization": null,
+      "treatmentChemicals": null
+    },
+    "stormwaterPollutionPreventionPlanInformation": {
+      "preparationInAdvance": true,
+      "contactInformation": {
+        "userId": null,
+        "firstName": "David",
+        "lastName": "Fladung",
+        "middleInitial": null,
+        "organization": null,
+        "phone": "703-227-6245",
+        "phoneExtension": null,
+        "email": "david.fladung@cgifederal.com",
+        "title": "Boss Guy"
+      }
+    },
+    "endangeredSpeciesProtectionInformation": {
+      "appendixDCriteriaMet": true,
+      "criterion": "Criterion_A",
+      "criteriaSelectionSummary": "A summary.",
+      "otherOperatorNpdesId": null,
+      "speciesAndHabitatInActionArea": null,
+      "distanceFromSite": null,
+      "biologicalOpinion": null,
+      "writtenOccurrence": null
+    },
+    "historicPreservation": {
+      "screeningCompleted": true,
+      "appendexEStep1": false,
+      "appendexEStep2": null,
+      "appendexEStep3": null,
+      "appendexEStep4": null,
+      "appendexEStep4Response": null
+    },
+    "lowErosivityWaiver": {
+      "lewProjectStart": null,
+      "lewProjectEnd": null,
+      "lewLessThan5Acres": null,
+      "lewRFactorLessThan5": null,
+      "lewAreaDisturbed": null,
+      "lewRFactor": null,
+      "lewRFactorCalculationMethod": null,
+      "interimSiteStabilizationMeasures": null
+    }
+  }
+}

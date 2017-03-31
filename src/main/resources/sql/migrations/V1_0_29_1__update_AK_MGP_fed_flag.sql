@@ -1,0 +1,2 @@
+UPDATE cgp_ref_mgp SET FED_FAC_ELIGIBLE = 'Y', NON_FED_FAC_ELIGIBLE = 'N' where STATE_CODE = 'AK';
+

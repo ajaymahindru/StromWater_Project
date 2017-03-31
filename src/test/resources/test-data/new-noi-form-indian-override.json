@@ -1,0 +1,28 @@
+{
+  "formData": {
+    "projectSiteInformation": {
+      "siteStateCode": "ID",
+      "siteIndianCountry": true,
+      "siteIndianCountryLands": "R641",
+      "sitePreviousNpdesPermit": false,
+      "siteCgpAuthorizationConfirmation": true
+    },
+    "operatorInformation": {
+      "operatorFederal": true
+    },
+    "chemicalTreatmentInformation": {
+      "polymersFlocculantsOtherTreatmentChemicals": true,
+      "cationicTreatmentChemicals": true,
+      "cationicTreatmentChemicalsAuthorization": true
+    },
+    "stormwaterPollutionPreventionPlanInformation": {
+      "preparationInAdvance": true
+    },
+    "endangeredSpeciesProtectionInformation": {
+      "appendixDCriteriaMet": true
+    },
+    "historicPreservation": {
+      "screeningCompleted": true
+    }
+  }
+}

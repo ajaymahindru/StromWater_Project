@@ -1,0 +1,27 @@
+{
+  "formData": {
+    "projectSiteInformation": {
+      "siteStateCode": "MD",
+      "siteIndianCountry": false,
+      "sitePreviousNpdesPermit": false,
+      "siteCgpAuthorizationConfirmation": true
+    },
+    "operatorInformation": {
+      "operatorFederal": true
+    },
+    "chemicalTreatmentInformation": {
+      "polymersFlocculantsOtherTreatmentChemicals": true,
+      "cationicTreatmentChemicals": true,
+      "cationicTreatmentChemicalsAuthorization": true
+    },
+    "stormwaterPollutionPreventionPlanInformation": {
+      "preparationInAdvance": true
+    },
+    "endangeredSpeciesProtectionInformation": {
+      "appendixDCriteriaMet": true
+    },
+    "historicPreservation": {
+      "screeningCompleted": true
+    }
+  }
+}

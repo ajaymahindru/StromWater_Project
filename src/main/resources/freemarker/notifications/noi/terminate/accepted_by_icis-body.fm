@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            Your Notice of Termination (NOT) requesting termination of coverage under EPA's Construction General Permit
+            (CGP) for stormwater discharges from ${form.formData.projectSiteInformation.siteName},
+            ${form.formData.projectSiteInformation.siteAddress}, for NPDES ID ${form.formSet.npdesId}, has been accepted
+            by the EPA.
+        </p>
+        <p>
+          To access your NOI in NeT, please visit: <a href="${applicationLink}">${applicationLink}</a>.
+        </p>
+        <p>
+            If you have questions about this email or about NeT, please call the EPA NOI Processing Center at
+            1-866-352-7755 (toll free) or send an email to noi@avanticorporation.com. If you have questions regarding
+            the CGP, please contact EPA at ${raEmail}.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

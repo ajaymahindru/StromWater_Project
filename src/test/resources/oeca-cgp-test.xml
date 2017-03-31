@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util
+           http://www.springframework.org/schema/util/spring-util.xsd">
+    <import resource="classpath:oeca-web-config.xml"/>
+    <import resource="classpath:oeca-cgp-web-config-properties.xml"/>
+    <import resource="classpath:oeca-web-security-webapp.xml"/>
+    <import resource="classpath:oeca-cgp-components.xml"/>
+    <import resource="classpath:oeca-cgp-security.xml"/>
+    <!-- ====================================================================== -->
+    <!-- Datasource Configuration  -->
+    <!-- ====================================================================== -->
+    <bean id="cgpDataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+        <property name="driverClass" value="org.h2.Driver"/>
+        <property name="url" value="jdbc:h2:mem:test;MODE=Oracle;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE"/>
+        <property name="username" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Hibernate Configuration -->
+    <!-- ====================================================================== -->
+    <bean id="cgpSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+          parent="parentSessionFactory">
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
+                <prop key="hibernate.jdbc.batch_size">0</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
+            </props>
+        </property>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Flyway database migration  -->
+    <!-- ====================================================================== -->
+    <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" depends-on="cgpSessionFactory">
+        <property name="dataSource" ref="cgpDataSource"/>
+        <property name="locations" value="classpath:sql/migrations, classpath:sql/h2"/>
+        <property name="baselineOnMigrate" value="true"/>
+        <property name="baselineVersionAsString" value="1.0.0"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Infrastructure Services -->
+    <!-- ====================================================================== -->
+    <bean id="certificationService" class="gov.epa.oeca.cgp.infrastructure.certification.CromerrServiceImpl"/>
+    <bean id="icisSubmissionService" class="gov.epa.oeca.cgp.infrastructure.icis.MockIcisSubmissionService"/>
+    <bean id="corGeneratorService" class="gov.epa.oeca.cgp.infrastructure.cor.MockCopyOfRecordGeneratorServiceImpl"/>
+    <bean id="userInformationService" class="gov.epa.oeca.cgp.infrastructure.user.MockUserInformationServiceImpl"/>
+    <bean id="catchmentImpairmentService"
+          class="gov.epa.oeca.cgp.infrastructure.attains.MockCatchmentImpairmentService"/>
+    <!-- ====================================================================== -->
+    <!-- OECA General Configuration Options  -->
+    <!-- ====================================================================== -->
+    <util:map id="oecaGeneralConfiguration">
+        <entry key="emailUniquenessEnabled" value="false"/>
+        <entry key="holdPeriodSeconds" value="1"/>
+        <entry key="corUrl" value="http://localhost:8080/oeca-cgp-web/action/secured/cor"/>
+        <entry key="icisDataflow" value="ICIS-AIR"/>
+    </util:map>
+</beans>

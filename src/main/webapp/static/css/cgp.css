@@ -1,0 +1,149 @@
+.panel-group > * > .panel {
+	margin-top: 5px;
+}
+.panel-group > *:first-child > .panel {
+	margin-top: 0px
+}
+.nav-help {
+	padding-right: 15px;
+}
+.dropdown-menu > li > span.navbar-dropdown-text {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap
+}
+.subquestion {
+	position: relative;
+}
+.subquestion > .glyphicon-share-alt {
+	position: absolute;
+	left: 19px;
+	transform: scaleY(-1);
+}
+.subquestion.\32x > .glyphicon-share-alt {
+	left: 44px;
+}
+.subquestion.\33x > .glyphicon-share-alt {
+	left: 69px;
+}
+.subquestion.\34x > .glyphicon-share-alt {
+    left: 94px;
+}
+.subquestion > div {
+	margin-left: 25px;
+	width: calc(100% - 25px);
+}
+.subquestion.\32x > div {
+	margin-left: 50px;
+	width: calc(100% - 50px);
+}
+.subquestion.\33 x > div {
+	margin-left: 75px;
+	width: calc(100% - 75px);
+}
+.subquestion.\34 x > div {
+    margin-left: 100px;
+    width: calc(100% - 100px);
+}
+.file-upload {
+	cursor: pointer;
+}
+.file-input:focus + label, .file-input-focused {
+	outline: 1px dotted #000;
+}
+.file-input {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.criterion-description {
+	text-decoration: underline;
+}
+
+.modal .error-modal .modal-header {
+	background-color: #d9534f;
+}
+
+.oeca-success-alert .modal-header .glyphicon, 
+.oeca-success-alert .modal-header .close,
+.oeca-info-alert .modal-header .glyphicon,
+.oeca-info-alert .modal-header .close,
+.oeca-error-alert .modal-header .glyphicon,
+.oeca-error-alert .modal-header .close {
+    font-size: 200%;
+}
+.oeca-success-alert,
+.oeca-success-alert .modal-footer,
+.oeca-info-alert,
+.oeca-info-alert .modal-footer,
+.oeca-error-alert,
+.oeca-error-alert .modal-footer {
+	text-align: center;
+}
+.oeca-success-alert .modal-footer .help-block,
+.oeca-info-alert .modal-footer .help-block,
+.oeca-error-alert .modal-footer .help-block {
+	font-size: 12px;
+}
+dfn {
+	border-bottom: #999 dotted 2px;
+}
+.cgp-btn-full-width > .btn-group {
+	display: block;
+}
+.cgp-btn-full-width > .btn-group > .btn {
+	display: block;
+	float: none;
+	width: 100%;
+	margin-bottom: 5px;
+}
+.dashboard {
+	margin-right: 2.5%;
+	margin-left: 2.5%
+}
+td.details-control {
+    cursor: pointer;
+}
+.dashboard #forms thead th {
+	background-color: #cccecf;
+}
+.dashboard #forms tbody td {
+    vertical-align: middle;
+    height: 40px;
+}
+.dashboard #forms tbody td.word-wrap {
+    word-break: break-word;
+}
+.dashboard .btn-group-xs .btn {
+    width: 90px;
+}
+@media (min-width: 768px) {
+	.cgp-btn-full-width {
+		display: flex;
+		flex-flow: row wrap;
+		justify-content: stretch;
+	}
+	.cgp-btn-full-width > .btn-group {
+		flex: 1 1 auto;
+		padding-left: 10px;
+	}
+	.cgp-btn-full-width > .btn-group:first-child {
+		padding-left: 0;
+	}
+}
+.action-col div {
+	margin: 0;
+}
+.clear {
+	clear:both;
+}
+.fa-question-mark {
+	cursor: help;
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- ====================================================================== -->
+    <!-- Scheduler Configuration -->
+    <!-- ====================================================================== -->
+    <bean id="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="dataSource" ref="cgpDataSource"/>
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="schedulerName" value="CgpQuartzScheduler"/>
+        <property name="overwriteExistingJobs" value="true"/>
+        <property name="applicationContextSchedulerContextKey" value="applicationContext"/>
+        <property name="autoStartup" value="true"/>
+        <property name="startupDelay" value="60"/>
+        <property name="waitForJobsToCompleteOnShutdown" value="true"/>
+        <property name="jobFactory">
+            <bean class="gov.epa.oeca.cgp.infrastructure.scheduling.AutowiringSpringBeanJobFactory"/>
+        </property>
+        <property name="quartzProperties">
+            <props>
+                <prop key="org.quartz.scheduler.instanceName">CgpQuartzScheduler</prop>
+                <prop key="org.quartz.scheduler.instanceId">AUTO</prop>
+                <prop key="org.quartz.jobStore.isClustered">true</prop>
+                <prop key="org.quartz.jobStore.clusterCheckinInterval">20000</prop>
+                <prop key="org.quartz.threadPool.class">org.quartz.simpl.SimpleThreadPool</prop>
+                <prop key="org.quartz.threadPool.threadCount">5</prop>
+                <prop key="org.quartz.jobStore.driverDelegateClass">org.quartz.impl.jdbcjobstore.StdJDBCDelegate</prop>
+                <prop key="org.quartz.jobStore.tablePrefix">QRTZ_</prop>
+            </props>
+        </property>
+        <property name="jobDetails">
+            <list>
+                <ref bean="icisDistributionJobDetail"/>
+                <ref bean="abandonedDraftsJobDetail"/>
+            </list>
+        </property>
+        <property name="triggers">
+            <list>
+                <ref bean="icisDistributionTrigger"/>
+                <ref bean="abandonedDraftsTrigger"/>
+            </list>
+        </property>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- ICIS Job -->
+    <!-- ====================================================================== -->
+    <bean id="icisDistributionJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="gov.epa.oeca.cgp.infrastructure.icis.IcisDistributionJob"/>
+        <property name="durability" value="true"/>
+    </bean>
+    <bean id="icisDistributionTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="icisDistributionJobDetail"/>
+        <!-- every 5 minutes -->
+        <property name="cronExpression" value="0 */5 * * * ?"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Abandoned Drafts Job -->
+    <!-- ====================================================================== -->
+    <bean id="abandonedDraftsJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="gov.epa.oeca.cgp.infrastructure.scheduling.AbandonedDraftsJob"/>
+        <property name="durability" value="true"/>
+    </bean>
+    <bean id="abandonedDraftsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="abandonedDraftsJobDetail"/>
+        <!-- 9:00 am/pm -->
+        <property name="cronExpression" value="0 0 9,21 * * ?"/>
+    </bean>
+</beans>

@@ -1,0 +1,32 @@
+{
+    "name": null,
+    "address1": null,
+    "address2": null,
+    "city": null,
+    "state": null,
+    "zip": null,
+    "zip4": null,
+    "county": null,
+    "pointOfContact": {
+        "firstName": null,
+        "middleInitial": null,
+        "lastName": null,
+        "title": null,
+        "phone": null,
+        "phoneExt": null,
+        "email": null,
+        "ein": null,
+        "organization": null
+    },
+    "preparer": {
+        "firstName": null,
+        "middleInitial": null,
+        "lastName": null,
+        "title": null,
+        "phone": null,
+        "phoneExt": null,
+        "email": null,
+        "ein": null,
+        "organization": null
+    }    
+}

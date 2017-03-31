@@ -1,0 +1,21 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            Your Low Erosivity Waiver (LEW) for Exclusion from Stormwater Permitting under EPA's Construction General
+            Permit (CGP) for ${form.formData.projectSiteInformation.siteName},
+            ${form.formData.projectSiteInformation.siteAddress}, has been updated.
+        </p>
+        <p>
+           To access your LEW in NeT, please visit: <a href="${applicationLink}">${applicationLink}</a>.
+        </p>
+        <p>
+            If you have questions about this email or about NeT, please call the EPA NOI Processing Center at
+            1-866-352-7755 (toll free) or send an email to noi@avanticorporation.com. If you have questions regarding
+            the CGP, please contact EPA at ${raEmail}.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

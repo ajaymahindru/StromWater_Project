@@ -1,0 +1,53 @@
+<beans:beans xmlns="http://www.springframework.org/schema/beans"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:security="http://www.springframework.org/schema/security"
+             xsi:schemaLocation="http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- ====================================================================== -->
+    <!-- enable secured annotations on business methods -->
+    <!-- ====================================================================== -->
+    <security:global-method-security secured-annotations="enabled"/>
+    <!-- ====================================================================== -->
+    <!-- Override authentication provider for CDX handoff to populate roles.json -->
+    <!-- ====================================================================== -->
+    <bean id="cdxPreAuthenticationProvider"
+          class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+        <property name="preAuthenticatedUserDetailsService" ref="cgpCdxHandoffPreAuthenticationUserDetailsService"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- Swagger -->
+    <!-- ====================================================================== -->
+    <security:http pattern="/apidocs/**" security="none"/>
+    <security:http pattern="/api/swagger.json" security="none"/>
+    <!-- ====================================================================== -->
+    <!-- unsecured web -->
+    <!-- ====================================================================== -->
+    <security:http pattern="/action/login" security="none"/>
+    <security:http pattern="/action/registration/**" security="none"/>
+    <security:http pattern="/static/**" security="none"/>
+    <!-- ====================================================================== -->
+    <!-- public API -->
+    <!-- ====================================================================== -->
+    <security:http pattern="/api/public/**" security="none"/>
+    <!-- ====================================================================== -->
+    <!-- registration API -->
+    <!-- ====================================================================== -->
+    <security:http pattern="/api/registration/**" security="none"/>
+    <!-- ====================================================================== -->
+    <!-- Application security -->
+    <!-- ====================================================================== -->
+    <security:http pattern="/**" auto-config="false" use-expressions="true">
+        <security:intercept-url pattern="/action/secured/**"
+                                access="hasAnyRole('ROLE_CGP_PREPARER', 'ROLE_CGP_CERTIFIER', 'ROLE_CGP_HELPDESK', 'ROLE_CGP_REGAUTH')"/>
+        <security:intercept-url pattern="/api/**"
+                                access="hasAnyRole('ROLE_CGP_PREPARER', 'ROLE_CGP_CERTIFIER', 'ROLE_CGP_HELPDESK', 'ROLE_CGP_REGAUTH')"/>
+        <security:form-login login-page="/action/login" default-target-url="/action/secured/home" />
+        <security:logout logout-url="/action/logout" invalidate-session="true" logout-success-url="/action/login"/>
+        <security:csrf disabled="true"/>
+        <security:session-management session-fixation-protection="none"/>
+        <security:custom-filter position="PRE_AUTH_FILTER" ref="cdxPreAuthenticationFilter"/>
+    </security:http>
+</beans:beans>

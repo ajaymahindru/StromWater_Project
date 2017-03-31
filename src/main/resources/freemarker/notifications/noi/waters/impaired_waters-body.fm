@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+           You have indicated in your NOI that you discharge to at least one water of the U.S. that is listed as impaired by
+           the state or tribe in which your project is located.  If your site discharges to one or more waters of the
+           U.S. that are impaired for sediment or a sediment-related parameter (e.g., total suspended solids or turbidity)
+           or nutrients (e.g., nitrogen or phosphorus), you are required to comply with additional stormwater control
+           requirements pertaining to the deadline to complete site stabilization in Part 2.2.14(a)(iii)(c) and site
+           inspections in Part 4.3. If your site discharges to waters of the U.S. that are impaired for pollutants other
+           than a sediment or nutrients, or related pollutants, you are only subject to additional measures or controls
+           if EPA informs you separately of such.
+        </p>
+    </body>
+</html>

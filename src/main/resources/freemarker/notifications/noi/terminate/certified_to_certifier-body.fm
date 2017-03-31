@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            A Notice of Termination (NOT) requesting termination of coverage under EPA's Construction General Permit (CGP)
+            for ${form.formData.projectSiteInformation.siteName}, ${form.formData.projectSiteInformation.siteAddress},
+            has been certified and submitted.
+        </p>
+        <p>
+            You can view your submission history and obtain a copy of the form you submitted within the NPDES Electronic
+            Reporting Tool (NeT) or from the Submission History section of your EPA's Central Data Exchange (CDX) account.
+            You are also able to download a copy of your submission via the CGP widget on the E-Enterprise Portal using
+            your NPDES ID ${form.formSet.npdesId}.
+        </p>
+        <p>
+            For guidance about this process, please visit:
+            <a href="${eReporting}">${eReporting}</a>. For more information
+            about the CGP, including a copy of the permit, please visit: <a href="${stormwaterCgp}">${stormwaterCgp}</a>.
+        </p>
+        <p>
+            If you have questions about this email or about NeT, please call the EPA NOI Processing Center at
+            1-866-352-7755 (toll free) or send an email to noi@avanticorporation.com. If you have questions regarding
+            the CGP, please contact EPA at ${raEmail}.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

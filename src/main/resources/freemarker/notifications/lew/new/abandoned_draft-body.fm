@@ -1,0 +1,34 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+           Dear ${form.formData.operatorInformation.preparer.firstName} ${form.formData.operatorInformation.preparer.lastName},
+        </p>
+        <p>
+            Our records indicate that you created a draft Low Erosivity Waiver (LEW) form 30 or more days ago. In order
+            for your LEW form to be authorized, it must be completed, signed by the Certifier
+            (i.e., the entity at your organization authorized to sign/certify the LEW for your site), and submitted to EPA.
+        </p>
+        <p>
+            Please log in to the NPDES Electronic Reporting Tool (NeT) to review and take action on this form.  NeT can
+            be accessed from: <a href="${applicationLink}">${applicationLink}</a>.
+        </p>
+        <p>
+            Once logged in, you can use the filtering capability to find the applicable LEW. Complete the sections of the
+            LEW, and then choose the Route to Certifier option at the end of the form.
+        </p>
+        <p>
+            If you do not wish to complete this CGP LEW, you may delete the LEW through the table of forms located on
+            your home page. Please note that once you delete an LEW, you will not be able to complete it in the future.
+            You will have to create a brand new LEW.
+        </p>
+        <p>
+            If you have any questions, please call the EPA NOI Processing Center at 1-866-352-7755 (toll free) or send an
+            email to noi@avanticorporation.com. For guidance about this process, please visit:
+            <a href="${eReporting}">${eReporting}</a>.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

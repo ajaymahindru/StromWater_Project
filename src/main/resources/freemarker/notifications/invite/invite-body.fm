@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <p>Dear ${firstName} ${lastName},</p>
+        <p>You have been invited by ${invitedByFirstName} ${invitedByLastName}, ${invitedById} to join NPDES Electronic Reporting Tool (NeT) as a ${role}.</p>
+        <p>NeT can be accessed from: ${applicationLink}. To review and take action on EPA CGPs, please log in to the NPDES Electronic Reporting Tool using your existing CDX credentials, or click "Create a new account".<p>
+        <p>For guidance about this process, please visit: <a href="${eReporting}">${eReporting}</a>.</p>
+        <p>
+           This is an automated notification; please do not reply to this email.
+        </p>
+        <p>
+            Sincerely<br/>
+            CDX Help Desk<br/>
+            <hr/>
+            United States Environmental Protection Agency - Central Data Exchange
+        </p>
+    </body>
+</html>

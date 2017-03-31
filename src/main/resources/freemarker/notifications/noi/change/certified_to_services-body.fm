@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            A revised Notice of Intent (NOI) requesting coverage for ${form.formData.projectSiteInformation.siteName},
+            ${form.formData.projectSiteInformation.siteAddress}, under EPA's Construction General Permit (CGP) was
+            submitted to the EPA and contains updates to the endangered species information.
+            Attached to this email is a copy of this NOI. The operator of this Project
+            Site indicated that he/she is eligible under ESA eligibility criterion ${esaCriterion}.
+        </p>
+        <p>
+            The latitude/longitude of this Project Site is: (${latitude}, ${longitude}).
+        </p>
+        <p>
+            Please review this NOI and contact EPA with any concerns within the 14-day review period at
+            ${raEmail}.
+        </p>
+        <p>
+            Eligibility criteria and procedures for determining permit eligibility with regard to protection of ESA-listed
+            species and/or designated critical habitat(s) are described in Appendix D of the permit, available at:
+            <a href="${stormwaterCgp}">${stormwaterCgp}</a>.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

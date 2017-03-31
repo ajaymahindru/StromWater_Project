@@ -1,0 +1,34 @@
+[
+  {
+    "value": "single",
+    "text": "Single-Family Residential"
+  },
+  {
+    "value": "multi",
+    "text": "Multi-Family Residential"
+  },
+  {
+    "value": "commercial",
+    "text": "Commercial"
+  },
+  {
+    "value": "industrial",
+    "text": "Industrial"
+  },
+  {
+    "value": "institutional",
+    "text": "Institutional"
+  },
+  {
+    "value": "road",
+    "text": "Highway or Road"
+  },
+  {
+    "value": "utility",
+    "text": "Utility"
+  },
+  {
+    "value": "OTHER",
+    "text": "Other"
+  }
+]

@@ -1,0 +1,26 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            The Low Erosivity Waiver (LEW) for Exclusion from Stormwater Permitting under EPA's Construction General
+            Permit (CGP) submitted by you for certification to
+            ${certifier.firstName} ${certifier.lastName} (${certifier.email}) for coverage of
+            ${form.formData.projectSiteInformation.siteName}, ${form.formData.projectSiteInformation.siteAddress}, has
+            been rejected for the following reason(s):
+        </p>
+        <p>
+            ${reason}
+        </p>
+        <p>
+           Please access the NPDES Electronic Reporting Tool (NeT) to revise and resubmit the LEW for certification as
+           necessary.  Please contact the Certifier if you have any questions regarding the reason(s) for rejection.
+        </p>
+        <p>
+            If you have questions about this email or about NeT, please call the EPA NOI Processing Center at
+            1-866-352-7755 (toll free) or send an email to noi@avanticorporation.com.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

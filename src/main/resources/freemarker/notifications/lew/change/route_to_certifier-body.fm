@@ -1,0 +1,33 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            Changes to an existing Low Erosivity Waiver (LEW) for Exclusion from Stormwater Permitting under EPA's
+            Construction General Permit (CGP) for ${form.formData.projectSiteInformation.siteName}, ${form.formData.projectSiteInformation.siteAddress},
+            have been prepared by ${form.formData.operatorInformation.preparer.firstName} ${form.formData.operatorInformation.preparer.lastName}
+            (${form.formData.operatorInformation.preparer.email}) with you listed as the Certifier. This revised LEW
+            will not be submitted to EPA until it is certified by you. Please log in to the NPDES Electronic Reporting
+            Tool (NeT) to review and take action on this form.  NeT can be accessed from: <a href="${applicationLink}">${applicationLink}</a>.
+        </p>
+        <p>
+            Once logged in, you can use the filtering capability to find the LEW for certification.  After you have
+            completed your review, follow the steps presented on the screen to certify the submission. If you choose not
+            to certify the LEW, select "Reject", enter a Reason for Rejection, and submit.  This action will route the
+            rejected form back to the Preparer in NeT, and generate an email notifying the Preparer that the form has
+            been rejected, your reason for rejection, and instructions to resubmit as needed.
+        </p>
+        <p>
+            You will receive an email informing you once your request for exclusion has been accepted.   For guidance
+            about this process, please visit: <a href="${eReporting}">${eReporting}</a>.  For more information
+            about the CGP, including a copy of the permit, please visit: <a href="${stormwaterCgp}">${stormwaterCgp}</a>.
+        </p>
+        <p>
+            If you have questions about this email or about NeT, please call the EPA NOI Processing Center at
+            1-866-352-7755 (toll free) or send an email to noi@avanticorporation.com. If you have questions regarding
+            the CGP, please contact EPA at ${raEmail}.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

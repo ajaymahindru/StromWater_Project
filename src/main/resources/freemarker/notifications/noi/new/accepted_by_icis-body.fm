@@ -1,0 +1,39 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            Your Notice of Intent (NOI) requesting coverage for ${form.formData.projectSiteInformation.siteName},
+            ${form.formData.projectSiteInformation.siteAddress} under EPA's Construction General Permit (CGP) has been
+            accepted and authorization to discharge under the CGP became effective on ${submittedDate}.
+        </p>
+        <p>
+            For tracking purposes, the following NPDES ID has been assigned to your NOI: ${form.formSet.npdesId}.
+            To access your NOI in NeT, please visit: <a href="${applicationLink}">${applicationLink}</a>.
+        </p>
+        <p>
+            As you know, the CGP requires you to have developed a Stormwater Pollution Prevention Plan (SWPPP) prior to
+            submitting your NOI.  The CGP also includes specific requirements for erosion and sediment controls,
+            pollution prevention controls, conducting self-inspections, taking corrective actions, and conducting staff
+            training.  You must comply with any state, tribal, or territory-specific requirements in Part 9
+            (see <a href="${stormwaterCgp}">${stormwaterCgp}</a>).
+        </p>
+        <p>
+            Please note that this email does not represent a determination by EPA regarding the validity of the
+            information you provided in your NOI. Your eligibility for coverage under this permit is based on the
+            validity of the certification you provided. Your electronic signature on the NOI form certifies that you have
+            read, understood, and are implementing all of the applicable requirements. An important aspect of this
+            certification requires that you have correctly determined whether you are eligible for coverage under this permit.
+        </p>
+        <p>
+            The 2017 CGP and additional information are available at: <a href="${stormwaterCgp}">${stormwaterCgp}</a>.
+        </p>
+        <p>
+            If you have questions about this email or about NeT, please call the EPA NOI Processing Center at
+            1-866-352-7755 (toll free) or send an email to noi@avanticorporation.com. If you have questions regarding
+            the CGP, please contact EPA at ${raEmail}.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

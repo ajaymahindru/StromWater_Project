@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+    <!-- ====================================================================== -->
+    <!-- Configuration  -->
+    <!-- ====================================================================== -->
+	<util:map id="cgpExternalUrls">
+		<entry key="appendixA" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_a_-_definitions_508.pdf"/>
+		<entry key="appendixB" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_b_-_areas_of_permit_coverage_508.pdf"/>
+		<entry key="appendixC" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_c_-_waivers_508.pdf"/>
+		<entry key="appendixD" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_d_-_endangered_species_reqs_508.pdf"/>
+		<entry key="appendixE" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_e_-_historic_properties_reqs_508.pdf"/>
+		<entry key="appendixF" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_f_-_tier_3_tier_2_and_tier_2.5_waters_508.pdf"/>
+		<entry key="appendixG" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_g_-_buffer_reqs_508.pdf"/>
+		<entry key="appendixH" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_h_-_storm_frequencies_508.pdf"/>
+		<entry key="appendixI" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_i_-_standard_permit_conditions_508.pdf"/>
+		<entry key="appendixJ" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_j_-_noi_fillable_508.pdf"/>
+		<entry key="appendixK" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_k_-_not_fillable_508.pdf"/>
+		<entry key="appendixL" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_l_-_request_for_chemical_treatment_fillable_508.pdf"/>
+		<entry key="cfr12226" value="http://www.ecfr.gov/cgi-bin/text-idx?SID=d9a3573573b03ab95b8eff6435ab2924&amp;mc=true&amp;node=se40.24.122_126&amp;rgn=div8"/>
+		<entry key="rfactorCalculator" value="https://www.epa.gov/npdes/rainfall-erosivity-factor-calculator-small-construction-sites"/>
+		<entry key="factSheet" value="https://www3.epa.gov/npdes/pubs/fact3-1.pdf"/>
+		<entry key="npdesPermitOffice" value="https://www.epa.gov/npdes/contact-us-stormwater#state"/>
+		<entry key="cgpDocs" value="https://www.epa.gov/npdes/epas-2017-construction-general-permit-cgp-and-related-documents"/>
+		<entry key="cgpHelpCenter" value="https://epanet.zendesk.com/hc/en-us/categories/204532588-Construction-General-Permit-CGP-"/>
+		<entry key="npdesEReporting" value="https://www.epa.gov/compliance/npdes-ereporting"/>
+		<entry key="eEnterpriseEnvironment" value="https://e-enterprise.gov/eenterprise-new"/>
+		<entry key="cgpHelpDeskEmail" value="NPDESereporting@epa.gov"/>
+		<entry key="cgpHelpDeskPhoneHours" value="877-227-8965 (9:00am - 5:00pm EST)"/>
+		<entry key="cdxContentFrameworks" value="https://dev.epacdx.net/ContentFramework"/>
+		<entry key="applicationLink" value="https://devngn.epacdxnode.net/oeca-cgp-web"/>
+		<entry key="eReporting" value="https://www.epa.gov/npdes/stormwater-discharges-construction-activities#ereporting"/>
+		<entry key="stormwaterCgp" value="https://www.epa.gov/npdes/stormwater-discharges-construction-activities#cgp"/>
+	</util:map>
+</beans>

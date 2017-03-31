@@ -1,0 +1,22 @@
+<html>
+    <body>
+        <p>${currentDate}</p>
+        <p>
+            A Notice of Intent (NOI) requesting coverage for ${form.formData.projectSiteInformation.siteName},
+            ${form.formData.projectSiteInformation.siteAddress}, under EPA's Construction General Permit (CGP) was
+            certified and submitted through NeT by  ${certifier.firstName} ${certifier.lastName} (${certifier.email}),
+            and is undergoing its 14-day review period. The NPDES ID is ${form.formSet.npdesId }.
+        </p>
+        <p>
+            For additional information about this NOI, you can access NeT using your Regulatory Authority CDX account at
+            ${applicationLink}. Once logged into NeT, use the filtering options to find the applicable NOI. You may use
+            the labeled buttons to Reject or Place the NOI On Hold. If the NOI is Rejected, you will enter a Reason
+            for Rejection and a task will be sent to the Certifier. If the NOI is Placed on Hold, it will stay on hold
+            until you take further action. The Certifier will be notified of any actions taken. If no action is taken,
+            the NOI will be automatically approved and submitted to ICIS after 14 days.
+        </p>
+        <p>
+            This is an automated notification; please do not reply to this email.
+        </p>
+    </body>
+</html>

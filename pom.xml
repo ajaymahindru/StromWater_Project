@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>gov.epa.oeca</groupId>
+        <artifactId>oeca-commons-parent</artifactId>
+        <version>1.0.33</version>
+    </parent>
+    <artifactId>oeca-cgp-web</artifactId>
+    <version>1.0.34-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <url>http://maven.apache.org</url>
+    <dependencies>
+        <!-- =============================================================================================== -->
+        <!-- commons web -->
+        <!-- =============================================================================================== -->
+        <dependency>
+            <groupId>gov.epa.oeca</groupId>
+            <artifactId>oeca-web-utils</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>gov.epa.oeca</groupId>
+            <artifactId>oeca-web-assets</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- =============================================================================================== -->
+        <!-- ICIS schemas -->
+        <!-- =============================================================================================== -->
+        <dependency>
+            <groupId>gov.epa.oeca</groupId>
+            <artifactId>oeca-icis-schemas</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- =============================================================================================== -->
+        <!-- ORM -->
+        <!-- =============================================================================================== -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+        </dependency>
+        <!-- =============================================================================================== -->
+        <!-- Persistence -->
+        <!-- =============================================================================================== -->
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <!-- ====================================================================== -->
+        <!-- misc -->
+        <!-- ====================================================================== -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.4</version>
+        </dependency>
+        <!-- ====================================================================== -->
+        <!-- groovy                                                                   -->
+        <!-- ====================================================================== -->
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-json</artifactId>
+        </dependency>
+        <!-- =============================================================================================== -->
+        <!-- Scheduling -->
+        <!-- =============================================================================================== -->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+        </dependency>
+        <!-- ====================================================================== -->
+        <!-- testing -->
+        <!-- ====================================================================== -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <!-- ====================================================================== -->
+    <!-- build -->
+    <!-- ====================================================================== -->
+    <build>
+        <finalName>oeca-cgp-web</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <overlays>
+                        <overlay>
+                            <id>oeca-web-assets</id>
+                            <groupId>gov.epa.oeca</groupId>
+                            <artifactId>oeca-web-assets</artifactId>
+                            <type>war</type>
+                            <includes>
+                                <include>apidocs/**</include>
+                                <include>layout/**</include>
+                                <include>static/**</include>
+                            </includes>
+                        </overlay>
+                    </overlays>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-wars</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/dependent-wars</outputDirectory>
+                            <stripVersion>true</stripVersion>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>gov.epa.oeca</groupId>
+                                    <artifactId>oeca-svc-registration</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>war</type>
+                                    <destFileName>oeca-svc-registration.war</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>gov.epa.oeca</groupId>
+                                    <artifactId>oeca-svc-auth</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>war</type>
+                                    <destFileName>oeca-svc-auth.war</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <configuration>
+                    <webApp>
+                        <contextPath>/oeca-cgp-web</contextPath>
+                        <!-- This is disable file locking on windows so you can edit static
+                            files without having to restart jetty. See: http://www.eclipse.org/jetty/documentation/current/troubleshooting-locked-files-on-windows.html -->
+                        <defaultsDescriptor>src/test/resources/jetty/jetty-maven-plugin-webdefault.xml
+                        </defaultsDescriptor>
+                        <descriptor>${basedir}/src/test/resources/web.xml</descriptor>
+                    </webApp>
+                    <!-- <contextXml>${basedir}/src/main/webapp/WEB-INF/jetty-context.xml</contextXml> -->
+                    <scanIntervalSeconds>5</scanIntervalSeconds>
+                    <useTestScope>true</useTestScope>
+                    <contextHandlers>
+                        <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+                            <war>${project.build.directory}/dependent-wars/oeca-svc-registration.war</war>
+                            <contextPath>/oeca-svc-registration</contextPath>
+                        </contextHandler>
+                        <contextHandler implementation="org.eclipse.jetty.webapp.WebAppContext">
+                            <war>${project.build.directory}/dependent-wars/oeca-svc-auth.war</war>
+                            <contextPath>/oeca-svc-auth</contextPath>
+                        </contextHandler>
+                    </contextHandlers>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>log.home</name>
+                            <value>${project.build.directory}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>spring.config.dir</name>
+                            <value>${project.basedir}/src/test/resources/conf</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>8080</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
