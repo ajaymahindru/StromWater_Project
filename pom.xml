@@ -7,7 +7,7 @@
         <version>1.0.33</version>
     </parent>
     <artifactId>oeca-cgp-web</artifactId>
-    <version>1.0.33</version>
+    <version>1.0.34-SNAPSHOT</version>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
     <dependencies>
