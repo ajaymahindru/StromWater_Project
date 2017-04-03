@@ -234,20 +234,20 @@ var DashboardController = function(data, params) {
 			{
 				name: 'formSets.npdesId',
 				orderable: true,
-				data: 'formSet.npdesId',
+				data: 'formSet.npdesId()',
 				responsivePriority: 10
 			},
 			{
 				name: 'formSets.masterPermitNumber',
 				orderable: true,
-				data: 'formSet.masterPermitNumber',
+				data: 'formSet.masterPermitNumber()',
 				responsivePriority: 10
 			},
 			{
 				name: 'trackingNumber',
 				orderable: true,
 				visible: false,
-				data: 'trackingNumber',
+				data: 'trackingNumber()',
 				responsivePriority: 30
 			},
 			{
@@ -266,7 +266,7 @@ var DashboardController = function(data, params) {
 				className: 'word-wrap',
 				name: 'index.operatorName',
 				orderable: true,
-				data: 'formData.operatorInformation.operatorName',
+				data: 'formData.operatorInformation.operatorName()',
 				width: '200px',
 				responsivePriority: 10
 			},
@@ -274,14 +274,14 @@ var DashboardController = function(data, params) {
 				className: 'word-wrap',
 				name: 'index.siteName',
 				orderable: true,
-				data: 'formData.projectSiteInformation.siteName',
+				data: 'formData.projectSiteInformation.siteName()',
 				width: '200px',
 				responsivePriority: 10
 			},
 			{
 				name: 'formSets.owner',
 				orderable: true,
-				data: 'formSet.owner',
+				data: 'formSet.owner()',
 				responsivePriority: 10
 			},
 			{
@@ -2064,7 +2064,7 @@ var TmdlController = function(data, allPollutants) {
 						}
 					}).length == 0) {
                     pollutant.text = pollutant.pollutantName;
-                    pollutant.id = pollutant.pollutantCode;
+                    pollutant.id = pollutant.pollutantName;
                     return pollutant;
                 }
             })

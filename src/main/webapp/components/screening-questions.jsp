@@ -118,7 +118,7 @@
                 </label>
                 <br/>
                 <input type="text" id="npdesId" class="form-control" data-bind="textInput: npdesPermit"
-                       style="width: 300px"/>
+                       style="width: 300px" maxlength="9"/>
             </div>
         </div>
         <!-- ko ifnot: permitNumberNext -->

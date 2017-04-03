@@ -4,14 +4,14 @@
     <parent>
         <groupId>gov.epa.oeca</groupId>
         <artifactId>oeca-commons-parent</artifactId>
-        <version>1.0.33</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
     <artifactId>oeca-cgp-web</artifactId>
     <version>1.1.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <url>http://maven.apache.org</url>
     <properties>
-        <parent.version>1.0.33</parent.version>
+        <parent.version>1.1.0-SNAPSHOT</parent.version>
     </properties>
     <dependencies>
         <!-- =============================================================================================== -->

@@ -104,7 +104,7 @@
 													return {
 														results: $.map(data, function(pollutant) {
 															pollutant.text = pollutant.pollutantName;
-															pollutant.id = pollutant.pollutantCode;
+															pollutant.id = pollutant.pollutantName;
 															return pollutant;
 														})
 													}
@@ -115,14 +115,14 @@
                                             value: $parent.impairedPollutants,
                                             model: PollutantController,
                                             compare: function(toRemove, item) {
-                                                return toRemove.id == item.pollutantCode();
+                                                return toRemove.id == item.pollutantName();
                                             }
                                         }, foreach: $parent.preSelectedImpairedPollutants">
 						<!--
                             For each through the currently selected options so that select2 will show them as already
                             selected.  There doesn't appear to be any api method in select2 to do this.
                         -->
-						<option data-bind="text: pollutantName, attr: {value: pollutantCode}" selected></option>
+						<option data-bind="text: pollutantName, attr: {value: pollutantName}" selected></option>
 					</select>
 				</div>
 			</div>
@@ -193,14 +193,14 @@
                                             value: pollutants,
                                             model: PollutantController,
                                             compare: function(toRemove, item) {
-                                                return toRemove.id == item.pollutantCode();
+                                                return toRemove.id == item.pollutantName();
                                             }
                                         }, foreach: originalPollutants">
 							<!--
                                 For each through the currently selected options so that select2 will show them as already
                                 selected.  There doesn't appear to be any api method in select2 to do this.
                             -->
-							<option data-bind="text: pollutantName, attr: {value: pollutantCode}" selected></option>
+							<option data-bind="text: pollutantName, attr: {value: pollutantName}" selected></option>
 						</select>
 					</div>
                     <div class="col-sm-1 form-group">
@@ -245,7 +245,7 @@
                                             value: $parent.newTmdl().pollutants,
                                             model: PollutantController,
                                             compare: function(toRemove, item) {
-                                                return toRemove.id == item.pollutantCode();
+                                                return toRemove.id == item.pollutantName();
                                             }
                                         }">
 						</select>
@@ -386,6 +386,7 @@
 			<hr>
 			<div class="form-group required">
 				<div class="h4 control-label">Receiving Waters Information:</div>
+				<span class="validationMessage" data-bind="validationMessage: dischargePoints"></span>
 			</div>
 			<p><strong>List all of the stormwater points of discharge from your facility.</strong> Each point of
 				discharge must be identified by a unique 3-digit ID (e.g., 001, 002). Note that this information does
