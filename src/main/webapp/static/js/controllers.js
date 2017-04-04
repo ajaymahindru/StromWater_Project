@@ -2384,7 +2384,9 @@ var CertificationInformationController = function(data, params) {
 		oeca.cgp.noi.sign(self.id(), data.activityId);
 	};
 	self.route = function(user) {
-		return oeca.cgp.noi.route(params.form(), user);
+		return oeca.cgp.noi.save(params.form(), null).success(function() {
+			oeca.cgp.noi.route(params.form(), user);
+		});
 	};
 	self.confirmCertifier = function(user) {
 		if(user.userId()) {
