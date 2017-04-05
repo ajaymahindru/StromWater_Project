@@ -163,6 +163,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             // update the previous form
             toClone.setActiveRecord(false);
             toClone.setLastUpdatedDate(ZonedDateTime.now());
+            toClone.setStatus(Status.ActivePendingChange);
             formRepository.update(toClone);
 
             // create the form
