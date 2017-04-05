@@ -31,7 +31,7 @@
 	<div class="row">
 	    <div class="col-sm-7 form-group">
 	        <label class="control-label" for="contact-address">Address</label>
-	        <input type="text" id="contact-address" class="form-control" data-bind="value: address"/>
+	        <input type="text" id="contact-address" class="form-control" maxlength="50" data-bind="value: address"/>
 	    </div>
 	</div>
 	<!-- /ko -->
@@ -65,7 +65,7 @@
 		<div class="row">
 			<div class="col-sm-12 form-group">
 				<label class="control-label" for="poc-ein">IRS Employer Identification Number (EIN)</label>
-				<input id="ein" class="form-control" type="text" data-bind="value: ein" />
+				<input id="ein" class="form-control" type="text" data-bind="value: ein" maxlength="10"/>
 			</div>
 		</div>
 	<!-- /ko -->

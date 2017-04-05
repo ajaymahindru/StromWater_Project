@@ -961,72 +961,82 @@
                             <div class="panel-body" data-bind="with: esignViewModel">
                                 <form data-bind="submit: $root.esignNext, enableAll: !$root.registrationSubmitted()">
                                     <h4>These questions will be used for signing your document electronically:</h4>
-                                    <div class="form-group col-sm-8">
-                                        <label for="equestion1" class="control-label">Question 1</label><br/>
-                                        <select id="equestion1" class="form-control"
-                                                data-bind="options: $root.cromerrQuestions1, optionsText: 'text', value: electronicSignatureAnswer1().question,
-                                       optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr1">
-                                        </select>
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+                                            <label for="equestion1" class="control-label">Question 1</label><br/>
+                                            <select id="equestion1" class="form-control"
+                                                    data-bind="options: $root.cromerrQuestions1, optionsText: 'text', value: electronicSignatureAnswer1().question,
+                                           optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr1">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="esignAnswer1" class="control-label">Answer 1</label>
+                                                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right"
+                                                          title="Answers are case-sensitive."></span>
+                                            <input type="password" class="form-control cromerr-mask" id="esignAnswer1" maxlength="80"
+                                                   data-bind="textInput: electronicSignatureAnswer1().answer"/>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="esignAnswer1" class="control-label">Answer 1</label>
-                    <span class="glyphicon glyphicon-info-sign" data-toggle="tooltip" data-placement="right"
-                          title="Answers are case-sensitive."></span>
-                                        <input type="password" class="form-control cromerr-mask" id="esignAnswer1" maxlength="80"
-                                               data-bind="textInput: electronicSignatureAnswer1().answer"/>
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+                                            <label for="equestion2" class="control-label">Question 2</label><br/>
+                                            <select id="equestion2" class="form-control"
+                                                    data-bind="options: $root.cromerrQuestions2, optionsText: 'text', value: electronicSignatureAnswer2().question,
+                                           optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr2">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="esignAnswer2" class="control-label">Answer 2</label>
+                                            <input type="password" class="form-control cromerr-mask" id="esignAnswer2" maxlength="80"
+                                                   data-bind="textInput: electronicSignatureAnswer2().answer"/>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-sm-8">
-                                        <label for="equestion2" class="control-label">Question 2</label><br/>
-                                        <select id="equestion2" class="form-control"
-                                                data-bind="options: $root.cromerrQuestions2, optionsText: 'text', value: electronicSignatureAnswer2().question,
-                                       optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr2">
-                                        </select>
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+                                            <label for="equestion3" class="control-label">Question 3</label><br/>
+                                            <select id="equestion3" class="form-control"
+                                                    data-bind="options: $root.cromerrQuestions3, optionsText: 'text', value: electronicSignatureAnswer3().question,
+                                           optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr3">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="esignAnswer3" class="control-label">Answer 3</label>
+                                            <input type="password" class="form-control cromerr-mask" id="esignAnswer3" maxlength="80"
+                                                   data-bind="textInput: electronicSignatureAnswer3().answer"/>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="esignAnswer2" class="control-label">Answer 2</label>
-                                        <input type="password" class="form-control cromerr-mask" id="esignAnswer2" maxlength="80"
-                                               data-bind="textInput: electronicSignatureAnswer2().answer"/>
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+                                            <label for="equestion4" class="control-label">Question 4</label><br/>
+                                            <select id="equestion4" class="form-control"
+                                                    data-bind="options: $root.cromerrQuestions4, optionsText: 'text', value: electronicSignatureAnswer4().question,
+                                           optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr4">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="esignAnswer4" class="control-label">Answer 4</label>
+                                            <input type="password" class="form-control cromerr-mask" id="esignAnswer4" maxlength="80"
+                                                   data-bind="textInput: electronicSignatureAnswer4().answer"/>
+                                        </div>
                                     </div>
-                                    <div class="form-group col-sm-8">
-                                        <label for="equestion3" class="control-label">Question 3</label><br/>
-                                        <select id="equestion3" class="form-control"
-                                                data-bind="options: $root.cromerrQuestions3, optionsText: 'text', value: electronicSignatureAnswer3().question,
-                                       optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr3">
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="esignAnswer3" class="control-label">Answer 3</label>
-                                        <input type="password" class="form-control cromerr-mask" id="esignAnswer3" maxlength="80"
-                                               data-bind="textInput: electronicSignatureAnswer3().answer"/>
-                                    </div>
-                                    <div class="form-group col-sm-8">
-                                        <label for="equestion4" class="control-label">Question 4</label><br/>
-                                        <select id="equestion4" class="form-control"
-                                                data-bind="options: $root.cromerrQuestions4, optionsText: 'text', value: electronicSignatureAnswer4().question,
-                                       optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr4">
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="esignAnswer4" class="control-label">Answer 4</label>
-                                        <input type="password" class="form-control cromerr-mask" id="esignAnswer4" maxlength="80"
-                                               data-bind="textInput: electronicSignatureAnswer4().answer"/>
-                                    </div>
-                                    <div class="form-group col-sm-8">
-                                        <label for="equestion5" class="control-label">Question 5</label><br/>
-                                        <select id="equestion5" class="form-control"
-                                                data-bind="options: $root.cromerrQuestions5, optionsText: 'text', value: electronicSignatureAnswer5().question,
-                                       optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr5">
-                                        </select>
-                                    </div>
-                                    <div class="form-group col-sm-4">
-                                        <label for="esignAnswer5" class="control-label">Answer 5</label>
-                                        <input type="password" class="form-control cromerr-mask" id="esignAnswer5" maxlength="80"
-                                               data-bind="textInput: electronicSignatureAnswer5().answer"/>
-                                        <br/>
-                                        <label>
-                                            <input id="showCromerrAnswer" type="checkbox"/>
-                                            Show answers
-                                        </label>
+                                    <div class="row">
+                                        <div class="form-group col-sm-8">
+                                            <label for="equestion5" class="control-label">Question 5</label><br/>
+                                            <select id="equestion5" class="form-control"
+                                                    data-bind="options: $root.cromerrQuestions5, optionsText: 'text', value: electronicSignatureAnswer5().question,
+                                           optionsCaption: 'Select a question...', selectedOptions: $root.selectedCromerr5">
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-sm-4">
+                                            <label for="esignAnswer5" class="control-label">Answer 5</label>
+                                            <input type="password" class="form-control cromerr-mask" id="esignAnswer5" maxlength="80"
+                                                   data-bind="textInput: electronicSignatureAnswer5().answer"/>
+                                            <br/>
+                                            <label>
+                                                <input id="showCromerrAnswer" type="checkbox"/>
+                                                Show answers
+                                            </label>
+                                        </div>
                                     </div>
                                     <div>
                                         <button type="submit" class="btn btn-primary"
@@ -1423,7 +1433,7 @@
                         <hr class="title" />
                     </form>
 
-                    <div data-bind="if: electronicProofing(), fadeVisible: electronicProofing()">
+                    <div data-bind="fadeVisible: electronicProofing()">
                         <div data-bind="with: $root.idProofing">
                             <form role="form" class="form" data-bind="submit: $root.verifySign"
                                   autocomplete="off">

@@ -1006,6 +1006,9 @@ oeca.cgp = {
 		geocode: function(address, callback) {
             L.esri.Geocoding.geocodeService().geocode().region(address).run(callback);
 		},
+		geocodeCityState: function(city, state, callback) {
+			L.esri.Geocoding.geocodeService().geocode().city(city).region(state).run(callback);
+		},
 		center: function(map, address) {
 			oeca.cgp.map.geocode(address, function(error, response) {
 				if(response.results[0]) {
@@ -1018,7 +1021,7 @@ oeca.cgp = {
 				state = oeca.cgp.map.decodeState(state);
 			}
 			if(city && state) {
-				oeca.cgp.map.geocode(city + ' ' + state, function(error, response) {
+				oeca.cgp.map.geocodeCityState(city, state, function(error, response) {
 					if(error) {
 						console.log(error);
 					}
@@ -1055,6 +1058,9 @@ oeca.cgp = {
 			}
 			if(state == 'MP') {
 				return 'Northern Mariana Islands';
+			}
+			if(state == 'PR') {
+				return 'Puerto Rico';
 			}
 			return state;
 		}

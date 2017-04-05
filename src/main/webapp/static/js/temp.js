@@ -252,11 +252,17 @@ ko.bindingHandlers.select2AjaxValue = {
         });
         $(element).on('select2:unselect', function(evt) {
             if(multi) {
+                var itemsToRemove = [];
                 ko.utils.arrayForEach(value(), function(item) {
                     if(compare(evt.params.data, item)) {
-                        value.remove(item);
+                        itemsToRemove.push(item);
                    }
                 });
+                if(itemsToRemove.length > 0) {
+                    ko.utils.arrayForEach(itemsToRemove, function(item) {
+                        value.remove(item);
+                    })
+                }
             }
             else {
                 value(null);

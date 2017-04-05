@@ -37,12 +37,12 @@
     	</div>
     	<!-- /ko -->
     <div>
-        <a class="btn btn-primary" data-bind="click: function(){search()}">Search</a>
+        <button class="btn btn-primary" data-bind="click: function(){search()}">Search</button>
     </div>
 </div>
 <div data-bind="if: showResults()">
     <p>Select <span data-bind="text: type() != null && type() != undefined ? 'your ' + type() : 'user'"></span> from the list below:</p>
-    <table class="table table-bordered table-condensed dataTable responsive no-wrap" style="width: 100%"
+    <table class="table table-bordered table-condensed dataTable responsive no-wrap word-break" style="width: 100%"
     		data-bind="attr: {id: id + '-search-results'}, 
     		datatable: {
     			columns: [

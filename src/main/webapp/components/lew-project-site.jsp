@@ -26,7 +26,7 @@
 			<div class="row">
 				<div class="col-sm-12 form-group">
 					<label class="control-label" for="site-name">Project/Site Name</label>
-					<input id="site-name" class="form-control" type="text" data-bind="value: siteName" />
+					<input id="site-name" class="form-control" type="text" maxlength="80" data-bind="value: siteName" />
 				</div>
 			</div>
 			<hr>
@@ -34,13 +34,13 @@
 			<div class="row">
 				<div class="col-sm-12 col-lg-6 form-group">
 					<label class="control-label" for="address-1">Address</label>
-					<input id="address-1" class="form-control" type="text" data-bind="value: siteAddress" />
+					<input id="address-1" class="form-control" type="text" maxlength="50" data-bind="value: siteAddress" />
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 form-group">
 					<label class="control-label" for="city">City</label>
-					<input id="city" class="form-control" type="text" data-bind="value: siteCity" />
+					<input id="city" class="form-control" type="text" maxlength="60" data-bind="value: siteCity" />
 				</div>
 				<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 form-group">
 					<label class="control-label" for="state">State</label>

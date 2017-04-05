@@ -705,8 +705,11 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
                 }
             }
             notificationHelper.sendCertificationToCertifier(forCertification, attachmentName, attachmentData);
-            if (FormType.Notice_Of_Intent.equals(forCertification.getType()) && Phase.New.equals(forCertification.getPhase())) {
-                notificationHelper.sendCertificationToRegulatoryAuthority(forCertification, attachmentName, attachmentData);
+            if (FormType.Notice_Of_Intent.equals(forCertification.getType()) && !Phase.Terminate.equals(forCertification.getPhase())) {
+                notificationHelper.sendCertificationToServices(forCertification, attachmentName, attachmentData);
+                if (Phase.New.equals(forCertification.getPhase())) {
+                    notificationHelper.sendCertificationToRegulatoryAuthority(forCertification, attachmentName, attachmentData);
+                }
             }
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage(), e);
@@ -839,7 +842,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             formRepository.update(toSubmit);
 
             // send notifications
-            if (FormType.Notice_Of_Intent.equals(toSubmit.getType()) && Phase.New.equals(toSubmit.getPhase())) {
+            if (FormType.Notice_Of_Intent.equals(toSubmit.getType()) && !Phase.Terminate.equals(toSubmit.getPhase())) {
                 //get copy of record
                 File attachmentData = null;
                 String attachmentName = null;
@@ -850,7 +853,10 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
                         break; // there is only one
                     }
                 }
-                notificationHelper.sendCertificationToRegulatoryAuthority(toSubmit, attachmentName, attachmentData);
+                notificationHelper.sendCertificationToServices(toSubmit, attachmentName, attachmentData);
+                if (Phase.New.equals(toSubmit.getPhase())) {
+                    notificationHelper.sendCertificationToRegulatoryAuthority(toSubmit, attachmentName, attachmentData);
+                }
             }
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage(), e);
@@ -902,7 +908,6 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             // send notifications
             notificationHelper.sendAcceptedByIcis(toActivate, attachmentName, attachmentData);
             if (FormType.Notice_Of_Intent.equals(toActivate.getType()) && !Phase.Terminate.equals(toActivate.getPhase())) {
-                notificationHelper.sendCertificationToServices(toActivate, attachmentName, attachmentData);
                 if (hasTierDesignation(toActivate)) {
                     notificationHelper.sendTierDesignation(toActivate);
                 }
