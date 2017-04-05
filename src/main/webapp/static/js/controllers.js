@@ -2196,6 +2196,18 @@ var EndangeredSpeciesProtectionController = function(data, params) {
 			}
 		}
 	});
+
+	var criterionSubscription = self.criterion.subscribe(function(value) {
+		console.log(self.attachments());
+		if (self.attachments().length > 0) {
+			if (value == "Criterion_A" || value == "Criterion_B") {
+				self.removeAllAttachments();
+			} else {
+				oeca.cgp.noi.criterionAttachmentWarning(params.form(), value, self.removeAllAttachments);
+			}
+		}
+	});
+
     self.errors = ko.validation.group([self.criterion, self.criteriaSelectionSummary, self.otherOperatorNpdesId,
         self.speciesAndHabitatInActionArea, self.distanceFromSite, self.attachments]);
     params.errors(self.errors);
@@ -2209,6 +2221,11 @@ var EndangeredSpeciesProtectionController = function(data, params) {
 	self.removeAttachment = function(attachment) {
 		oeca.cgp.noi.deleteAttachment(params.form(), attachment);
 	}
+	self.removeAllAttachments = function() {
+		ko.utils.arrayForEach(self.attachments(), function(attachment) {
+			oeca.cgp.noi.deleteAttachment(params.form(), attachment);
+		});
+	}
 	self.saveAndContinue = function() {
 		if(self.errors().length > 0) {
 			self.errors.showAllMessages();
@@ -2219,6 +2236,7 @@ var EndangeredSpeciesProtectionController = function(data, params) {
 	self.dispose = function() {
 		postal.unsubscribe(self.postalSub);
 		oeca.cgp.utils.dispose(self.pendingAttachment);
+		oeca.cgp.utils.dispose(criterionSubscription);
 	}
 };
 var HistoricPreservationController = function(data, params) {
