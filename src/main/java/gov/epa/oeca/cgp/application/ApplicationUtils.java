@@ -16,10 +16,10 @@ import java.util.List;
 @Component
 public class ApplicationUtils {
 
-    public static final List<Status> PUBLIC_STATUSES = Arrays.asList(Status.Submitted, Status.Active, Status.Terminated,
-            Status.Discontinued, Status.Archived);
-    public static final List<Status> RA_STATUSES = Arrays.asList(Status.Submitted, Status.Active, Status.Denied,
-            Status.OnHold, Status.Terminated, Status.Discontinued, Status.Archived);
+    public static final List<Status> PUBLIC_STATUSES = Arrays.asList(Status.Submitted, Status.Active, Status.ActivePendingChange,
+            Status.Terminated, Status.Discontinued, Status.Archived);
+    public static final List<Status> RA_STATUSES = Arrays.asList(Status.Submitted, Status.Active, Status.ActivePendingChange,
+            Status.Denied, Status.OnHold, Status.Terminated, Status.Discontinued, Status.Archived);
     public static final List<Status> FINAL_STATUSES = Arrays.asList(Status.Active, Status.Terminated, Status.Discontinued);
     public static final List<Status> DISTRIBUTION_STATUSES =
             Arrays.asList(Status.Submitted, Status.Active, Status.Terminated, Status.Discontinued);
