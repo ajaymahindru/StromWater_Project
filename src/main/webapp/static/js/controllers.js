@@ -2719,11 +2719,14 @@ var UserSearchController = function(data, params) {
         //page.hideElementWrapper();
 		var dataflow = 'NETEPACGP';
 		var roleId = (self.type() === 'Certifier' ? 120410 : (self.type() === 'Preparer' ? 120420 : ''));
-        var criteriaString = 'userId=' + self.searchCriteria().userId() +
-                '&firstName=' + self.searchCriteria().firstName() + '&middleInitial=' + self.searchCriteria().middleInitial() +
-                '&lastName=' + self.searchCriteria().lastName() + '&organizationName=' + self.searchCriteria().organization() +
-                '&organizationAddress=' + self.searchCriteria().address() + '&email=' + self.searchCriteria().email() +
-                '&dataflow=' + dataflow + '&roleId=' + roleId;
+        var criteriaString = 'userId=' + encodeURIComponent(self.searchCriteria().userId())
+			+ '&firstName=' + encodeURIComponent(self.searchCriteria().firstName())
+			+ '&middleInitial=' + self.searchCriteria().middleInitial()
+			+ '&lastName=' + encodeURIComponent(self.searchCriteria().lastName())
+			+ '&organizationName=' + encodeURIComponent(self.searchCriteria().organization())
+			+ '&organizationAddress=' + encodeURIComponent(self.searchCriteria().address())
+			+ '&email=' + encodeURIComponent(self.searchCriteria().email())
+			+ '&dataflow=' + dataflow + '&roleId=' + roleId;
         oeca.blockUI.show();
         self.searchResults.removeAll();
 		$.getJSON(config.registration.ctx + '/api/registration/v1/user/search?' + criteriaString, function(data) {
