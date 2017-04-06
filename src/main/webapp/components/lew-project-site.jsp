@@ -106,7 +106,9 @@
 																},
 																center: {
 																	city: siteCity(),
-																	state: siteStateCode()
+																	state: siteStateCode(),
+																	lat: siteLocation.latitude(),
+																	long: siteLocation.longitude()
 																}
 															}"></div>
 				</div>
