@@ -277,10 +277,14 @@
                                 return stateCode;
                             }
                         };
-                        var criteriaString = 'organizationName='+self.orgSearchModel().organizationName()+'&address='+self.orgSearchModel().mailingAddress1()
-                                +'&address2='+self.orgSearchModel().mailingAddress2()+'&city='+self.orgSearchModel().city()+'&state='+stateCodeString(self.orgSearchModel().stateCode())
-                                +'&zip='+self.orgSearchModel().zip();
-                        $.getJSON(config.registration.ctx + '/api/registration/v1/organization?'+criteriaString,
+                        var criteriaURI = 'organizationName=' + encodeURIComponent(self.orgSearchModel().organizationName())
+                                + '&address=' + encodeURIComponent(self.orgSearchModel().mailingAddress1())
+                                + '&address2=' + encodeURIComponent(self.orgSearchModel().mailingAddress2())
+                                + '&city=' + encodeURIComponent(self.orgSearchModel().city())
+                                + '&state='+stateCodeString(self.orgSearchModel().stateCode())
+                                + '&zip='+self.orgSearchModel().zip();
+                        console.log(criteriaURI);
+                        $.getJSON(config.registration.ctx + '/api/registration/v1/organization?'+criteriaURI,
                                 function (data) {
                                     self.orgSearchResults(ko.mapping.fromJS(data));
                                     self.showOrgSearchFields(false);
