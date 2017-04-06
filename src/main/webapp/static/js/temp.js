@@ -764,7 +764,10 @@ ko.bindingHandlers.leaflet = {
             map.on('click', onMapClick);
         }
         if (options.center) {
-            if (options.center.city && options.center.state) {
+            if (options.center.lat && options.center.long) {
+                map.setView([options.center.lat, options.center.long], 10);
+            }
+            else if (options.center.city && options.center.state) {
                 oeca.cgp.map.centerCityState(map, options.center.city, options.center.state);
             }
             else if (options.center.state) {
