@@ -4,7 +4,7 @@
     <parent>
         <groupId>gov.epa.oeca</groupId>
         <artifactId>oeca-commons-parent</artifactId>
-        <version>1.1.0</version>
+        <version>1.1.1-SNAPSHOT</version>
     </parent>
     <artifactId>oeca-cgp-web</artifactId>
     <version>1.1.1-SNAPSHOT</version>
@@ -35,7 +35,7 @@
     <!-- Properties -->
     <!-- =============================================================================================== -->
     <properties>
-        <parent.version>1.1.0</parent.version>
+        <parent.version>1.1.1-SNAPSHOT</parent.version>
     </properties>
     <dependencies>
         <!-- =============================================================================================== -->
