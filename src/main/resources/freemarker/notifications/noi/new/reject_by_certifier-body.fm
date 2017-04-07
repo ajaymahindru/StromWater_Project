@@ -15,8 +15,9 @@
             necessary.  Please contact the Certifier if you have any questions regarding the reason(s) for rejection.
         </p>
         <p>
-            If you have questions about this email or about NeT, please call the EPA NOI Processing Center at
-            1-866-352-7755 (toll free) or send an email to noi@avanticorporation.com.
+            If you have questions about this email or about NeT CGP, please refer to the NeT Help Center
+            at <a href="${netHelpCenter}">${netHelpCenter}</a> or e-mail ${npdesEmail} for assistance.
+            If you have questions regarding the permit requirements of EPA's CGP, please contact EPA at ${raEmail}.
         </p>
         <p>
             This is an automated notification; please do not reply to this email.

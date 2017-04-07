@@ -82,6 +82,8 @@ public class CgpNoiFormNotificationHelper {
             model.put("eReporting", cgpExternalUrls.get("eReporting"));
             model.put("stormwaterCgp", cgpExternalUrls.get("stormwaterCgp"));
             model.put("raEmail", ra);
+            model.put("netHelpCenter", cgpExternalUrls.get("netHelpCenter"));
+            model.put("npdesEmail", additionalMailConfiguration.get("NpdesEmail"));
             String subjectTemplate = getNotificationPath(form.getType(), form.getPhase(), "route_to_certifier-subject.fm");
             String bodyTemplate = getNotificationPath(form.getType(), form.getPhase(), "route_to_certifier-body.fm");
             String subject = mergeTemplate(subjectTemplate, model);
@@ -104,12 +106,18 @@ public class CgpNoiFormNotificationHelper {
             certifier.setLastName(applicationSecurityUtils.getCurrentApplicationUser().getLastName());
             certifier.setEmail(applicationSecurityUtils.getCurrentApplicationUser().getEmail());
 
+            List<String> raEmails = getRaEmails(form);
+            String ra = StringUtils.join(raEmails, ", ");
+
             // merge model
             Map<String, Object> model = new HashMap<>();
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("certifier", certifier);
             model.put("reason", StringUtils.isEmpty(reason) ? defaultReason : reason);
+            model.put("netHelpCenter", cgpExternalUrls.get("netHelpCenter"));
+            model.put("npdesEmail", additionalMailConfiguration.get("NpdesEmail"));
+            model.put("raEmail", ra);
             String subjectTemplate = getNotificationPath(form.getType(), form.getPhase(), "reject_by_certifier-subject.fm");
             String bodyTemplate = getNotificationPath(form.getType(), form.getPhase(), "reject_by_certifier-body.fm");
             String subject = mergeTemplate(subjectTemplate, model);
@@ -137,6 +145,9 @@ public class CgpNoiFormNotificationHelper {
             model.put("raEmail", ra);
             model.put("eReporting", cgpExternalUrls.get("eReporting"));
             model.put("stormwaterCgp", cgpExternalUrls.get("stormwaterCgp"));
+            model.put("netHelpCenter", cgpExternalUrls.get("netHelpCenter"));
+            model.put("npdesEmail", additionalMailConfiguration.get("NpdesEmail"));
+            model.put("eEnterprisePortal", cgpExternalUrls.get("eEnterpriseEnvironment"));
             String subjectTemplate = getNotificationPath(form.getType(), form.getPhase(), "certified_to_certifier-subject.fm");
             String bodyTemplate = getNotificationPath(form.getType(), form.getPhase(), "certified_to_certifier-body.fm");
             String subject = mergeTemplate(subjectTemplate, model);
@@ -292,6 +303,8 @@ public class CgpNoiFormNotificationHelper {
             model.put("applicationLink", cgpExternalUrls.get("applicationLink"));
             model.put("stormwaterCgp", cgpExternalUrls.get("stormwaterCgp"));
             model.put("submittedDate", form.getSubmittedDate().toLocalDate());
+            model.put("netHelpCenter", cgpExternalUrls.get("netHelpCenter"));
+            model.put("npdesEmail", additionalMailConfiguration.get("NpdesEmail"));
             String subjectTemplate = getNotificationPath(form.getType(), form.getPhase(), "accepted_by_icis-subject.fm");
             String bodyTemplate = getNotificationPath(form.getType(), form.getPhase(), "accepted_by_icis-body.fm");
             String subject = mergeTemplate(subjectTemplate, model);
@@ -315,6 +328,8 @@ public class CgpNoiFormNotificationHelper {
             // get the basic mail information
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
             String preparer = form.getFormData().getOperatorInformation().getPreparer().getEmail();
+            List<String> raEmails = getRaEmails(form);
+            String ra = StringUtils.join(raEmails, ", ");
 
             // merge model
             Map<String, Object> model = new HashMap<>();
@@ -322,6 +337,9 @@ public class CgpNoiFormNotificationHelper {
             model.put("currentDate", LocalDate.now().toString());
             model.put("applicationLink", cgpExternalUrls.get("applicationLink"));
             model.put("eReporting", cgpExternalUrls.get("eReporting"));
+            model.put("netHelpCenter", cgpExternalUrls.get("netHelpCenter"));
+            model.put("npdesEmail", additionalMailConfiguration.get("NpdesEmail"));
+            model.put("raEmail", ra);
             String subjectTemplate = getNotificationPath(form.getType(), form.getPhase(), "abandoned_draft-subject.fm");
             String bodyTemplate = getNotificationPath(form.getType(), form.getPhase(), "abandoned_draft-body.fm");
             String subject = mergeTemplate(subjectTemplate, model);
