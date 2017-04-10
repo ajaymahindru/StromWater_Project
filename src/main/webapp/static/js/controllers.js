@@ -2589,7 +2589,8 @@ var FileUploader = function(form, category) {
                     }
                     setTimeout(function () {
                         self.filesUploading.removeAll(files);
-                    }, 20000);
+						$(".custom-file-input-clear-button").click();
+                    }, 5000);
                 },
                 error: function (res) {
                 	var errorMessage = "We encountered an issue saving your attachment.";
