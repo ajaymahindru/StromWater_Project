@@ -315,7 +315,7 @@
 			<tbody data-bind="foreach: history">
 			<tr>
 				<td data-bind="text: trackingNumber"></td>
-				<td data-bind="text: status"></td>
+				<td data-bind="text: statusDisplay"></td>
 				<td data-bind="text: lastUpdatedDate() !== null ? moment(lastUpdatedDate()).format('MM/DD/YYYY h:mm A') : ''"></td>
 				<td><div class="btn-group btn-group-xs"><button type="button" class="btn-primary-outline btn" data-bind="click: $parent.view"><span class="fa fa-search"></span> View</button></div></td>
 			</tr>
