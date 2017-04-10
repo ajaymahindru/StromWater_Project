@@ -1076,6 +1076,7 @@ var ScreeningQuestionsController = function(data, params) {
 	};
 	self.dispose = function() {
 		oeca.cgp.utils.disposeList(subscriptions);
+        oeca.cgp.utils.dispose(self.eligibilityChecker);
 	}
 };
 var LewScreeningQuestionController = function(data, params) {
@@ -1141,6 +1142,9 @@ var LewScreeningQuestionController = function(data, params) {
 		oeca.cgp.notifications.screeningQuestionsLocked(null, function(){
 			params.completeCallback();
 		});
+	}
+	self.dispose = function() {
+		oeca.cgp.utils.dispose(self.eligibilityChecker);
 	}
 };
 var LewErosivityInformationController = function(data, params) {
@@ -1244,7 +1248,7 @@ var OperatorInformationController = function(data, params) {
 		}
 	}
 	self.dispose = function() {
-		oeca.cgp.utils.disposeList(self.counties);
+		oeca.cgp.utils.dispose(self.counties);
 	}
 };
 var ProjectSiteController = function(data, params) {
@@ -1488,6 +1492,7 @@ var DischargeInformationController = function(data, params) {
 			message: 'At least one discharge point is required'
 		}
 	});
+	var postalSubs = [];
 	self.setDischargeValidations= function(discharge) {
 		var fields = [];
         discharge.id.extend({
@@ -1580,9 +1585,9 @@ var DischargeInformationController = function(data, params) {
             ]
         });
 		fields.push(discharge.firstWater().pollutants);
-        postal.channel('noi').subscribe('pollutant.*', function(pollutant, envelope) {
+        postalSubs.push(postal.channel('noi').subscribe('pollutant.*', function(pollutant, envelope) {
         	setPollutantErrors(pollutant);
-		});
+		}));
 
 		discharge.errors = ko.validation.group(fields, {deep: true, live: true});
 	};
@@ -1628,6 +1633,7 @@ var DischargeInformationController = function(data, params) {
                     }
                     self.dischargePoints.push(self.newDischarge());
                     self.newDischarge(null);
+                    oeca.cgp.utils.dispose(self.newDischargeVM());
                     self.newDischargeVM(null);
                     //for some reason the errors gets messed this somehow fixes it.
                     self.dischargePoints.notifySubscribers();
@@ -1650,8 +1656,6 @@ var DischargeInformationController = function(data, params) {
 	};
 	self.addDischargeAndDuplicate = function() {
 		var duplicateId = self.newDischarge().id();
-		var waterImpairedAnswer = self.newDischargeVM().waterImpairedQuestion();
-        var tmdlAnswer = self.newDischargeVM().tmdlQuestion();
 		self.addDischarge(function(result) {
 			if(result) {
 				self.createDischarge();
@@ -1664,13 +1668,12 @@ var DischargeInformationController = function(data, params) {
                     enableTier: self.dischargeAllowable,
                     waterWillReset: self.waterWillReset
                 }));
-                //self.newDischargeVM().waterImpairedQuestion(waterImpairedAnswer);
-                //self.newDischargeVM().tmdlQuestion(tmdlAnswer);
             }
         });
 	};
 	self.discardDischarge = function() {
 		self.newDischarge(null);
+        oeca.cgp.utils.dispose(self.newDischargeVM());
 		self.newDischargeVM(null);
 	}
 	self.editDischarge = function(discharge, row) {
@@ -1736,6 +1739,9 @@ var DischargeInformationController = function(data, params) {
 	};
     self.dispose = function() {
     	oeca.cgp.utils.disposeList(self.subscriptions);
+    	for(var i = 0; i < postalSubs.length; ++i) {
+    		postal.unsubscribe(postalSubs[i]);
+        }
     };
 };
 var DischargePointChildRow = function(data, param) {
@@ -1748,7 +1754,9 @@ var DischargePointChildRow = function(data, param) {
 	self.preselectedPollutants = ko.utils.unwrapObservable(data.data).firstWater().pollutants();
 	self.pollutants = ko.utils.unwrapObservable(data.data).firstWater().pollutants;
 	self.waterImpairedQuestion = ko.utils.unwrapObservable(data.data).impaired;
-	self.waterImpairedQuestion.subscribe(function(answer) {
+	var subscriptions = [];
+	var postalSubs = [];
+	subscriptions.push(self.waterImpairedQuestion.subscribe(function(answer) {
 		if(answer == false) {
 			for(var i = self.pollutants().length - 1; i >= 0; --i) {
 				self.removeImpairedFromPollutant(self.pollutants()[i]);
@@ -1756,16 +1764,16 @@ var DischargePointChildRow = function(data, param) {
             //remove all pre selected impaired pollutants
             self.preSelectedImpairedPollutants.length = 0;
 		}
-	})
+	}));
 	self.tmdlQuestion = ko.utils.unwrapObservable(data.data).tmdlCompleted;
-	self.tmdlQuestion.subscribe(function(answer) {
+    subscriptions.push(self.tmdlQuestion.subscribe(function(answer) {
 		if(answer == false) {
             for (var i = self.pollutants().length - 1; i >= 0; --i) {
                 self.removeTmdlFromPollutant(self.pollutants()[i]);
             }
             self.tmdls.removeAll();
         }
-	});
+	}));
 	//computed to convert from the UI data model to the actual data model.
     self.enteredImpairedPollutants = ko.pureComputed(function() {
     	return self.pollutants.filterByProp(true, 'impaired');
@@ -1778,7 +1786,7 @@ var DischargePointChildRow = function(data, param) {
 			}
 		}
 	});
-	self.impairedPollutants.subscribe(function(newPollutants) {
+    subscriptions.push(self.impairedPollutants.subscribe(function(newPollutants) {
 		ko.utils.arrayForEach(newPollutants, function (pollutant) {
 			//self.addOrUpdatePollutant(pollutant, true, null);
 			var lookupResult = self.findPollutant(pollutant);
@@ -1796,13 +1804,13 @@ var DischargePointChildRow = function(data, param) {
 				self.removeImpairedFromPollutant(pollutant);
 			}
 		})
-	});
+	}));
 	self.preSelectedImpairedPollutants = self.impairedPollutants();
 	//adds a subscription to the tmdl pollutant list so that when it changes it makes the correct change to add or
 	// remove pollutants from the mian list.  Additionally if the pollutant list for the tmdl is cleared out this will
 	// delete the tmdl.
     self.syncTmdlPollutants = function(tmdl) {
-        tmdl.pollutants.subscribe(function(newPollutants) {
+        subscriptions.push(tmdl.pollutants.subscribe(function(newPollutants) {
             //check if any new pollutants were added
             ko.utils.arrayForEach(newPollutants, function(pollutant) {
                 self.addOrUpdatePollutant(pollutant, null, tmdl);
@@ -1816,7 +1824,7 @@ var DischargePointChildRow = function(data, param) {
             if(newPollutants.length == 0) {
             	self.tmdls.remove(tmdl);
 			}
-        });
+        }));
     };
 	self.tmdls = ko.observableArray([]);
 	self.addTmdl = function() {
@@ -1834,7 +1842,7 @@ var DischargePointChildRow = function(data, param) {
             if(rule.validator) {
                 self.newTmdl().id.rules.remove(rule);
             }
-        })
+        });
         var tmdl = self.newTmdl();
         self.syncTmdlPollutants(tmdl);
         /// /self.newTmdl().pollutants.subscribe(self.syncTmdlPollutants);
@@ -1844,7 +1852,7 @@ var DischargePointChildRow = function(data, param) {
     };
     self.discardTmdl = function() {
         //set to null to refresh select2
-        self.newTmdl(null);
+		self.newTmdl(null);
         var newTmdl = new TmdlController(null, self.pollutants);
         self.setNewTmdlErrors(newTmdl);
         self.newTmdl(newTmdl);
@@ -1854,8 +1862,6 @@ var DischargePointChildRow = function(data, param) {
         return self.pollutants.lookupByProp(pollutant.pollutantCode(), 'pollutantCode');
     };
     self.addOrUpdatePollutant = function(pollutant, impaired, tmdl) {
-        if(tmdl && ko.utils.unwrapObservable(tmdl)) {
-        }
         var lookupResult = self.findPollutant(pollutant);
         if(!lookupResult) {
             pollutant.tmdl(tmdl == null ? new Tmdl() : new Tmdl(ko.mapping.toJS(tmdl)));
@@ -1918,11 +1924,11 @@ var DischargePointChildRow = function(data, param) {
 	});
     self.showNewTmdl = ko.observable(self.tmdls().length == 0);
     self.newTmdl = ko.observable(new TmdlController(null, self.pollutants));
-    postal.channel('noi').subscribe('form.*.presave', function() {
+    postalSubs.push(postal.channel('noi').subscribe('form.*.presave', function() {
     	if(self.tmdlQuestion() && self.showNewTmdl()) {
     		self.addTmdl();
 		}
-	});
+	}));
 	self.setNewTmdlErrors = function(tmdl) {
 		tmdl.id.extend({
             alphaNumericOnly: true,
@@ -1977,7 +1983,6 @@ var DischargePointChildRow = function(data, param) {
     };
     self.checkTmdl = function(callback) {
 		if(self.showNewTmdl() && (self.newTmdl().id() || self.newTmdl().name() || self.newTmdl().pollutants().length > 0)) {
-			console.log("user has a pending tmdl");
 			oeca.cgp.notifications.errorAlert({
 				message: 'You have a new TMDL that you have not added to your waterbody yet, would you like to add ' +
 				'this TMDL to your waterbody or discard it?',
@@ -2019,6 +2024,12 @@ var DischargePointChildRow = function(data, param) {
 		else {
 			callback(true);
         }
+	}
+	self.dispose = function() {
+    	oeca.cgp.utils.disposeList(subscriptions);
+		for(var i = 0; i < postalSubs.length; ++i){
+			postal.unsubscribe(postalSubs[i]);
+		}
 	}
 };
 var PollutantController = function(data) {
@@ -2198,7 +2209,6 @@ var EndangeredSpeciesProtectionController = function(data, params) {
 	});
 
 	var criterionSubscription = self.criterion.subscribe(function(value) {
-		console.log(self.attachments());
 		if (self.attachments().length > 0) {
 			if (value == "Criterion_A" || value == "Criterion_B") {
 				self.removeAllAttachments();
@@ -2251,26 +2261,27 @@ var HistoricPreservationController = function(data, params) {
     self.appendexEStep4OtherResponse = ko.observable(null);
 
 	//clear out subquestions when they are hidden
-	self.appendexEStep1.subscribe(function(newVal) {
+	var subscriptions = [];
+	subscriptions.push(self.appendexEStep1.subscribe(function(newVal) {
 	    if(newVal != true) {
 	        self.appendexEStep2(null);
 	    }
-	});
-	self.appendexEStep2.subscribe(function(newVal) {
+	}));
+    subscriptions.push(self.appendexEStep2.subscribe(function(newVal) {
         if(newVal != false) {
             self.appendexEStep3(null);
         }
-    });
-	self.appendexEStep3.subscribe(function(newVal) {
+    }));
+    subscriptions.push(self.appendexEStep3.subscribe(function(newVal) {
         if(newVal != false) {
             self.appendexEStep4(null);
         }
-    });
-    self.appendexEStep4.subscribe(function(newVal) {
+    }));
+    subscriptions.push(self.appendexEStep4.subscribe(function(newVal) {
         if(newVal != true) {
             self.appendexEStep4Response(null);
         }
-    });
+    }));
 
     //validations
 	self.appendexEStep1.extend({required: true});
@@ -2322,6 +2333,9 @@ var HistoricPreservationController = function(data, params) {
 			return;
 		}
 		params.completeCallback();
+	}
+	self.dispose = function() {
+		oeca.cgp.utils.disposeList(subscriptions);
 	}
 };
 var CertificationInformationController = function(data, params) {
@@ -2538,6 +2552,7 @@ var FileUploader = function(form, category) {
 	var self = this;
 	self.fileArray = ko.observableArray([]);
 	self.subscriptions = [];
+	var postalSubs = [];
     self.subscriptions.push(self.fileArray.subscribe(function() {
         if(self.fileArray().length == 0) {
             return;
@@ -2584,7 +2599,7 @@ var FileUploader = function(form, category) {
                         var file = files[i];
                         if(file.status() != 'error') {
                             file.status('uploaded');
-                            postal.channel('noi').publish("attachment." + category + ".add", file);
+                            postalSubs.push(postal.channel('noi').publish("attachment." + category + ".add", file));
                         }
                     }
                     setTimeout(function () {
@@ -2611,6 +2626,9 @@ var FileUploader = function(form, category) {
 	});
 	self.dispose = function() {
 		oeca.cgp.utils.disposeList(self.subscriptions);
+		for (var i = 0; i < postalSubs.length; ++i) {
+			postal.unsubscribe(postalSubs[i]);
+		}
 	}
 }
 var ContactTemplateController = function(data, params) {
@@ -2851,7 +2869,6 @@ var TerminateModalController = function(data, params) {
 	self.continue = function() {
 		self.showConfirmation(true);
 	}
-	//TODO dispose of these.
 	self.cromerrTransactionIds = [];
 	self.confirmTerminate = function() {
 		if(self.errors().length > 0) {
@@ -2908,5 +2925,10 @@ var TerminateModalController = function(data, params) {
 	self.refresh = function(data) {
 		ko.mapping.fromJS(data, {}, self);
 		self.panel("warning");
+	}
+	self.dispose = function() {
+		for(var i = 0; i < self.cromerrTransactionIds.length; ++i) {
+			oeca.cromerr.disposeTransaction(self.cromerrTransactionIds[i]);
+		}
 	}
 }
