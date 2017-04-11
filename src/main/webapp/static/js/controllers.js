@@ -25,21 +25,8 @@ var DashboardController = function(data, params) {
 		if (showFilterAfter !== true) {
 			self.showFilter(false);
 		}
-		dt.ajax.reload();
-
+		dt.ajax.reload(null,false);
 	};
-
-	var cleanCriteria = function (obj) {
-		for (var i in obj) {
-			if (obj[i] === null || obj[i] === undefined || obj[i] === "undefined" || obj[i] === "") {
-				delete obj[i];
-			}
-		}
-
-		return obj;
-	};
-
-
 
 	self.clearFilter = function() {
 		self.criteria.reset();
@@ -181,7 +168,6 @@ var DashboardController = function(data, params) {
 		dt.destroy();
 	}
 
-	var searchCriteria = cleanCriteria(params);
 	var dt = $('#forms').DataTable({
 		"searching": false,
 		"processing": true,
