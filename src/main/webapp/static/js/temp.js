@@ -646,9 +646,11 @@ ko.bindingHandlers.childRow = {
         var template = ko.utils.unwrapObservable(valueAccessor());
         var data = null;
         var vm = null;
+        var allowMultiple = true;
         if (typeof template != 'String') {
             data = template.data;
             vm = template.vm;
+            allowMultiple = template.allowMultiple == undefined ? true : template.allowMultiple;
             template = template.name;
         }
         var table = $(element).closest('table').DataTable();
@@ -662,27 +664,31 @@ ko.bindingHandlers.childRow = {
                 applyBindings = true;
             }
             var elem = $(this);
-            var hideRow = function() {
+            var hideRow = function(row, elem) {
                 row.child.hide();
                 elem.children('span.glyphicon').removeClass("glyphicon-minus-sign");
                 elem.children('span.glyphicon').addClass('glyphicon-plus-sign');
             }
-            var showRow = function() {
+            var showRow = function(row, elem) {
+                if(data && allowMultiple == false) {
+                    $(element).find('tr > td.details-control').each(function() {
+                        hideRow(table.row(this), $(this));
+                    });
+                }
                 row.child.show();
                 elem.children('span.glyphicon').addClass('glyphicon-minus-sign');
                 elem.children('span.glyphicon').removeClass('glyphicon-plus-sign');
             }
             if (row.child.isShown()) {
-                hideRow();
-                hideRow();
+                hideRow(row, elem);
             }
             else {
-                showRow();
+                showRow(row, elem);
             }
             if (applyBindings) {
                 //delay applying bindings until after the row is shown so the map shows up
                 var closeChildRowFunc = function() {
-                    hideRow();
+                    hideRow(row, elem);
                 }
                 var ChildRowVm = vm || function (data) {
                         var self = this;

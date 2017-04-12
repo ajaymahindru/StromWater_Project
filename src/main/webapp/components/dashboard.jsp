@@ -295,8 +295,8 @@
 					Location: <span data-bind="text: formData.projectSiteInformation.siteLocation.display"></span><br/>
 					Owner: <span data-bind="text: formSet.owner"></span><br/>
 					Status: <span data-bind="text: statusDisplay"></span><br/>
-					Date Submitted to EPA: <span data-bind="text: submittedDate() !== null ? moment(submittedDate()).format('MM/DD/YYYY h:mm A') : ''"></span><br/>
-					Date Updated: <span data-bind="text: lastUpdatedDate() !== null ? moment(lastUpdatedDate()).format('MM/DD/YYYY h:mm A') : ''"></span>
+					Date Certified: <span data-bind="text: certifiedDate() !== null ? moment(certifiedDate()).format('MM/DD/YYYY h:mm A') : ''"></span><br/>
+					Date Active: <span data-bind="text: reviewExpiration() !== null ? moment(reviewExpiration()).format('MM/DD/YYYY h:mm A') : ''"></span>
 				</div>
 			</div>
 		</div>
