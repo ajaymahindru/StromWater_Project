@@ -163,6 +163,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             // update the previous form
             toClone.setActiveRecord(false);
             toClone.setLastUpdatedDate(ZonedDateTime.now());
+            toClone.setStatus(Status.ActivePendingChange);
             formRepository.update(toClone);
 
             // create the form
@@ -880,6 +881,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             Validate.isTrue(
                     ZonedDateTime.now().compareTo(toActivate.getReviewExpiration()) > 0,
                     "Can not activate a form unless the review expiration has expired.");
+            toActivate.setSubmittedDate(ZonedDateTime.now());
             toActivate.setLastUpdatedDate(ZonedDateTime.now());
             setFinalFormStatus(toActivate);
             formRepository.update(toActivate);
@@ -943,7 +945,6 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             CgpNoiForm previous = toDistribute.getFormSet().getForms().size() > 1 ?
                     findPreviousForm(toDistribute.getFormSet()) :
                     null;
-            toDistribute.setSubmittedDate(ZonedDateTime.now());
             toDistribute.setLastUpdatedDate(ZonedDateTime.now());
             icisSubmissionService.submitToIcisNpdesDataflow(toDistribute, previous);
             formRepository.update(toDistribute);

@@ -27,6 +27,7 @@
 		<entry key="npdesPermitOffice" value="https://www.epa.gov/npdes/contact-us-stormwater#state"/>
 		<entry key="cgpDocs" value="https://www.epa.gov/npdes/epas-2017-construction-general-permit-cgp-and-related-documents"/>
 		<entry key="cgpHelpCenter" value="https://epanet.zendesk.com/hc/en-us/categories/204532588-Construction-General-Permit-CGP-"/>
+		<entry key="netHelpCenter" value="https://epanet.zendesk.com/hc/en-us"/>
 		<entry key="npdesEReporting" value="https://www.epa.gov/compliance/npdes-ereporting"/>
 		<entry key="eEnterpriseEnvironment" value="https://e-enterprise.gov/eenterprise-new"/>
 		<entry key="cgpHelpDeskEmail" value="NPDESereporting@epa.gov"/>

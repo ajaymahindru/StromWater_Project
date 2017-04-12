@@ -521,6 +521,34 @@ oeca.cgp = {
                 ]
             });
         },
+		criterionAttachment: function(newCriterion, cancelAction, continueAction) {
+			oeca.cgp.notifications.infoAlert({
+				bodyTitle: 'Endangered Species Protection Attachment(s)',
+				message: 'You have changed Appendix D criterion to ' + oeca.cgp.constants.appendixDCriteria[newCriterion] + '. Would you like to keep previously uploaded attachments?',
+				buttons: [
+					{
+						label: 'Remove',
+						action: function(dialogRef) {
+							dialogRef.close();
+							if(continueAction) {
+								continueAction()
+							}
+						},
+						cssClass: 'btn-danger-outline'
+					},
+					{
+						label: 'Keep',
+						action: function(dialogRef) {
+							dialogRef.close();
+							if(cancelAction) {
+								cancelAction(dialogRef);
+							}
+						},
+						cssClass: 'btn-primary-outline'
+					}
+				]
+			});
+		},
 		changeForm: function(cancelAction, changeAction) {
 			oeca.cgp.notifications.infoAlert({
 				bodyTitle: 'Change Form?',
@@ -867,6 +895,10 @@ oeca.cgp = {
             });
 	        event.stopPropagation();
         },
+		criterionAttachmentWarning: function(data, newCriterion, removeAction) {
+			console.log(data);
+			oeca.cgp.notifications.criterionAttachment(newCriterion, null, removeAction);
+		},
 		route: function(form, user) {
             return $.ajax({
                 url: config.ctx + "/api/form/v1/" + form.id() + "/route",

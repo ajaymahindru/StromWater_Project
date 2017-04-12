@@ -5,7 +5,7 @@ package gov.epa.oeca.cgp.domain.noi;
  */
 public enum Status {
     // normal workflow
-    Draft("Draft"), Submitted("Submitted"), Active("Active"), Terminated("Terminated"), Discontinued("Discontinued"), Archived("Archived"),
+    Draft("Draft"), Submitted("Submitted"), Active("Active"), ActivePendingChange("Active-Pending Change"), Terminated("Terminated"), Discontinued("Discontinued"), Archived("Archived"),
     // EPA intervention
     OnHold("On Hold"), Denied("Denied");
 
