@@ -945,7 +945,6 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             CgpNoiForm previous = toDistribute.getFormSet().getForms().size() > 1 ?
                     findPreviousForm(toDistribute.getFormSet()) :
                     null;
-            toDistribute.setLastUpdatedDate(ZonedDateTime.now());
             icisSubmissionService.submitToIcisNpdesDataflow(toDistribute, previous);
             formRepository.update(toDistribute);
         } catch (IllegalArgumentException e) {
