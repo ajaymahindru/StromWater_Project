@@ -14,7 +14,6 @@
 		<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/leaflet/leaflet.css"/>
 		<script src="${pageContext.request.contextPath}/static/js/leaflet/leaflet.js"></script>
 		<script src="${pageContext.request.contextPath}/static/js/leaflet/esri-leaflet.js"></script>
-		<script src="${pageContext.request.contextPath}/static/js/leaflet/leaflet.js"></script>
 		<script src="${pageContext.request.contextPath}/static/js/leaflet/esri-leaflet-geocoder.js"></script>
 		<script>
 			var viewModel;
