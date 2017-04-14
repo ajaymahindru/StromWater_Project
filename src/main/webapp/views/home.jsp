@@ -11,12 +11,11 @@
 <stripes:layout-render name="/layout/cgp-layout.jsp" title="EPA CGP" tab="Home">
 	<stripes:layout-component name="additionalHead">
 		<!-- TODO host files locally? -->
-		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
-		<script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
-		<!-- Load Esri Leaflet from CDN -->
-  		<script src="https://unpkg.com/esri-leaflet@2.0.6"></script>
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/leaflet.esri.geocoder/2.1.0/esri-leaflet-geocoder.css">
-		<script src="https://cdn.jsdelivr.net/leaflet.esri.geocoder/2.1.0/esri-leaflet-geocoder.js"></script>
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/leaflet/leaflet.css"/>
+		<script src="${pageContext.request.contextPath}/static/js/leaflet/leaflet.js"></script>
+		<script src="${pageContext.request.contextPath}/static/js/leaflet/esri-leaflet.js"></script>
+		<script src="${pageContext.request.contextPath}/static/js/leaflet/leaflet.js"></script>
+		<script src="${pageContext.request.contextPath}/static/js/leaflet/esri-leaflet-geocoder.js"></script>
 		<script>
 			var viewModel;
 			oeca.cgp.noi.npdesId = "${actionBean.npdesId}";
