@@ -107,36 +107,36 @@
 							content for a supportive basis statement is provided under the criterion you selected.
 						</label>
 						<textarea id="endangered-species-criterion-summary" class="form-control" data-bind="value: criteriaSelectionSummary"></textarea>
-						<span class="help-block" data-bind="visible: criterion() == 'Criterion_A'">
-						    A basis statement supporting the selection of this criterion should identify the USFWS and NMFS information
+						<span class="static-info" data-bind="visible: criterion() == 'Criterion_A'">
+						    <strong>A basis statement supporting the selection of this criterion should identify the USFWS and NMFS information
                             sources used. Attaching aerial image(s) of the site to this NOI is helpful to EPA, USFWS, and
                             NMFS in confirming eligibility under this criterion. Please Note: NMFS' jurisdiction includes
-                            ESA-listed marine and estuarine species that spawn in inland rivers.
+                            ESA-listed marine and estuarine species that spawn in inland rivers.</strong>
 					    </span>
-						<span class="help-block" data-bind="visible: criterion() == 'Criterion_B'">
-						    A basis statement supporting the selection of this criterion should identify the eligibility criterion of
-						    the other CGP NOI, the authorization date, and confirmation that the authorization is effective.
+						<span class="static-info" data-bind="visible: criterion() == 'Criterion_B'">
+						    <strong>A basis statement supporting the selection of this criterion should identify the eligibility criterion of
+						    the other CGP NOI, the authorization date, and confirmation that the authorization is effective.</strong>
 						</span>
-						<span class="help-block" data-bind="visible: criterion() == 'Criterion_C'">
-						    A basis statement supporting the selection of this criterion should identify the information resources and expertise
+						<span class="static-info" data-bind="visible: criterion() == 'Criterion_C'">
+						    <strong>A basis statement supporting the selection of this criterion should identify the information resources and expertise
 						    (e.g., state or federal biologists) used to arrive at this conclusion. Any supporting documentation should explicitly state that
 						    both ESA-listed species and designated critical habitat under the jurisdiction of the USFWS and/or NMFS were considered
 						    in the evaluation. Attaching aerial image(s) of the site to this NOI is helpful to EPA, USFWS, and NMFS in confirming eligibility
-						    under this criterion.
+						    under this criterion.</strong>
 						</span>
-						<span class="help-block" data-bind="visible: criterion() == 'Criterion_D'">
-						    A basis statement supporting the selection of this criterion should identify whether USFWS or NMFS or both agencies participated
-						    in coordination, the field office/regional office(s) providing that coordination, and the date that coordination concluded.
+						<span class="static-info" data-bind="visible: criterion() == 'Criterion_D'">
+						    <strong>A basis statement supporting the selection of this criterion should identify whether USFWS or NMFS or both agencies participated
+						    in coordination, the field office/regional office(s) providing that coordination, and the date that coordination concluded.</strong>
 						</span>
-						<span class="help-block" data-bind="visible: criterion() == 'Criterion_E'">
-						    A basis statement supporting the selection of this criterion should identify the federal action agencie(s) involved,
+						<span class="static-info" data-bind="visible: criterion() == 'Criterion_E'">
+						    <strong>A basis statement supporting the selection of this criterion should identify the federal action agencie(s) involved,
 						    the field office/regional office(s) providing that consultation, any tracking numbers of identifiers associated with that consultation
-						    (e.g., IPaC number, PCTS number), and the date the consultation was completed.
+						    (e.g., IPaC number, PCTS number), and the date the consultation was completed.</strong>
 						</span>
-						<span class="help-block" data-bind="visible: criterion() == 'Criterion_F'">
-						    A basis statement supporting the selection of this criterion should identify whether USFWS or NMFS or both agencies provided a
+						<span class="static-info" data-bind="visible: criterion() == 'Criterion_F'">
+						    <strong>A basis statement supporting the selection of this criterion should identify whether USFWS or NMFS or both agencies provided a
 						    section 10 permit, the field office/regional office(s) providing permit(s), any tracking numbers of identifiers associated with that
-						    consultation (e.g., IPaC number, PCTS number), and the date the permit was granted.
+						    consultation (e.g., IPaC number, PCTS number), and the date the permit was granted.</strong>
 						</span>
 					</div>
 				</div>
