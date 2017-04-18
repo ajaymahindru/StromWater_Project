@@ -147,3 +147,51 @@ td.details-control {
 .fa-question-mark {
 	cursor: help;
 }
+/*
+CoR Styles
+ */
+.cor-header {
+	display: flex;
+}
+.cor-header > div {
+	border: 1px solid black;
+	padding: 5px;
+	font-weight: bold;
+}
+.cor-underline-group {
+	display: flex;
+	align-items: flex-end;
+}
+.cor-underline-group > label {
+	margin: 0;
+}
+.cor-underline-group > span {
+	flex: 1 1 auto;
+}
+.cor-underline {
+	display: inline-block;
+	width: 100%;
+	margin-left: 3px;
+	height: 1lh;
+}
+.cor-underline + .cor-underline {
+	margin-left: 15px;
+}
+.cor-underline.xs {
+	width: 50px;
+}
+.cor-underline > .form-control-static::after {
+	content: '';
+	width: 100%;
+	display: block;
+	background-color: #CCC;
+	height: 2px;
+	margin-top: -3px;
+}
+.cor-underline > .form-control-static > span {
+	display: inline-block;
+	width: 100%;
+}
+.cor-boxes label {
+	font-weight: normal;
+}
