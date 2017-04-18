@@ -159,4 +159,12 @@ public class ReferenceRepository {
                 .setParameter(0, subcategory)
                 .getResultList();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Subscriber> retrieveSubscribersByCatSubcat(String category, String subcategory) {
+        return (List<Subscriber>) cgpSessionFactory.getCurrentSession()
+                .createQuery("select s from Subscriber s join s.notifications sn where sn.category = ? and sn.subcategory = ?")
+                .setParameter(0, category).setParameter(1, subcategory)
+                .getResultList();
+    }
 }

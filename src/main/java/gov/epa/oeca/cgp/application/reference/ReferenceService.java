@@ -51,4 +51,6 @@ public interface ReferenceService {
 
     List<Subscriber> retrieveSubscribersByMgp(String mgpCategory) throws ApplicationException;
 
+    List<Subscriber> retrieveSubscribersByCatSubcat(String category, String subcategory) throws ApplicationException;
+
 }

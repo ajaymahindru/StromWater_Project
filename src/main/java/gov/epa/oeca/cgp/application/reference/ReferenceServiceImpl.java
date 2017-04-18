@@ -298,4 +298,19 @@ public class ReferenceServiceImpl implements ReferenceService {
             throw ApplicationException.asApplicationException(e);
         }
     }
+
+    @Override
+    public List<Subscriber> retrieveSubscribersByCatSubcat(String category, String subcategory) throws ApplicationException {
+        try {
+            Validate.notEmpty(category, "Notification category is required");
+            Validate.notEmpty(subcategory, "Notification subcategory is required");
+            return referenceRepository.retrieveSubscribersByCatSubcat(category, subcategory);
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage(), e);
+            throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
 }
