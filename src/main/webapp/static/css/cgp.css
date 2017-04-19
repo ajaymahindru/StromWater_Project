@@ -150,13 +150,19 @@ td.details-control {
 /*
 CoR Styles
  */
+.cor {
+	border: 2px #ddd solid;
+}
 .cor-header {
 	display: flex;
+	border-bottom: 1px #ddd solid;
 }
 .cor-header > div {
-	border: 1px solid black;
 	padding: 5px;
 	font-weight: bold;
+}
+.cor-header > div + div {
+	border-left: 1px #ddd solid;
 }
 .cor-underline-group {
 	display: flex;
@@ -194,4 +200,28 @@ CoR Styles
 }
 .cor-boxes label {
 	font-weight: normal;
+}
+.cor > .panel {
+	border-radius: 0;
+}
+.cor > p {
+	margin: 5px;
+}
+@media print {
+	.cor > .panel-default > .panel-heading {
+		background-color: #f5f5f5 !important;
+	}
+	.container {
+		padding: 0;
+	}
+	.cor {
+		border: unset;
+		border-top: 1px #ddd solid;
+	}
+	.cor-underline > .form-control-static::after{
+		background-color: #CCC !important;
+	}
+	body {
+		padding-top: 15px;
+	}
 }

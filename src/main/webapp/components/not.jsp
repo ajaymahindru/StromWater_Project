@@ -14,7 +14,7 @@
             3510-9
         </div>
         <div>
-            EPA LOGO
+            <img width="150px" src="${pageContext.request.contextPath}/static/img/epa-logo-black.png"/>
         </div>
         <div>
             UNITED STATES ENVIRONMENTAL PROTECTION AGENCY<br>
@@ -27,11 +27,10 @@
             2-4-0004
         </div>
     </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <p>Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah Blah </p>
-        </div>
-    </div>
+    <p>Submission of this Notice of Termination constitutes notice that the operator identified in Section III
+        of this form is no longer authorized discharge pursuant to the NPDES Construction General Permit (CGP)
+        from the site identified in Section IV of this form. All necessary information must be included on this
+        form. Refer to the instructions at the end of this form.</p>
     <div class="panel panel-default">
         <div class="panel-heading">Permit Information</div>
         <div class="panel-body">
@@ -117,8 +116,7 @@
                     data: {
                         firstName: operatorPointOfContact.firstName,
                         middleInitial: operatorPointOfContact.middleInitial,
-                        lastName: operatorPointOfContact.lastName,
-                        title: operatorPointOfContact.title
+                        lastName: operatorPointOfContact.lastName
                     }
                 }"></div>
         </div>
@@ -187,10 +185,17 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <p>
-                            I certify under penalty of law that this document and all attachments were prepared under my direction or supervision in accordance with a system designed to assure that qualified personnel properly gathered and evaluated the information submitted.
-                            Based on my inquiry of the person or persons who manage the system, or those persons directly responsible for gathering the information, the information submitted is, to the best of my knowledge and belief, true, accurate, and complete.
-                            I have no personal knowledge that the information submitted is other than true, accurate, and complete. I am aware that there are significant penalties for submitting false information, including the possibility of fine and imprisonment for knowing violations.
-                            Signing an electronic document on behalf of another person is subject to criminal, civil, administrative, or other lawful action.
+                            I certify under penalty of law that this document and all attachments were prepared under my
+                            direction or supervision in accordance with a system designed to assure that qualified
+                            personnel properly gathered and evaluated the information submitted.
+                            Based on my inquiry of the person or persons who manage the system, or those persons
+                            directly responsible for gathering the information, the information submitted is, to the
+                            best of my knowledge and belief, true, accurate, and complete.
+                            I have no personal knowledge that the information submitted is other than true, accurate,
+                            and complete. I am aware that there are significant penalties for submitting false
+                            information, including the possibility of fine and imprisonment for knowing violations.
+                            Signing an electronic document on behalf of another person is subject to criminal, civil,
+                            administrative, or other lawful action.
                         </p>
                     </div>
                 </div>
@@ -222,10 +227,17 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <p>
-                            I certify under penalty of law that this document and all attachments were prepared under my direction or supervision in accordance with a system designed to assure that qualified personnel properly gathered and evaluated the information submitted.
-                            Based on my inquiry of the person or persons who manage the system, or those persons directly responsible for gathering the information, the information submitted is, to the best of my knowledge and belief, true, accurate, and complete.
-                            I have no personal knowledge that the information submitted is other than true, accurate, and complete. I am aware that there are significant penalties for submitting false information, including the possibility of fine and imprisonment for knowing violations.
-                            Signing an electronic document on behalf of another person is subject to criminal, civil, administrative, or other lawful action.
+                            I certify under penalty of law that this document and all attachments were prepared under my
+                            direction or supervision in accordance with a system designed to assure that qualified
+                            personnel properly gathered and evaluated the information submitted.
+                            Based on my inquiry of the person or persons who manage the system, or those persons
+                            directly responsible for gathering the information, the information submitted is, to the
+                            best of my knowledge and belief, true, accurate, and complete.
+                            I have no personal knowledge that the information submitted is other than true, accurate,
+                            and complete. I am aware that there are significant penalties for submitting false
+                            information, including the possibility of fine and imprisonment for knowing violations.
+                            Signing an electronic document on behalf of another person is subject to criminal, civil,
+                            administrative, or other lawful action.
                         </p>
                     </div>
                 </div>
