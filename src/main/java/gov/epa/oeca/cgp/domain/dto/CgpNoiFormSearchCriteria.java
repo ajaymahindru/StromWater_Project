@@ -25,6 +25,7 @@ public class CgpNoiFormSearchCriteria implements Serializable {
     List<Status> statuses;
     String operatorName;
     String siteName;
+    Long siteRegion;
     String siteStateCode;
     List<String> siteStateCodes;
     String siteCity;
@@ -101,6 +102,14 @@ public class CgpNoiFormSearchCriteria implements Serializable {
 
     public void setSiteZipCode(String siteZipCode) {
         this.siteZipCode = siteZipCode;
+    }
+
+    public Long getSiteRegion() {
+        return siteRegion;
+    }
+
+    public void setSiteRegion(Long siteRegion) {
+        this.siteRegion = siteRegion;
     }
 
     public String getSiteStateCode() {

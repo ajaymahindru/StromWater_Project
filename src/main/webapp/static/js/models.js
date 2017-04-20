@@ -26,6 +26,7 @@ var NoiSearchCriteria = function(data) {
 		status: null,
 		operatorName: null,
 		siteName: null,
+		siteRegion: null,
 		siteStateCode: null,
 		siteCity: null,
 		siteZipCode: null,

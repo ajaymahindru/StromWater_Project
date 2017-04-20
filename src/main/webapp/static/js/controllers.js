@@ -10,16 +10,36 @@ var DashboardController = function(data, params) {
         params: self.criteria.submittedFrom,
         message: "Invalid date range.",
         onlyIf: function() {
-            return self.criteria.submittedTo() !== null;
+            return self.criteria.submittedTo() !== null && self.criteria.submittedTo() !== "";
         }
     }});
+	self.submittedFromSub = self.criteria.submittedFrom.subscribe(function(value) {
+		if (value == "") {
+			self.criteria.submittedFrom(null);
+		}
+	});
+	self.submittedToSub = self.criteria.submittedTo.subscribe(function(value) {
+		if (value == "") {
+			self.criteria.submittedTo(null);
+		}
+	});
     self.criteria.updatedTo.extend({fromDate: {
         params: self.criteria.updatedFrom,
         message: "Invalid date range.",
         onlyIf: function() {
-            return self.criteria.updatedTo() !== null;
+            return self.criteria.updatedTo() !== null && self.criteria.updatedTo() !== "";
         }
     }});
+	self.updatedFromSub = self.criteria.updatedFrom.subscribe(function(value) {
+		if (value == "") {
+			self.criteria.updatedFrom(null);
+		}
+	});
+	self.updatedToSub = self.criteria.updatedTo.subscribe(function(value) {
+		if (value == "") {
+			self.criteria.updatedTo(null);
+		}
+	});
 	self.applyFilter = function(showFilterAfter) {
 		console.log("loading form list");
 		if (showFilterAfter !== true) {
@@ -166,6 +186,10 @@ var DashboardController = function(data, params) {
 		postal.unsubscribe(self.postalSub);
 		postal.unsubscribe(self.postalSubNav);
 		dt.destroy();
+		oeca.cgp.utils.dispose(self.submittedFromSub);
+		oeca.cgp.utils.dispose(self.submittedToSub);
+		oeca.cgp.utils.dispose(self.updatedFromSub);
+		oeca.cgp.utils.dispose(self.updatedToSub);
 	}
 
 	var dt = $('#forms').DataTable({
