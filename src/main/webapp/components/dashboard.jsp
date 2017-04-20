@@ -413,7 +413,23 @@
 							<label class="control-label" for="operator-name">Operator Name</label>
 							<input id="operator-name" class="form-control" type="text" data-bind="value: operatorName" />
 						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label" for="project-region">Project/Site Region</label>
+							<select id="project-region" class="form-control" data-bind="value: siteRegion">
+								<option value="">Select Region</option>
+								<option value="1">01</option>
+								<option value="2">02</option>
+								<option value="3">03</option>
+								<option value="4">04</option>
+								<option value="5">05</option>
+								<option value="6">06</option>
+								<option value="7">07</option>
+								<option value="8">08</option>
+								<option value="9">09</option>
+								<option value="10">10</option>
+							</select>
 						</div>
+					</div>
 					<div class="row">
 						<div class="col-sm-4 form-group">
 							<label class="control-label" for="project-state">Project/Site State</label>
