@@ -140,7 +140,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         }
         if (criteria.getSubmittedTo() != null) {
             cr.add(Restrictions.le("submittedDate",
-                    applicationUtils.getAsStartOfDay(criteria.getSubmittedTo())));
+                    applicationUtils.getAsStartOfDay(criteria.getSubmittedTo().plusDays(1))));
         }
         if (criteria.getUpdatedFrom() != null) {
             cr.add(Restrictions.ge("lastUpdatedDate",
@@ -148,7 +148,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         }
         if (criteria.getUpdatedTo() != null) {
             cr.add(Restrictions.le("lastUpdatedDate",
-                    applicationUtils.getAsStartOfDay(criteria.getUpdatedTo())));
+                    applicationUtils.getAsStartOfDay(criteria.getUpdatedTo().plusDays(1))));
         }
         if (criteria.getCreatedFrom() != null) {
             cr.add(Restrictions.ge("createdDate",
