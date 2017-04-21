@@ -104,7 +104,7 @@
 					<div class="col-lg-12 form-group">
 						<label class="control-label" for="endangered-species-criterion-summary">
 							Provide a brief summary of the basis for criterion selection listed above [the necessary
-							content for a supportive basis statement is provided under the criterion you selected.
+							content for a supportive basis statement is provided under the criterion you selected].
 						</label>
 						<textarea id="endangered-species-criterion-summary" class="form-control" data-bind="value: criteriaSelectionSummary"></textarea>
 						<span class="static-info" data-bind="visible: criterion() == 'Criterion_A'">
