@@ -207,6 +207,13 @@ CoR Styles
 .cor > p {
 	margin: 5px;
 }
+.yes-no-box {
+	margin-left: 30px;
+	font-weight: normal;
+}
+.yes-no-box + .yes-no-box {
+	margin-left: 10px;
+}
 @media print {
 	.cor > .panel-default > .panel-heading {
 		background-color: #f5f5f5 !important;
