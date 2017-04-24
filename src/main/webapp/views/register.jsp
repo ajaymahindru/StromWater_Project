@@ -791,7 +791,7 @@
                                             <div class="form-group">
                                                 <label for="firstName" class="control-label">First Name</label>
                                                 <input type="text" class="form-control" id="firstName"
-                                                       data-bind="textInput: firstName" maxlength="38"/>
+                                                       data-bind="textInput: firstName" maxlength="20"/>
                                             </div>
                                         </div>
                                     </div>
@@ -808,7 +808,7 @@
                                         <div class="col-sm-4">
                                             <div class="form-group">
                                                 <label for="lastName" class="control-label">Last Name</label>
-                                                <input type="text" class="form-control" id="lastName" maxlength="38"
+                                                <input type="text" class="form-control" id="lastName" maxlength="30"
                                                        data-bind="textInput: lastName"/>
                                             </div>
                                         </div>
@@ -1167,8 +1167,8 @@
                                         <br/>
                                     </form>
                                     <div>
-                                        <p>Can't find your organization? <a role="button" id="backToSearch" data-bind="click: backToSearch">Back to search page</a> or
-                                            <a role="button" data-bind="click: $root.addNewOrg">request that we add your organization</a>.</p>
+                                        <p>Can't find your organization? <a role="button" tabindex="0" id="backToSearch" data-bind="click: backToSearch">Back to search page</a> or
+                                            <a role="button" tabindex="0" data-bind="click: $root.addNewOrg">request that we add your organization</a>.</p>
                                     </div>
                                 </div>
 
@@ -1181,8 +1181,8 @@
                                     <div><!--ko text: orgInfoViewModel().countryCode--><!--/ko--></div>
                                     <br/>
                                     <div>
-                                        <small>Wrong organization information? <a role="button" id="backToResults" data-bind="click: backToResults">Back to search results</a> or
-                                            <a role="button" data-bind="click: addNewOrg">request that we add your organization</a>.</small>
+                                        <small>Wrong organization information? <a role="button" id="backToResults" tabindex="0" data-bind="click: backToResults">Back to search results</a> or
+                                            <a role="button" tabindex="0" data-bind="click: addNewOrg">request that we add your organization</a>.</small>
                                         <br/><br/>
                                         <button class="btn btn-primary" type="submit"
                                                 data-bind="visible: showOrgInfoNextButton, click: orgInfoNext">Next
@@ -1290,7 +1290,7 @@
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label for="newOrgExt" class="control-label">Extension</label>
-                                                <input type="text" class="form-control" id="newOrgExt"
+                                                <input type="text" class="form-control" id="newOrgExt" maxlength="5"
                                                        data-bind="value: phoneExtension, valueUpdate: 'blur'"/>
                                             </div>
                                         </div>
@@ -1336,7 +1336,7 @@
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label for="ext" class="control-label">Extension</label>
-                                                <input type="text" class="form-control" id="ext"
+                                                <input type="text" class="form-control" id="ext" maxlength="5"
                                                        data-bind="value: phoneExtension, valueUpdate: 'blur'"/>
                                             </div>
                                         </div>
