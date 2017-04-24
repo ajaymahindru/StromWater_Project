@@ -16,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * @author dfladung
@@ -91,8 +90,20 @@ public class ReferenceServiceImplTest {
     @Test
     public void retriveTribesByLandName() throws Exception {
         try {
-            List<Tribe> tribes = referenceService.retriveTribesByLandName("NAVAJO RESERVATION");
+            List<Tribe> tribes = referenceService.retrieveTribesByLandName("NAVAJO RESERVATION");
             assertEquals(tribes.size(), 3);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void retriveTribesByLandNameAndStateCode() throws Exception {
+        try {
+            Tribe tribe = referenceService.retrieveTribeByLandNameAndStateCode("AUBURN", "CA");
+            assertNotNull(tribe);
+            assertEquals("A002", tribe.getTribalCode());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());

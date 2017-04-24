@@ -85,11 +85,20 @@ public class ReferenceRepository {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Tribe> retriveTribesByLandName(String tribalLandName) {
+    public List<Tribe> retrieveTribesByLandName(String tribalLandName) {
         return (List<Tribe>) cgpSessionFactory.getCurrentSession()
                 .createQuery("from Tribe t where t.tribalName = ?")
                 .setParameter(0, tribalLandName)
                 .getResultList();
+    }
+
+    @SuppressWarnings("unchecked")
+    public Tribe retrieveTribeByLandNameAndStateCode(String tribalLandName, String stateCode) {
+        return (Tribe) cgpSessionFactory.getCurrentSession()
+                .createQuery("select t from Tribe t join t.states ts where t.tribalName = ? and ts.stateCode = ?")
+                .setParameter(0, tribalLandName)
+                .setParameter(1, stateCode)
+                .getSingleResult();
     }
 
     @SuppressWarnings("unchecked")
