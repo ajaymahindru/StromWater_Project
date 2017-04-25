@@ -45,6 +45,11 @@
             NO
         </label>
     </script>
+    <script type="text/html" id="text-block-field">
+        <blockquote>
+            <span style="word-wrap: break-word" data-bind="text: field"></span>
+        </blockquote>
+    </script>
     <script type="text/html" id="cor-address">
         <div class="row">
             <div class="col-xs-12 form-group cor-underline-group">

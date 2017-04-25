@@ -305,6 +305,5 @@
     </div>
     <div data-bind="template: 'cor-certification'"></div>
 </div>
-
 <!-- /ko -->
 <!-- /ko -->
