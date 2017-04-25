@@ -203,6 +203,7 @@ CoR Styles
 }
 .cor > .panel {
 	border-radius: 0;
+	margin-bottom: 0;
 }
 .cor > p {
 	margin: 5px;
@@ -213,6 +214,9 @@ CoR Styles
 }
 .yes-no-box + .yes-no-box {
 	margin-left: 10px;
+}
+.cor .list-group-item-header {
+	background-color: #CCC;
 }
 @media print {
 	.cor > .panel-default > .panel-heading {

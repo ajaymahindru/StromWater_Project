@@ -18,7 +18,6 @@
             <span class="form-group-static" id="site-state"
                   data-bind="text: projectSiteInformation.siteStateCode"></span>
         </div>
-
     </div>
 </div>
 <div class="row">
@@ -124,8 +123,7 @@
     <div class="col-sm-12">
         <div class="form-group">
             <label class="control-label" for="swppp">Has a Stormwater Pollution Prevention Plan (SWPPP) been prepared in
-                advance
-                of filling this NOI, as required?</label>
+                advance of filling this NOI, as required?</label>
             <span class="form-group-static" id="swppp"
                   data-bind="text: stormwaterPollutionPreventionPlanInformation.preparationInAdvance() ? 'Yes':'No'"></span>
         </div>
@@ -149,8 +147,7 @@
     <div class="col-sm-12">
         <div class="form-group">
             <label class="control-label" for="historic-properties-question">Have you completed the screening process in
-                <a
-                        href="${actionBean.cgpUrls.appendixE }" target="_blank">Appendix E</a> relating to the
+                <a href="${actionBean.cgpUrls.appendixE }" target="_blank">Appendix E</a> relating to the
                 protection of historic properties?</label>
             <span class="form-group-static" id="historic-properties-question"
                   data-bind="text: historicPreservation.screeningCompleted()?'Yes':'No'"></span>
