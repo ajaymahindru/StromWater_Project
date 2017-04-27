@@ -288,9 +288,14 @@
 
             var wrapper = addCssClass(document.createElement('span'), [sysOpts.wrapperClass, options.wrapperClass]);
             var buttonGroup = addCssClass(document.createElement('span'), [sysOpts.buttonGroupClass, options.buttonGroupClass]);
-            var button = addCssClass(document.createElement('span'), sysOpts.buttonClass);
+            var button = addCssClass(document.createElement('span'), [sysOpts.buttonClass, element.getAttribute('id')]);
+            button.setAttribute('tabindex', '0');
+            button.setAttribute('role', 'button');
+            button.setAttribute('onkeydown', 'fileInputKeydown(event, ' + element.getAttribute('id') + ')');
+            button.setAttribute('id', 'fileInputButton');
             buttonGroup.appendChild(button);
             wrapper.appendChild(buttonGroup);
+            element.setAttribute('tabindex', '-1');
             element.parentNode.insertBefore(wrapper, element);
             button.appendChild(element);
 
@@ -380,3 +385,10 @@
     ko.fileBindings = fileBindings;
     return fileBindings;
 }));
+//enable tabbing to filedrag button and calling input click on keydown
+var fileInputKeydown = function(event, uniqueClass) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if ((keycode === 13) || (keycode === 32)) {
+        $("span." + uniqueClass).find('input').click();
+    }
+};
