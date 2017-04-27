@@ -157,6 +157,7 @@ CoR Styles
 	border-bottom: 1px #ddd solid;
 	margin-right: 0;
 	margin-left: 0;
+	display: flex;
 }
 .cor-header > div {
 	padding: 5px;
