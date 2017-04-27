@@ -16,6 +16,27 @@
 		<script src="${pageContext.request.contextPath}/static/js/leaflet/esri-leaflet.js"></script>
 		<script src="${pageContext.request.contextPath}/static/js/leaflet/esri-leaflet-geocoder.js"></script>
 		<script>
+			var PhantomJSPrinting = {
+                header : {
+                    height : '0.0in',
+                    contents : function(pageNum, numPages) {
+                        return '';
+                    }
+                },
+                footer : {
+                    height : '0.25in',
+                    contents : function(pageNum, numPages) {
+                        return '<span style="font-family: Helvetica, Ariel, sans-serif; font-size: 12px; float: right">Page ' + pageNum + ' of ' + numPages + '<span>';
+                    }
+                },
+				format: 'Custom',
+				customPaperSize: {
+					width: '1170px',
+					height: '1649px',
+					margin: '0px'
+				},
+				renderDelay: 800
+			}
 			var viewModel;
 			oeca.cgp.noi.npdesId = "${actionBean.npdesId}";
 			$(function() {

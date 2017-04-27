@@ -7,24 +7,24 @@
 <!-- ko if: form -->
 <!-- ko with: form().formData -->
 <div class="cor">
-    <div class="cor-header">
-        <div>
+    <div class="row cor-header">
+        <div class="col-xs-2">
             NPDES<br>
             FORM<br>
-            3510-9
+            3510-13
         </div>
-        <div>
+        <div class="col-xs-3">
             <img width="150px" src="${pageContext.request.contextPath}/static/img/epa-logo-black.png"/>
         </div>
-        <div>
+        <div class="col-xs-5">
             UNITED STATES ENVIRONMENTAL PROTECTION AGENCY<br>
             WASHINGTON, DC 20460<br>
             NOTICE OF TERMINATION (NOT) FOR THE 2017 NPDES CONSTRUCTION PERMIT
         </div>
-        <div>
+        <div class="col-xs-2">
             FORM<br>
             Approved OMB No.<br>
-            2-4-0004
+            2040-0004
         </div>
     </div>
     <p>Submission of this Notice of Termination constitutes notice that the operator identified in Section III

@@ -7,23 +7,24 @@
 <!-- ko if: form -->
 <!-- ko with: form().formData -->
 <div class="cor">
-    <div class="cor-header">
-        <div>
+    <div class="row cor-header">
+        <div class="col-xs-2">
             NPDES<br>
-            FORM
+            FORM<br>
+            3510-9
         </div>
-        <div>
+        <div class="col-xs-3">
             <img width="150px" src="${pageContext.request.contextPath}/static/img/epa-logo-black.png"/>
         </div>
-        <div>
+        <div class="col-xs-5">
             UNITED STATES ENVIRONMENTAL PROTECTION AGENCY<br>
             WASHINGTON, DC 20460<br>
-            NOTICE OF TERMINATION (NOT) FOR THE 2017 NPDES CONSTRUCTION PERMIT
+            NOTICE OF INTENT (NOI) FOR THE 2017 NPDES CONSTRUCTION PERMIT
         </div>
-        <div>
+        <div class="col-xs-2">
             FORM<br>
             Approved OMB No.<br>
-            2-4-0004
+            2040-0004
         </div>
     </div>
     <p>Submission of this Notice of Intent (NOI) constitutes notice that the operator identified in Section III of this
@@ -52,7 +53,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-8">
+                <div class="col-xs-4">
                     <div class="form-group cor-underline-group">
                         <label class="control-label" for="project-state">
                             State where your construction site is located:</label>
@@ -127,7 +128,7 @@
             </div>
             <!-- ko if: projectSiteInformation.sitePreviousNpdesPermit() == true -->
             <div class="row subquestion">
-                <div class="col-xs-12">
+                <div class="col-xs-5">
                     <div class="form-group cor-underline-group">
                         <label class="control-label" for="prev-npdes-id">Your most current NPDES ID: </label>
                         <span id="prev-npdes-id" data-bind="template: {
@@ -649,9 +650,10 @@
                             <tbody data-bind="foreach: $parents[1].form().attachmentsByCategory(oeca.cgp.constants.attachmentCategories.CHEMICAL_INFO)">
                             <tr>
                                 <td>
-                                    <a data-bind="attr: {href: '${pageContext.request.contextPath}/action/secured/attachment/' + id()}">
+                                    <a class="hidden-print" data-bind="attr: {href: '${pageContext.request.contextPath}/action/secured/attachment/' + id()}">
                                         <span class="fa fa-download"></span> <span data-bind="text: name"></span>
                                     </a>
+                                    <span class="visible-print" data-bind="text: name"></span>
                                 </td>
                                 <td data-bind="text: oeca.cgp.utils.formatDateTime(createdDate)"></td>
                                 <td data-bind="text: sizeDisplay"></td>
@@ -784,9 +786,10 @@
                             <tbody data-bind="foreach: $parents[1].form().attachmentsByCategory(oeca.cgp.constants.attachmentCategories.ENDANGERED_SPECIES)">
                             <tr>
                                 <td>
-                                    <a data-bind="attr: {href: '${pageContext.request.contextPath}/action/secured/attachment/' + id()}">
+                                    <a class="hidden-print" data-bind="attr: {href: '${pageContext.request.contextPath}/action/secured/attachment/' + id()}">
                                         <span class="fa fa-download"></span> <span data-bind="text: name"></span>
                                     </a>
+                                    <span class="visible-print" data-bind="text: name"></span>
                                 </td>
                                 <td data-bind="text: oeca.cgp.utils.formatDateTime(createdDate)"></td>
                                 <td data-bind="text: sizeDisplay"></td>
