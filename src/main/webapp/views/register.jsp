@@ -454,8 +454,8 @@
                         }
                         var serializedRegistrationInfo = ko.toJSON(registrationInfo, function (key, value) {
                             //Prevent errors and other irrelevant properties from being sent to the server
-                            return $.inArray(key,["verifyEmail","confCodeErrorMessage","codeValidationAdded","errors","codeIsValid", "confirmationCode"])
-                            > -1  ? undefined : value;
+                            return $.inArray(key,["verifyEmail","confCodeErrorMessage","codeValidationAdded",
+                                "errors","codeIsValid", "confirmationCode"]) > -1  ? undefined : value;
                         });
                         oeca.logger.debug(serializedRegistrationInfo);
                         $.ajax({
@@ -705,17 +705,17 @@
                         <div class="col-xs-4 bs-wizard-step complete">
                             <div class="text-center bs-wizard-stepnum">New Account</div>
                             <div class="progress"><div class="progress-bar"></div></div>
-                            <a href="#" class="bs-wizard-dot"></a>
+                            <a tabindex="-1" class="bs-wizard-dot"></a>
                         </div>
                         <div class="col-xs-4 bs-wizard-step disabled">
                             <div class="text-center bs-wizard-stepnum">ID Proofing</div>
                             <div class="progress"><div class="progress-bar"></div></div>
-                            <a href="#" class="bs-wizard-dot"></a>
+                            <a tabindex="-1" class="bs-wizard-dot"></a>
                         </div>
                         <div class="col-xs-4 bs-wizard-step disabled">
                             <div class="text-center bs-wizard-stepnum">Submission</div>
                             <div class="progress"><div class="progress-bar"></div></div>
-                            <a href="#" class="bs-wizard-dot"></a>
+                            <a tabindex="-1" class="bs-wizard-dot"></a>
                         </div>
                     </div>
                 </div>
@@ -1167,8 +1167,10 @@
                                         <br/>
                                     </form>
                                     <div>
-                                        <p>Can't find your organization? <a role="button" tabindex="0" id="backToSearch" data-bind="click: backToSearch">Back to search page</a> or
-                                            <a role="button" tabindex="0" data-bind="click: $root.addNewOrg">request that we add your organization</a>.</p>
+                                        <p>Can't find your organization?
+                                            <a role="button" href="" tabindex="0" id="backToSearch" data-bind="click: backToSearch">Back to search page</a> or
+                                            <a role="button" href="" tabindex="0" data-bind="click: $root.addNewOrg">request that we add your organization</a>.
+                                        </p>
                                     </div>
                                 </div>
 
@@ -1181,8 +1183,8 @@
                                     <div><!--ko text: orgInfoViewModel().countryCode--><!--/ko--></div>
                                     <br/>
                                     <div>
-                                        <small>Wrong organization information? <a role="button" id="backToResults" tabindex="0" data-bind="click: backToResults">Back to search results</a> or
-                                            <a role="button" tabindex="0" data-bind="click: addNewOrg">request that we add your organization</a>.</small>
+                                        <small>Wrong organization information? <a role="button" href="" id="backToResults" tabindex="0" data-bind="click: backToResults">Back to search results</a> or
+                                            <a role="button" href="" tabindex="0" data-bind="click: addNewOrg">request that we add your organization</a>.</small>
                                         <br/><br/>
                                         <button class="btn btn-primary" type="submit"
                                                 data-bind="visible: showOrgInfoNextButton, click: orgInfoNext">Next
@@ -1305,11 +1307,11 @@
                                             <div class="form-group col-sm-3">
                                                 <label for="newOrgVerifyEmail" class="control-label">Re-enter Email</label>
                                                 <input type="text" class="form-control" id="newOrgVerifyEmail"
-                                                       data-bind="value: verifyEmail, valueUpdate: 'blur', disable: codeIsValid()"/>
+                                                       data-bind="textInput: verifyEmail, disable: codeIsValid()"/>
                                             </div>
                                             <div class="form-group col-sm-1"><label></label>
                                                 <input type="button" id="newOrgSendCode" class="btn btn-primary" value="Send Verification Code"
-                                                       data-bind="click: $root.sendVerificationCode, enable: verifyEmail.isValid(),hasFocus: verifyEmail.isValid()">
+                                                       data-bind="click: $root.sendVerificationCode, enable: verifyEmail.isValid()">
                                             </div>
                                         </div>
                                         <div class="row" id="newOrgCodeContainer" data-bind="if: codeValidationAdded">
@@ -1351,11 +1353,11 @@
                                             <div class="form-group col-sm-3">
                                                 <label for="verifyEmail" class="control-label">Re-enter Email</label>
                                                 <input type="text" class="form-control" id="verifyEmail"
-                                                       data-bind="value: verifyEmail, valueUpdate: 'blur', disable: codeIsValid()"/>
+                                                       data-bind="textInput: verifyEmail, disable: codeIsValid()"/>
                                             </div>
                                             <div class="form-group col-sm-1"><label></label>
                                                 <input type="button" id="sendCode" class="btn btn-primary" value="Send Verification Code"
-                                                       data-bind="click: $root.sendVerificationCode, enable: verifyEmail.isValid(),hasFocus: verifyEmail.isValid()">
+                                                       data-bind="click: $root.sendVerificationCode, enable: verifyEmail.isValid()">
                                             </div>
                                         </div>
                                         <div class="row" id="codeContainer" data-bind="if: codeValidationAdded">
@@ -1398,17 +1400,17 @@
                         <div class="col-xs-4 bs-wizard-step complete">
                             <div class="text-center bs-wizard-stepnum">New Account</div>
                             <div class="progress"><div class="progress-bar"></div></div>
-                            <a href="#" class="bs-wizard-dot"></a>
+                            <a tabindex="-1" class="bs-wizard-dot"></a>
                         </div>
                         <div class="col-xs-4 bs-wizard-step complete">
                             <div class="text-center bs-wizard-stepnum">ID Proofing</div>
                             <div class="progress"><div class="progress-bar"></div></div>
-                            <a href="#" class="bs-wizard-dot"></a>
+                            <a tabindex="-1" class="bs-wizard-dot"></a>
                         </div>
                         <div class="col-xs-4 bs-wizard-step disabled">
                             <div class="text-center bs-wizard-stepnum">Submission</div>
                             <div class="progress"><div class="progress-bar"></div></div>
-                            <a href="#" class="bs-wizard-dot"></a>
+                            <a tabindex="-1" class="bs-wizard-dot"></a>
                         </div>
                     </div>
                 </div>

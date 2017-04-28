@@ -113,7 +113,7 @@
                             fields: [
                                 {
                                     field: firstName,
-                                    css: ''
+                                    css: 'half'
                                 },
                                 {
                                     field: middleInitial,
@@ -121,7 +121,7 @@
                                 },
                                 {
                                     field: lastName,
-                                    css: ''
+                                    css: 'half'
                                 }
                             ]
                         }
