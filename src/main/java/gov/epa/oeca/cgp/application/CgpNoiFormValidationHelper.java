@@ -66,6 +66,7 @@ public class CgpNoiFormValidationHelper {
         Validate.notNull(psi.getSitePreviousNpdesPermit(), "Previous NPDES permit indicator is required.");
         if (psi.getSitePreviousNpdesPermit()) {
             Validate.notEmpty(psi.getSitePreviousNpdesPermitId(), "Previous NPDES permit ID is required.");
+            Validate.isTrue(psi.getSitePreviousNpdesPermitId().length() <= 9, "Previous NPDES permit ID must be 9 characters long or less.");
         }
 
         // chemicals
@@ -301,6 +302,7 @@ public class CgpNoiFormValidationHelper {
         Validate.notEmpty(esp.getCriteriaSelectionSummary(), "Criteria selection summary is required.");
         if (AppendixDCriterion.Criterion_B.equals(esp.getCriterion())) {
             Validate.notEmpty(esp.getOtherOperatorNpdesId(), "The other operator's NPDES ID is required.");
+            Validate.isTrue(esp.getOtherOperatorNpdesId().length() <= 9, "The other operator's NPDES ID muust be 9 characters long or less.");
         } else if (AppendixDCriterion.Criterion_C.equals(esp.getCriterion())) {
             Validate.notEmpty(
                     esp.getSpeciesAndHabitatInActionArea(),
