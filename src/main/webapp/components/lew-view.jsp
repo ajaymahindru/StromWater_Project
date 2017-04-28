@@ -45,7 +45,7 @@
                         <span data-bind="template: {
                                 name: 'underlined-field',
                                 data: {
-                                    field: $parent.form().formSet.npdesId
+                                    field: $parent.form().formSet.npdesId() || oeca.cgp.noi.npdesId
                                 }
                             }" id="npdes-id"></span>
                     </div>
