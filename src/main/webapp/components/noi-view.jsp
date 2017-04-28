@@ -682,10 +682,16 @@
                 <div class="col-xs-12">
                     <div class="form-group cor-underline-group">
                         <label class="control-label" for="appendix-d-criteria">Using the Instructions in
-                            <a href="${actionBean.cgpUrls.appendixD }" target="_blank">Appendix D</a> of the CGP, under
-                            which criterion listed in
-                            <a href="${actionBean.cgpUrls.appendixD }" target="_blank">Appendix D</a> are you eligible
-                            for coverage under this permit?</label>
+                            <a href="${actionBean.cgpUrls.appendixD }" class="hidden-print" target="_blank">
+                                Appendix D
+                            </a>
+                            <span class="visible-print-inline">Appendix D</span>
+                            of the CGP, under which criterion listed in
+                            <a href="${actionBean.cgpUrls.appendixD }" class="hidden-print" target="_blank">
+                                Appendix D
+                            </a>
+                            <span class="visible-print-inline">Appendix D</span>
+                            are you eligible for coverage under this permit?</label>
                         <span id="appendix-d-criteria" data-bind="template: {
                                         name: 'underlined-field',
                                         data: {

@@ -227,6 +227,9 @@ CoR Styles
 	background-color: #ddd;
 }
 @media print {
+	.cor {
+		font-size: 65%
+	}
 	.cor .panel-default > .panel-heading {
 		background-color: #ddd !important;
 	}
