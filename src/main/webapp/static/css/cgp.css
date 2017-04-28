@@ -229,7 +229,6 @@ CoR Styles
 @media print {
 	.cor {
 		font-size: 65%;
-        font-family: Arial sans-serif;
 	}
 	.cor .panel-default > .panel-heading {
 		background-color: #ddd !important;
