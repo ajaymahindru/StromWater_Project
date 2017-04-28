@@ -9,7 +9,7 @@
             <pattern>%d{HH:mm:ss,SSS} %-5p [%c] %m%n</pattern>
         </encoder>
     </appender>
-    <appender name="SECURITY" class="ch.qos.logback.core.rolling.RollingFileAppender" additivity="false">
+    <appender name="SECURITY" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${log.home}/@project.artifactId@/@project.artifactId@-security.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.home}/@project.artifactId@/@project.artifactId@-security.%d{yyyy-MM-dd}.log
@@ -25,7 +25,7 @@
             <pattern>%d{HH:mm:ss,SSS} %-5p [%c] %m%n</pattern>
         </encoder>
     </appender>
-    <logger name="org.springframework.security" level="debug">
+    <logger name="org.springframework.security" level="debug" additivity="false">
         <appender-ref ref="SECURITY"/>
     </logger>
     <logger name="gov.epa.oeca" level="info"/>
