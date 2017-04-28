@@ -34,7 +34,6 @@ import java.util.*;
 public class CgpNoiFormNotificationHelper {
 
     private static final Logger logger = LoggerFactory.getLogger(CgpNoiFormNotificationHelper.class);
-    private static final List<String> defaultBcc = Collections.singletonList("CGP@epa.gov");
     private static final String defaultReason = "No reason provided.";
 
     @Autowired
@@ -89,7 +88,7 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendGenericNotification(from, Collections.singletonList(to), cc, defaultBcc, subject, body);
+            notificationService.sendGenericNotification(from, Collections.singletonList(to), cc, null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -123,7 +122,7 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendGenericNotification(from, Collections.singletonList(to), cc, defaultBcc, subject, body);
+            notificationService.sendGenericNotification(from, Collections.singletonList(to), cc, null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -154,7 +153,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
 
             // send the notification
-            notificationService.sendNotificationWithAttachment(from, Collections.singletonList(to), cc, defaultBcc, subject, body,
+            notificationService.sendNotificationWithAttachment(from, Collections.singletonList(to), cc, null, subject, body,
                     attachmentName, attachmentData);
         } catch (Exception e) {
             logger.warn(e.getMessage());
@@ -186,7 +185,7 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendNotificationWithAttachment(from, to, null, defaultBcc, subject, body, attachmentName, attachmentData);
+            notificationService.sendNotificationWithAttachment(from, to, null, null, subject, body, attachmentName, attachmentData);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -223,7 +222,7 @@ public class CgpNoiFormNotificationHelper {
             }
 
             //send the notification
-            notificationService.sendNotificationWithAttachment(from, to, null, defaultBcc, subject, body, attachmentName, attachmentData);
+            notificationService.sendNotificationWithAttachment(from, to, null, null, subject, body, attachmentName, attachmentData);
 
         } catch (Exception e) {
             logger.warn(e.getMessage());
@@ -251,7 +250,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Arrays.asList(certifier, preparer), cc,
-                    defaultBcc, subject, body);
+                    null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -279,7 +278,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Arrays.asList(certifier, preparer), cc,
-                    defaultBcc, subject, body);
+                    null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -294,6 +293,12 @@ public class CgpNoiFormNotificationHelper {
             List<String> cc = CollectionUtils.isEmpty(raEmails) ? null : raEmails;
             String certifier = form.getFormData().getOperatorInformation().getCertifier().getEmail();
             String preparer = form.getFormData().getOperatorInformation().getPreparer().getEmail();
+            //get bcc emails
+            List<Subscriber> subscribers = referenceService.retrieveSubscribersByCatSubcat("bcc", "accepted_by_icis");
+            List<String> bcc = new ArrayList<>();
+            for (Subscriber s : subscribers) {
+                bcc.add(s.getEmail());
+            }
 
             // merge model
             Map<String, Object> model = new HashMap<>();
@@ -311,7 +316,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendNotificationWithAttachment(from, Arrays.asList(certifier, preparer), cc,
-                    defaultBcc, subject, body, attachmentName, attachmentData);
+                    bcc, subject, body, attachmentName, attachmentData);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -346,7 +351,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Collections.singletonList(preparer), null,
-                    defaultBcc, subject, body);
+                    null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -370,7 +375,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Arrays.asList(certifier, preparer), null,
-                    defaultBcc, subject, body);
+                    null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -394,7 +399,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Arrays.asList(certifier, preparer), null,
-                    defaultBcc, subject, body);
+                    null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -418,7 +423,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Arrays.asList(certifier, preparer), null,
-                    defaultBcc, subject, body);
+                    null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -442,7 +447,7 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Arrays.asList(certifier, preparer), null,
-                    defaultBcc, subject, body);
+                    null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -470,7 +475,7 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendGenericNotification(from, Collections.singletonList(email), null, defaultBcc, subject, body);
+            notificationService.sendGenericNotification(from, Collections.singletonList(email), null, null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }

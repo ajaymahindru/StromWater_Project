@@ -295,8 +295,8 @@
 					Location: <span data-bind="text: formData.projectSiteInformation.siteLocation.display"></span><br/>
 					Owner: <span data-bind="text: formSet.owner"></span><br/>
 					Status: <span data-bind="text: statusDisplay"></span><br/>
-					Date Submitted to EPA: <span data-bind="text: submittedDate() !== null ? moment(submittedDate()).format('MM/DD/YYYY h:mm A') : ''"></span><br/>
-					Date Updated: <span data-bind="text: lastUpdatedDate() !== null ? moment(lastUpdatedDate()).format('MM/DD/YYYY h:mm A') : ''"></span>
+					Date Certified: <span data-bind="text: certifiedDate() !== null ? moment(certifiedDate()).format('MM/DD/YYYY h:mm A') : ''"></span><br/>
+					Date Active: <span data-bind="text: reviewExpiration() !== null ? moment(reviewExpiration()).format('MM/DD/YYYY h:mm A') : ''"></span>
 				</div>
 			</div>
 		</div>
@@ -372,6 +372,10 @@
 							<input id="npdes-id" class="form-control" type="text" data-bind="value: npdesId" />
 						</div>
 						<div class="col-sm-4 form-group">
+							<label class="control-label" for="mgp-number">Master General Permit Number</label>
+							<input id="mgp-number" class="form-control" type="text" data-bind="value: masterGeneralPermit" />
+						</div>
+						<div class="col-sm-4 form-group">
 							<label class="control-label" for="tracking-number">Tracking Number</label>
 							<input id="tracking-number" class="form-control" type="text" data-bind="value: trackingNumber" />
 						</div>
@@ -387,17 +391,48 @@
 																					optionsCaption: 'Select Form Type'"></select>
 						</div>
 						<div class="col-sm-4 form-group">
-							<label class="control-label" for="project-site">Project/Site</label>
+							<label class="control-label" for="project-status">Project Status</label>
+							<select id="project-status" class="form-control" data-bind="lookup: 'formStatuses',
+																					value: status,
+																					optionsValue: 'code',
+																					optionsText: 'description',
+																					valueAllowUnset: true,
+																					optionsCaption: 'Select Status'"></select>
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label" for="owner">Owner</label>
+							<input id="owner" class="form-control" type="text" data-bind="value: owner" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4 form-group">
+							<label class="control-label" for="project-site">Project/Site Name</label>
 							<input id="project-site" class="form-control" type="text" data-bind="value: siteName" />
 						</div>
 						<div class="col-sm-4 form-group">
 							<label class="control-label" for="operator-name">Operator Name</label>
 							<input id="operator-name" class="form-control" type="text" data-bind="value: operatorName" />
 						</div>
+						<div class="col-sm-4 form-group">
+							<label class="control-label" for="project-region">Project/Site Region</label>
+							<select id="project-region" class="form-control" data-bind="value: siteRegion">
+								<option value="">Select Region</option>
+								<option value="1">01</option>
+								<option value="2">02</option>
+								<option value="3">03</option>
+								<option value="4">04</option>
+								<option value="5">05</option>
+								<option value="6">06</option>
+								<option value="7">07</option>
+								<option value="8">08</option>
+								<option value="9">09</option>
+								<option value="10">10</option>
+							</select>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4 form-group">
-							<label class="control-label" for="project-state">Project State</label>
+							<label class="control-label" for="project-state">Project/Site State</label>
 							<select id="project-state" class="form-control" data-bind="lookup: 'states',
 																				value: siteStateCode,
 																				optionsText: 'stateName',
@@ -408,7 +443,7 @@
 									style="width: 100%"/>
 						</div>
 						<div class="col-sm-4 form-group">
-							<label class="control-label" for="project-county">Project County</label>
+							<label class="control-label" for="project-county">Project/Site County</label>
 							<select id="project-county" class="form-control" style="width: 100%" data-bind="enable: siteStateCode,
 																										lookup: {
 																											options: 'counties',
@@ -428,23 +463,14 @@
 						    <span class="help-block" data-bind="visible: !siteStateCode()">Project State must be selected first.</span>
 						</div>
 						<div class="col-sm-4 form-group">
-							<label class="control-label" for="project-city">Project City</label>
+							<label class="control-label" for="project-city">Project/Site City</label>
 							<input id="project-city" class="form-control" type="text" data-bind="value: siteCity" />
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4 form-group">
-							<label class="control-label" for="project-zip">Project Zip</label>
+							<label class="control-label" for="project-zip">Project/Site Zip</label>
 							<input id="project-zip" class="form-control" type="text" data-bind="maskedZip: siteZipCode" />
-						</div>
-						<div class="col-sm-4 form-group">
-							<label class="control-label" for="project-status">Project Status</label>
-							<select id="project-status" class="form-control" data-bind="lookup: 'formStatuses',
-																					value: status,
-																					optionsValue: 'code',
-																					optionsText: 'description',
-																					valueAllowUnset: true,
-																					optionsCaption: 'Select Status'"></select>
 						</div>
 						<div class="col-sm-4 form-group">
 							<label class="control-label" for="tribe-name">Tribe Name</label>
@@ -469,17 +495,7 @@
                                                                              placeholder: 'Select Tribe'
                                                                          }"></select>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4 form-group">
-							<label class="control-label" for="submitted-date-from">Submitted Date From</label>
-							<input id="submitted-date-from" class="form-control" type="text" data-bind="value: submittedFrom, datepicker" />
-						</div>
-						<div class="col-sm-4 form-group">
-							<label class="control-label" for="submited-date-to">Submitted Date To</label>
-							<input id="submited-date-to" class="form-control" type="text" data-bind="value: submittedTo, datepicker" />
-						</div>
-						<div class="col-sm-4 form-group">
+						<div class="col-sm-2 form-group">
 							<label class="control-label">Federal Facility</label>
 							<div>
 								<div class="radio radio-inline" style="padding-left: 0px">
@@ -493,17 +509,49 @@
 								</div>
 							</div>
 						</div>
+						<div class="col-sm-2 form-group">
+							<label class="control-label">Tribal Lands</label>
+							<div>
+								<div class="radio radio-inline" style="padding-left: 0px">
+									<label>
+										<input type="radio" name="tribal-lands" id="tribal-lands-yes" data-bind="checkedValue: true, checked: siteIndianCountry"/>Yes
+									</label>
+									&nbsp;
+									<label>
+										<input type="radio" name="tribal-lands" id="tribal-lands-no" data-bind="checkedValue: false, checked: siteIndianCountry"/>No
+									</label>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-4 form-group">
-							<label class="control-label" for="updated-date-from">Updated Date From</label>
-							<input id="updated-date-from" class="form-control" type="text" data-bind="value: updatedFrom, datepicker" />
+							<label class="control-label" for="updated-date">Date Modified</label>
+							<div id="updated-date" class="row">
+								<div class="col-sm-6 form-group">
+									<label class="control-label" for="updated-date-from">From</label>
+									<input id="updated-date-from" class="form-control" type="text" data-bind="value: updatedFrom, datepicker" />
+								</div>
+								<div class="col-sm-6 form-group">
+									<label class="control-label" for="updated-date-to">To</label>
+									<input id="updated-date-to" class="form-control" type="text" data-bind="value: updatedTo, datepicker" />
+								</div>
+							</div>
 						</div>
 						<div class="col-sm-4 form-group">
-							<label class="control-label" for="updated-date-to">Updated Date To</label>
-							<input id="updated-date-to" class="form-control" type="text" data-bind="value: updatedTo, datepicker" />
+							<label class="control-label" for="submitted-date">Date Submitted</label>
+							<div id="submitted-date" class="row">
+								<div class="col-sm-6 form-group">
+									<label class="control-label" for="submitted-date-from">From</label>
+									<input id="submitted-date-from" class="form-control" type="text" data-bind="value: submittedFrom, datepicker" />
+								</div>
+								<div class="col-sm-6 form-group">
+									<label class="control-label" for="submited-date-to">To</label>
+									<input id="submited-date-to" class="form-control" type="text" data-bind="value: submittedTo, datepicker" />
+								</div>
+							</div>
 						</div>
-						<div class="col-sm-4" style="padding-top: 13px">
+						<div class="col-sm-4" style="padding-top: 40px">
 							<div class="btn-group btn-group-justified">
 								<div class="btn-group">
 									<button class="btn btn-lg btn-default" data-bind="click: $parent.clearFilter">Clear</button>

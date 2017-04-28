@@ -21,7 +21,9 @@ public interface ReferenceService {
 
     List<Tribe> retrieveTribes(String stateCode) throws ApplicationException;
 
-    List<Tribe> retriveTribesByLandName(String tribalLandName) throws ApplicationException;
+    List<Tribe> retrieveTribesByLandName(String tribalLandName) throws ApplicationException;
+
+    Tribe retrieveTribeByLandNameAndStateCode(String tribalLandName, String stateCode) throws ApplicationException;
 
     List<BiaTribe> retrieveBiaTribes() throws ApplicationException;
 
@@ -50,5 +52,7 @@ public interface ReferenceService {
     List<Subscriber> retrieveSubscribers() throws ApplicationException;
 
     List<Subscriber> retrieveSubscribersByMgp(String mgpCategory) throws ApplicationException;
+
+    List<Subscriber> retrieveSubscribersByCatSubcat(String category, String subcategory) throws ApplicationException;
 
 }

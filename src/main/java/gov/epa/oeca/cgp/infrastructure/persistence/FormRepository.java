@@ -7,6 +7,7 @@ import gov.epa.oeca.cgp.domain.dto.datatable.DataTableConfig;
 import gov.epa.oeca.cgp.domain.dto.datatable.DataTableCriteria;
 import gov.epa.oeca.cgp.domain.dto.datatable.DataTableOrder;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
+import gov.epa.oeca.cgp.domain.ref.State;
 import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
 import org.apache.commons.collections.CollectionUtils;
@@ -19,6 +20,7 @@ import org.hibernate.criterion.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Math.toIntExact;
@@ -34,6 +36,8 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
 
     @Autowired
     ApplicationUtils applicationUtils;
+    @Autowired
+    ReferenceRepository referenceRepository;
 
     public FormRepository() {
         super(CgpNoiForm.class);
@@ -108,10 +112,10 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
             cr.add(Restrictions.eq("formSets.owner", criteria.getOwner()));
         }
         if (!StringUtils.isEmpty(criteria.getNpdesId())) {
-            cr.add(Restrictions.eq("formSets.npdesId", criteria.getNpdesId()));
+            cr.add(Restrictions.like("formSets.npdesId", criteria.getNpdesId(), MatchMode.ANYWHERE).ignoreCase());
         }
         if (!StringUtils.isEmpty(criteria.getMasterGeneralPermit())) {
-            cr.add(Restrictions.eq("formSets.masterPermitNumber", criteria.getMasterGeneralPermit()));
+            cr.add(Restrictions.like("formSets.masterPermitNumber", criteria.getMasterGeneralPermit(), MatchMode.ANYWHERE).ignoreCase());
         }
 
 
@@ -140,7 +144,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         }
         if (criteria.getSubmittedTo() != null) {
             cr.add(Restrictions.le("submittedDate",
-                    applicationUtils.getAsStartOfDay(criteria.getSubmittedTo())));
+                    applicationUtils.getAsStartOfDay(criteria.getSubmittedTo().plusDays(1))));
         }
         if (criteria.getUpdatedFrom() != null) {
             cr.add(Restrictions.ge("lastUpdatedDate",
@@ -148,7 +152,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         }
         if (criteria.getUpdatedTo() != null) {
             cr.add(Restrictions.le("lastUpdatedDate",
-                    applicationUtils.getAsStartOfDay(criteria.getUpdatedTo())));
+                    applicationUtils.getAsStartOfDay(criteria.getUpdatedTo().plusDays(1))));
         }
         if (criteria.getCreatedFrom() != null) {
             cr.add(Restrictions.ge("createdDate",
@@ -171,6 +175,14 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
 
         // index properties
         cr.createAlias("index", "index");
+        if (criteria.getSiteRegion() != null) {
+            List<State> regionStates = referenceRepository.retrieveStates(criteria.getSiteRegion().intValue());
+            List<String> regionStateCodes = new ArrayList<>();
+            for (State rs : regionStates) {
+                regionStateCodes.add(rs.getStateCode());
+            }
+            cr.add(Restrictions.in("index.siteStateCode", regionStateCodes));
+        }
         if (BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch())
                 && !CollectionUtils.isEmpty(criteria.getSiteStateCodes())) {
             cr.add(Restrictions.in("index.siteStateCode", criteria.getSiteStateCodes()));

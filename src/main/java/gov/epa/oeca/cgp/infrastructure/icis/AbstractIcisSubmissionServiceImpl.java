@@ -3,7 +3,6 @@ package gov.epa.oeca.cgp.infrastructure.icis;
 import gov.epa.oeca.cgp.application.reference.ReferenceService;
 import gov.epa.oeca.cgp.domain.noi.*;
 import gov.epa.oeca.cgp.domain.noi.formsections.*;
-import gov.epa.oeca.cgp.domain.ref.State;
 import gov.epa.oeca.cgp.domain.ref.Tribe;
 import gov.epa.oeca.common.ApplicationException;
 import net.exchangenetwork.schema.icis._5._8.*;
@@ -23,7 +22,6 @@ import java.io.File;
 import java.math.RoundingMode;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -487,17 +485,11 @@ public abstract class AbstractIcisSubmissionServiceImpl implements IcisSubmissio
         facility.setLocationZipCode(psi.getSiteZipCode());
         facility.setLocationCountryCode("US");
         if (!StringUtils.isEmpty(psi.getSiteIndianCountryLands())) {
-            List<Tribe> tribes = referenceService.retriveTribesByLandName(psi.getSiteIndianCountryLands());
-            for (Tribe t : tribes) {
-                if (CollectionUtils.exists(t.getStates(), o -> ((State) o).getStateCode().equals(
-                        form.getFormData().getProjectSiteInformation().getSiteStateCode()))) {
-                    // the original design does not support tribes with non-unique codes, so we're treating any
-                    // negative tribal code as -999 for ICIS purposes
-                    String tribalLandCode = (StringUtils.startsWith(t.getTribalCode(), "-")) ? "-999" : t.getTribalCode();
-                    facility.setTribalLandCode(tribalLandCode);
-                    break;
-                }
-            }
+            Tribe t = referenceService.retrieveTribeByLandNameAndStateCode(psi.getSiteIndianCountryLands(), psi.getSiteStateCode());
+            // the original design does not support tribes with non-unique codes, so we're treating any
+            // negative tribal code as -999 for ICIS purposes
+            String tribalLandCode = (StringUtils.startsWith(t.getTribalCode(), "-")) ? "-999" : t.getTribalCode();
+            facility.setTribalLandCode(tribalLandCode);
         }
         GeographicCoordinates coordinates = new GeographicCoordinates();
         facility.setGeographicCoordinates(coordinates);

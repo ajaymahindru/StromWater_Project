@@ -26,6 +26,7 @@ var NoiSearchCriteria = function(data) {
 		status: null,
 		operatorName: null,
 		siteName: null,
+		siteRegion: null,
 		siteStateCode: null,
 		siteCity: null,
 		siteZipCode: null,
@@ -36,6 +37,7 @@ var NoiSearchCriteria = function(data) {
 		updatedTo: null,
 		activeRecord: null,
 		operatorFederal: null,
+		siteIndianCountry: null,
 		siteIndianCountryLands: null
 	}, data);
 	ko.mapping.fromJS(data, {}, self);

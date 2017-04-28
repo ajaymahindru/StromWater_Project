@@ -97,10 +97,25 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
-    public List<Tribe> retriveTribesByLandName(String tribalLandName) throws ApplicationException {
+    public List<Tribe> retrieveTribesByLandName(String tribalLandName) throws ApplicationException {
         try {
             Validate.notEmpty(tribalLandName, "Tribal land name is required");
-            return referenceRepository.retriveTribesByLandName(tribalLandName);
+            return referenceRepository.retrieveTribesByLandName(tribalLandName);
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage(), e);
+            throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
+    @Override
+    public Tribe retrieveTribeByLandNameAndStateCode(String tribalLandName, String stateCode) throws ApplicationException {
+        try {
+            Validate.notEmpty(tribalLandName, "Tribal land name is required");
+            Validate.notEmpty(stateCode, "State code is required");
+            return referenceRepository.retrieveTribeByLandNameAndStateCode(tribalLandName, stateCode);
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage(), e);
             throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());
@@ -290,6 +305,21 @@ public class ReferenceServiceImpl implements ReferenceService {
         try {
             Validate.notEmpty(mgp, "MGP is required");
             return referenceRepository.retrieveSubscribersBySubcategory(mgp);
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage(), e);
+            throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
+    @Override
+    public List<Subscriber> retrieveSubscribersByCatSubcat(String category, String subcategory) throws ApplicationException {
+        try {
+            Validate.notEmpty(category, "Notification category is required");
+            Validate.notEmpty(subcategory, "Notification subcategory is required");
+            return referenceRepository.retrieveSubscribersByCatSubcat(category, subcategory);
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage(), e);
             throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());

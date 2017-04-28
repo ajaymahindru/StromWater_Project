@@ -10,10 +10,7 @@ import gov.epa.oeca.cgp.domain.noi.*;
 import gov.epa.oeca.cgp.domain.noi.formsections.PointOfDischarge;
 import gov.epa.oeca.cgp.domain.noi.formsections.Pollutant;
 import gov.epa.oeca.cgp.domain.noi.formsections.Tier;
-import gov.epa.oeca.cgp.domain.ref.MgpRule;
-import gov.epa.oeca.cgp.domain.ref.NpdesSequence;
-import gov.epa.oeca.cgp.domain.ref.State;
-import gov.epa.oeca.cgp.domain.ref.TribalOverride;
+import gov.epa.oeca.cgp.domain.ref.*;
 import gov.epa.oeca.cgp.infrastructure.certification.CromerrService;
 import gov.epa.oeca.cgp.infrastructure.cor.CopyOfRecordGeneratorService;
 import gov.epa.oeca.cgp.infrastructure.icis.IcisSubmissionService;
@@ -309,6 +306,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             // update the previous form
             toClone.setActiveRecord(false);
             toClone.setLastUpdatedDate(ZonedDateTime.now());
+            toClone.setStatus(Status.ActivePendingChange);
             formRepository.update(toClone);
 
             // create the form
@@ -945,7 +943,6 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             CgpNoiForm previous = toDistribute.getFormSet().getForms().size() > 1 ?
                     findPreviousForm(toDistribute.getFormSet()) :
                     null;
-            toDistribute.setLastUpdatedDate(ZonedDateTime.now());
             icisSubmissionService.submitToIcisNpdesDataflow(toDistribute, previous);
             formRepository.update(toDistribute);
         } catch (IllegalArgumentException e) {
@@ -1216,8 +1213,9 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             Validate.notEmpty(
                     form.getFormData().getProjectSiteInformation().getSiteIndianCountryLands(),
                     "Indian tribal code is required.");
-            String tribalCode = form.getFormData().getProjectSiteInformation().getSiteIndianCountryLands();
-            TribalOverride override = referenceService.retrieveOverride(tribalCode, stateCode);
+            String tribalLandName = form.getFormData().getProjectSiteInformation().getSiteIndianCountryLands();
+            Tribe t = referenceService.retrieveTribeByLandNameAndStateCode(tribalLandName, stateCode);
+            TribalOverride override = referenceService.retrieveOverride(t.getTribalCode(), stateCode);
             logger.info(String.format("found override %s, for form with ID %s", override, form.getId()));
             if (override != null) {
                 masterGeneralPermitNumber = override.getMgpNumber();

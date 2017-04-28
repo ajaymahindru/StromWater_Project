@@ -165,8 +165,8 @@ oeca.cgp = {
 		},
 		routePreparer: function() {
 			oeca.cgp.notifications.successAlert({
-				message: 'Your form has been routed to an additional preparer.',
-				helpText: 'The additional preparer must now route the form to an approved Certifier to sign and submit this for for approval by the EPA.',
+				message: 'Your form has been routed.',
+				helpText: 'The preparer must now route the form to an approved Certifier to sign and submit this document for approval by the EPA.',
 				buttons: [{
 					label: 'Ok',
 					action: function(dialogRef) {
@@ -380,7 +380,7 @@ oeca.cgp = {
 		noiCreated: function(trackingNumber) {
 			oeca.cgp.notifications.successAlert({
 				message: 'You have successfully created a draft Notice of Intent permit.  Your Tracking Number is '+ trackingNumber +'.',
-				helpText: 'Copy/paste your Tracking Number for your records. You can use it to identify your permit prior to NPDES ID assignment.',
+				helpText: 'Copy/paste or print your Tracking Number for your records. You can use it to identify your permit prior to NPDES ID assignment.',
 				id: 'noiCreated',
 				buttons: [
 					{
@@ -405,7 +405,7 @@ oeca.cgp = {
 		lewCreated: function(trackingNumber) {
 			oeca.cgp.notifications.successAlert({
 				message: 'You have successfully created a draft Low Erosivity Waiver.  Your Tracking Number is '+ trackingNumber +'.',
-				helpText: 'Copy/paste your Tracking Number for your records. You can use it to identify your permit prior to NPDES ID assignment.',
+				helpText: 'Copy/paste or print your Tracking Number for your records. You can use it to identify your permit prior to NPDES ID assignment.',
 				id: 'lewCreated',
 				buttons: [
 					{
