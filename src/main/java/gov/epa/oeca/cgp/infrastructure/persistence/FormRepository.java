@@ -109,7 +109,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         // formSet properties
         cr.createAlias("formSet", "formSets");
         if (!StringUtils.isEmpty(criteria.getOwner())) {
-            cr.add(Restrictions.like("formSets.owner", criteria.getOwner(), MatchMode.ANYWHERE).ignoreCase());
+            cr.add(Restrictions.eq("formSets.owner", criteria.getOwner()).ignoreCase());
         }
         if (!StringUtils.isEmpty(criteria.getNpdesId())) {
             cr.add(Restrictions.like("formSets.npdesId", criteria.getNpdesId(), MatchMode.ANYWHERE).ignoreCase());
