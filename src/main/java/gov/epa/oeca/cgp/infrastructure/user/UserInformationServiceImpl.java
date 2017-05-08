@@ -3,10 +3,10 @@ package gov.epa.oeca.cgp.infrastructure.user;
 import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.registration.NewUserProfile;
+import gov.epa.oeca.common.domain.registration.Organization;
 import gov.epa.oeca.common.infrastructure.cdx.register.Assembler;
 import gov.epa.oeca.common.infrastructure.cdx.register.RegistrationHelper;
 import gov.epa.oeca.common.infrastructure.cdx.register.StreamlinedRegistrationClient;
-import net.exchangenetwork.wsdl.register.streamlined._1.RegistrationOrganization;
 import net.exchangenetwork.wsdl.register.streamlined._1.RegistrationRoleType;
 import net.exchangenetwork.wsdl.register.streamlined._1.RegistrationUser;
 import net.exchangenetwork.wsdl.register.streamlined._1.RegistrationUserSearchCriteria;
@@ -85,7 +85,7 @@ public class UserInformationServiceImpl implements UserInformationService {
     }
 
     @Override
-    public RegistrationOrganization retrievePrimaryOrganization(String userId) throws ApplicationException {
+    public Organization retrievePrimaryOrganization(String userId) throws ApplicationException {
         try {
             // validate
             Validate.notNull(userId, "User ID is required.");
@@ -95,7 +95,7 @@ public class UserInformationServiceImpl implements UserInformationService {
             String token = getStreamlinedRegistrationToken(url);
             RegistrationUser user = new RegistrationUser();
             user.setUserId(userId);
-            return streamlinedRegistrationClient.retrievePrimaryOrganization(url, token, user);
+            return assembler.assembleOrg(streamlinedRegistrationClient.retrievePrimaryOrganization(url, token, user));
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage(), e);
             throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());

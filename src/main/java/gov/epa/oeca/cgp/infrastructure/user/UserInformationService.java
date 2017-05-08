@@ -2,7 +2,7 @@ package gov.epa.oeca.cgp.infrastructure.user;
 
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.registration.NewUserProfile;
-import net.exchangenetwork.wsdl.register.streamlined._1.RegistrationOrganization;
+import gov.epa.oeca.common.domain.registration.Organization;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface UserInformationService {
 
     NewUserProfile retrieveCertifier(String certifierId) throws ApplicationException;
 
-    RegistrationOrganization retrievePrimaryOrganization(String userId) throws ApplicationException;
+    Organization retrievePrimaryOrganization(String userId) throws ApplicationException;
 }
