@@ -332,7 +332,8 @@ public class CgpNoiFormNotificationHelper {
             }
             // get the basic mail information
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
-            String preparer = form.getFormData().getOperatorInformation().getPreparer().getEmail();
+            String owner = form.getFormSet().getOwner();
+            String ownerEmail = userInformationService.retrievePrimaryOrganization(owner).getEmail();
             List<String> raEmails = getRaEmails(form);
             String ra = StringUtils.join(raEmails, ", ");
 
@@ -350,7 +351,7 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendGenericNotification(from, Collections.singletonList(preparer), null,
+            notificationService.sendGenericNotification(from, Collections.singletonList(ownerEmail), null,
                     null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());
