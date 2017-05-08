@@ -14,7 +14,7 @@
             3510-9
         </div>
         <div class="col-xs-3">
-            <img width="150px" src="${pageContext.request.contextPath}/static/img/epa-logo-black.png"/>
+            <img class="cor-epa-logo" src="${pageContext.request.contextPath}/static/img/epa-logo-black.png"/>
         </div>
         <div class="col-xs-5">
             UNITED STATES ENVIRONMENTAL PROTECTION AGENCY<br>
@@ -260,7 +260,7 @@
     <div class="panel panel-default" data-bind="with: operatorInformation">
         <div class="panel-heading">Operator Information</div>
         <div class="panel-body">
-            <h4>Operator Information</h4>
+            <h5>Operator Information</h5>
             <div class="row">
                 <div class="col-xs-7">
                     <div class="form-group cor-underline-group">
@@ -316,7 +316,7 @@
                     </div>
                 </div>
             </div>
-            <h4>Project/Site Address</h4>
+            <h5>Project/Site Address</h5>
             <div class="row">
                 <div class="col-xs-12">
                     <span data-bind="template: {
@@ -541,7 +541,7 @@
             <!-- /ko -->
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="h4">
+                    <div class="h5">
                         <span data-bind="text: id"></span>:
                         <span data-bind="text: firstWater().receivingWaterName"></span>
                         <small data-bind="text: description"></small>
@@ -692,7 +692,7 @@
                             </a>
                             <span class="visible-print-inline">Appendix D</span>
                             are you eligible for coverage under this permit?</label>
-                        <span id="appendix-d-criteria" data-bind="template: {
+                        <span id="appendix-d-criteria" style="min-width: 150px;" data-bind="template: {
                                         name: 'underlined-field',
                                         data: {
                                             field: oeca.cgp.constants.appendixDCriteria[criterion()]
