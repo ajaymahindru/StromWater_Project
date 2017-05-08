@@ -3,6 +3,7 @@ package gov.epa.oeca.cgp.infrastructure.user;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.registration.NewUserProfile;
 import gov.epa.oeca.common.domain.registration.Organization;
+import net.exchangenetwork.wsdl.register.streamlined._1.RegistrationOrganization;
 
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +22,12 @@ public class MockUserInformationServiceImpl implements UserInformationService {
         return result;
     }
 
+    RegistrationOrganization getRegOrg() {
+        RegistrationOrganization regOrg = new RegistrationOrganization();
+        regOrg.setEmail("linera.abieva@cgifederal.com");
+        return regOrg;
+    }
+
     @Override
     public List<NewUserProfile> retrieveRegionalAuthority(Integer region) throws ApplicationException {
         return Collections.singletonList(getTest());
@@ -29,5 +36,10 @@ public class MockUserInformationServiceImpl implements UserInformationService {
     @Override
     public NewUserProfile retrieveCertifier(String certifierId) throws ApplicationException {
         return getTest();
+    }
+
+    @Override
+    public RegistrationOrganization retrievePrimaryOrganization(String userId) throws ApplicationException {
+        return getRegOrg();
     }
 }
