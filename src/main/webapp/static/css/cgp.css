@@ -157,7 +157,7 @@ CoR Styles
 	border-bottom: 1px #ddd solid;
 	margin-right: 0;
 	margin-left: 0;
-	display: flex;
+	//display: flex;
 }
 .cor-header > div {
 	padding: 5px;
@@ -172,27 +172,18 @@ CoR Styles
 }
 .cor-underline-group > label {
 	margin: 0;
-	white-space: nowrap;
+	float: left;
 }
 .cor-underline-group > span {
-	width: 100%;
-	display: table-cell;
+	float: left;
 }
 .cor-underline {
 	display: inline-block;
-	width: 100%;
 	padding: 0 0 0 3px;
 	height: 1lh;
 }
 .cor-underline + .cor-underline {
 	margin-left: 15px;
-}
-.cor-underline.xs {
-	min-width: 25px;
-	width: 25px;
-}
-.cor-underline.half {
-	width: 50%;
 }
 .cor-underline > .form-control-static::after {
 	content: '';
@@ -204,7 +195,6 @@ CoR Styles
 }
 .cor-underline > .form-control-static > span {
 	display: inline-block;
-	width: 100%;
 }
 .cor-boxes label {
 	font-weight: normal;
@@ -216,6 +206,12 @@ CoR Styles
 .cor > p {
 	margin: 5px;
 }
+.cor blockquote {
+	/*
+	normal font size for free text fields
+	*/
+	font-size: 14px;
+}
 .yes-no-box {
 	margin-left: 30px;
 	font-weight: normal;
@@ -225,6 +221,13 @@ CoR Styles
 }
 .cor .list-group-item-header {
 	background-color: #ddd;
+}
+.cor .panel {
+	page-break-inside: avoid;
+}
+.cor-epa-logo {
+	width: 100%;
+	max-width: 120px;
 }
 @media print {
 	.cor {
@@ -246,7 +249,22 @@ CoR Styles
 	.cor .list-group-item-header {
 		background-color: #f5f5f5 !important;
 	}
+	/*
+	doesnt work in phantom js just disable for printing and use text-decoration if we upgrade to phantomjs 2 we can
+	re-enable this
+	 */
+	.cor-underline > .form-control-static::after {
+		display: none;
+	}
+	.cor-underline > .form-control-static {
+		border-bottom: #CCC 2px solid;
+		padding-bottom: 0;
+	}
 	body {
 		padding-top: 15px;
+		font-family: Helvetica, Ariel, sans-serif !important;
+	}
+	.cor-epa-logo {
+		width: 80px;
 	}
 }
