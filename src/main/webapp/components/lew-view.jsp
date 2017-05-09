@@ -222,7 +222,7 @@
     <div class="panel panel-default" data-bind="with: operatorInformation">
         <div class="panel-heading">Operator Information</div>
         <div class="panel-body">
-            <h4>Operator Information</h4>
+            <h5>Operator Information</h5>
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group cor-underline-group">
@@ -278,7 +278,7 @@
                     </div>
                 </div>
             </div>
-            <h4>Project/Site Address</h4>
+            <h5>Project/Site Address</h5>
             <div class="row">
                 <div class="col-xs-12">
                     <span data-bind="template: {
