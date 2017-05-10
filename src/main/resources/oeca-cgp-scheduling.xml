@@ -79,7 +79,6 @@
     <bean id="icisStatusTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="icisStatusJobDetail"/>
         <!-- every hour -->
-        <!--<property name="cronExpression" value="0 0 0/1 * * ?"/>-->
-        <property name="cronExpression" value="0 */5 * * * ?"/>
+        <property name="cronExpression" value="0 0 0/1 * * ?"/>
     </bean>
 </beans>

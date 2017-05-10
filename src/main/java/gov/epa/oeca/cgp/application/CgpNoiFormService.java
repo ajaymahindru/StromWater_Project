@@ -109,5 +109,5 @@ public interface CgpNoiFormService {
 
     void inviteUser(String role, Contact contact) throws ApplicationException;
 
-    void sendIcisTransactionFailure(CgpNoiForm form, List<Document> documents, String statusDetail) throws  ApplicationException;
+    void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws  ApplicationException;
 }

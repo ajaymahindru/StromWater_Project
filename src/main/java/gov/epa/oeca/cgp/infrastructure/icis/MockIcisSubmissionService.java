@@ -3,6 +3,7 @@ package gov.epa.oeca.cgp.infrastructure.icis;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.document.Document;
+import gov.epa.oeca.common.domain.node.Transaction;
 import gov.epa.oeca.common.domain.node.TransactionStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,15 +34,11 @@ public class MockIcisSubmissionService extends AbstractIcisSubmissionServiceImpl
     }
 
     @Override
-    public TransactionStatus getTransactionStatus(String transactionId) throws ApplicationException {
-        return TransactionStatus.FAILED;
+    public Transaction getTransactionDetail(String transactionId) throws ApplicationException {
+        Transaction tx = new Transaction("_" + UUID.randomUUID().toString(), TransactionStatus.FAILED,
+                "E_InternalError: all files failed validation");
+        return tx;
     }
-
-    @Override
-    public String getTransactionStatusDetail(String transactionId) throws ApplicationException {
-        return "E_InternalError: all files failed validation";
-    }
-
 
     @Override
     public List<Document> downloadTransactionDocs(String transactionId) throws ApplicationException {

@@ -4,6 +4,7 @@ import gov.epa.oeca.cgp.application.CgpNoiFormService;
 import gov.epa.oeca.cgp.domain.dto.CgpNoiFormSearchCriteria;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
 import gov.epa.oeca.common.domain.document.Document;
+import gov.epa.oeca.common.domain.node.Transaction;
 import gov.epa.oeca.common.domain.node.TransactionStatus;
 import gov.epa.oeca.cgp.security.ApplicationSecurityUtils;
 import org.quartz.JobExecutionContext;
@@ -46,16 +47,18 @@ public class IcisStatusJob extends QuartzJobBean {
         for (CgpNoiForm submittedForm : submittedForms) {
             try {
                 String txId = submittedForm.getNodeTransactionId();
-                TransactionStatus txStatus = icisSubmissionService.getTransactionStatus(txId);
+                Transaction transaction = icisSubmissionService.getTransactionDetail(txId);
+                TransactionStatus txStatus = transaction.getStatus();
+                String statusDetail = transaction.getStatusDetail();
+                Long formId = submittedForm.getId();
                 if (!txStatus.equals(submittedForm.getNodeTransactionStatus())) {
                     submittedForm.setNodeTransactionStatus(txStatus);
-                    formService.updateForm(submittedForm.getId(), submittedForm);
+                    formService.updateForm(formId, submittedForm);
                     logger.debug(String.format("Transaction Status of form %s was changed to %s",
-                            submittedForm.getId(), submittedForm.getNodeTransactionStatus().getValue()));
+                            formId, submittedForm.getNodeTransactionStatus().getValue()));
                     if (TransactionStatus.FAILED.equals(submittedForm.getNodeTransactionStatus())) {
                         List<Document> docs = icisSubmissionService.downloadTransactionDocs(txId);
-                        String statusDetail = icisSubmissionService.getTransactionStatusDetail(txId);
-                        formService.sendIcisTransactionFailure(submittedForm, docs, statusDetail);
+                        formService.sendIcisTransactionFailure(formId, docs, statusDetail);
                     }
                 }
             } catch (Exception e) {

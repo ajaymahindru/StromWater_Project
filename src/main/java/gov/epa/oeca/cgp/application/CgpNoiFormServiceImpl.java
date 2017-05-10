@@ -1174,8 +1174,9 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
 
     @Override
     @Transactional(readOnly = true)
-    public void sendIcisTransactionFailure(CgpNoiForm form, List<Document> documents, String statusDetail) throws  ApplicationException {
+    public void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws  ApplicationException {
         try {
+            CgpNoiForm form = retrieveForm(formId);
             Validate.notEmpty(form.getNodeTransactionId(),
                     "Transaction ID is required");
             Validate.isTrue(

@@ -24,7 +24,7 @@ public class ApplicationUtils {
     public static final List<Status> FINAL_STATUSES = Arrays.asList(Status.Active, Status.Terminated, Status.Discontinued);
     public static final List<Status> DISTRIBUTION_STATUSES =
             Arrays.asList(Status.Submitted, Status.Active, Status.Terminated, Status.Discontinued);
-    public static final List<TransactionStatus> TRANSACTION_INPROGRESS_STATUSES = Arrays.asList(TransactionStatus.UNKNOWN, TransactionStatus.PROCESSING, TransactionStatus.PENDING);
+    public static final List<TransactionStatus> TRANSACTION_FINAL_STATUSES = Arrays.asList(TransactionStatus.FAILED, TransactionStatus.COMPLETED);
 
     public static final String DISABLE_DISTRIBUTION_KEY = "disable_distribution";
 
