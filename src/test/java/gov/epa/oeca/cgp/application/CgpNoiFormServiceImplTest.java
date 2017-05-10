@@ -593,7 +593,9 @@ public class CgpNoiFormServiceImplTest {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
             criteria.setOwner("DFLADUNG");
             assertEquals(1, formService.retrieveForms(criteria).size());
-            criteria.setOwner("DFLADUN");
+            criteria.setOwner("dfladun");
+            assertEquals(1, formService.retrieveForms(criteria).size());
+            criteria.setOwner("dfladung1");
             assertEquals(0, formService.retrieveForms(criteria).size());
 
             // search by mgp

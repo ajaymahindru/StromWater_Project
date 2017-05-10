@@ -30,4 +30,9 @@ public class MockUserInformationServiceImpl implements UserInformationService {
     public NewUserProfile retrieveCertifier(String certifierId) throws ApplicationException {
         return getTest();
     }
+
+    @Override
+    public Organization retrievePrimaryOrganization(String userId) throws ApplicationException {
+        return getTest().getOrganization();
+    }
 }

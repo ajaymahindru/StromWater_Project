@@ -293,13 +293,14 @@ public class CgpNoiFormNotificationHelper {
             List<String> cc = CollectionUtils.isEmpty(raEmails) ? null : raEmails;
             String certifier = form.getFormData().getOperatorInformation().getCertifier().getEmail();
             String preparer = form.getFormData().getOperatorInformation().getPreparer().getEmail();
-            //get bcc emails
-            List<Subscriber> subscribers = referenceService.retrieveSubscribersByCatSubcat("bcc", "accepted_by_icis");
             List<String> bcc = new ArrayList<>();
-            for (Subscriber s : subscribers) {
-                bcc.add(s.getEmail());
+            if (!Phase.Change.equals(form.getPhase())) {
+                //get bcc emails for all non-Change forms
+                List<Subscriber> subscribers = referenceService.retrieveSubscribersByCatSubcat("bcc", "accepted_by_icis");
+                for (Subscriber s : subscribers) {
+                    bcc.add(s.getEmail());
+                }
             }
-
             // merge model
             Map<String, Object> model = new HashMap<>();
             model.put("form", form);
@@ -332,7 +333,8 @@ public class CgpNoiFormNotificationHelper {
             }
             // get the basic mail information
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
-            String preparer = form.getFormData().getOperatorInformation().getPreparer().getEmail();
+            String owner = form.getFormSet().getOwner();
+            String ownerEmail = userInformationService.retrievePrimaryOrganization(owner).getEmail();
             List<String> raEmails = getRaEmails(form);
             String ra = StringUtils.join(raEmails, ", ");
 
@@ -350,7 +352,7 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendGenericNotification(from, Collections.singletonList(preparer), null,
+            notificationService.sendGenericNotification(from, Collections.singletonList(ownerEmail), null,
                     null, subject, body);
         } catch (Exception e) {
             logger.warn(e.getMessage());

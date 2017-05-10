@@ -402,104 +402,108 @@
 			<!-- /ko -->
 			<fieldset data-bind="disable: change() && !waitListEdit()">
 				<!-- ko if: dischargePoints().length > 0 -->
-				<table id="discharges" class="table table-bordered table-condensed dataTable responsive no-wrap" style="width: 100%" data-bind="datatable: {
-								responsive: {
-									details: false
-								},
-								columns: [
-									{
-										className: 'details-control',
-										orderable: false,
-										data: null,
-										render: $.fn.dataTable.render.ko.templateInline(
-													'<span class=&quot;glyphicon glyphicon-plus-sign&quot;></span> ' +
-													'<!-- ko if: data.errors().length > 0 -->' +
-													'<span class=&quot;label label-danger&quot; data-bind=&quot;text: data.errors().length&quot;></span>' +
-													'<!-- /ko --><!-- ko if: data.errors().length == 0 -->' +
-													'<span class=&quot;label label-success&quot;>' +
-													 	'<span class=&quot;glyphicon glyphicon-ok&quot;></span>' +
-													'</span>' +
-													'<!-- /ko -->'
-										),
-										responsivePriority: 1,
-										width: '25px'
+				<div>
+					<%--  It seems knockout cannot remove a table initialized as a datatable with an if unless you wrap
+							that object in a div --%>
+					<table id="discharges" class="table table-bordered table-condensed dataTable responsive no-wrap" style="width: 100%" data-bind="datatable: {
+									responsive: {
+										details: false
 									},
-									{
-										name: 'id',
-										orderable: true,
-										data: 'id',
-										responsivePriority: 1,
-										render: $.fn.dataTable.render.ko.observable()
-									},
-									{
-										name: 'description',
-										orderable: true,
-										data: 'description',
-										responsivePriority: 1,
-										render: $.fn.dataTable.render.ko.observable()
-									},
-									{
-										name: 'recievingWater',
-										orderable: true,
-										data: null,
-										responsivePriority: 10,
-										className: 'desktop',
-										render: $.fn.dataTable.render.ko.computed(function(data) {
-										    return data.firstWater() !== null ? data.firstWater().receivingWaterName()
-										    									: '';
-										})
-									},
-									{
-										name: 'tier',
-										orderable: true,
-										data: 'tierDisplay',
-										responsivePriority: 20,
-										className: 'desktop',
-										render: $.fn.dataTable.render.ko.observable()
-									},
-									{
-										name: 'actions',
-										orderable: false,
-										data: null,
-										render: $.fn.dataTable.render.ko.actions([
-											{
-												name: 'Edit',
-												action: editDischarge,
-												cssClass: 'btn-primary-outline btn-xs'
-											},
-											{
-												name: 'Delete',
-												action: deleteDischarge,
-												cssClass: 'btn-danger-outline btn-xs'
-											}
-										], '#discharges')
-									}
-								],
-								order: [[1, 'asc']],
-								dom: '<\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>'
-							}">
-					<thead>
-						<tr>
-							<th></th>
-							<th>ID</th>
-							<th>Description</th>
-							<th>Receiving Water</th>
-							<th>Tier Designation</th>
-							<th>Actions</th>
-						</tr>
-					</thead>
-					<tbody data-bind="datasource: dischargePoints, childRow: {
-															name: 'discharge-point-edit',
-															data: {
-																enableTier: dischargeAllowable,
-																waterWillReset: waterWillReset,
-																isAdded: true
-															},
-															vm: DischargePointChildRow,
-															allowMultiple: false
-														}">
-					</tbody>
-				</table>
+									columns: [
+										{
+											className: 'details-control',
+											orderable: false,
+											data: null,
+											render: $.fn.dataTable.render.ko.templateInline(
+														'<span class=&quot;glyphicon glyphicon-plus-sign&quot;></span> ' +
+														'<!-- ko if: data.errors().length > 0 -->' +
+														'<span class=&quot;label label-danger&quot; data-bind=&quot;text: data.errors().length&quot;></span>' +
+														'<!-- /ko --><!-- ko if: data.errors().length == 0 -->' +
+														'<span class=&quot;label label-success&quot;>' +
+															'<span class=&quot;glyphicon glyphicon-ok&quot;></span>' +
+														'</span>' +
+														'<!-- /ko -->'
+											),
+											responsivePriority: 1,
+											width: '25px'
+										},
+										{
+											name: 'id',
+											orderable: true,
+											data: 'id',
+											responsivePriority: 1,
+											render: $.fn.dataTable.render.ko.observable()
+										},
+										{
+											name: 'description',
+											orderable: true,
+											data: 'description',
+											responsivePriority: 1,
+											render: $.fn.dataTable.render.ko.observable()
+										},
+										{
+											name: 'recievingWater',
+											orderable: true,
+											data: null,
+											responsivePriority: 10,
+											className: 'desktop',
+											render: $.fn.dataTable.render.ko.computed(function(data) {
+												return data.firstWater() !== null ? data.firstWater().receivingWaterName()
+																					: '';
+											})
+										},
+										{
+											name: 'tier',
+											orderable: true,
+											data: 'tierDisplay',
+											responsivePriority: 20,
+											className: 'desktop',
+											render: $.fn.dataTable.render.ko.observable()
+										},
+										{
+											name: 'actions',
+											orderable: false,
+											data: null,
+											render: $.fn.dataTable.render.ko.actions([
+												{
+													name: 'Edit',
+													action: editDischarge,
+													cssClass: 'btn-primary-outline btn-xs'
+												},
+												{
+													name: 'Delete',
+													action: deleteDischarge,
+													cssClass: 'btn-danger-outline btn-xs'
+												}
+											], '#discharges')
+										}
+									],
+									order: [[1, 'asc']],
+									dom: '<\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>'
+								}">
+						<thead>
+							<tr>
+								<th></th>
+								<th>ID</th>
+								<th>Description</th>
+								<th>Receiving Water</th>
+								<th>Tier Designation</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody data-bind="datasource: dischargePoints, childRow: {
+																name: 'discharge-point-edit',
+																data: {
+																	enableTier: dischargeAllowable,
+																	waterWillReset: waterWillReset,
+																	isAdded: true
+																},
+																vm: DischargePointChildRow,
+																allowMultiple: false
+															}">
+						</tbody>
+					</table>
+				</div>
 				<!-- /ko -->
 				<!-- ko ifnot: dischargePoints().length > 0 -->
 				<p>No discharge points have been added yet.  Click <a href="JavaScript:" data-bind="click: createDischarge">New Discharge Point</a> to add one.</p>
