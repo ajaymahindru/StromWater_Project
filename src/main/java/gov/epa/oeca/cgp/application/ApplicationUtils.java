@@ -1,6 +1,7 @@
 package gov.epa.oeca.cgp.application;
 
 import gov.epa.oeca.cgp.domain.noi.Status;
+import gov.epa.oeca.common.domain.node.TransactionStatus;
 import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
 import org.apache.commons.lang.StringUtils;
@@ -23,6 +24,7 @@ public class ApplicationUtils {
     public static final List<Status> FINAL_STATUSES = Arrays.asList(Status.Active, Status.Terminated, Status.Discontinued);
     public static final List<Status> DISTRIBUTION_STATUSES =
             Arrays.asList(Status.Submitted, Status.Active, Status.Terminated, Status.Discontinued);
+    public static final List<TransactionStatus> TRANSACTION_INPROGRESS_STATUSES = Arrays.asList(TransactionStatus.UNKNOWN, TransactionStatus.PROCESSING, TransactionStatus.PENDING);
 
     public static final String DISABLE_DISTRIBUTION_KEY = "disable_distribution";
 

@@ -9,6 +9,7 @@ import gov.epa.oeca.cgp.domain.noi.Attachment;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiFormSet;
 import gov.epa.oeca.common.ApplicationException;
+import gov.epa.oeca.common.domain.document.Document;
 
 import java.io.File;
 import java.util.List;
@@ -107,4 +108,6 @@ public interface CgpNoiFormService {
     File retrievePublicAttachmentData(Long formId, Long attachmentId) throws ApplicationException;
 
     void inviteUser(String role, Contact contact) throws ApplicationException;
+
+    void sendIcisTransactionFailure(CgpNoiForm form, List<Document> documents, String statusDetail) throws  ApplicationException;
 }

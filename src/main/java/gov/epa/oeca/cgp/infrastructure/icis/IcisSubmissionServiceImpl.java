@@ -1,6 +1,7 @@
 package gov.epa.oeca.cgp.infrastructure.icis;
 
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
+import gov.epa.oeca.common.domain.node.TransactionStatus;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.document.Document;
 import gov.epa.oeca.common.infrastructure.node2.NetworkNode2Client;
@@ -53,6 +54,49 @@ public class IcisSubmissionServiceImpl extends AbstractIcisSubmissionServiceImpl
             throw ApplicationException.asApplicationException(e);
         } finally {
             FileUtils.deleteQuietly(xml);
+        }
+    }
+
+    @Override
+    public TransactionStatus getTransactionStatus(String transactionId) throws ApplicationException {
+        try {
+            URL endpoint = new URL(networkNode2EndpointConfiguration.get("serviceUrl"));
+            String user = networkNode2EndpointConfiguration.get("operatorId");
+            String credential = networkNode2EndpointConfiguration.get("operatorPassword");
+            String token = client.authenticate(endpoint, user, credential, "default", "password");
+            return client.getStatus(endpoint, token, transactionId);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
+    @Override
+    public String getTransactionStatusDetail(String transactionId) throws ApplicationException {
+        try {
+            URL endpoint = new URL(networkNode2EndpointConfiguration.get("serviceUrl"));
+            String user = networkNode2EndpointConfiguration.get("operatorId");
+            String credential = networkNode2EndpointConfiguration.get("operatorPassword");
+            String token = client.authenticate(endpoint, user, credential, "default", "password");
+            return client.getStatusDetail(endpoint, token, transactionId);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
+    @Override
+    public List<Document> downloadTransactionDocs(String transactionId) throws ApplicationException {
+        try {
+            URL endpoint = new URL(networkNode2EndpointConfiguration.get("serviceUrl"));
+            String user = networkNode2EndpointConfiguration.get("operatorId");
+            String credential = networkNode2EndpointConfiguration.get("operatorPassword");
+            String token = client.authenticate(endpoint, user, credential, "default", "password");
+            String dataflow = networkNode2EndpointConfiguration.get("dataflow");
+            return client.download(endpoint, token, transactionId, dataflow);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
         }
     }
 
