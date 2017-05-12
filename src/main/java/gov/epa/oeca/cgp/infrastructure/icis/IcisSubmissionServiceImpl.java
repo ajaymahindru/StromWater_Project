@@ -1,6 +1,7 @@
 package gov.epa.oeca.cgp.infrastructure.icis;
 
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
+import gov.epa.oeca.common.domain.node.Transaction;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.document.Document;
 import gov.epa.oeca.common.infrastructure.node2.NetworkNode2Client;
@@ -26,6 +27,8 @@ public class IcisSubmissionServiceImpl extends AbstractIcisSubmissionServiceImpl
 
     @Resource(name = "networkNode2EndpointConfiguration")
     Map<String, String> networkNode2EndpointConfiguration;
+    @Resource(name = "oecaGeneralConfiguration")
+    Map<String, String> oecaGeneralConfiguration;
     @Autowired
     NetworkNode2Client client;
 
@@ -53,6 +56,35 @@ public class IcisSubmissionServiceImpl extends AbstractIcisSubmissionServiceImpl
             throw ApplicationException.asApplicationException(e);
         } finally {
             FileUtils.deleteQuietly(xml);
+        }
+    }
+
+    @Override
+    public Transaction getTransactionDetail(String transactionId) throws ApplicationException {
+        try {
+            URL endpoint = new URL(networkNode2EndpointConfiguration.get("serviceUrl"));
+            String user = networkNode2EndpointConfiguration.get("operatorId");
+            String credential = networkNode2EndpointConfiguration.get("operatorPassword");
+            String token = client.authenticate(endpoint, user, credential, "default", "password");
+            return client.getStatus(endpoint, token, transactionId);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
+    @Override
+    public List<Document> downloadTransactionDocs(String transactionId) throws ApplicationException {
+        try {
+            URL endpoint = new URL(networkNode2EndpointConfiguration.get("serviceUrl"));
+            String user = networkNode2EndpointConfiguration.get("operatorId");
+            String credential = networkNode2EndpointConfiguration.get("operatorPassword");
+            String token = client.authenticate(endpoint, user, credential, "default", "password");
+            String dataflow = oecaGeneralConfiguration.get("icisDataflow");
+            return client.download(endpoint, token, transactionId, dataflow);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
         }
     }
 

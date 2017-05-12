@@ -10,6 +10,8 @@ import gov.epa.oeca.cgp.domain.noi.*;
 import gov.epa.oeca.cgp.domain.noi.formsections.PointOfDischarge;
 import gov.epa.oeca.cgp.domain.noi.formsections.Pollutant;
 import gov.epa.oeca.cgp.domain.noi.formsections.Tier;
+import gov.epa.oeca.common.domain.document.Document;
+import gov.epa.oeca.common.domain.node.TransactionStatus;
 import gov.epa.oeca.cgp.domain.ref.*;
 import gov.epa.oeca.cgp.infrastructure.certification.CromerrService;
 import gov.epa.oeca.cgp.infrastructure.cor.CopyOfRecordGeneratorService;
@@ -694,20 +696,19 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
 
             // send notifications
             //get copy of record
-            File attachmentData = null;
-            String attachmentName = null;
+            Document attachment = new Document();
             for (Attachment a : forCertification.getAttachments()) {
                 if (AttachmentCategory.CoR.equals(a.getCategory())) {
-                    attachmentName = a.getName();
-                    attachmentData = retrieveAttachmentData(a.getId());
+                    attachment.setName(a.getName());
+                    attachment.setContent(retrieveAttachmentData(a.getId()));
                     break; // there is only one
                 }
             }
-            notificationHelper.sendCertificationToCertifier(forCertification, attachmentName, attachmentData);
+            notificationHelper.sendCertificationToCertifier(forCertification, attachment);
             if (FormType.Notice_Of_Intent.equals(forCertification.getType()) && !Phase.Terminate.equals(forCertification.getPhase())) {
-                notificationHelper.sendCertificationToServices(forCertification, attachmentName, attachmentData);
+                notificationHelper.sendCertificationToServices(forCertification, attachment);
                 if (Phase.New.equals(forCertification.getPhase())) {
-                    notificationHelper.sendCertificationToRegulatoryAuthority(forCertification, attachmentName, attachmentData);
+                    notificationHelper.sendCertificationToRegulatoryAuthority(forCertification, attachment);
                 }
             }
         } catch (IllegalArgumentException e) {
@@ -843,18 +844,17 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             // send notifications
             if (FormType.Notice_Of_Intent.equals(toSubmit.getType()) && !Phase.Terminate.equals(toSubmit.getPhase())) {
                 //get copy of record
-                File attachmentData = null;
-                String attachmentName = null;
+                Document attachment = new Document();
                 for (Attachment a : toSubmit.getAttachments()) {
                     if (AttachmentCategory.CoR.equals(a.getCategory())) {
-                        attachmentName = a.getName();
-                        attachmentData = retrieveAttachmentData(a.getId());
+                        attachment.setName(a.getName());
+                        attachment.setContent(retrieveAttachmentData(a.getId()));
                         break; // there is only one
                     }
                 }
-                notificationHelper.sendCertificationToServices(toSubmit, attachmentName, attachmentData);
+                notificationHelper.sendCertificationToServices(toSubmit, attachment);
                 if (Phase.New.equals(toSubmit.getPhase())) {
-                    notificationHelper.sendCertificationToRegulatoryAuthority(toSubmit, attachmentName, attachmentData);
+                    notificationHelper.sendCertificationToRegulatoryAuthority(toSubmit, attachment);
                 }
             }
         } catch (IllegalArgumentException e) {
@@ -895,18 +895,17 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
 
 
             // find the CoR for notifications
-            File attachmentData = null;
-            String attachmentName = null;
+            Document attachment = new Document();
             for (Attachment a : toActivate.getAttachments()) {
                 if (AttachmentCategory.CoR.equals(a.getCategory())) {
-                    attachmentName = a.getName();
-                    attachmentData = retrieveAttachmentData(a.getId());
+                    attachment.setName(a.getName());
+                    attachment.setContent(retrieveAttachmentData(a.getId()));
                     break; // there is only one
                 }
             }
 
             // send notifications
-            notificationHelper.sendAcceptedByIcis(toActivate, attachmentName, attachmentData);
+            notificationHelper.sendAcceptedByIcis(toActivate, attachment);
             if (FormType.Notice_Of_Intent.equals(toActivate.getType()) && !Phase.Terminate.equals(toActivate.getPhase())) {
                 if (hasTierDesignation(toActivate)) {
                     notificationHelper.sendTierDesignation(toActivate);
@@ -943,6 +942,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             CgpNoiForm previous = toDistribute.getFormSet().getForms().size() > 1 ?
                     findPreviousForm(toDistribute.getFormSet()) :
                     null;
+            toDistribute.setNodeTransactionStatus(TransactionStatus.UNKNOWN);
             icisSubmissionService.submitToIcisNpdesDataflow(toDistribute, previous);
             formRepository.update(toDistribute);
         } catch (IllegalArgumentException e) {
@@ -1166,6 +1166,23 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             Validate.notEmpty(lastName, "Last name is required.");
             Validate.notEmpty(role, "Intended user role is required.");
             notificationHelper.sendInvite(email, firstName, lastName, role);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws  ApplicationException {
+        try {
+            CgpNoiForm form = retrieveForm(formId);
+            Validate.notEmpty(form.getNodeTransactionId(),
+                    "Transaction ID is required");
+            Validate.isTrue(
+                    TransactionStatus.FAILED.equals(form.getNodeTransactionStatus()),
+                    "Transaction Status must be FAILED to proceed to notification.");
+            notificationHelper.sendIcisError(form, documents, statusDetail);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw ApplicationException.asApplicationException(e);

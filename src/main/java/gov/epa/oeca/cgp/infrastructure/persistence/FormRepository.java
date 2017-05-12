@@ -172,6 +172,13 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
                 cr.add(Restrictions.isNull("nodeTransactionId"));
             }
         }
+        if (criteria.getIcisSubmissionInProgress() != null) {
+            if (BooleanUtils.isTrue(criteria.getIcisSubmissionInProgress())) {
+                cr.add(Restrictions.not(Restrictions.in("nodeTransactionStatus", ApplicationUtils.TRANSACTION_FINAL_STATUSES)));
+            } else {
+                cr.add(Restrictions.in("nodeTransactionStatus", ApplicationUtils.TRANSACTION_FINAL_STATUSES));
+            }
+        }
 
         // index properties
         cr.createAlias("index", "index");

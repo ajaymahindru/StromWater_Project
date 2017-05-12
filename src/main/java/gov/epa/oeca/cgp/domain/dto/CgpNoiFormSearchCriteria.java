@@ -51,6 +51,7 @@ public class CgpNoiFormSearchCriteria implements Serializable {
     Boolean activeRecord;
     String associatedUser;
     Boolean submittedToIcis;
+    Boolean icisSubmissionInProgress;
 
     public CgpNoiFormSearchCriteria() {
 
@@ -286,6 +287,14 @@ public class CgpNoiFormSearchCriteria implements Serializable {
 
     public void setSubmittedToIcis(Boolean submittedToIcis) {
         this.submittedToIcis = submittedToIcis;
+    }
+
+    public Boolean getIcisSubmissionInProgress() {
+        return icisSubmissionInProgress;
+    }
+
+    public void setIcisSubmissionInProgress(Boolean icisSubmissionInProgress) {
+        this.icisSubmissionInProgress = icisSubmissionInProgress;
     }
 
     @Override

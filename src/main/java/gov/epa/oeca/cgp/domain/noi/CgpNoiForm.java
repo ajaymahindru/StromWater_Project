@@ -3,6 +3,7 @@ package gov.epa.oeca.cgp.domain.noi;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import gov.epa.oeca.cgp.domain.BaseEntity;
+import gov.epa.oeca.common.domain.node.TransactionStatus;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Parameter;
@@ -79,6 +80,10 @@ public class CgpNoiForm extends BaseEntity {
     @Column(name = "node_transaction_id")
     String nodeTransactionId;
 
+    @Column(name = "node_transaction_status")
+    @Enumerated(EnumType.STRING)
+    TransactionStatus nodeTransactionStatus;
+
     @Column
     @Type(
             type = "gov.epa.oeca.cgp.infrastructure.persistence.JsonBlobType",
@@ -140,6 +145,14 @@ public class CgpNoiForm extends BaseEntity {
 
     public void setNodeTransactionId(String nodeTransactionId) {
         this.nodeTransactionId = nodeTransactionId;
+    }
+
+    public TransactionStatus getNodeTransactionStatus() {
+        return nodeTransactionStatus;
+    }
+
+    public void setNodeTransactionStatus(TransactionStatus nodeTransactionStatus) {
+        this.nodeTransactionStatus = nodeTransactionStatus;
     }
 
     public FormType getType() {

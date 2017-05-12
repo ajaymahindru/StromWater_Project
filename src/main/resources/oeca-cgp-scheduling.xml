@@ -34,12 +34,14 @@
             <list>
                 <ref bean="icisDistributionJobDetail"/>
                 <ref bean="abandonedDraftsJobDetail"/>
+                <ref bean="icisStatusJobDetail"/>
             </list>
         </property>
         <property name="triggers">
             <list>
                 <ref bean="icisDistributionTrigger"/>
                 <ref bean="abandonedDraftsTrigger"/>
+                <ref bean="icisStatusTrigger"/>
             </list>
         </property>
     </bean>
@@ -66,5 +68,17 @@
         <property name="jobDetail" ref="abandonedDraftsJobDetail"/>
         <!-- 9:00 am/pm -->
         <property name="cronExpression" value="0 0 9,21 * * ?"/>
+    </bean>
+    <!-- ====================================================================== -->
+    <!-- ICIS Transaction Status Job -->
+    <!-- ====================================================================== -->
+    <bean id="icisStatusJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="gov.epa.oeca.cgp.infrastructure.icis.IcisStatusJob"/>
+        <property name="durability" value="true"/>
+    </bean>
+    <bean id="icisStatusTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="icisStatusJobDetail"/>
+        <!-- every hour -->
+        <property name="cronExpression" value="0 0 0/1 * * ?"/>
     </bean>
 </beans>
