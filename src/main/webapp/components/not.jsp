@@ -110,7 +110,7 @@
                             email: operatorPointOfContact.email
                         }
                     }"></div>
-            <div class="h4">Operator Point of Contact</div>
+            <div class="h5">Operator Point of Contact</div>
             <div data-bind="template: {
                     name: 'cor-contact',
                     data: {
@@ -138,7 +138,7 @@
                 </div>
             </div>
             <hr>
-            <div class="h4">Project/Site Address</div>
+            <div class="h5">Project/Site Address</div>
             <div data-bind="template: {
                     name: 'cor-address',
                     data: {
