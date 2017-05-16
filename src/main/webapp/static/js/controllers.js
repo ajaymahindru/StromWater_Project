@@ -190,7 +190,43 @@ var DashboardController = function(data, params) {
 		oeca.cgp.utils.dispose(self.submittedToSub);
 		oeca.cgp.utils.dispose(self.updatedFromSub);
 		oeca.cgp.utils.dispose(self.updatedToSub);
+	};
+
+	self.criteriaString = ko.pureComputed(function() {
+		return 'owner=' + convertToString(self.criteria.owner())
+			+ '&npdesId=' + convertToString(self.criteria.npdesId())
+			+ '&masterGeneralPermit=' + convertToString(self.criteria.masterGeneralPermit())
+			+ '&trackingNumber=' + convertToString(self.criteria.trackingNumber())
+			+ '&type=' + convertToString(self.criteria.type())
+			+ '&status=' + convertToString(self.criteria.status())
+			+ '&operatorName=' + convertToString(self.criteria.operatorName())
+			+ '&siteName=' + convertToString(self.criteria.siteName())
+			+ '&siteRegion=' + convertToString(self.criteria.siteRegion())
+			+ '&siteStateCode=' + convertToString(self.criteria.siteStateCode())
+			+ '&siteZipCode=' + convertToString(self.criteria.siteZipCode())
+			+ '&reviewExpiration=' + convertToIso(self.criteria.reviewExpiration())
+			+ '&submittedFrom=' + convertToIso(self.criteria.submittedFrom())
+			+ '&submittedTo=' + convertToIso(self.criteria.submittedTo())
+			+ '&updatedFrom=' + convertToIso(self.criteria.updatedFrom())
+			+ '&updatedTo=' + convertToIso(self.criteria.updatedTo())
+			+ (self.criteria.activeRecord() !== null ? '&activeRecord=' + self.criteria.activeRecord() : '')
+			+ (self.criteria.operatorFederal() !== null ? '&operatorFederal=' + self.criteria.operatorFederal() : '')
+			+ (self.criteria.siteIndianCountry() !== null ? '&siteIndianCountry=' + self.criteria.siteIndianCountry() :'')
+			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands());
+	});
+	var convertToIso = function(val) {
+		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
+	};
+	var convertToString = function(val) {
+		return val !== null ? encodeURIComponent(val) : "";
 	}
+
+	self.exportToExcelLink = function() {
+		return config.ctx + "/api/form/v1/export/excel?" + self.criteriaString();
+	};
+	self.exportToHtmlLink = function() {
+		return config.ctx + "/api/form/v1/export/html?" + self.criteriaString();
+	};
 
 	var dt = $('#forms').DataTable({
 		"searching": false,
@@ -336,19 +372,7 @@ var DashboardController = function(data, params) {
 		order: [[10, 'desc']],
 		dom: '<\'pull-left\'B><\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>',
 		buttons: [
-			'colvis',
-			{
-				extend: 'excel',
-				exportOptions: {
-					columns: ':not(.action-col):not(.details-control)'
-				}
-			},
-			{
-				extend: 'print',
-				exportOptions: {
-					columns: ':not(.action-col):not(.details-control)'
-				}
-			},
+			'colvis'
 		],
 		"language": {
 			"emptyTable": "There are no forms to display."
