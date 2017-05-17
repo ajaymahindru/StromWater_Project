@@ -412,8 +412,6 @@ public class FormResource extends BaseResource {
             @QueryParam("type") String type,
             @ApiParam(value = "Form status.")
             @QueryParam("status") String status,
-            @ApiParam(value = "Form statuses")
-            @QueryParam("statuses") List<String> statuses,
             @ApiParam(value = "The name of the project operator.")
             @QueryParam("operatorName") String operatorName,
             @ApiParam(value = "The project's name.")
@@ -422,8 +420,6 @@ public class FormResource extends BaseResource {
             @QueryParam("siteRegion") Long siteRegion,
             @ApiParam(value = "The two digit state code of the project site.")
             @QueryParam("siteStateCode") String siteStateCode,
-            @ApiParam(value = "The two digit state codes of the project site.")
-            @QueryParam("siteStateCodes") List<String> siteStateCodes,
             @ApiParam(value = "The city of the project site.")
             @QueryParam("siteCity") String siteCity,
             @ApiParam(value = "The zip code of the project site.")
@@ -444,22 +440,8 @@ public class FormResource extends BaseResource {
             @QueryParam("updatedFrom") String updatedFrom,
             @ApiParam(value = "An ISO 8601 formatted date string.")
             @QueryParam("updatedTo") String updatedTo,
-            @ApiParam(value = "An ISO 8601 formatted date string.")
-            @QueryParam("createdFrom") String createdFrom,
-            @ApiParam(value = "An ISO 8601 formatted date string.")
-            @QueryParam("createdTo") String createdTo,
-            @ApiParam(value = "Public search indicator.")
-            @QueryParam("publicSearch") Boolean publicSearch,
-            @ApiParam(value = "Regulatory authority search indicator.")
-            @QueryParam("regulatoryAuthoritySearch") Boolean regulatoryAuthoritySearch,
             @ApiParam(value = "Active record search indicator.")
-            @QueryParam("activeRecord") Boolean activeRecord,
-            @ApiParam(value = "Associated user ID.")
-            @QueryParam("associatedUser") String associatedUser,
-            @ApiParam(value = "Submitted to ICIS search indicator.")
-            @QueryParam("submittedToIcis") Boolean submittedToIcis,
-            @ApiParam(value = "Indicator to search In-Progress submissions.")
-            @QueryParam("icisSubmissionInProgress") Boolean icisSubmissionInProgress
+            @QueryParam("activeRecord") Boolean activeRecord
     ) {
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
@@ -475,22 +457,12 @@ public class FormResource extends BaseResource {
                 Status s = Status.valueOf(status);
                 criteria.setStatus(s);
             }
-            if (!statuses.isEmpty()) {
-                List<Status> statusList = new ArrayList<>();
-                for (String formStatus : statuses) {
-                    statusList.add(Status.valueOf(formStatus));
-                }
-                criteria.setStatuses(statusList);
-            }
             criteria.setOperatorName(operatorName);
             criteria.setSiteName(siteName);
             criteria.setSiteRegion(siteRegion);
             if (!StringUtils.isEmpty(siteStateCode)) {
                 Validate.isTrue(siteStateCode.length() == 2, "Project state should be a 2-digit code.");
                 criteria.setSiteStateCode(siteStateCode);
-            }
-            if (!siteStateCodes.isEmpty()) {
-                criteria.setSiteStateCodes(siteStateCodes);
             }
             criteria.setSiteCity(siteCity);
             criteria.setSiteZipCode(siteZipCode);
@@ -506,14 +478,7 @@ public class FormResource extends BaseResource {
             criteria.setSubmittedTo(applicationUtils.fromString(submittedTo));
             criteria.setUpdatedFrom(applicationUtils.fromString(updatedFrom));
             criteria.setUpdatedTo(applicationUtils.fromString(updatedTo));
-            criteria.setCreatedFrom(applicationUtils.fromString(createdFrom));
-            criteria.setCreatedTo(applicationUtils.fromString(createdTo));
-            criteria.setPublicSearch(publicSearch);
-            criteria.setRegulatoryAuthoritySearch(regulatoryAuthoritySearch);
             criteria.setActiveRecord(activeRecord);
-            criteria.setAssociatedUser(associatedUser);
-            criteria.setSubmittedToIcis(submittedToIcis);
-            criteria.setIcisSubmissionInProgress(icisSubmissionInProgress);
 
             if (applicationSecurityUtils.hasRole(ApplicationSecurityUtils.preparer, ApplicationSecurityUtils.certifier)) {
                 criteria.setAssociatedUser(applicationSecurityUtils.getCurrentUserId());

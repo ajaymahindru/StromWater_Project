@@ -3,6 +3,7 @@ package gov.epa.oeca.cgp.infrastructure.export;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
 import gov.epa.oeca.cgp.security.ApplicationSecurityUtils;
 import gov.epa.oeca.common.ApplicationException;
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -133,17 +134,17 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 buf.append("<tr><td>")
                         .append(form.getType().getValue())
                         .append("</td><td>")
-                        .append(form.getFormSet().getNpdesId())
+                        .append(!StringUtils.isEmpty(form.getFormSet().getNpdesId()) ? form.getFormSet().getNpdesId() : "")
                         .append("</td><td>")
                         .append(form.getFormSet().getMasterPermitNumber())
                         .append("</td><td>")
-                        .append(form.getTrackingNumber())
+                        .append(!StringUtils.isEmpty(form.getTrackingNumber()) ? form.getTrackingNumber() : "")
                         .append("</td><td>")
                         .append(form.getFormData().getProjectSiteInformation().getSiteStateCode())
                         .append("</td><td>")
-                        .append(form.getFormData().getOperatorInformation().getOperatorName())
+                        .append(!StringUtils.isEmpty(form.getFormData().getOperatorInformation().getOperatorName()) ? form.getFormData().getOperatorInformation().getOperatorName() : "")
                         .append("</td><td>")
-                        .append(form.getFormData().getProjectSiteInformation().getSiteName())
+                        .append(!StringUtils.isEmpty(form.getFormData().getProjectSiteInformation().getSiteName()) ? form.getFormData().getProjectSiteInformation().getSiteName() : "")
                         .append("</td><td>")
                         .append(form.getFormSet().getOwner())
                         .append("</td><td>")
