@@ -294,7 +294,7 @@
             To continue, you must affirm yes to this statement.
         </div>
         <!-- /ko -->
-        <button class="btn btn-primary" data-bind="slideVisible: npdesConfirm, click: next" onclick="scrollToTop();">Next</button>
+        <button class="btn btn-primary" data-bind="slideVisible: npdesConfirm, click: next" onclick="oeca.utils.scrollToTop();">Next</button>
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko if: screeningQuestionsLocked -->

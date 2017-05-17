@@ -134,7 +134,7 @@
             </button>
         </div>
         <button class="btn btn-primary" data-bind="slideVisible: screeningFinished, click: next"
-                onclick="scrollToTop();">Next</button>
+                onclick="oeca.utils.scrollToTop();">Next</button>
         <!-- /ko -->
         <!-- /ko -->
         <!-- ko if: screeningQuestionsLocked -->
