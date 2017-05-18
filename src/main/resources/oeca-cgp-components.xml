@@ -124,6 +124,7 @@
     <bean id="userInformationService" class="gov.epa.oeca.cgp.infrastructure.user.UserInformationServiceImpl"/>
     <bean id="catchmentImpairmentService"
           class="gov.epa.oeca.cgp.infrastructure.attains.CatchmentImpairmentServiceImpl"/>
+    <bean id="formExportService" class="gov.epa.oeca.cgp.infrastructure.export.CgpFormExportServiceImpl"/>
     <!-- ====================================================================== -->
     <!-- ATTAINS/Catchment -->
     <!-- ====================================================================== -->

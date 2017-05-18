@@ -565,6 +565,10 @@
 				</div>
 			</div>
 		</div>
+		<div class="btn-group">
+			<a class="btn btn-default" data-bind="attr: { href: exportToExcelLink()}">Excel</a>
+			<a class="btn btn-default" target="_blank" data-bind="attr: { href: exportToHtmlLink()}">Print</a>
+		</div>
 		<table id="forms" class="table table-striped table-condensed dataTable responsive no-wrap" style="width: 100%" >
 			<thead>
 				<tr>
