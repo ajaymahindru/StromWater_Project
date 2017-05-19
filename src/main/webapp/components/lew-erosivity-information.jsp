@@ -97,7 +97,7 @@
 			</div>
 		</div>
 		<button class="btn btn-primary" data-bind="click: next"
-				onclick="scrollToTop();">
+				onclick="oeca.utils.scrollToTop();">
 			<!-- ko if: showSaveButton -->
 			Save Section
 			<!-- /ko -->
