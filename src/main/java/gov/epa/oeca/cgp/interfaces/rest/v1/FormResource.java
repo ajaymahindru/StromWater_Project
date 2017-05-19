@@ -487,6 +487,7 @@ public class FormResource extends BaseResource {
                 criteria.setRegulatoryAuthoritySearch(true);
             }
             List<CgpNoiForm> formList = cgpNoiFormService.retrieveForms(criteria);
+            Validate.isTrue(formList.size() <= 1000, "Your search returned too many records. Please refine your filter criteria.");
             if (EXCEL.equals(format)) {
                 File excel = cgpFormExportService.generateExcelExport(formList);
                 return Response.ok(excel, MediaType.APPLICATION_OCTET_STREAM)

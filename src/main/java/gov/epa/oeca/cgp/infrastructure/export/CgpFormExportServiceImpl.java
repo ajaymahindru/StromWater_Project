@@ -87,7 +87,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                     Cell c8 = r.createCell(8);
                     c8.setCellValue(form.getStatus().getValue());
                     Cell c9 = r.createCell(9);
-                    c9.setCellValue(DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a").format(form.getLastUpdatedDate()));
+                    c9.setCellValue(form.getLastUpdatedDate() != null ? DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a").format(form.getLastUpdatedDate()) : "");
                 }
             }
             File excelFile = File.createTempFile("EPACGP", ".xls");
@@ -150,7 +150,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                         .append("</td><td>")
                         .append(form.getStatus().getValue())
                         .append("</td><td>")
-                        .append(DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a").format(form.getLastUpdatedDate()))
+                        .append(form.getLastUpdatedDate() != null ? DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a").format(form.getLastUpdatedDate()) : "")
                         .append("</td></tr>");
             }
             buf.append("</table>" +

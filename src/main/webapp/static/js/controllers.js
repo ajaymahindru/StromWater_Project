@@ -372,7 +372,19 @@ var DashboardController = function(data, params) {
 		order: [[10, 'desc']],
 		dom: '<\'pull-left\'B><\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>',
 		buttons: [
-			'colvis'
+			'colvis',
+			{
+				text: 'Excel',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToExcelLink());
+				}
+			},
+			{
+				text: 'Print',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToHtmlLink());
+				}
+			}
 		],
 		"language": {
 			"emptyTable": "There are no forms to display."
