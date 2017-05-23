@@ -441,7 +441,9 @@ public class FormResource extends BaseResource {
             @ApiParam(value = "An ISO 8601 formatted date string.")
             @QueryParam("updatedTo") String updatedTo,
             @ApiParam(value = "Active record search indicator.")
-            @QueryParam("activeRecord") Boolean activeRecord
+            @QueryParam("activeRecord") Boolean activeRecord,
+            @ApiParam(value = "Result limit.")
+            @QueryParam("resultLimit") Long resultLimit
     ) {
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
@@ -479,6 +481,7 @@ public class FormResource extends BaseResource {
             criteria.setUpdatedFrom(applicationUtils.fromString(updatedFrom));
             criteria.setUpdatedTo(applicationUtils.fromString(updatedTo));
             criteria.setActiveRecord(activeRecord);
+            criteria.setResultLimit(resultLimit);
 
             if (applicationSecurityUtils.hasRole(ApplicationSecurityUtils.preparer, ApplicationSecurityUtils.certifier)) {
                 criteria.setAssociatedUser(applicationSecurityUtils.getCurrentUserId());
@@ -487,7 +490,6 @@ public class FormResource extends BaseResource {
                 criteria.setRegulatoryAuthoritySearch(true);
             }
             List<CgpNoiForm> formList = cgpNoiFormService.retrieveForms(criteria);
-            Validate.isTrue(formList.size() <= 1000, "Your search returned too many records. Please refine your filter criteria.");
             if (EXCEL.equals(format)) {
                 File excel = cgpFormExportService.generateExcelExport(formList);
                 return Response.ok(excel, MediaType.APPLICATION_OCTET_STREAM)
@@ -501,7 +503,6 @@ public class FormResource extends BaseResource {
             } else {
                 return Response.serverError().entity("ERROR: incorrect export format specified.").build();
             }
-
 
         } catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
