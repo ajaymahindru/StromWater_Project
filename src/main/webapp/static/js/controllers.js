@@ -212,7 +212,8 @@ var DashboardController = function(data, params) {
 			+ (self.criteria.activeRecord() !== null ? '&activeRecord=' + self.criteria.activeRecord() : '')
 			+ (self.criteria.operatorFederal() !== null ? '&operatorFederal=' + self.criteria.operatorFederal() : '')
 			+ (self.criteria.siteIndianCountry() !== null ? '&siteIndianCountry=' + self.criteria.siteIndianCountry() :'')
-			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands());
+			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands())
+			+ '&resultLimit=' + 1000; //limit results to 1000 max
 	});
 	var convertToIso = function(val) {
 		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
@@ -372,7 +373,19 @@ var DashboardController = function(data, params) {
 		order: [[10, 'desc']],
 		dom: '<\'pull-left\'B><\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>',
 		buttons: [
-			'colvis'
+			'colvis',
+			{
+				text: 'Excel',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToExcelLink());
+				}
+			},
+			{
+				text: 'Print',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToHtmlLink());
+				}
+			}
 		],
 		"language": {
 			"emptyTable": "There are no forms to display."
