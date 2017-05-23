@@ -33,6 +33,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
 
     private static final Log logger = LogFactory.getLog(FormRepository.class);
 
+    protected static final String RESULT_COUNT_ERROR = "Search criteria returned too many records. Please refine your search.";
 
     @Autowired
     ApplicationUtils applicationUtils;
@@ -48,6 +49,18 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         DetachedCriteria cr = createCriteria(criteria);
         //order by lastUpdatedDate
         cr.addOrder(Order.desc("lastUpdatedDate"));
+
+        //incur a result limit if specified
+        if (criteria.getResultLimit() != null) {
+            DetachedCriteria countCr = createCriteria(criteria);
+            countCr.setProjection(Projections.countDistinct("id"));
+            List<Long> count = (List<Long>) countCr.getExecutableCriteria(cgpSessionFactory.getCurrentSession()).list();
+            Long countLimit = criteria.getResultLimit();
+            if (count.get(0) > countLimit) {
+                throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, RESULT_COUNT_ERROR);
+            }
+        }
+
         return cr.getExecutableCriteria(cgpSessionFactory.getCurrentSession()).list();
     }
 

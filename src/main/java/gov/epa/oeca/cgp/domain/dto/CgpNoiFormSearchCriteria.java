@@ -52,6 +52,7 @@ public class CgpNoiFormSearchCriteria implements Serializable {
     String associatedUser;
     Boolean submittedToIcis;
     Boolean icisSubmissionInProgress;
+    Long resultLimit;
 
     public CgpNoiFormSearchCriteria() {
 
@@ -295,6 +296,14 @@ public class CgpNoiFormSearchCriteria implements Serializable {
 
     public void setIcisSubmissionInProgress(Boolean icisSubmissionInProgress) {
         this.icisSubmissionInProgress = icisSubmissionInProgress;
+    }
+
+    public Long getResultLimit() {
+        return resultLimit;
+    }
+
+    public void setResultLimit(Long resultLimit) {
+        this.resultLimit = resultLimit;
     }
 
     @Override
