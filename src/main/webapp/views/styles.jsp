@@ -12,7 +12,6 @@
 	<stripes:layout-component name="additionalHead">
 		<script src="${pageContext.request.contextPath}/static/js/models.js"></script>
 		<script src="${pageContext.request.contextPath}/static/js/controllers.js"></script>
-		<script src="${pageContext.request.contextPath}/static/js/temp.js"></script>
 		<script src="${pageContext.request.contextPath}/static/js/knockout-file-bindings.js"></script>
 		<script src="${pageContext.request.contextPath}/static/js/components.js"></script>
 		<script src="${pageContext.request.contextPath}/static/js/register.js"></script>

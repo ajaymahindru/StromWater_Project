@@ -32,7 +32,7 @@
 				phoneExt: 'Extension'
 			}"></contact-info>
 			<button class="btn btn-primary" data-bind="click: saveAndContinue"
-					onclick="scrollToTop();">
+					onclick="oeca.utils.scrollToTop();">
 				<!-- ko if: showSaveButton -->
 				Save Section
 				<!-- /ko -->
