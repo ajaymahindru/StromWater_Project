@@ -3,6 +3,7 @@ package gov.epa.oeca.cgp.infrastructure.persistence.migrations;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
+import gov.epa.oeca.cgp.domain.noi.CgpNoiFormData;
 import org.apache.commons.lang3.StringUtils;
 import org.flywaydb.core.api.migration.spring.SpringJdbcMigration;
 import org.slf4j.Logger;
@@ -34,14 +35,14 @@ public class V1_1_4_2__AddCountyToIndex implements SpringJdbcMigration {
                 Long indexId = resultSet.getLong(2);
                 InputStream blobStream = lobHandler.getBlobAsBinaryStream(resultSet, 3);
                 try {
-                    CgpNoiForm form = mapper.readValue(blobStream, CgpNoiForm.class);
-                    if (!StringUtils.isEmpty(form.getFormData().getProjectSiteInformation().getSiteCounty())) {
+                    CgpNoiFormData form = mapper.readValue(blobStream, CgpNoiFormData.class);
+                    if (!StringUtils.isEmpty(form.getProjectSiteInformation().getSiteCounty())) {
                         jdbcTemplate.update("update cgp_noi_form_data_index set site_county = ? where id = ?",
-                                new Object[]{form.getFormData().getProjectSiteInformation().getSiteCounty(), indexId});
+                                new Object[]{form.getProjectSiteInformation().getSiteCounty(), indexId});
                     }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     logger.error(e.getMessage(), e);
-                    throw new SQLException("Could not deserialize class from blob stream.", e);
+                    throw new SQLException("Could not migrate county date to index.", e);
                 }
             }
         });
