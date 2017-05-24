@@ -21,36 +21,39 @@ public class CgpNoiFormDataIndex extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     @Column(name = "site_name", length = 255)
-    String siteName;
+    private String siteName;
 
     @Column(name = "site_state_code", length = 2)
-    String siteStateCode;
+    private String siteStateCode;
 
     @Column(name = "site_city")
-    String siteCity;
+    private String siteCity;
 
     @Column(name = "site_zip_code")
-    String siteZipCode;
+    private String siteZipCode;
+
+    @Column(name = "site_county")
+    private String siteCounty;
 
     @Column(name = "site_indian_country_ind", length = 1)
     @Type(type = "yes_no")
-    Boolean siteIndianCountry;
+    private Boolean siteIndianCountry;
 
     @Column(name = "site_indian_country_lands", length = 4000)
-    String siteIndianCountryLands;
+    private String siteIndianCountryLands;
 
     @Column(name = "operator_name", length = 4000)
-    String operatorName;
+    private String operatorName;
 
     @Column(name = "operator_federal_ind", length = 1)
     @Type(type = "yes_no")
-    Boolean operatorFederal;
+    private Boolean operatorFederal;
 
     @Column(name = "preparer")
-    String preparer;
+    private String preparer;
 
     @Column(name = "certifier")
-    String certifier;
+    private String certifier;
 
     public String getSiteName() {
         return siteName;
@@ -130,5 +133,13 @@ public class CgpNoiFormDataIndex extends BaseEntity {
 
     public void setCertifier(String certifier) {
         this.certifier = certifier;
+    }
+
+    public String getSiteCounty() {
+        return siteCounty;
+    }
+
+    public void setSiteCounty(String siteCounty) {
+        this.siteCounty = siteCounty;
     }
 }

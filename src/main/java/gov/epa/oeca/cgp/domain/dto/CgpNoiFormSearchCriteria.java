@@ -16,43 +16,44 @@ public class CgpNoiFormSearchCriteria implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    String owner;
-    String npdesId;
-    String masterGeneralPermit;
-    String trackingNumber;
-    FormType type;
-    Status status;
-    List<Status> statuses;
-    String operatorName;
-    String siteName;
-    Long siteRegion;
-    String siteStateCode;
-    List<String> siteStateCodes;
-    String siteCity;
-    String siteZipCode;
-    Boolean siteIndianCountry;
-    String siteIndianCountryLands;
-    Boolean operatorFederal;
-    ZonedDateTime reviewExpiration;
+    private String owner;
+    private String npdesId;
+    private String masterGeneralPermit;
+    private String trackingNumber;
+    private FormType type;
+    private Status status;
+    private List<Status> statuses;
+    private String operatorName;
+    private String siteName;
+    private Long siteRegion;
+    private String siteStateCode;
+    private List<String> siteStateCodes;
+    private String siteCity;
+    private String siteZipCode;
+    private String siteCounty;
+    private Boolean siteIndianCountry;
+    private String siteIndianCountryLands;
+    private Boolean operatorFederal;
+    private ZonedDateTime reviewExpiration;
     @JsonDeserialize(using = DatePickerZonedDateTimeDeserializer.class)
-    ZonedDateTime submittedFrom;
+    private ZonedDateTime submittedFrom;
     @JsonDeserialize(using = DatePickerZonedDateTimeDeserializer.class)
-    ZonedDateTime submittedTo;
+    private ZonedDateTime submittedTo;
     @JsonDeserialize(using = DatePickerZonedDateTimeDeserializer.class)
-    ZonedDateTime updatedFrom;
+    private ZonedDateTime updatedFrom;
     @JsonDeserialize(using = DatePickerZonedDateTimeDeserializer.class)
-    ZonedDateTime updatedTo;
+    private ZonedDateTime updatedTo;
     @JsonDeserialize(using = DatePickerZonedDateTimeDeserializer.class)
-    ZonedDateTime createdFrom;
+    private ZonedDateTime createdFrom;
     @JsonDeserialize(using = DatePickerZonedDateTimeDeserializer.class)
-    ZonedDateTime createdTo;
-    Boolean publicSearch;
-    Boolean regulatoryAuthoritySearch;
-    Boolean activeRecord;
-    String associatedUser;
-    Boolean submittedToIcis;
-    Boolean icisSubmissionInProgress;
-    Long resultLimit;
+    private ZonedDateTime createdTo;
+    private Boolean publicSearch;
+    private Boolean regulatoryAuthoritySearch;
+    private Boolean activeRecord;
+    private String associatedUser;
+    private Boolean submittedToIcis;
+    private Boolean icisSubmissionInProgress;
+    private Long resultLimit;
 
     public CgpNoiFormSearchCriteria() {
 
@@ -304,6 +305,14 @@ public class CgpNoiFormSearchCriteria implements Serializable {
 
     public void setResultLimit(Long resultLimit) {
         this.resultLimit = resultLimit;
+    }
+
+    public String getSiteCounty() {
+        return siteCounty;
+    }
+
+    public void setSiteCounty(String siteCounty) {
+        this.siteCounty = siteCounty;
     }
 
     @Override
