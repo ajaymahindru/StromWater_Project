@@ -35,9 +35,7 @@ public class V1_1_4_2__AddCountyToIndex implements SpringJdbcMigration {
                 InputStream blobStream = lobHandler.getBlobAsBinaryStream(resultSet, 3);
                 try {
                     CgpNoiForm form = mapper.readValue(blobStream, CgpNoiForm.class);
-                    logger.info(String.format("Processing form with id = %s, indexId = %s", id, indexId));
                     if (!StringUtils.isEmpty(form.getFormData().getProjectSiteInformation().getSiteCounty())) {
-                        logger.info(String.format("About to update index with id %s for form %s", indexId, id));
                         jdbcTemplate.update("update cgp_noi_form_data_index set site_county = ? where id = ?",
                                 new Object[]{form.getFormData().getProjectSiteInformation().getSiteCounty(), indexId});
                     }
