@@ -18,9 +18,9 @@ import java.sql.SQLException;
 /**
  * @author dfladung
  */
-public class V1_1_4_1__AddCountyToIndex implements SpringJdbcMigration {
+public class V1_1_4_2__AddCountyToIndex implements SpringJdbcMigration {
 
-    private static final Logger logger = LoggerFactory.getLogger(V1_1_4_1__AddCountyToIndex.class);
+    private static final Logger logger = LoggerFactory.getLogger(V1_1_4_2__AddCountyToIndex.class);
 
     @Override
     public void migrate(JdbcTemplate jdbcTemplate) throws Exception {
