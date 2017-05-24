@@ -226,6 +226,9 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
             cr.add(Restrictions.like("index.siteZipCode", criteria.getSiteZipCode(),
                     MatchMode.ANYWHERE).ignoreCase());
         }
+        if (!StringUtils.isEmpty(criteria.getSiteCounty())) {
+            cr.add(Restrictions.eq("index.siteCounty", criteria.getSiteCounty()).ignoreCase());
+        }
         if (criteria.getOperatorFederal() != null) {
             cr.add(Restrictions.eq("index.operatorFederal", criteria.getOperatorFederal()));
         }
