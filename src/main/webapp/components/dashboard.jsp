@@ -392,7 +392,7 @@
 						</div>
 						<div class="col-sm-4 form-group">
 							<label class="control-label" for="project-status">Project Status</label>
-							<select id="project-status" class="form-control" data-bind="lookup: 'formStatuses',
+							<select id="project-status" class="form-control" data-bind="lookup: 'userFormStatuses',
 																					value: status,
 																					optionsValue: 'code',
 																					optionsText: 'description',
