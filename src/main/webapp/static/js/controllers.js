@@ -2751,7 +2751,7 @@ var UserSearchController = function(data, params) {
 		address: null
 	}));
 	self.searchCriteria().userId = ko.observable('').extend({minLength: 3});
-	self.searchCriteria().lastName = ko.observable('').extend({required: true, minLength: 3});
+	self.searchCriteria().lastName = ko.observable('').extend({minLength: 3});
 	self.searchCriteria().organization = ko.observable('').extend({minLength: 3});
 	self.searchCriteria().address = ko.observable('').extend({minLength: 3});
 	self.searchCriteria().errors = ko.validation.group(self.searchCriteria(), {deep: true});
