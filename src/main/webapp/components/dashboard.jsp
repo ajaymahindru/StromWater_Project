@@ -45,7 +45,7 @@
 		<!-- ko if: status() == 'Active' -->
 		<!-- ko if: type() == 'Low_Erosivity_Waiver' -->
 		    <div class="btn-group btn-group-xs">
-                <button class="btn btn-danger-outline" data-bind="modal: {
+                <button class="btn btn-danger-outline" data-bind="openModal: {
                                                                         name: 'terminate-modal',
                                                                         params: {
                                                                             data: $data,
@@ -56,7 +56,7 @@
 		<!-- /ko -->
 		<!-- ko if: type() == 'Notice_Of_Intent' -->
 		    <div class="btn-group btn-group-xs">
-                <button class="btn btn-danger-outline" data-bind="modal: {
+                <button class="btn btn-danger-outline" data-bind="openModal: {
                                                                         name: 'terminate-modal',
                                                                         params: {
                                                                             data: $data,
@@ -88,7 +88,7 @@
 		<!-- /ko -->
 		<!-- ko if: (phase() == 'New' || phase() == 'Change') && status() == 'Active' -->
 			<button class="btn btn-primary-outline" data-bind="click: $parent.changeAction"><span class="fa fa-pencil"></span> Change</button>
-			<button class="btn btn-danger-outline" data-bind="modal: {
+			<button class="btn btn-danger-outline" data-bind="openModal: {
 																	name: 'terminate-modal',
 																	params: {
 																		data: $data,
@@ -193,7 +193,7 @@
 		<!-- /ko -->
 		<!-- ko if: (phase() == 'New' || phase() == 'Change') && status() == 'Active' -->
 			<button class="btn btn-primary-outline" data-bind="click: $parent.changeAction"><span class="fa fa-pencil"></span> Change</button>
-			<button class="btn btn-danger-outline" data-bind="modal: {
+			<button class="btn btn-danger-outline" data-bind="openModal: {
 																	name: 'terminate-modal',
 																	params: {
 																		data: $data,

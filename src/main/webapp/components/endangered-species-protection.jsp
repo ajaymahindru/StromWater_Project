@@ -144,7 +144,7 @@
 					<div class="col-sm-12 form-group" data-bind="slideVisible: criterion() == 'Criterion_C'">
 						<label class="control-label" for="habitateds-located">What federally-listed species or federally-designated
 							critical habitat are located in your
-							<dfn data-bind="modal: {name: 'action-area-modal'}">"action area"</dfn>?</label>
+							<dfn data-bind="openModal: {name: 'action-area-modal'}">"action area"</dfn>?</label>
 						<br/>
 						<textarea id="habitateds-located" class="form-control" data-bind="value: speciesAndHabitatInActionArea"></textarea>
 					</div>
