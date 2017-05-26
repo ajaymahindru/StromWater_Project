@@ -10,6 +10,7 @@ import gov.epa.oeca.cgp.domain.ref.*;
 import gov.epa.oeca.common.interfaces.rest.BaseResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -45,9 +46,13 @@ public class LookupResource extends BaseResource {
     @Path("formStatus")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiOperation(value = "Retrieves all form statuses")
-    public List<Lookup> retrieveAllStatuses() {
+    public List<Lookup> retrieveAllStatuses(@QueryParam("shownToUser") Boolean shownToUser) {
         List<Lookup> formStatuses = new ArrayList<>();
-        for (Status status : Status.values()) {
+        Status[] statuses = BooleanUtils.isTrue(shownToUser) ? new Status[]{
+            Status.Draft, Status.Submitted, Status.Active, Status.Terminated, Status.Discontinued,
+                Status.OnHold
+        } : Status.values();
+        for (Status status : statuses) {
             formStatuses.add(new Lookup(status.name(), status.getValue()));
         }
         return formStatuses;
