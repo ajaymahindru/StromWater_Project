@@ -10,6 +10,7 @@ import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiFormSet;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.document.Document;
+import gov.epa.oeca.common.domain.node.TransactionStatus;
 
 import java.io.File;
 import java.util.List;
@@ -110,4 +111,6 @@ public interface CgpNoiFormService {
     void inviteUser(String role, Contact contact) throws ApplicationException;
 
     void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws  ApplicationException;
+
+    void updateFormTxStatus(Long formId, TransactionStatus status) throws  ApplicationException;
 }

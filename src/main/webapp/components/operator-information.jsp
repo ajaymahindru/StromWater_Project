@@ -99,7 +99,7 @@
 								email: operatorPointOfContact.email
 							}"></contact-info>
 			<div>
-				<button class="btn btn-primary" data-bind="click: saveAndContinue" onclick="scrollToTop();">
+				<button class="btn btn-primary" data-bind="click: saveAndContinue" onclick="oeca.utils.scrollToTop();">
 					<!-- ko if: showSaveButton -->
 						Save Section
 					<!-- /ko -->

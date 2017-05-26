@@ -1174,6 +1174,26 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
 
     @Override
     @Transactional(readOnly = true)
+    @Secured({ApplicationSecurityUtils.systemRoleName})
+    public void updateFormTxStatus(Long formId, TransactionStatus status) throws  ApplicationException {
+        try {
+            CgpNoiForm forUpdate = formRepository.find(formId);
+            Validate.isTrue(status != null, "Transaction status is required");
+            forUpdate.setNodeTransactionStatus(status);
+            forUpdate.setLastUpdatedDate(ZonedDateTime.now());
+            formRepository.update(forUpdate);
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage(), e);
+            throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    @Secured({ApplicationSecurityUtils.systemRoleName})
     public void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws  ApplicationException {
         try {
             CgpNoiForm form = retrieveForm(formId);

@@ -212,7 +212,8 @@ var DashboardController = function(data, params) {
 			+ (self.criteria.activeRecord() !== null ? '&activeRecord=' + self.criteria.activeRecord() : '')
 			+ (self.criteria.operatorFederal() !== null ? '&operatorFederal=' + self.criteria.operatorFederal() : '')
 			+ (self.criteria.siteIndianCountry() !== null ? '&siteIndianCountry=' + self.criteria.siteIndianCountry() :'')
-			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands());
+			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands())
+			+ '&resultLimit=' + 1000; //limit results to 1000 max
 	});
 	var convertToIso = function(val) {
 		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
@@ -372,7 +373,19 @@ var DashboardController = function(data, params) {
 		order: [[10, 'desc']],
 		dom: '<\'pull-left\'B><\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>',
 		buttons: [
-			'colvis'
+			'colvis',
+			{
+				text: 'Excel',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToExcelLink());
+				}
+			},
+			{
+				text: 'Print',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToHtmlLink());
+				}
+			}
 		],
 		"language": {
 			"emptyTable": "There are no forms to display."
@@ -491,6 +504,7 @@ var NoiFormController = function(data, params) {
 				oeca.cgp.noi.save(self.form()).success(function() {
 					self.sections.operator.show(true);
 					self.sections.operator.toggle(true);
+                    oeca.utils.scrollToElement('.panel:last');
 				});
 			}
 		},
@@ -507,6 +521,7 @@ var NoiFormController = function(data, params) {
                     else {
                 		self.sections.site.show(true);
                 		self.sections.site.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
 					}
                 });
             }
@@ -524,6 +539,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.discharge.show(true);
                         self.sections.discharge.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -546,6 +562,7 @@ var NoiFormController = function(data, params) {
                         else {
                     		self.sections.swppp.show(true);
                     		self.sections.swppp.toggle(true);
+                            oeca.utils.scrollToElement('.panel:last');
 						}
                     }
                 });
@@ -564,6 +581,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.swppp.show(true);
                         self.sections.swppp.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -581,6 +599,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.endangered.show(true);
                         self.sections.endangered.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -598,6 +617,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.historic.show(true);
                         self.sections.historic.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -615,6 +635,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.certification.show(true);
                         self.sections.certification.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -761,6 +782,7 @@ var LewFormController = function(data, params) {
 				oeca.cgp.lew.save(self.form()).success(function() {
 					self.sections.erosivity.show(true);
 					self.sections.erosivity.toggle(true);
+                    oeca.utils.scrollToElement('.panel:last');
 				});
 			}
 		},
@@ -777,6 +799,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.operator.show(true);
                         self.sections.operator.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
 					}
                 });
             }
@@ -794,6 +817,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.project.show(true);
                         self.sections.project.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -811,6 +835,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.certification.show(true);
                         self.sections.certification.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
