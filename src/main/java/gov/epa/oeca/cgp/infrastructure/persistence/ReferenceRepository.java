@@ -68,7 +68,7 @@ public class ReferenceRepository {
 
     @SuppressWarnings("unchecked")
     public List<County> retrieveCounties() {
-        return (List<County>) cgpSessionFactory.getCurrentSession().createQuery("from County").getResultList();
+        return (List<County>) cgpSessionFactory.getCurrentSession().createQuery("from County order by countyName").getResultList();
     }
 
     @SuppressWarnings("unchecked")
