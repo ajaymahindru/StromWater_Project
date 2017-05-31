@@ -114,7 +114,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             StringBuilder buf = new StringBuilder();
             buf.append("<html>" +
                     "<header>EPA CGP</header>" +
-                    "<body>" +
+                    "<body onload=\"window.print()\">" +
                     "<table>" +
                     "<tr>" +
                     "<th>Type</th>" +
