@@ -18,6 +18,12 @@
         <property name="preAuthenticatedUserDetailsService" ref="cgpCdxHandoffPreAuthenticationUserDetailsService"/>
     </bean>
     <!-- ====================================================================== -->
+    <!-- Override entry point reference -->
+    <!-- ====================================================================== -->
+    <bean id="epcgp" class="gov.epa.oeca.cgp.security.CgpAuthenticationEntryPoint">
+        <constructor-arg value="/action/login"/>
+    </bean>
+    <!-- ====================================================================== -->
     <!-- Swagger -->
     <!-- ====================================================================== -->
     <security:http pattern="/apidocs/**" security="none"/>
@@ -39,7 +45,7 @@
     <!-- ====================================================================== -->
     <!-- Application security -->
     <!-- ====================================================================== -->
-    <security:http pattern="/**" auto-config="false" use-expressions="true">
+    <security:http pattern="/**" auto-config="false" use-expressions="true" entry-point-ref="epcgp">
         <security:intercept-url pattern="/action/secured/**"
                                 access="hasAnyRole('ROLE_CGP_PREPARER', 'ROLE_CGP_CERTIFIER', 'ROLE_CGP_HELPDESK', 'ROLE_CGP_REGAUTH')"/>
         <security:intercept-url pattern="/api/**"
