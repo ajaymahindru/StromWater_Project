@@ -36,7 +36,8 @@
 			$(function() {
 				$.cromerrWidget(oeca.cgp.defaults.cromerrSettings());
 				$.when(
-					loadLookup('counties')
+					loadLookup('counties'),
+					loadLookup('formStatuses')
 				).done(function() {
 					var ViewModel = function() {
 						var self = this;
