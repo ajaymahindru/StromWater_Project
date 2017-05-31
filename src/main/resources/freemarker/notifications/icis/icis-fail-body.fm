@@ -11,7 +11,7 @@
         <p>
             Transaction ID: ${txId}
         </p>
-        <#if statusDetail >
+        <#if displayError >
         <p>
             Error message: ${statusDetail}
         </p>
