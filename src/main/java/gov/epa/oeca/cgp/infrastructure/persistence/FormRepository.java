@@ -139,8 +139,12 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         if (criteria.getType() != null) {
             cr.add(Restrictions.eq("type", criteria.getType()));
         }
-        if (BooleanUtils.isTrue(criteria.getPublicSearch())) {
-            cr.add(Restrictions.in("status", ApplicationUtils.PUBLIC_STATUSES));
+        if (BooleanUtils.isTrue(criteria.getPublicSearch())) { // search for only this status
+            if (criteria.getStatus() != null && ApplicationUtils.PUBLIC_STATUSES.contains(criteria.getStatus())){
+                cr.add(Restrictions.eq("status", criteria.getStatus()));
+            } else { // return all public statuses
+                cr.add(Restrictions.in("status", ApplicationUtils.PUBLIC_STATUSES));
+            }
         } else if (BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch())) {
             cr.add(Restrictions.in("status", ApplicationUtils.RA_STATUSES));
         } else if (!CollectionUtils.isEmpty(criteria.getStatuses())) {
@@ -225,6 +229,9 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         if (!StringUtils.isEmpty(criteria.getSiteZipCode())) {
             cr.add(Restrictions.like("index.siteZipCode", criteria.getSiteZipCode(),
                     MatchMode.ANYWHERE).ignoreCase());
+        }
+        if (!StringUtils.isEmpty(criteria.getSiteCounty())) {
+            cr.add(Restrictions.eq("index.siteCounty", criteria.getSiteCounty()).ignoreCase());
         }
         if (criteria.getOperatorFederal() != null) {
             cr.add(Restrictions.eq("index.operatorFederal", criteria.getOperatorFederal()));
