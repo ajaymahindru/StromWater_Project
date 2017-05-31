@@ -18,6 +18,15 @@
         <property name="preAuthenticatedUserDetailsService" ref="cgpCdxHandoffPreAuthenticationUserDetailsService"/>
     </bean>
     <!-- ====================================================================== -->
+    <!-- Define AJAX-aware handlers -->
+    <!-- ====================================================================== -->
+    <beans:bean id="ajaxAwareAccessDeniedHandler" class="gov.epa.oeca.common.security.AjaxAwareAccessDeniedHandler">
+        <beans:constructor-arg value="/action/login"/>
+    </beans:bean>
+    <beans:bean id="ajaxAwareEntryPoint" class="gov.epa.oeca.common.security.AjaxAwareAuthenticationEntryPoint">
+        <beans:constructor-arg value="/oeca-cgp-web/action/login"/>
+    </beans:bean>
+    <!-- ====================================================================== -->
     <!-- Swagger -->
     <!-- ====================================================================== -->
     <security:http pattern="/apidocs/**" security="none"/>
@@ -39,14 +48,15 @@
     <!-- ====================================================================== -->
     <!-- Application security -->
     <!-- ====================================================================== -->
-    <security:http pattern="/**" auto-config="false" use-expressions="true">
+    <security:http pattern="/**" auto-config="false" use-expressions="true" entry-point-ref="ajaxAwareEntryPoint">
         <security:intercept-url pattern="/action/secured/**"
                                 access="hasAnyRole('ROLE_CGP_PREPARER', 'ROLE_CGP_CERTIFIER', 'ROLE_CGP_HELPDESK', 'ROLE_CGP_REGAUTH')"/>
         <security:intercept-url pattern="/api/**"
                                 access="hasAnyRole('ROLE_CGP_PREPARER', 'ROLE_CGP_CERTIFIER', 'ROLE_CGP_HELPDESK', 'ROLE_CGP_REGAUTH')"/>
-        <security:form-login login-page="/action/login" default-target-url="/action/secured/home" />
+        <security:form-login login-page="/action/login" default-target-url="/action/secured/home"/>
         <security:logout logout-url="/action/logout" invalidate-session="true" logout-success-url="/action/login"/>
         <security:csrf disabled="true"/>
+        <security:access-denied-handler ref="ajaxAwareAccessDeniedHandler"/>
         <security:session-management session-fixation-protection="none"/>
         <security:custom-filter position="PRE_AUTH_FILTER" ref="cdxPreAuthenticationFilter"/>
     </security:http>
