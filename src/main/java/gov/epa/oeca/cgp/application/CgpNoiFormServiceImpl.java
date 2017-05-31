@@ -1173,7 +1173,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     @Secured({ApplicationSecurityUtils.systemRoleName})
     public void updateFormTxStatus(Long formId, TransactionStatus status) throws  ApplicationException {
         try {
