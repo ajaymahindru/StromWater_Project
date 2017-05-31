@@ -21,10 +21,10 @@
     <!-- Define AJAX-aware handlers -->
     <!-- ====================================================================== -->
     <beans:bean id="ajaxAwareAccessDeniedHandler" class="gov.epa.oeca.common.security.AjaxAwareAccessDeniedHandler">
-        <beans:property name="errorPage" value="/action/login"/>
+        <beans:constructor-arg value="/action/login"/>
     </beans:bean>
     <beans:bean id="ajaxAwareEntryPoint" class="gov.epa.oeca.common.security.AjaxAwareAuthenticationEntryPoint">
-        <beans:property name="errorPage" value="/oeca-cgp-web/action/login"/>
+        <beans:constructor-arg value="/oeca-cgp-web/action/login"/>
     </beans:bean>
     <!-- ====================================================================== -->
     <!-- Swagger -->
