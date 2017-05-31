@@ -504,6 +504,7 @@ var NoiFormController = function(data, params) {
 				oeca.cgp.noi.save(self.form()).success(function() {
 					self.sections.operator.show(true);
 					self.sections.operator.toggle(true);
+                    oeca.utils.scrollToElement('.panel:last');
 				});
 			}
 		},
@@ -520,6 +521,7 @@ var NoiFormController = function(data, params) {
                     else {
                 		self.sections.site.show(true);
                 		self.sections.site.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
 					}
                 });
             }
@@ -537,6 +539,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.discharge.show(true);
                         self.sections.discharge.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -559,6 +562,7 @@ var NoiFormController = function(data, params) {
                         else {
                     		self.sections.swppp.show(true);
                     		self.sections.swppp.toggle(true);
+                            oeca.utils.scrollToElement('.panel:last');
 						}
                     }
                 });
@@ -577,6 +581,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.swppp.show(true);
                         self.sections.swppp.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -594,6 +599,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.endangered.show(true);
                         self.sections.endangered.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -611,6 +617,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.historic.show(true);
                         self.sections.historic.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -628,6 +635,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.certification.show(true);
                         self.sections.certification.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -774,6 +782,7 @@ var LewFormController = function(data, params) {
 				oeca.cgp.lew.save(self.form()).success(function() {
 					self.sections.erosivity.show(true);
 					self.sections.erosivity.toggle(true);
+                    oeca.utils.scrollToElement('.panel:last');
 				});
 			}
 		},
@@ -790,6 +799,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.operator.show(true);
                         self.sections.operator.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
 					}
                 });
             }
@@ -807,6 +817,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.project.show(true);
                         self.sections.project.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -824,6 +835,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.certification.show(true);
                         self.sections.certification.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }

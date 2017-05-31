@@ -251,6 +251,7 @@ registerLookup('tmdls', config.ctx + '/static/json/tmdl.json', BaseLookupModel);
 registerLookup('pollutants', config.ctx + '/static/json/pollutants.json', null);
 registerLookup('formTypes', config.ctx + '/api/lookup/v1/formType', null);
 registerLookup('formStatuses', config.ctx + '/api/lookup/v1/formStatus', null);
+registerLookup('userFormStatuses', config.ctx + '/api/lookup/v1/formStatus?shownToUser=true', null);
 registerLookup("counties", config.ctx + '/api/lookup/v1/counties', BaseLookupModel);
 registerLookup('yesNoRadio', config.ctx + '/static/json/yesNoRadio.json', null);
 registerLookup('constructionTypes', config.ctx + '/static/json/siteConstructionTypes.json', null);
