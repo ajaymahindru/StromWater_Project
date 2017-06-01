@@ -10,7 +10,7 @@
     <!-- ====================================================================== -->
 	<util:map id="cgpExternalUrls">
 		<entry key="appendixA" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_a_-_definitions_508.pdf"/>
-		<entry key="appendixB" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_b_-_areas_of_permit_coverage_508.pdf"/>
+		<entry key="appendixB" value="https://www.epa.gov/sites/production/files/2017-03/documents/2017_cgp_final_appendix_b_-_areas_of_permit_coverage_508.pdf"/>
 		<entry key="appendixC" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_c_-_waivers_508.pdf"/>
 		<entry key="appendixD" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_d_-_endangered_species_reqs_508.pdf"/>
 		<entry key="appendixE" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_e_-_historic_properties_reqs_508.pdf"/>
@@ -20,7 +20,7 @@
 		<entry key="appendixI" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_i_-_standard_permit_conditions_508.pdf"/>
 		<entry key="appendixJ" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_j_-_noi_fillable_508.pdf"/>
 		<entry key="appendixK" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_k_-_not_fillable_508.pdf"/>
-		<entry key="appendixL" value="https://www.epa.gov/sites/production/files/2017-02/documents/2017_cgp_final_appendix_l_-_request_for_chemical_treatment_fillable_508.pdf"/>
+		<entry key="appendixL" value="https://www.epa.gov/sites/production/files/2017-04/documents/2017_cgp_final_appendix_l_-_request_for_chemical_treatment_fillable_508.pdf"/>
 		<entry key="cfr12226" value="http://www.ecfr.gov/cgi-bin/text-idx?SID=d9a3573573b03ab95b8eff6435ab2924&amp;mc=true&amp;node=se40.24.122_126&amp;rgn=div8"/>
 		<entry key="rfactorCalculator" value="https://www.epa.gov/npdes/rainfall-erosivity-factor-calculator-small-construction-sites"/>
 		<entry key="factSheet" value="https://www3.epa.gov/npdes/pubs/fact3-1.pdf"/>
