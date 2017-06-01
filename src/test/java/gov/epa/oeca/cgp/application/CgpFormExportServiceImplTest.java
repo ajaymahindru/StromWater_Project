@@ -1,14 +1,19 @@
 package gov.epa.oeca.cgp.application;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import gov.epa.oeca.cgp.domain.dto.CgpNoiFormSearchCriteria;
+import gov.epa.oeca.cgp.domain.noi.Attachment;
+import gov.epa.oeca.cgp.domain.noi.AttachmentCategory;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
-import gov.epa.oeca.cgp.domain.noi.FormType;
 import gov.epa.oeca.cgp.infrastructure.export.CgpFormExportService;
 import gov.epa.oeca.cgp.security.ApplicationSecurityUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -17,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 
 import java.io.File;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -38,12 +44,19 @@ public class CgpFormExportServiceImplTest {
     CgpNoiFormService formService;
     @Resource(name = "formExportService")
     CgpFormExportService exportService;
+    @Autowired
+    ResourceLoader loader;
 
     CgpNoiFormSearchCriteria getCriteria(){
         CgpNoiFormSearchCriteria cr = new CgpNoiFormSearchCriteria();
-        cr.setType(FormType.Notice_Of_Intent);
         cr.setOwner("LABIEVA34");
         return cr;
+    }
+
+    CgpNoiForm getForm(String file) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return mapper.readValue(loader.getResource(file).getFile(), CgpNoiForm.class);
     }
 
     @Test
@@ -66,6 +79,30 @@ public class CgpFormExportServiceImplTest {
             List<CgpNoiForm> forms = formService.retrieveForms(getCriteria());
             File html = exportService.generateHtmlExport(forms);
             assertTrue(html.exists());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testExtractCsv() throws Exception {
+        try {
+            ZonedDateTime start = ZonedDateTime.now();
+            applicationSecurityUtils.mockCertifier("LABIEVA34", "linera.abieva@cgifederal.com", "Linera", "Abieva");
+            CgpNoiForm newForm = getForm("test-data/new-lew-form.json");
+            Long id = formService.createNewLowErosivityWaiver(newForm).getId();
+            newForm = getForm("test-data/new-lew-form.json");
+            formService.updateForm(id, newForm);
+            Attachment attachment = new Attachment();
+            attachment.setName("logback.xml");
+            attachment.setCategory(AttachmentCategory.Default);
+            attachment.setData(loader.getResource("logback.xml").getFile());
+            formService.addAttachment(id, attachment);
+
+            List<CgpNoiForm> forms = formService.retrieveForms(getCriteria());
+            File csv = exportService.generateCsvExtract(forms);
+            assertTrue(csv.exists());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());
