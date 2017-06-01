@@ -9,7 +9,7 @@
     <util:map id="registerPdfEndpointConfiguration">
         <entry key="serviceUrl"
                value="http://localhost:8080/cdx-register-II/services/RegisterPdfServiceConditionalMTOM"/>
-        <entry key="operatorId" value="oeca.services@epa.gov"/>
-        <entry key="operatorPassword" value="CDXoeca025"/>
+        <entry key="operatorId" value="oeca.services.unittest@epa.gov"/>
+        <entry key="operatorPassword" value="OecaUnitTestSpring2017"/>
     </util:map>
 </beans>

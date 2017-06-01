@@ -190,7 +190,44 @@ var DashboardController = function(data, params) {
 		oeca.cgp.utils.dispose(self.submittedToSub);
 		oeca.cgp.utils.dispose(self.updatedFromSub);
 		oeca.cgp.utils.dispose(self.updatedToSub);
+	};
+
+	self.criteriaString = ko.pureComputed(function() {
+		return 'owner=' + convertToString(self.criteria.owner())
+			+ '&npdesId=' + convertToString(self.criteria.npdesId())
+			+ '&masterGeneralPermit=' + convertToString(self.criteria.masterGeneralPermit())
+			+ '&trackingNumber=' + convertToString(self.criteria.trackingNumber())
+			+ '&type=' + convertToString(self.criteria.type())
+			+ '&status=' + convertToString(self.criteria.status())
+			+ '&operatorName=' + convertToString(self.criteria.operatorName())
+			+ '&siteName=' + convertToString(self.criteria.siteName())
+			+ '&siteRegion=' + convertToString(self.criteria.siteRegion())
+			+ '&siteStateCode=' + convertToString(self.criteria.siteStateCode())
+			+ '&siteZipCode=' + convertToString(self.criteria.siteZipCode())
+			+ '&reviewExpiration=' + convertToIso(self.criteria.reviewExpiration())
+			+ '&submittedFrom=' + convertToIso(self.criteria.submittedFrom())
+			+ '&submittedTo=' + convertToIso(self.criteria.submittedTo())
+			+ '&updatedFrom=' + convertToIso(self.criteria.updatedFrom())
+			+ '&updatedTo=' + convertToIso(self.criteria.updatedTo())
+			+ (self.criteria.activeRecord() !== null ? '&activeRecord=' + self.criteria.activeRecord() : '')
+			+ (self.criteria.operatorFederal() !== null ? '&operatorFederal=' + self.criteria.operatorFederal() : '')
+			+ (self.criteria.siteIndianCountry() !== null ? '&siteIndianCountry=' + self.criteria.siteIndianCountry() :'')
+			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands())
+			+ '&resultLimit=' + 1000; //limit results to 1000 max
+	});
+	var convertToIso = function(val) {
+		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
+	};
+	var convertToString = function(val) {
+		return val !== null ? encodeURIComponent(val) : "";
 	}
+
+	self.exportToExcelLink = function() {
+		return config.ctx + "/api/form/v1/export/excel?" + self.criteriaString();
+	};
+	self.exportToHtmlLink = function() {
+		return config.ctx + "/api/form/v1/export/html?" + self.criteriaString();
+	};
 
 	var dt = $('#forms').DataTable({
 		"searching": false,
@@ -338,17 +375,17 @@ var DashboardController = function(data, params) {
 		buttons: [
 			'colvis',
 			{
-				extend: 'excel',
-				exportOptions: {
-					columns: ':not(.action-col):not(.details-control)'
+				text: 'Excel',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToExcelLink());
 				}
 			},
 			{
-				extend: 'print',
-				exportOptions: {
-					columns: ':not(.action-col):not(.details-control)'
+				text: 'Print',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToHtmlLink());
 				}
-			},
+			}
 		],
 		"language": {
 			"emptyTable": "There are no forms to display."
@@ -467,6 +504,7 @@ var NoiFormController = function(data, params) {
 				oeca.cgp.noi.save(self.form()).success(function() {
 					self.sections.operator.show(true);
 					self.sections.operator.toggle(true);
+                    oeca.utils.scrollToElement('.panel:last');
 				});
 			}
 		},
@@ -483,6 +521,7 @@ var NoiFormController = function(data, params) {
                     else {
                 		self.sections.site.show(true);
                 		self.sections.site.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
 					}
                 });
             }
@@ -500,6 +539,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.discharge.show(true);
                         self.sections.discharge.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -522,6 +562,7 @@ var NoiFormController = function(data, params) {
                         else {
                     		self.sections.swppp.show(true);
                     		self.sections.swppp.toggle(true);
+                            oeca.utils.scrollToElement('.panel:last');
 						}
                     }
                 });
@@ -540,6 +581,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.swppp.show(true);
                         self.sections.swppp.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -557,6 +599,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.endangered.show(true);
                         self.sections.endangered.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -574,6 +617,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.historic.show(true);
                         self.sections.historic.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -591,6 +635,7 @@ var NoiFormController = function(data, params) {
                     else {
                         self.sections.certification.show(true);
                         self.sections.certification.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -737,6 +782,7 @@ var LewFormController = function(data, params) {
 				oeca.cgp.lew.save(self.form()).success(function() {
 					self.sections.erosivity.show(true);
 					self.sections.erosivity.toggle(true);
+                    oeca.utils.scrollToElement('.panel:last');
 				});
 			}
 		},
@@ -753,6 +799,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.operator.show(true);
                         self.sections.operator.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
 					}
                 });
             }
@@ -770,6 +817,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.project.show(true);
                         self.sections.project.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }
@@ -787,6 +835,7 @@ var LewFormController = function(data, params) {
                     else {
                         self.sections.certification.show(true);
                         self.sections.certification.toggle(true);
+                        oeca.utils.scrollToElement('.panel:last');
                     }
                 });
             }

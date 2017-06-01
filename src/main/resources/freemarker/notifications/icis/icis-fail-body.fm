@@ -1,0 +1,29 @@
+<html>
+    <body>
+    <p>${currentDate}</p>
+        <p>
+            There was an issue processing ${formPhase} CGP NPDES ID: ${npdesId}.
+            This form failed when attempting to be distributed to ICIS due to technical issues.
+        </p>
+        <p>
+            Transaction Status: ${txStatus}
+        </p>
+        <p>
+            Transaction ID: ${txId}
+        </p>
+        <#if displayError >
+        <p>
+            Error message: ${statusDetail}
+        </p>
+        </#if>
+        <p>
+           This is an automated notification; please do not reply to this email.
+        </p>
+        <p>
+            Sincerely<br/>
+            CDX Help Desk<br/>
+            <hr/>
+            United States Environmental Protection Agency - Central Data Exchange
+        </p>
+    </body>
+</html>

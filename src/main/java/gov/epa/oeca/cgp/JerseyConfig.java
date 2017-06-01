@@ -31,7 +31,7 @@ public class JerseyConfig extends ResourceConfig {
         register(MultiPartFeature.class);
 
         // using packages("...") causes issues when running as an executable WAR, so registering manually
-        packages("io.swagger.jaxrs.listing", "gov.epa.oeca.cgp.interfaces.rest");
+        packages("io.swagger.jaxrs.listing", "gov.epa.oeca.common.interfaces.rest", "gov.epa.oeca.cgp.interfaces.rest");
 
 
         logger.info("Initialized Jersey");

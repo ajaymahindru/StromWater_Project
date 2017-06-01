@@ -66,8 +66,8 @@ public class PublicFormResource extends BaseResource {
             @QueryParam("operatorName") String operatorName,
             @ApiParam(value = "The two digit state code of the project site.")
             @QueryParam("projectState") String projectState,
-            @ApiParam(value = "The country of the project site.")
-            @QueryParam("projectCountry") String projectCountry,
+            @ApiParam(value = "The county of the project site.")
+            @QueryParam("projectCounty") String projectCounty,
             @ApiParam(value = "The city of the project site.")
             @QueryParam("projectCity") String projectCity,
             @ApiParam(value = "The zip code of the project site.")
@@ -105,6 +105,7 @@ public class PublicFormResource extends BaseResource {
             }
             criteria.setSiteCity(projectCity);
             criteria.setSiteZipCode(projectZip);
+            criteria.setSiteCounty(projectCounty);
             if (!StringUtils.isEmpty(projectStatus)) {
                 Status status = Status.valueOf(projectStatus);
                 criteria.setStatus(status);

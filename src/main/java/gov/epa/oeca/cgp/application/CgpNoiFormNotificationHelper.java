@@ -12,6 +12,7 @@ import gov.epa.oeca.cgp.infrastructure.user.UserInformationService;
 import gov.epa.oeca.cgp.security.ApplicationSecurityUtils;
 import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
+import gov.epa.oeca.common.domain.document.Document;
 import gov.epa.oeca.common.domain.registration.NewUserProfile;
 import gov.epa.oeca.common.infrastructure.notification.NotificationService;
 import org.apache.commons.collections.CollectionUtils;
@@ -23,7 +24,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import javax.annotation.Resource;
-import java.io.File;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -128,7 +128,7 @@ public class CgpNoiFormNotificationHelper {
         }
     }
 
-    public void sendCertificationToCertifier(CgpNoiForm form, String attachmentName, File attachmentData) throws ApplicationException {
+    public void sendCertificationToCertifier(CgpNoiForm form, Document attachment) throws ApplicationException {
         try {
             // get the basic mail information
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
@@ -153,14 +153,14 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
 
             // send the notification
-            notificationService.sendNotificationWithAttachment(from, Collections.singletonList(to), cc, null, subject, body,
-                    attachmentName, attachmentData);
+            notificationService.sendNotificationWithAttachments(from, Collections.singletonList(to), cc, null,
+                    subject, body, Collections.singletonList(attachment));
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
     }
 
-    public void sendCertificationToRegulatoryAuthority(CgpNoiForm form, String attachmentName, File attachmentData) throws ApplicationException {
+    public void sendCertificationToRegulatoryAuthority(CgpNoiForm form, Document attachment) throws ApplicationException {
         try {
             // get the basic mail information
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
@@ -185,13 +185,14 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendNotificationWithAttachment(from, to, null, null, subject, body, attachmentName, attachmentData);
+            notificationService.sendNotificationWithAttachments(from, to, null, null,
+                    subject, body, Collections.singletonList(attachment));
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
     }
 
-    public void sendCertificationToServices(CgpNoiForm form, String attachmentName, File attachmentData) throws ApplicationException {
+    public void sendCertificationToServices(CgpNoiForm form, Document attachment) throws ApplicationException {
         try {
             // get the basic mail information
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
@@ -222,7 +223,8 @@ public class CgpNoiFormNotificationHelper {
             }
 
             //send the notification
-            notificationService.sendNotificationWithAttachment(from, to, null, null, subject, body, attachmentName, attachmentData);
+            notificationService.sendNotificationWithAttachments(from, to, null, null,
+                    subject, body, Collections.singletonList(attachment));
 
         } catch (Exception e) {
             logger.warn(e.getMessage());
@@ -284,7 +286,7 @@ public class CgpNoiFormNotificationHelper {
         }
     }
 
-    public void sendAcceptedByIcis(CgpNoiForm form, String attachmentName, File attachmentData) throws ApplicationException {
+    public void sendAcceptedByIcis(CgpNoiForm form, Document attachment) throws ApplicationException {
         try {
             // get the basic mail information
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
@@ -316,8 +318,8 @@ public class CgpNoiFormNotificationHelper {
             String subject = mergeTemplate(subjectTemplate, model);
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
-            notificationService.sendNotificationWithAttachment(from, Arrays.asList(certifier, preparer), cc,
-                    bcc, subject, body, attachmentName, attachmentData);
+            notificationService.sendNotificationWithAttachments(from, Arrays.asList(certifier, preparer), cc,
+                    bcc, subject, body, Collections.singletonList(attachment));
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }
@@ -478,6 +480,38 @@ public class CgpNoiFormNotificationHelper {
             String body = mergeTemplate(bodyTemplate, model);
             // send the notification
             notificationService.sendGenericNotification(from, Collections.singletonList(email), null, null, subject, body);
+        } catch (Exception e) {
+            logger.warn(e.getMessage());
+        }
+    }
+
+    public void sendIcisError(CgpNoiForm form, List<Document> txDocs, String statusDetail) throws ApplicationException{
+        try {
+            // get the basic mail information
+            String from = additionalMailConfiguration.get("DoNotReplyEmail");
+            //get subscribers' emails
+            List<Subscriber> subscribers = referenceService.retrieveSubscribersByCatSubcat("icis", "failed");
+            List<String> to = new ArrayList<>();
+            for (Subscriber s : subscribers) {
+                to.add(s.getEmail());
+            }
+            // merge model
+            Map<String, Object> model = new HashMap<>();
+            model.put("formType", form.getType().getValue());
+            model.put("siteName", form.getFormData().getProjectSiteInformation().getSiteName());
+            model.put("npdesId", form.getFormSet().getNpdesId());
+            model.put("currentDate", LocalDate.now().toString());
+            model.put("formPhase", form.getPhase());
+            model.put("txStatus", form.getNodeTransactionStatus());
+            model.put("txId", form.getNodeTransactionId());
+            model.put("displayError", StringUtils.isNotEmpty(statusDetail));
+            model.put("statusDetail", statusDetail);
+            String subjectTemplate = "notifications/icis/icis-fail-subject.fm";
+            String bodyTemplate = "notifications/icis/icis-fail-body.fm";
+            String subject = mergeTemplate(subjectTemplate, model);
+            String body = mergeTemplate(bodyTemplate, model);
+            notificationService.sendNotificationWithAttachments(from, to, null,
+                    null, subject, body, txDocs);
         } catch (Exception e) {
             logger.warn(e.getMessage());
         }

@@ -115,7 +115,7 @@
 					appropriate controls and implementation procedures designed to ensure that your use of cationic treatment chemicals
 					will not lead to a violation of water quality standards.</p>
 				<button class="btn btn-primary" data-bind="click: saveAndContinue"
-						onclick="scrollToTop();">
+						onclick="oeca.utils.scrollToTop();">
 					<!-- ko if: showSaveButton -->
 					Save Section
 					<!-- /ko -->

@@ -1,20 +1,20 @@
 package gov.epa.oeca.cgp.interfaces.rest.v1;
 
+import gov.epa.oeca.cgp.application.ApplicationUtils;
 import gov.epa.oeca.cgp.application.CgpNoiFormService;
 import gov.epa.oeca.cgp.domain.Contact;
 import gov.epa.oeca.cgp.domain.dto.CgpNoiFormSearchCriteria;
 import gov.epa.oeca.cgp.domain.dto.CgpNoiFormSearchResult;
 import gov.epa.oeca.cgp.domain.dto.datatable.DataTableCriteria;
-import gov.epa.oeca.cgp.domain.noi.Attachment;
-import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
-import gov.epa.oeca.cgp.domain.noi.CgpNoiFormData;
-import gov.epa.oeca.cgp.domain.noi.FormType;
+import gov.epa.oeca.cgp.domain.noi.*;
+import gov.epa.oeca.cgp.infrastructure.export.CgpFormExportService;
 import gov.epa.oeca.cgp.security.ApplicationSecurityUtils;
 import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.interfaces.rest.BaseResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
@@ -28,9 +28,8 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import javax.ws.rs.core.Response;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -45,10 +44,18 @@ import java.util.UUID;
 public class FormResource extends BaseResource {
 
     private static final Logger logger = LoggerFactory.getLogger(FormResource.class);
+
+    protected static final String EXCEL = "excel";
+    protected static final String HTML = "html";
+
     @Autowired
     protected CgpNoiFormService cgpNoiFormService;
     @Autowired
+    protected CgpFormExportService cgpFormExportService;
+    @Autowired
     ApplicationSecurityUtils applicationSecurityUtils;
+    @Autowired
+    ApplicationUtils applicationUtils;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -380,6 +387,123 @@ public class FormResource extends BaseResource {
     public void invite(@PathParam("role") String role, Contact contact) {
         try {
             cgpNoiFormService.inviteUser(role, contact);
+        } catch (ApplicationException e) {
+            logger.error(e.getMessage(), e);
+            throw translateException(e);
+        }
+    }
+
+    @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("export/{format}")
+    @ApiOperation(value = "Filters the currently logged in user's list of forms based on the search criteria posted " +
+            "and returns an excel file of the searched forms.")
+    public Response exportFormList(
+            final @PathParam("format") String format,
+            @ApiParam(value = "The owner user ID of the form.")
+            @QueryParam("owner") String owner,
+            @ApiParam(value = "The NPDES ID of the form.")
+            @QueryParam("npdesId") String npdesId,
+            @ApiParam(value = "The Master General Permit (MGP) of the form.")
+            @QueryParam("masterGeneralPermit") String masterGeneralPermit,
+            @ApiParam(value = "The unique tracking number of the form.")
+            @QueryParam("trackingNumber") String trackingNumber,
+            @ApiParam(value = "The form type.")
+            @QueryParam("type") String type,
+            @ApiParam(value = "Form status.")
+            @QueryParam("status") String status,
+            @ApiParam(value = "The name of the project operator.")
+            @QueryParam("operatorName") String operatorName,
+            @ApiParam(value = "The project's name.")
+            @QueryParam("siteName") String siteName,
+            @ApiParam(value = "The project's region.")
+            @QueryParam("siteRegion") Long siteRegion,
+            @ApiParam(value = "The two digit state code of the project site.")
+            @QueryParam("siteStateCode") String siteStateCode,
+            @ApiParam(value = "The city of the project site.")
+            @QueryParam("siteCity") String siteCity,
+            @ApiParam(value = "The zip code of the project site.")
+            @QueryParam("siteZipCode") String siteZipCode,
+            @ApiParam(value = "Indicator to search for facilities on tribal lands.")
+            @QueryParam("siteIndianCountry") Boolean siteIndianCountry,
+            @ApiParam(value = "The name of Indian country lands to search by.")
+            @QueryParam("siteIndianCountryLands") String siteIndianCountryLands,
+            @ApiParam(value = "Indicator to search for federally operated facilities.")
+            @QueryParam("operatorFederal") Boolean operatorFederal,
+            @ApiParam(value = "An ISO 8601 formatted review expiration date.")
+            @QueryParam("reviewExpiration") String reviewExpiration,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("submittedFrom") String submittedFrom,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("submittedTo") String submittedTo,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("updatedFrom") String updatedFrom,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("updatedTo") String updatedTo,
+            @ApiParam(value = "Active record search indicator.")
+            @QueryParam("activeRecord") Boolean activeRecord,
+            @ApiParam(value = "Result limit.")
+            @QueryParam("resultLimit") Long resultLimit
+    ) {
+        try {
+            CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
+            criteria.setOwner(owner);
+            criteria.setNpdesId(npdesId);
+            criteria.setMasterGeneralPermit(masterGeneralPermit);
+            criteria.setTrackingNumber(trackingNumber);
+            if (!StringUtils.isEmpty(type)) {
+                FormType formType = FormType.valueOf(type);
+                criteria.setType(formType);
+            }
+            if (!StringUtils.isEmpty(status)) {
+                Status s = Status.valueOf(status);
+                criteria.setStatus(s);
+            }
+            criteria.setOperatorName(operatorName);
+            criteria.setSiteName(siteName);
+            criteria.setSiteRegion(siteRegion);
+            if (!StringUtils.isEmpty(siteStateCode)) {
+                Validate.isTrue(siteStateCode.length() == 2, "Project state should be a 2-digit code.");
+                criteria.setSiteStateCode(siteStateCode);
+            }
+            criteria.setSiteCity(siteCity);
+            criteria.setSiteZipCode(siteZipCode);
+            if (siteIndianCountry != null) {
+                criteria.setSiteIndianCountry(siteIndianCountry);
+            }
+            criteria.setSiteIndianCountryLands(siteIndianCountryLands);
+            if (operatorFederal != null) {
+                criteria.setOperatorFederal(operatorFederal);
+            }
+            criteria.setReviewExpiration(applicationUtils.fromString(reviewExpiration));
+            criteria.setSubmittedFrom(applicationUtils.fromString(submittedFrom));
+            criteria.setSubmittedTo(applicationUtils.fromString(submittedTo));
+            criteria.setUpdatedFrom(applicationUtils.fromString(updatedFrom));
+            criteria.setUpdatedTo(applicationUtils.fromString(updatedTo));
+            criteria.setActiveRecord(activeRecord);
+            criteria.setResultLimit(resultLimit);
+
+            if (applicationSecurityUtils.hasRole(ApplicationSecurityUtils.preparer, ApplicationSecurityUtils.certifier)) {
+                criteria.setAssociatedUser(applicationSecurityUtils.getCurrentUserId());
+            }
+            if (applicationSecurityUtils.hasRole(ApplicationSecurityUtils.regAuth)) {
+                criteria.setRegulatoryAuthoritySearch(true);
+            }
+            List<CgpNoiForm> formList = cgpNoiFormService.retrieveForms(criteria);
+            if (EXCEL.equals(format)) {
+                File excel = cgpFormExportService.generateExcelExport(formList);
+                return Response.ok(excel, MediaType.APPLICATION_OCTET_STREAM)
+                        .header("Content-Disposition", "attachment; filename=\"" + excel.getName() + "\"")
+                        .build();
+            } else if (HTML.equals(format)) {
+                File html = cgpFormExportService.generateHtmlExport(formList);
+                return Response.ok(html, MediaType.TEXT_HTML)
+                        .header("Content-Disposition", "inline; filename=\"" + html.getName() + "\"")
+                        .build();
+            } else {
+                return Response.serverError().entity("ERROR: incorrect export format specified.").build();
+            }
+
         } catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);

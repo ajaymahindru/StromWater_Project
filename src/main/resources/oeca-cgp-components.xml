@@ -104,7 +104,7 @@
     <!-- ====================================================================== -->
     <bean id="flyway" class="org.flywaydb.core.Flyway" init-method="migrate" depends-on="cgpSessionFactory">
         <property name="dataSource" ref="cgpDataSource"/>
-        <property name="locations" value="classpath:sql/migrations, classpath:sql/mysql"/>
+        <property name="locations" value="classpath:sql/mysql, classpath:sql/migrations, classpath:gov/epa/oeca/cgp/infrastructure/persistence/migrations"/>
         <property name="baselineOnMigrate" value="true"/>
         <property name="baselineVersionAsString" value="1.0.0"/>
     </bean>
@@ -124,6 +124,7 @@
     <bean id="userInformationService" class="gov.epa.oeca.cgp.infrastructure.user.UserInformationServiceImpl"/>
     <bean id="catchmentImpairmentService"
           class="gov.epa.oeca.cgp.infrastructure.attains.CatchmentImpairmentServiceImpl"/>
+    <bean id="formExportService" class="gov.epa.oeca.cgp.infrastructure.export.CgpFormExportServiceImpl"/>
     <!-- ====================================================================== -->
     <!-- ATTAINS/Catchment -->
     <!-- ====================================================================== -->
