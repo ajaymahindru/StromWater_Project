@@ -1173,7 +1173,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     @Secured({ApplicationSecurityUtils.systemRoleName})
     public void updateFormTxStatus(Long formId, TransactionStatus status) throws  ApplicationException {
         try {
@@ -1196,6 +1196,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
     @Secured({ApplicationSecurityUtils.systemRoleName})
     public void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws  ApplicationException {
         try {
+            logger.info("Sending ICIS tx failure notification");
             CgpNoiForm form = retrieveForm(formId);
             Validate.notEmpty(form.getNodeTransactionId(),
                     "Transaction ID is required");

@@ -54,8 +54,8 @@ public class IcisStatusJob extends QuartzJobBean {
                 if (!txStatus.equals(submittedForm.getNodeTransactionStatus())) {
                     formService.updateFormTxStatus(formId, txStatus);
                     logger.debug(String.format("Transaction Status of form %s was changed to %s",
-                            formId, submittedForm.getNodeTransactionStatus().getValue()));
-                    if (TransactionStatus.FAILED.equals(submittedForm.getNodeTransactionStatus())) {
+                            formId, txStatus.getValue()));
+                    if (TransactionStatus.FAILED.equals(txStatus)) {
                         List<Document> docs = icisSubmissionService.downloadTransactionDocs(txId);
                         formService.sendIcisTransactionFailure(formId, docs, statusDetail);
                     }
