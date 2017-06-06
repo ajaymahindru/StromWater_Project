@@ -24,6 +24,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -38,7 +40,8 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
 
     private static final String NEW_LINE_SEPARATOR = "\n";
     //CSV file header
-    private static final Object [] FILE_HEADER = {
+    private static final Object [] FORM_LIST_FILE_HEADER = {
+            "ID",
             "Type",
             "NPDES ID",
             "Master Permit Number",
@@ -93,6 +96,11 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             "LEW R-Factor",
             "R-Factor Calculation Method",
             "Interim Site Stabilization Measures (Y/N)"
+    };
+
+    private static final Object [] SINGLE_FORM_FILE_HEADER = {
+            "Field Name",
+            "Field Value"
     };
 
     @Override
@@ -243,7 +251,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             FileWriter fileWriter = new FileWriter(csvFile.getAbsolutePath());
             CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR).withQuote('"');
             CSVPrinter csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
-            csvFilePrinter.printRecord(FILE_HEADER);
+            csvFilePrinter.printRecord(FORM_LIST_FILE_HEADER);
 
             for (CgpNoiForm form : formList) {
                 FormType type = form.getType();
@@ -258,6 +266,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 HistoricPreservation hp = form.getFormData().getHistoricPreservation();
                 LowErosivityWaiver lew = form.getFormData().getLowErosivityWaiver();
                 List formRecord = Arrays.asList(
+                        form.getId(),
                         type.getValue(),
                         form.getFormSet().getNpdesId(),
                         form.getFormSet().getMasterPermitNumber(),
@@ -275,8 +284,8 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                         site.getSiteName(),
                         assembleSiteAddress(site),
                         assembleLocation(site.getSiteLocation()),
-                        noi ? site.getSiteProjectStart().toString() : "N/A",
-                        noi ? site.getSiteProjectEnd().toString() : "N/A",
+                        noi ? getDateString(site.getSiteProjectStart()) : "N/A",
+                        noi ? getDateString(site.getSiteProjectEnd()) : "N/A",
                         noi ? site.getSiteAreaDisturbed().toString() : "N/A",
                         noi ? assembleListString(site.getSiteConstructionTypes()) : "N/A",
                         assembleYNString(site.getSiteStructureDemolitionBefore1980()),
@@ -330,12 +339,207 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
 
     }
 
+    @Override
+    @Transactional
+    public File generateFormCsv (CgpNoiForm form) throws ApplicationException {
+        try {
+            File csvFile = File.createTempFile("EPACGP", ".csv");
+            FileWriter fileWriter = new FileWriter(csvFile.getAbsolutePath());
+            CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR).withQuote('"');
+            CSVPrinter csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
+            csvFilePrinter.printRecord(SINGLE_FORM_FILE_HEADER);
+
+            FormType type = form.getType();
+            OperatorInformation operator = form.getFormData().getOperatorInformation();
+            ProjectSiteInformation site = form.getFormData().getProjectSiteInformation();
+
+            List r1 = Arrays.asList("ID", form.getId());
+            csvFilePrinter.printRecord(r1);
+            List r2 = Arrays.asList("Type", type.getValue());
+            csvFilePrinter.printRecord(r2);
+            List r3 = Arrays.asList("NPDES ID", form.getFormSet().getNpdesId());
+            csvFilePrinter.printRecord(r3);
+            List r4 = Arrays.asList("Master Permit Number", form.getFormSet().getMasterPermitNumber());
+            csvFilePrinter.printRecord(r4);
+            List r5 = Arrays.asList("Tracking Number", form.getTrackingNumber());
+            csvFilePrinter.printRecord(r5);
+            List r6 = Arrays.asList("Status", form.getStatus());
+            csvFilePrinter.printRecord(r6);
+            List r7 = Arrays.asList("Last Modified", getZonedDateString(form.getLastUpdatedDate()));
+            csvFilePrinter.printRecord(r7);
+            List r8 = Arrays.asList("Review Expiration Date", getZonedDateString(form.getReviewExpiration()));
+            csvFilePrinter.printRecord(r8);
+            List r9 = Arrays.asList("Certified Date", getZonedDateString(form.getCertifiedDate()));
+            csvFilePrinter.printRecord(r9);
+            List r10 = Arrays.asList("Operator Name", operator.getOperatorName());
+            csvFilePrinter.printRecord(r10);
+            List r11 = Arrays.asList("Operator Address", assembleOperatorAddress(operator));
+            csvFilePrinter.printRecord(r11);
+            List r12 = Arrays.asList("Operator Point of Contact", assembleContactString(operator.getOperatorPointOfContact()));
+            csvFilePrinter.printRecord(r12);
+            List r13 = Arrays.asList("Project/Site Name", site.getSiteName());
+            csvFilePrinter.printRecord(r13);
+            List r14 = Arrays.asList("Project/Site Address", assembleSiteAddress(site));
+            csvFilePrinter.printRecord(r14);
+            List r15 = Arrays.asList("Project/Site Location", assembleLocation(site.getSiteLocation()));
+            csvFilePrinter.printRecord(r15);
+
+            if (FormType.Notice_Of_Intent.equals(type)) {
+                DischargeInformation discharge = form.getFormData().getDischargeInformation();
+                ChemicalTreatmentInformation chem = form.getFormData().getChemicalTreatmentInformation();
+                StormwaterPollutionPreventionPlanInformation swppp = form.getFormData().getStormwaterPollutionPreventionPlanInformation();
+                EndangeredSpeciesProtectionInformation esp = form.getFormData().getEndangeredSpeciesProtectionInformation();
+                AppendixDCriterion espCrit = esp.getCriterion();
+                HistoricPreservation hp = form.getFormData().getHistoricPreservation();
+
+                List r16 = Arrays.asList("Project Start Date", getDateString(site.getSiteProjectStart()));
+                csvFilePrinter.printRecord(r16);
+                List r17 = Arrays.asList("Project End Date", getDateString(site.getSiteProjectEnd()));
+                csvFilePrinter.printRecord(r17);
+                List r18 = Arrays.asList("Project Area to be Disturbed (acre)", site.getSiteAreaDisturbed().toString());
+                csvFilePrinter.printRecord(r18);
+                List r19 = Arrays.asList("Site Construction Type(s)", assembleListString(site.getSiteConstructionTypes()));
+                csvFilePrinter.printRecord(r19);
+                List r20 = Arrays.asList("Site Structure Demolition before 1980?",
+                        assembleYNString(site.getSiteStructureDemolitionBefore1980()));
+                csvFilePrinter.printRecord(r20);
+                List r21 = Arrays.asList("Site Structure Demolition b/f 1980 >=10k sq ft?",
+                        assembleYNString(site.getSiteStructureDemolitionBefore198010kSquareFeet()));
+                csvFilePrinter.printRecord(r21);
+                List r22 = Arrays.asList("Pre-development Agricultural?",
+                        assembleYNString(site.getSitePreDevelopmentAgricultural()));
+                csvFilePrinter.printRecord(r22);
+                List r23 = Arrays.asList("Earth-disturbing Activities?",
+                        assembleYNString(site.getSiteEarthDisturbingActivitiesOccurrence()));
+                csvFilePrinter.printRecord(r23);
+                List r24 = Arrays.asList("Emergency-related Project?", assembleYNString(site.getSiteEmergencyRelated()));
+                csvFilePrinter.printRecord(r24);
+                List r25 = Arrays.asList("Previous NPDES Permit Present?",
+                        assembleYNString(site.getSitePreviousNpdesPermit()));
+                csvFilePrinter.printRecord(r25);
+                List r26 = Arrays.asList("Previous NPDES ID", site.getSitePreviousNpdesPermitId());
+                csvFilePrinter.printRecord(r26);
+                List r27 = Arrays.asList("Religious/Cultural Indian Property?",
+                        assembleYNString(site.getSiteIndianCulturalProperty()));
+                csvFilePrinter.printRecord(r27);
+                List r28 = Arrays.asList("Religious/Cultural Indian Tribe", site.getSiteIndianCulturalPropertyTribe());
+                csvFilePrinter.printRecord(r28);
+                List r29 = Arrays.asList("Termination Reason", site.getSiteTerminationReason());
+                csvFilePrinter.printRecord(r29);
+                List r30 = Arrays.asList("Discharge Municipal Separated Storm Sewer System",
+                        assembleYNString(discharge.getDischargeMunicipalSeparateStormSewerSystem()));
+                csvFilePrinter.printRecord(r30);
+                List r31 = Arrays.asList("Discharge: US Waters within 50ft",
+                        assembleYNString(discharge.getDischargeUSWatersWithin50Feet()));
+                csvFilePrinter.printRecord(r31);
+                //parse through points of discharge
+                for (PointOfDischarge pod : discharge.getDischargePoints()) {
+                    ReceivingWater water = pod.getFirstWater();
+                    List dr = Arrays.asList(
+                            "Point Of Discharge ID " + pod.getId(),
+                            "Description: " + pod.getDescription(),
+                            "Tier: " + (pod.getTier() != null ? pod.getTier().getValue() : "N/A"),
+                            "Impared: " + assembleYNString(pod.getImpaired()),
+                            "TMDL completed: " + assembleYNString(pod.getTmdlCompleted()),
+                            "Receiving Water ID: " + water.getId(),
+                            "Receiving Water Name: " + water.getReceivingWaterName()
+                    );
+                    csvFilePrinter.printRecord(dr);
+                    List<Pollutant> pollutants = water.getPollutants();
+                    for (Pollutant p : pollutants) {
+                        List pol = Arrays.asList(
+                                String.format("PoD %s Pollutant", pod.getId()),
+                                "Code: " + p.getId() != null ? p.getId() : "",
+                                "Name: " + p.getPollutantName(),
+                                "Impared:" + assembleYNString(p.getImpaired()),
+                                String.format("TMDL ID: %s, Name: %s", p.getTmdl().getId(), p.getTmdl().getName())
+                        );
+                        csvFilePrinter.printRecord(pol);
+                    }
+                }
+                List r32 = Arrays.asList("Treatment Chemicals Usage", assembleYNString(chem.getPolymersFlocculantsOtherTreatmentChemicals()));
+                csvFilePrinter.printRecord(r32);
+                List r33 = Arrays.asList("Cationic Treatment Chemicals", assembleYNString(chem.getCationicTreatmentChemicals()));
+                csvFilePrinter.printRecord(r33);
+                List r34 = Arrays.asList("Cationic Treatment Chem. Authorization", assembleYNString(chem.getCationicTreatmentChemicalsAuthorization()));
+                csvFilePrinter.printRecord(r34);
+                List r35 = Arrays.asList("Treatment Chemicals", assembleListString(chem.getTreatmentChemicals()));
+                csvFilePrinter.printRecord(r35);
+                List r36 = Arrays.asList("SWPPP Contact", assembleContactString(swppp.getContactInformation()));
+                csvFilePrinter.printRecord(r36);
+                List r37 = Arrays.asList("Endangered Species Protection Criterion", espCrit.getValue());
+                csvFilePrinter.printRecord(r37);
+                List r38 = Arrays.asList("ESP Criterion Basis Summary", esp.getCriteriaSelectionSummary());
+                csvFilePrinter.printRecord(r38);
+                if (AppendixDCriterion.Criterion_B.equals(espCrit)) {
+                    List otherNpdes = Arrays.asList("Other Operator NPDES ID", esp.getOtherOperatorNpdesId());
+                    csvFilePrinter.printRecord(otherNpdes);
+                }
+                if (AppendixDCriterion.Criterion_C.equals(espCrit)) {
+                    List sh = Arrays.asList("Species/Habitat in Action Area", esp.getSpeciesAndHabitatInActionArea());
+                    csvFilePrinter.printRecord(sh);
+                    List shDistance = Arrays.asList("Species/Habitat Distance from Site (mi)", esp.getDistanceFromSite());
+                    csvFilePrinter.printRecord(shDistance);
+                }
+                List r39 = Arrays.asList("Historic Preservation Screening Completed", assembleYNString(hp.getScreeningCompleted()));
+                csvFilePrinter.printRecord(r39);
+                List r40 = Arrays.asList("HP Step 1: stormwater controls requiring subsurface earth disturbance", assembleYNString(hp.getAppendexEStep1()));
+                csvFilePrinter.printRecord(r40);
+                if (hp.getAppendexEStep1()) {
+                    List r41 = Arrays.asList("HP Step 2: historic properties do not exist", assembleYNString(hp.getAppendexEStep2()));
+                    csvFilePrinter.printRecord(r41);
+                    if (!hp.getAppendexEStep2()) {
+                        List r42 = Arrays.asList("HP Step 3: stormwater controls have no effect on historic properties", assembleYNString(hp.getAppendexEStep3()));
+                        csvFilePrinter.printRecord(r42);
+                        if (!hp.getAppendexEStep3()) {
+                            List r43 = Arrays.asList("HP Step 4: SHPO/THPO indicated whether subsurface earth disturbances affect historic properties", assembleYNString(hp.getAppendexEStep4()));
+                            csvFilePrinter.printRecord(r43);
+                            if (hp.getAppendexEStep4()) {
+                                List r44 = Arrays.asList("HP Step 4 Response", hp.getAppendexEStep4Response());
+                                csvFilePrinter.printRecord(r44);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                LowErosivityWaiver lew = form.getFormData().getLowErosivityWaiver();
+                List r16 = Arrays.asList("LEW Project Start Date", getDateString(lew.getLewProjectStart()));
+                csvFilePrinter.printRecord(r16);
+                List r17 = Arrays.asList("LEW Project End Date", getDateString(lew.getLewProjectEnd()));
+                csvFilePrinter.printRecord(r17);
+                List r18 = Arrays.asList("LEW Area to be Disturbed", lew.getLewAreaDisturbed().toString());
+                csvFilePrinter.printRecord(r18);
+                List r19 = Arrays.asList("LEW R-Factor", lew.getLewRFactor().toString());
+                csvFilePrinter.printRecord(r19);
+                List r20 = Arrays.asList("R-Factor Calculation Method", lew.getLewRFactorCalculationMethod());
+                csvFilePrinter.printRecord(r20);
+                List r21 = Arrays.asList("Interim Site Stabilization Measures", assembleYNString(lew.getInterimSiteStabilizationMeasures()));
+                csvFilePrinter.printRecord(r21);
+            }
+
+            FileOutputStream fos = new FileOutputStream(csvFile);
+            fos.close();
+            fileWriter.flush();
+            fileWriter.close();
+            csvFilePrinter.close();
+
+            return csvFile;
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+
+    }
+
     String getZonedDateString(ZonedDateTime date) {
         return date != null ? DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a").format(date) : "";
     }
 
     String getDateString(Date date) {
-        return date != null ? date.toString() : "";
+        DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+        return date != null ? df.format(date) : "";
     }
 
     String assembleOperatorAddress(OperatorInformation operatorInformation) {
@@ -356,8 +560,9 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     String assembleContactString(Contact contact) {
         if (contact != null) {
             return String.format("%s %s %s, %s, %s ext. %s, %s",
-                    contact.getFirstName(), contact.getMiddleInitial(), contact.getLastName(),
-                    contact.getTitle(), contact.getPhone(), contact.getPhoneExtension(), contact.getEmail());
+                    contact.getFirstName(), contact.getMiddleInitial() != null ? contact.getMiddleInitial() : "",
+                    contact.getLastName(), contact.getTitle(), contact.getPhone(),
+                    contact.getPhoneExtension() != null ? contact.getPhoneExtension() : "", contact.getEmail());
         }
         return "";
     }
@@ -372,7 +577,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
         if (!CollectionUtils.isEmpty(list)) {
             StringBuilder sb = new StringBuilder();
             for (String s : list) {
-                sb.append(s);
+                sb.append(s + ", ");
             }
             return sb.toString();
         }

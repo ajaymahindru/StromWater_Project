@@ -86,7 +86,7 @@ public class CgpFormExportServiceImplTest {
     }
 
     @Test
-    public void testExtractCsv() throws Exception {
+     public void testExtractCsv() throws Exception {
         try {
             ZonedDateTime start = ZonedDateTime.now();
             applicationSecurityUtils.mockCertifier("LABIEVA34", "linera.abieva@cgifederal.com", "Linera", "Abieva");
@@ -102,6 +102,29 @@ public class CgpFormExportServiceImplTest {
 
             List<CgpNoiForm> forms = formService.retrieveForms(getCriteria());
             File csv = exportService.generateCsvExtract(forms);
+            assertTrue(csv.exists());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void testExtractFormCsv() throws Exception {
+        try {
+            applicationSecurityUtils.mockCertifier("LABIEVA34", "linera.abieva@cgifederal.com", "Linera", "Abieva");
+            CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
+            Long id = formService.createNewNoticeOfIntent(newForm).getId();
+            newForm = getForm("test-data/new-noi-form.json");
+            formService.updateForm(id, newForm);
+            Attachment attachment = new Attachment();
+            attachment.setName("logback.xml");
+            attachment.setCategory(AttachmentCategory.Default);
+            attachment.setData(loader.getResource("logback.xml").getFile());
+            formService.addAttachment(id, attachment);
+
+            CgpNoiForm form = formService.retrieveForm(id);
+            File csv = exportService.generateFormCsv(form);
             assertTrue(csv.exists());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
