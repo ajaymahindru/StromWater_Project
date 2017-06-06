@@ -287,7 +287,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                         assembleLocation(site.getSiteLocation()),
                         noi ? getDateString(site.getSiteProjectStart()) : "N/A",
                         noi ? getDateString(site.getSiteProjectEnd()) : "N/A",
-                        noi ? site.getSiteAreaDisturbed().toString() : "N/A",
+                        noi ? site.getSiteAreaDisturbed() : "N/A",
                         noi ? assembleListString(site.getSiteConstructionTypes()) : "N/A",
                         assembleYNString(site.getSiteStructureDemolitionBefore1980()),
                         assembleYNString(site.getSiteStructureDemolitionBefore198010kSquareFeet()),
@@ -398,7 +398,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 csvFilePrinter.printRecord(r16);
                 List r17 = Arrays.asList("Project End Date", getDateString(site.getSiteProjectEnd()));
                 csvFilePrinter.printRecord(r17);
-                List r18 = Arrays.asList("Project Area to be Disturbed (acre)", site.getSiteAreaDisturbed().toString());
+                List r18 = Arrays.asList("Project Area to be Disturbed (acre)", site.getSiteAreaDisturbed());
                 csvFilePrinter.printRecord(r18);
                 List r19 = Arrays.asList("Site Construction Type(s)", assembleListString(site.getSiteConstructionTypes()));
                 csvFilePrinter.printRecord(r19);
@@ -511,9 +511,9 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 csvFilePrinter.printRecord(r16);
                 List r17 = Arrays.asList("LEW Project End Date", getDateString(lew.getLewProjectEnd()));
                 csvFilePrinter.printRecord(r17);
-                List r18 = Arrays.asList("LEW Area to be Disturbed", lew.getLewAreaDisturbed().toString());
+                List r18 = Arrays.asList("LEW Area to be Disturbed", lew.getLewAreaDisturbed());
                 csvFilePrinter.printRecord(r18);
-                List r19 = Arrays.asList("LEW R-Factor", lew.getLewRFactor().toString());
+                List r19 = Arrays.asList("LEW R-Factor", lew.getLewRFactor());
                 csvFilePrinter.printRecord(r19);
                 List r20 = Arrays.asList("R-Factor Calculation Method", lew.getLewRFactorCalculationMethod());
                 csvFilePrinter.printRecord(r20);
