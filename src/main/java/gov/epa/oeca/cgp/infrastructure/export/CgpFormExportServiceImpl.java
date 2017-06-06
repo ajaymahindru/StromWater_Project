@@ -570,9 +570,13 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     }
 
     String assembleLocation(Location l) {
-        return String.format("(%s, %s), Data Source: %s, Horizontal Reference Datum: %s",
-                l.getLatitude().toString(), l.getLongitude().toString(),
-                l.getLatLongDataSource(), l.getHorizontalReferenceDatum());
+        if (l != null) {
+            return String.format("(%s, %s), Data Source: %s, Horizontal Reference Datum: %s",
+                    l.getLatitude(), l.getLongitude(),
+                    l.getLatLongDataSource(), l.getHorizontalReferenceDatum());
+        } else {
+            return "";
+        }
     }
 
     String assembleListString(List<String> list) {
@@ -582,8 +586,9 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 sb.append(s + ", ");
             }
             return sb.toString();
+        } else {
+            return "";
         }
-        return "";
     }
 
     String assembleYNString(Boolean b) {
