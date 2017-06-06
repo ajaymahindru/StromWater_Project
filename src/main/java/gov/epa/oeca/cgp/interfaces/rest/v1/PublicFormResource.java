@@ -230,7 +230,7 @@ public class PublicFormResource extends BaseResource {
     @GET
     @Path("/{formId}")
     @Consumes("application/json")
-    @Produces("application/json")
+    @Produces(MediaType.TEXT_PLAIN)
     @ApiOperation(value = "Retrieves a form with the specified ID.")
     public PublicNoiForm retrieveForm(
             @ApiParam(value = "The tracking number of the form.")
@@ -239,6 +239,32 @@ public class PublicFormResource extends BaseResource {
             CgpNoiForm result = cgpNoiFormService.retrievePublicForm(formId);
             return assembler.assemblePublicForm(result);
         } catch (ApplicationException e) {
+            logger.error(e.getMessage(), e);
+            throw translateException(e);
+        }
+    }
+
+    @GET
+    @Path("/csv/{formId}")
+    @Consumes("application/json")
+    @Produces("application/json")
+    @ApiOperation(value = "Retrieves CSV data of a form with the specified ID.")
+    public Response retrieveFormCsv(
+            @ApiParam(value = "The tracking number of the form.")
+            @PathParam("formId") Long formId) {
+        try {
+            CgpNoiForm result = cgpNoiFormService.retrievePublicForm(formId);
+            File csv = exportService.generateFormCsv(result);
+
+            return Response.ok()
+                    .entity(new String(Files.readAllBytes(csv.toPath())))
+                    .type(MediaType.TEXT_PLAIN_TYPE)
+                    .build();
+        } catch (IOException io) {
+            logger.error(io.getMessage(), io);
+            throw translateException(new ApplicationException(ApplicationErrorCode.E_InvalidArgument, io.getMessage()));
+        }
+        catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);
         }
