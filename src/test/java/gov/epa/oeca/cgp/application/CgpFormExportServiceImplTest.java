@@ -88,11 +88,10 @@ public class CgpFormExportServiceImplTest {
     @Test
      public void testExtractCsv() throws Exception {
         try {
-            ZonedDateTime start = ZonedDateTime.now();
             applicationSecurityUtils.mockCertifier("LABIEVA34", "linera.abieva@cgifederal.com", "Linera", "Abieva");
-            CgpNoiForm newForm = getForm("test-data/new-lew-form.json");
-            Long id = formService.createNewLowErosivityWaiver(newForm).getId();
-            newForm = getForm("test-data/new-lew-form.json");
+            CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
+            Long id = formService.createNewNoticeOfIntent(newForm).getId();
+            newForm = getForm("test-data/new-noi-form.json");
             formService.updateForm(id, newForm);
             Attachment attachment = new Attachment();
             attachment.setName("logback.xml");
