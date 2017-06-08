@@ -603,8 +603,8 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
         StringBuilder sb = new StringBuilder();
         List<PointOfDischarge> points = discharge.getDischargePoints();
         for (PointOfDischarge p : points) {
-            sb.append(String.format("ID: %s, %s, %s; ",
-                    p.getId(), p.getFirstWater().getReceivingWaterName(), p.getTier().getValue()));
+            sb.append(String.format("ID: %s, Receiving Water: %s, Tier: %s; ",
+                    p.getId(), p.getFirstWater() != null ? p.getFirstWater().getReceivingWaterName() : "not specified", p.getTier() != null ? p.getTier().getValue() : "N/A"));
         }
         return sb.toString();
     }
