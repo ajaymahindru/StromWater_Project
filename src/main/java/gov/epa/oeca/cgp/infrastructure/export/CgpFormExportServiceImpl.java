@@ -581,11 +581,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
 
     String assembleListString(List<String> list) {
         if (!CollectionUtils.isEmpty(list)) {
-            StringBuilder sb = new StringBuilder();
-            for (String s : list) {
-                sb.append(s + ", ");
-            }
-            return sb.toString();
+            return StringUtils.join(list, ", ");
         } else {
             return "";
         }
@@ -600,12 +596,16 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     }
 
     String assembleDischargePoints(DischargeInformation discharge) {
-        StringBuilder sb = new StringBuilder();
         List<PointOfDischarge> points = discharge.getDischargePoints();
-        for (PointOfDischarge p : points) {
-            sb.append(String.format("ID: %s, Receiving Water: %s, Tier: %s; ",
-                    p.getId(), p.getFirstWater() != null ? p.getFirstWater().getReceivingWaterName() : "not specified", p.getTier() != null ? p.getTier().getValue() : "N/A"));
+        if (!CollectionUtils.isEmpty(points)) {
+            StringBuilder sb = new StringBuilder();
+            for (PointOfDischarge p : points) {
+                sb.append(String.format("ID: %s, Receiving Water: %s, Tier: %s; ",
+                        p.getId(), p.getFirstWater() != null ? p.getFirstWater().getReceivingWaterName() : "not specified", p.getTier() != null ? p.getTier().getValue() : "N/A"));
+            }
+            return sb.toString();
+        } else {
+            return "";
         }
-        return sb.toString();
     }
 }

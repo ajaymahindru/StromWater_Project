@@ -137,7 +137,7 @@ public class PublicFormResource extends BaseResource {
     @GET
     @Path("/csv")
     @Consumes("application/json")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces("application/json")
     @ApiOperation(value = "Extracts a CSV format copy of forms for the specified criteria.")
     public Response extractFormsCsv(
             @ApiParam(value = "The Master General Permit (MGP) of the form.")
@@ -230,7 +230,7 @@ public class PublicFormResource extends BaseResource {
     @GET
     @Path("/{formId}")
     @Consumes("application/json")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces("application/json")
     @ApiOperation(value = "Retrieves a form with the specified ID.")
     public PublicNoiForm retrieveForm(
             @ApiParam(value = "The tracking number of the form.")
