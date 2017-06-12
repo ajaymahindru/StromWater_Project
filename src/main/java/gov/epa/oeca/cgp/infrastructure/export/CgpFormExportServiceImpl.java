@@ -253,6 +253,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR).withQuote('"');
             CSVPrinter csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
             csvFilePrinter.printRecord(FORM_LIST_FILE_HEADER);
+            List<List<String>> records = new ArrayList<>();
 
             for (CgpNoiForm form : formList) {
                 FormType type = form.getType();
@@ -324,8 +325,9 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                         !noi ? lew.getLewRFactorCalculationMethod() : "N/A",
                         assembleYNString(lew.getInterimSiteStabilizationMeasures())
                 );
-                csvFilePrinter.printRecord(formRecord);
+                records.add(formRecord);
             }
+            csvFilePrinter.printRecords(records);
 
             FileOutputStream fos = new FileOutputStream(csvFile);
             fos.close();
