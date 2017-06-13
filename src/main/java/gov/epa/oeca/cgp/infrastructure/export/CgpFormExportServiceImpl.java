@@ -9,6 +9,7 @@ import gov.epa.oeca.common.ApplicationException;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -247,13 +248,14 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     @Override
     @Transactional
     public File generateCsvExtract (List<CgpNoiForm> formList) throws ApplicationException {
+        FileWriter fileWriter = null;
+        CSVPrinter csvFilePrinter = null;
         try {
             File csvFile = File.createTempFile("EPACGP", ".csv");
-            FileWriter fileWriter = new FileWriter(csvFile.getAbsolutePath());
+            fileWriter = new FileWriter(csvFile.getAbsolutePath());
             CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR).withQuote('"');
-            CSVPrinter csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
+            csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
             csvFilePrinter.printRecord(FORM_LIST_FILE_HEADER);
-            List<List<String>> records = new ArrayList<>();
 
             for (CgpNoiForm form : formList) {
                 FormType type = form.getType();
@@ -325,20 +327,16 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                         !noi ? lew.getLewRFactorCalculationMethod() : "N/A",
                         assembleYNString(lew.getInterimSiteStabilizationMeasures())
                 );
-                records.add(formRecord);
+                csvFilePrinter.printRecord(formRecord);
             }
-            csvFilePrinter.printRecords(records);
-
-            FileOutputStream fos = new FileOutputStream(csvFile);
-            fos.close();
-            fileWriter.flush();
-            fileWriter.close();
-            csvFilePrinter.close();
 
             return csvFile;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw ApplicationException.asApplicationException(e);
+        } finally {
+            IOUtils.closeQuietly(csvFilePrinter);
+            IOUtils.closeQuietly(fileWriter);
         }
 
     }
@@ -346,11 +344,13 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     @Override
     @Transactional
     public File generateFormCsv (CgpNoiForm form) throws ApplicationException {
+        FileWriter fileWriter = null;
+        CSVPrinter csvFilePrinter = null;
         try {
             File csvFile = File.createTempFile("EPACGP", ".csv");
-            FileWriter fileWriter = new FileWriter(csvFile.getAbsolutePath());
+            fileWriter = new FileWriter(csvFile.getAbsolutePath());
             CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR).withQuote('"');
-            CSVPrinter csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
+            csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
             csvFilePrinter.printRecord(SINGLE_FORM_FILE_HEADER);
 
             FormType type = form.getType();
@@ -523,16 +523,13 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 csvFilePrinter.printRecord(r21);
             }
 
-            FileOutputStream fos = new FileOutputStream(csvFile);
-            fos.close();
-            fileWriter.flush();
-            fileWriter.close();
-            csvFilePrinter.close();
-
             return csvFile;
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw ApplicationException.asApplicationException(e);
+        } finally {
+            IOUtils.closeQuietly(csvFilePrinter);
+            IOUtils.closeQuietly(fileWriter);
         }
 
     }
