@@ -43,53 +43,7 @@
 <div data-bind="if: showResults()">
     <p>Select <span data-bind="text: type() != null && type() != undefined ? 'your ' + type() : 'user'"></span> from the list below:</p>
     <table class="table table-bordered table-condensed dataTable responsive no-wrap word-break" style="width: 100%"
-    		data-bind="attr: {id: id + '-search-results'}, 
-    		datatable: {
-    			columns: [
-    				{
-    					name: 'action',
-    					orderable: false,
-    					render: $.fn.dataTable.render.ko.action('select', selectUser, 'btn-primary-outline', '#' + id + '-search-results')
-    				},
-    				{
-    				    name: 'userId',
-    				    'orderable': true,
-    				    'data': 'userId',
-    				    render: $.fn.dataTable.render.ko.observable()
-    				},
-    				{
-    					name: 'certifierName',
-    					'orderable': true,
-    					'data': 'name',
-    					render: $.fn.dataTable.render.ko.observable()
-    				},
-    				{
-    					name: 'org',
-    					'orderable': true,
-    					'data': 'organization',
-    					render: $.fn.dataTable.render.ko.observable()
-    				},
-    				{
-    					name: 'role',
-    					'orderable': true,
-    					'data': 'role',
-    					visible: (showRoleColumn == true),
-    					render: $.fn.dataTable.render.ko.observable()
-    				},
-    				{
-    					name: 'address',
-    					'orderable': true,
-    					'data': 'address',
-    					render: $.fn.dataTable.render.ko.observable()
-    				},
-    				{
-    					name: 'email',
-    					'orderable': true,
-    					'data': 'email',
-    					render: $.fn.dataTable.render.ko.observable()
-    				}
-    			]
-    		}">
+    		data-bind="attr: {id: id + '-search-results'}, datatable: dtConfig">
         <thead>
             <tr>
                 <th></th>
@@ -101,7 +55,7 @@
                 <th>Email</th>
             </tr>
         </thead>
-        <tbody data-bind="datasource: searchResults">
+        <tbody>
         </tbody>
     </table>
     <!-- ko if: helpText -->
