@@ -16,6 +16,7 @@ import gov.epa.oeca.common.interfaces.rest.BaseResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
@@ -176,6 +177,7 @@ public class PublicFormResource extends BaseResource {
             @QueryParam("updatedDateFrom") String updatedDateFrom,
             @ApiParam(value = "An ISO 8601 formatted date string.")
             @QueryParam("updatedDateTo") String updatedDateTo) {
+        File csv = null;
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
             criteria.setTrackingNumber(trackingNumber);
@@ -210,7 +212,7 @@ public class PublicFormResource extends BaseResource {
             criteria.setResultLimit(1000L);
             List<CgpNoiForm> forms = cgpNoiFormService.retrievePublicForms(criteria);
 
-            File csv = exportService.generateCsvExtract(forms);
+            csv = exportService.generateCsvExtract(forms);
             return Response.ok()
                     .entity(new String(Files.readAllBytes(csv.toPath())))
                     .type(MediaType.TEXT_PLAIN_TYPE)
@@ -224,6 +226,8 @@ public class PublicFormResource extends BaseResource {
         } catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);
+        } finally {
+            FileUtils.deleteQuietly(csv);
         }
     }
 
@@ -252,9 +256,10 @@ public class PublicFormResource extends BaseResource {
     public Response retrieveFormCsv(
             @ApiParam(value = "The tracking number of the form.")
             @PathParam("formId") Long formId) {
+        File csv = null;
         try {
             CgpNoiForm result = cgpNoiFormService.retrievePublicForm(formId);
-            File csv = exportService.generateFormCsv(result);
+            csv = exportService.generateFormCsv(result);
 
             return Response.ok()
                     .entity(new String(Files.readAllBytes(csv.toPath())))
@@ -263,10 +268,11 @@ public class PublicFormResource extends BaseResource {
         } catch (IOException io) {
             logger.error(io.getMessage(), io);
             throw translateException(new ApplicationException(ApplicationErrorCode.E_InvalidArgument, io.getMessage()));
-        }
-        catch (ApplicationException e) {
+        } catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);
+        } finally {
+            FileUtils.deleteQuietly(csv);
         }
     }
 
