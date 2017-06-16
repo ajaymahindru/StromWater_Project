@@ -16,7 +16,6 @@ import gov.epa.oeca.common.interfaces.rest.BaseResource;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.Validate;
 import org.slf4j.Logger;
@@ -177,7 +176,6 @@ public class PublicFormResource extends BaseResource {
             @QueryParam("updatedDateFrom") String updatedDateFrom,
             @ApiParam(value = "An ISO 8601 formatted date string.")
             @QueryParam("updatedDateTo") String updatedDateTo) {
-        File csv = null;
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
             criteria.setTrackingNumber(trackingNumber);
@@ -209,10 +207,11 @@ public class PublicFormResource extends BaseResource {
             criteria.setSubmittedTo(applicationUtils.fromString(submittedDateTo));
             criteria.setUpdatedFrom(applicationUtils.fromString(updatedDateFrom));
             criteria.setUpdatedTo(applicationUtils.fromString(updatedDateTo));
-            criteria.setResultLimit(1000L);
+//            criteria.setResultLimit(1000L);
             List<CgpNoiForm> forms = cgpNoiFormService.retrievePublicForms(criteria);
 
-            csv = exportService.generateCsvExtract(forms);
+            File csv = exportService.generateCsvExtract(forms);
+            tracker.track(csv, csv);
             return Response.ok()
                     .entity(new String(Files.readAllBytes(csv.toPath())))
                     .type(MediaType.TEXT_PLAIN_TYPE)
@@ -226,8 +225,6 @@ public class PublicFormResource extends BaseResource {
         } catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);
-        } finally {
-            FileUtils.deleteQuietly(csv);
         }
     }
 
@@ -256,11 +253,10 @@ public class PublicFormResource extends BaseResource {
     public Response retrieveFormCsv(
             @ApiParam(value = "The tracking number of the form.")
             @PathParam("formId") Long formId) {
-        File csv = null;
         try {
             CgpNoiForm result = cgpNoiFormService.retrievePublicForm(formId);
-            csv = exportService.generateFormCsv(result);
-
+            File csv = exportService.generateFormCsv(result);
+            tracker.track(csv, csv);
             return Response.ok()
                     .entity(new String(Files.readAllBytes(csv.toPath())))
                     .type(MediaType.TEXT_PLAIN_TYPE)
@@ -271,8 +267,6 @@ public class PublicFormResource extends BaseResource {
         } catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);
-        } finally {
-            FileUtils.deleteQuietly(csv);
         }
     }
 
