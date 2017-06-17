@@ -1121,7 +1121,7 @@ oeca.cgp = {
 		},
 		formatDateTime: function(date) {
 			var unwrappedDate = ko.utils.unwrapObservable(date);
-            return unwrappedDate ? moment(unwrappedDate).format('MM/DD/YYYY h:mm A') : '';
+            return unwrappedDate ? moment(unwrappedDate).format('MM/DD/YYYY h:mm A Z') : '';
 		},
 		panelComputed: function(selectedPanel, panelName) {
 			return ko.pureComputed({
