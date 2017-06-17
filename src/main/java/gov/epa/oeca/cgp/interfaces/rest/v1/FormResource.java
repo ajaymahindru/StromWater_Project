@@ -492,11 +492,13 @@ public class FormResource extends BaseResource {
             List<CgpNoiForm> formList = cgpNoiFormService.retrieveForms(criteria);
             if (EXCEL.equals(format)) {
                 File excel = cgpFormExportService.generateExcelExport(formList);
+                tracker.track(excel, excel);
                 return Response.ok(excel, MediaType.APPLICATION_OCTET_STREAM)
                         .header("Content-Disposition", "attachment; filename=\"" + excel.getName() + "\"")
                         .build();
             } else if (HTML.equals(format)) {
                 File html = cgpFormExportService.generateHtmlExport(formList);
+                tracker.track(html, html);
                 return Response.ok(html, MediaType.TEXT_HTML)
                         .header("Content-Disposition", "inline; filename=\"" + html.getName() + "\"")
                         .build();

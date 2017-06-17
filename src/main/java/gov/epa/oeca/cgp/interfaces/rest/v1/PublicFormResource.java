@@ -207,10 +207,11 @@ public class PublicFormResource extends BaseResource {
             criteria.setSubmittedTo(applicationUtils.fromString(submittedDateTo));
             criteria.setUpdatedFrom(applicationUtils.fromString(updatedDateFrom));
             criteria.setUpdatedTo(applicationUtils.fromString(updatedDateTo));
-            criteria.setResultLimit(1000L);
+//            criteria.setResultLimit(1000L);
             List<CgpNoiForm> forms = cgpNoiFormService.retrievePublicForms(criteria);
 
             File csv = exportService.generateCsvExtract(forms);
+            tracker.track(csv, csv);
             return Response.ok()
                     .entity(new String(Files.readAllBytes(csv.toPath())))
                     .type(MediaType.TEXT_PLAIN_TYPE)
@@ -255,7 +256,7 @@ public class PublicFormResource extends BaseResource {
         try {
             CgpNoiForm result = cgpNoiFormService.retrievePublicForm(formId);
             File csv = exportService.generateFormCsv(result);
-
+            tracker.track(csv, csv);
             return Response.ok()
                     .entity(new String(Files.readAllBytes(csv.toPath())))
                     .type(MediaType.TEXT_PLAIN_TYPE)
@@ -263,8 +264,7 @@ public class PublicFormResource extends BaseResource {
         } catch (IOException io) {
             logger.error(io.getMessage(), io);
             throw translateException(new ApplicationException(ApplicationErrorCode.E_InvalidArgument, io.getMessage()));
-        }
-        catch (ApplicationException e) {
+        } catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);
         }
