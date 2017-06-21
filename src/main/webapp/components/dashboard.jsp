@@ -172,6 +172,9 @@
 		</div>
 		<!-- /ko -->
 		<!-- /ko -->
+		<div class="btn-group btn-group-xs">
+			<button class="btn btn-primary-outline" data-bind="click: $parent.exportAction"><span class="fa fa-table"></span> CSV</button>
+		</div>
 		<!-- /ko -->
 	</script>
 </sec:authorize>

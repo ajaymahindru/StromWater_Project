@@ -247,6 +247,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
 
     @Override
     @Transactional
+    @Secured({ApplicationSecurityUtils.helpdeskRoleName})
     public File generateCsvExtract (List<CgpNoiForm> formList) throws ApplicationException {
         FileWriter fileWriter = null;
         CSVPrinter csvFilePrinter = null;
@@ -343,6 +344,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
 
     @Override
     @Transactional
+    @Secured({ApplicationSecurityUtils.helpdeskRoleName})
     public File generateFormCsv (CgpNoiForm form) throws ApplicationException {
         FileWriter fileWriter = null;
         CSVPrinter csvFilePrinter = null;

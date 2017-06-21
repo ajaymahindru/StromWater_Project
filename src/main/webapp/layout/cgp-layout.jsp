@@ -32,13 +32,15 @@
                 <c:when test="${not empty actionBean.user}">
 					oeca.cgp.currentUser = {
 						username: "${actionBean.user.username}",
-						userRoleId: "${actionBean.user.userRoleId}"
+						userRoleId: "${actionBean.user.userRoleId}",
+						roleId: "${actionBean.user.roleId}",
 					};
                 </c:when>
                 <c:otherwise>
 					oeca.cgp.currentUser = {
 						username: null,
-						userRoleId: null
+						userRoleId: null,
+						roleId: null,
 					};
                 </c:otherwise>
                 </c:choose>
