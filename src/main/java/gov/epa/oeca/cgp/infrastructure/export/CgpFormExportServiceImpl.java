@@ -379,6 +379,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             FormType type = form.getType();
             OperatorInformation operator = form.getFormData().getOperatorInformation();
             ProjectSiteInformation site = form.getFormData().getProjectSiteInformation();
+            Location location = site.getSiteLocation();
 
             List r1 = Arrays.asList("ID", form.getId());
             csvFilePrinter.printRecord(r1);
@@ -400,17 +401,43 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             csvFilePrinter.printRecord(r9);
             List r10 = Arrays.asList("Operator Name", operator.getOperatorName());
             csvFilePrinter.printRecord(r10);
-            List r11 = Arrays.asList("Operator Address", assembleOperatorAddress(operator));
-            csvFilePrinter.printRecord(r11);
+            List opAd1 = Arrays.asList("Operator Address", operator.getOperatorAddress());
+            csvFilePrinter.printRecord(opAd1);
+            List opAd2 = Arrays.asList("Operator City", operator.getOperatorCity());
+            csvFilePrinter.printRecord(opAd2);
+            List opAd3 = Arrays.asList("Operator State", operator.getOperatorStateCode());
+            csvFilePrinter.printRecord(opAd3);
+            List opAd4 = Arrays.asList("Operator Zip", operator.getOperatorZipCode());
+            csvFilePrinter.printRecord(opAd4);
+            List opAd5 = Arrays.asList("Operator County", operator.getOperatorCounty());
+            csvFilePrinter.printRecord(opAd5);
             List r12 = Arrays.asList("Operator Point of Contact", assembleContactString(operator.getOperatorPointOfContact()));
             csvFilePrinter.printRecord(r12);
             List r13 = Arrays.asList("Project/Site Name", site.getSiteName());
             csvFilePrinter.printRecord(r13);
-            List r14 = Arrays.asList("Project/Site Address", assembleSiteAddress(site));
-            csvFilePrinter.printRecord(r14);
-            List r15 = Arrays.asList("Project/Site Location", assembleLocation(site.getSiteLocation()));
-            csvFilePrinter.printRecord(r15);
-
+            List prAd1 = Arrays.asList("Project/Site Address", site.getSiteAddress());
+            csvFilePrinter.printRecord(prAd1);
+            List prAd2 = Arrays.asList("Project/Site City", site.getSiteCity());
+            csvFilePrinter.printRecord(prAd2);
+            List prAd3 = Arrays.asList("Project/Site State", site.getSiteStateCode());
+            csvFilePrinter.printRecord(prAd3);
+            List prAd4 = Arrays.asList("Project/Site Zip", site.getSiteZipCode());
+            csvFilePrinter.printRecord(prAd4);
+            List prAd5 = Arrays.asList("Project/Site County", site.getSiteCounty());
+            csvFilePrinter.printRecord(prAd5);
+            if (location != null) {
+                List loc1 = Arrays.asList("Project Location Latitude", location.getLatitude());
+                csvFilePrinter.printRecord(loc1);
+                List loc2 = Arrays.asList("Project Location Longitude", location.getLongitude());
+                csvFilePrinter.printRecord(loc2);
+                List loc3 = Arrays.asList("Project Location Data Source", location.getLatLongDataSource());
+                csvFilePrinter.printRecord(loc3);
+                List loc4 = Arrays.asList("Location Horizontal Reference Datum", location.getHorizontalReferenceDatum());
+                csvFilePrinter.printRecord(loc4);
+            } else {
+                List loc = Arrays.asList("Project Location", "not specified");
+                csvFilePrinter.printRecord(loc);
+            }
             if (FormType.Notice_Of_Intent.equals(type)) {
                 DischargeInformation discharge = form.getFormData().getDischargeInformation();
                 ChemicalTreatmentInformation chem = form.getFormData().getChemicalTreatmentInformation();
@@ -566,21 +593,6 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
         return date != null ? df.format(date) : "";
     }
 
-    String assembleOperatorAddress(OperatorInformation operatorInformation) {
-        return String.format("%s, %s, %s, %s, County/Division: %s",
-                operatorInformation.getOperatorAddress(), operatorInformation.getOperatorCity(),
-                operatorInformation.getOperatorStateCode(), operatorInformation.getOperatorZipCode(),
-                operatorInformation.getOperatorCounty());
-
-    }
-
-    String assembleSiteAddress(ProjectSiteInformation site) {
-        return String.format("%s, %s, %s, %s, County/Division: %s",
-                site.getSiteAddress(), site.getSiteCity(),
-                site.getSiteStateCode(), site.getSiteZipCode(),
-                site.getSiteCounty());
-    }
-
     String assembleContactString(Contact contact) {
         if (contact != null) {
             return String.format("%s %s %s, %s, %s ext. %s, %s",
@@ -589,16 +601,6 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                     contact.getPhoneExtension() != null ? contact.getPhoneExtension() : "", contact.getEmail());
         }
         return "";
-    }
-
-    String assembleLocation(Location l) {
-        if (l != null) {
-            return String.format("(%s, %s), Data Source: %s, Horizontal Reference Datum: %s",
-                    l.getLatitude(), l.getLongitude(),
-                    l.getLatLongDataSource(), l.getHorizontalReferenceDatum());
-        } else {
-            return "";
-        }
     }
 
     String assembleListString(List<String> list) {
