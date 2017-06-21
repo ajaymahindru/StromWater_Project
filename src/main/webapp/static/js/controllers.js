@@ -53,6 +53,14 @@ var DashboardController = function(data, params) {
 		self.applyFilter(true);
 	};
 
+	self.exportToCsvLink = function() {
+		return config.ctx + "/api/form/v1/csv?" + self.criteriaString();
+	}
+
+	self.exportCsvForm = function(form) {
+		window.window.open(config.ctx + "/api/form/v1/csv/" + form.id());
+	}
+
 	self.editForm = function(form) {
 		if(form.submitted()) {
 			oeca.cgp.notifications.changeForm(null, function() {
@@ -363,7 +371,8 @@ var DashboardController = function(data, params) {
 					releaseAction: self.releaseForm,
 					denyAction: self.denyForm,
 					viewAction: self.viewForm,
-					assignAction: self.assignForm
+					assignAction: self.assignForm,
+					exportAction: self.exportCsvForm
 				})
 			}
 		],
@@ -374,6 +383,15 @@ var DashboardController = function(data, params) {
 		dom: '<\'pull-left\'B><\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>',
 		buttons: [
 			'colvis',
+			{
+				text: 'CSV',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToCsvLink());
+				},
+				available: function ( dt, config ) {
+					return oeca.cgp.currentUser.roleId == 120440;
+				}
+			},
 			{
 				text: 'Excel',
 				action: function ( e, dt, node, config ) {

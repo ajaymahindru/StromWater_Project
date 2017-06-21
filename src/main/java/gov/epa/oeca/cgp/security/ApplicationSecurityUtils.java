@@ -97,6 +97,7 @@ public class ApplicationSecurityUtils {
     public void mockHelpDesk(String userId) {
         ApplicationUser user = new ApplicationUser(userId, Collections.singletonList(helpdesk));
         user.setEmail("hd@cgifederal.com");
+        user.setRoleId(120440L);
         addUserToSecurityContext(user);
     }
 
