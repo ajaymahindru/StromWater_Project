@@ -87,7 +87,7 @@ public class CgpFormExportServiceImplTest {
     @Test
      public void testExtractCsv() throws Exception {
         try {
-            applicationSecurityUtils.mockCertifier("LABIEVA34", "linera.abieva@cgifederal.com", "Linera", "Abieva");
+            applicationSecurityUtils.mockHelpDesk("LABIEVA34");
             CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
             Long id = formService.createNewNoticeOfIntent(newForm).getId();
             newForm = getForm("test-data/new-noi-form.json");
@@ -110,7 +110,7 @@ public class CgpFormExportServiceImplTest {
     @Test
     public void testExtractFormCsv() throws Exception {
         try {
-            applicationSecurityUtils.mockCertifier("LABIEVA34", "linera.abieva@cgifederal.com", "Linera", "Abieva");
+            applicationSecurityUtils.mockHelpDesk("LABIEVA34");
             CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
             Long id = formService.createNewNoticeOfIntent(newForm).getId();
             newForm = getForm("test-data/new-noi-form.json");
