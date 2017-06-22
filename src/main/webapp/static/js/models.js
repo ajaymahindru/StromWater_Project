@@ -583,6 +583,15 @@ var Contact = function(data) {
 		}
 		return firstName + ' ' + mi + lastName;
 	});
+	self.nameLast = ko.pureComputed(function() {
+        var firstName = self.firstName() || '';
+        var lastName = self.lastName() || '';
+        var mi = self.middleInitial() || '';
+        if(self.firstName() && self.lastName() && self.middleInitial()) {
+            mi += '.';
+        }
+        return lastName + ', ' + firstName + ' ' + mi;
+	})
 }
 var Attachment = function(data) {
 	var self = this;
