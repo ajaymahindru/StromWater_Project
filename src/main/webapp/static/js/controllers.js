@@ -2782,7 +2782,16 @@ var UserSearchController = function(data, params) {
 	self.searchCriteria().lastName = ko.observable(null).extend({minLength: 3});
 	self.searchCriteria().organization = ko.observable(null).extend({minLength: 3});
 	self.searchCriteria().address = ko.observable(null).extend({minLength: 3});
-	self.searchCriteria().errors = ko.validation.group(self.searchCriteria(), {deep: true});
+	self.searchCriteria.extend({requiresOneOf: [
+				self.searchCriteria().userId,
+				self.searchCriteria().firstName,
+				self.searchCriteria().middleInitial,
+				self.searchCriteria().lastName,
+        		self.searchCriteria().organization,
+        		self.searchCriteria().address,
+				self.searchCriteria().email
+			]});
+	self.searchCriteria().errors = ko.validation.group(self.searchCriteria, {deep: true});
 	self.helpText = params.helpText;
 	self.showRoleColumn = params.showRoleColumn,
 	self.id = params.id;
@@ -2805,7 +2814,7 @@ var UserSearchController = function(data, params) {
             {
                 name: 'certifierName',
                 'orderable': true,
-                'data': 'name',
+                'data': 'nameLast',
                 render: $.fn.dataTable.render.ko.observable()
             },
             {
@@ -2875,9 +2884,11 @@ var UserSearchController = function(data, params) {
                             }
                         }
 					}, self.searchResults);
+        			console.log(data);
+        			console.log(settings);
         			callback({
         				data: self.searchResults(),
-        				draw: 2,
+        				draw: data.draw,
 						recordsTotal: results.totalCount,
 						recordsFiltered: results.totalCount
 					});
@@ -2895,46 +2906,8 @@ var UserSearchController = function(data, params) {
             userSearchErrors.showAllMessages();
             return;
         }
-
-        //page.hideElementWrapper();
-		var dataflow = 'NETEPACGP';
-		var roleId = (self.type() === 'Certifier' ? 120410 : (self.type() === 'Preparer' ? 120420 : ''));
-        var criteriaString = 'userId=' + encodeURIComponent(self.searchCriteria().userId())
-			+ '&firstName=' + encodeURIComponent(self.searchCriteria().firstName())
-			+ '&middleInitial=' + self.searchCriteria().middleInitial()
-			+ '&lastName=' + encodeURIComponent(self.searchCriteria().lastName())
-			+ '&organizationName=' + encodeURIComponent(self.searchCriteria().organization())
-			+ '&organizationAddress=' + encodeURIComponent(self.searchCriteria().address())
-			+ '&email=' + encodeURIComponent(self.searchCriteria().email())
-			+ '&dataflow=' + dataflow + '&roleId=' + roleId;
-        //oeca.blockUI.show();
         self.searchResults.removeAll();
         self.showResults(true);
-		/*$.getJSON(config.registration.ctx + '/api/registration/v1/user/search?' + criteriaString, function(data) {
-			ko.mapping.fromJS(data, {
-				'': {
-					create: function(options) {
-						return new Contact({
-						    userId: options.data.user.userId,
-						    firstName: options.data.user.firstName,
-						    middleInitial: options.data.user.middleInitial,
-						    lastName: options.data.user.lastName,
-						    email: options.data.organization.email,
-						    organization: options.data.organization.organizationName,
-						    role: oeca.cgp.constants.roles[options.data.role.type.code],
-						    address:
-						        options.data.organization.mailingAddress1 +
-						        (options.data.organization.mailingAddress2 !== null ? ' ' + options.data.organization.mailingAddress2 : '') +
-						        ', ' + options.data.organization.city +
-						        ', ' + options.data.organization.state.code +
-						        ' ' + options.data.organization.zip +
-						        ', ' + options.data.organization.country.code
-						});
-					}
-				}
-			}, self.searchResults);
-            self.showResults(true);
-		});*/
 	};
 	self.selectedUser = ko.observable(null);
 	self.searchResults = ko.observableArray([]);
