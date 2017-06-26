@@ -673,6 +673,12 @@ public class CgpNoiFormServiceImplTest {
             criteria.setOperatorFederal(false);
             assertEquals(0, formService.retrieveForms(criteria).size());
 
+            // search by region
+            criteria = new CgpNoiFormSearchCriteria();
+            criteria.setSiteRegion(2L);
+            assertEquals(0, formService.retrieveForms(criteria).size());
+            criteria.setSiteRegion(1L);
+            assertEquals(1, formService.retrieveForms(criteria).size());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());
@@ -887,7 +893,6 @@ public class CgpNoiFormServiceImplTest {
     public void testRetrieveRaForms() {
         try {
             // setup
-            ZonedDateTime start = ZonedDateTime.now();
             applicationSecurityUtils.mockCertifier("DFLADUNG", "david.fladung@cgifederal.com", "David", "Fladung");
             CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
             Long id = formService.createNewNoticeOfIntent(newForm).getId();

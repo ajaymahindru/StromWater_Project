@@ -130,6 +130,15 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         if (!StringUtils.isEmpty(criteria.getMasterGeneralPermit())) {
             cr.add(Restrictions.like("formSets.masterPermitNumber", criteria.getMasterGeneralPermit(), MatchMode.ANYWHERE).ignoreCase());
         }
+        if (BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch()) && criteria.getSiteRegion() != null) {
+            // search for all of the permits beginning with the state code of the states in the specified region
+            List<String> statesInRegion = getStateCodesForRegion(criteria.getSiteRegion().intValue());
+            Disjunction permitStates = Restrictions.or();
+            for (String state : statesInRegion) {
+                permitStates.add(Restrictions.like("formSets.masterPermitNumber", state, MatchMode.START));
+            }
+            cr.add(permitStates);
+        }
 
 
         // form properties
@@ -140,7 +149,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
             cr.add(Restrictions.eq("type", criteria.getType()));
         }
         if (BooleanUtils.isTrue(criteria.getPublicSearch())) { // search for only this status
-            if (criteria.getStatus() != null && ApplicationUtils.PUBLIC_STATUSES.contains(criteria.getStatus())){
+            if (criteria.getStatus() != null && ApplicationUtils.PUBLIC_STATUSES.contains(criteria.getStatus())) {
                 cr.add(Restrictions.eq("status", criteria.getStatus()));
             } else { // return all public statuses
                 cr.add(Restrictions.in("status", ApplicationUtils.PUBLIC_STATUSES));
@@ -199,17 +208,8 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
 
         // index properties
         cr.createAlias("index", "index");
-        if (criteria.getSiteRegion() != null) {
-            List<State> regionStates = referenceRepository.retrieveStates(criteria.getSiteRegion().intValue());
-            List<String> regionStateCodes = new ArrayList<>();
-            for (State rs : regionStates) {
-                regionStateCodes.add(rs.getStateCode());
-            }
-            cr.add(Restrictions.in("index.siteStateCode", regionStateCodes));
-        }
-        if (BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch())
-                && !CollectionUtils.isEmpty(criteria.getSiteStateCodes())) {
-            cr.add(Restrictions.in("index.siteStateCode", criteria.getSiteStateCodes()));
+        if (!BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch()) && criteria.getSiteRegion() != null) {
+            cr.add(Restrictions.in("index.siteStateCode", getStateCodesForRegion(criteria.getSiteRegion().intValue())));
         }
         if (!StringUtils.isEmpty(criteria.getOperatorName())) {
             cr.add(Restrictions.like("index.operatorName", criteria.getOperatorName(),
@@ -253,5 +253,14 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
 
         }
         return cr;
+    }
+
+    private List<String> getStateCodesForRegion(Integer region) {
+        List<State> regionStates = referenceRepository.retrieveStates(region);
+        List<String> regionStateCodes = new ArrayList<>();
+        for (State rs : regionStates) {
+            regionStateCodes.add(rs.getStateCode());
+        }
+        return regionStateCodes;
     }
 }
