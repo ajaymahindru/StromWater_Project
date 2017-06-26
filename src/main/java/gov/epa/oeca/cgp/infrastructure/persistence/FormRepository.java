@@ -208,7 +208,7 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
 
         // index properties
         cr.createAlias("index", "index");
-        if (BooleanUtils.isFalse(criteria.getRegulatoryAuthoritySearch()) && criteria.getSiteRegion() != null) {
+        if (!BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch()) && criteria.getSiteRegion() != null) {
             cr.add(Restrictions.in("index.siteStateCode", getStateCodesForRegion(criteria.getSiteRegion().intValue())));
         }
         if (!StringUtils.isEmpty(criteria.getOperatorName())) {
