@@ -541,16 +541,16 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 csvFilePrinter.printRecord(r39);
                 List r40 = Arrays.asList("HP Step 1: stormwater controls requiring subsurface earth disturbance", assembleYNString(hp.getAppendexEStep1()));
                 csvFilePrinter.printRecord(r40);
-                if (hp.getAppendexEStep1()) {
+                if (hp.getAppendexEStep1() != null && hp.getAppendexEStep1()) {
                     List r41 = Arrays.asList("HP Step 2: historic properties do not exist", assembleYNString(hp.getAppendexEStep2()));
                     csvFilePrinter.printRecord(r41);
-                    if (!hp.getAppendexEStep2()) {
+                    if (hp.getAppendexEStep2() != null && !hp.getAppendexEStep2()) {
                         List r42 = Arrays.asList("HP Step 3: stormwater controls have no effect on historic properties", assembleYNString(hp.getAppendexEStep3()));
                         csvFilePrinter.printRecord(r42);
-                        if (!hp.getAppendexEStep3()) {
+                        if (hp.getAppendexEStep3() != null && !hp.getAppendexEStep3()) {
                             List r43 = Arrays.asList("HP Step 4: SHPO/THPO indicated whether subsurface earth disturbances affect historic properties", assembleYNString(hp.getAppendexEStep4()));
                             csvFilePrinter.printRecord(r43);
-                            if (hp.getAppendexEStep4()) {
+                            if (hp.getAppendexEStep4() != null && hp.getAppendexEStep4()) {
                                 List r44 = Arrays.asList("HP Step 4 Response", hp.getAppendexEStep4Response());
                                 csvFilePrinter.printRecord(r44);
                             }
