@@ -47,7 +47,7 @@ public class UserInformationServiceImpl implements UserInformationService {
             RegistrationRoleType role = new RegistrationRoleType();
             role.setCode(120430L); // RA role
             criteria.setRoleType(role);
-            return assembler.assembleNewUserProfiles(streamlinedRegistrationClient.retrieveUsersByCriteria(url, token, criteria));
+            return assembler.assembleNewUserProfiles(streamlinedRegistrationClient.retrieveUsersByCriteria(url, token, criteria, null, null, null).getResults());
         } catch (IllegalArgumentException e) {
             logger.error(e.getMessage(), e);
             throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());
@@ -72,7 +72,7 @@ public class UserInformationServiceImpl implements UserInformationService {
             role.setCode(120410L); // certifier role
             criteria.setRoleType(role);
             List<NewUserProfile> results = assembler.assembleNewUserProfiles(
-                    streamlinedRegistrationClient.retrieveUsersByCriteria(url, token, criteria));
+                    streamlinedRegistrationClient.retrieveUsersByCriteria(url, token, criteria, null, null, null).getResults());
             Validate.isTrue(results.size() == 1, "Expecting one certifer result.");
             return results.get(0);
         } catch (IllegalArgumentException e) {
