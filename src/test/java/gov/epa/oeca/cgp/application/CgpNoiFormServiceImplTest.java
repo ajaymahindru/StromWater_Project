@@ -887,7 +887,6 @@ public class CgpNoiFormServiceImplTest {
     public void testRetrieveRaForms() {
         try {
             // setup
-            ZonedDateTime start = ZonedDateTime.now();
             applicationSecurityUtils.mockCertifier("DFLADUNG", "david.fladung@cgifederal.com", "David", "Fladung");
             CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
             Long id = formService.createNewNoticeOfIntent(newForm).getId();

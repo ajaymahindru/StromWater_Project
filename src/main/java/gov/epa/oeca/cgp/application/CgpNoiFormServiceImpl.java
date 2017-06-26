@@ -1175,7 +1175,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
     @Override
     @Transactional
     @Secured({ApplicationSecurityUtils.systemRoleName})
-    public void updateFormTxStatus(Long formId, TransactionStatus status) throws  ApplicationException {
+    public void updateFormTxStatus(Long formId, TransactionStatus status) throws ApplicationException {
         try {
             CgpNoiForm forUpdate = formRepository.find(formId);
             Validate.isTrue(status != null, "Transaction status is required");
@@ -1194,7 +1194,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
     @Override
     @Transactional(readOnly = true)
     @Secured({ApplicationSecurityUtils.systemRoleName})
-    public void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws  ApplicationException {
+    public void sendIcisTransactionFailure(Long formId, List<Document> documents, String statusDetail) throws ApplicationException {
         try {
             logger.info("Sending ICIS tx failure notification");
             CgpNoiForm form = retrieveForm(formId);
@@ -1380,23 +1380,12 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
         }
     }
 
-    void validateCgpNoiFormSearchCriteria(CgpNoiFormSearchCriteria criteria) {
+    private void validateCgpNoiFormSearchCriteria(CgpNoiFormSearchCriteria criteria) {
         if (BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch())) {
             Validate.isTrue(applicationSecurityUtils.hasRole(ApplicationSecurityUtils.regAuth),
                     "Regulatory authority search requires the RA role.");
             String region = applicationSecurityUtils.getCurrentApplicationUser().getClientId();
-            if (!StringUtils.isEmpty(region)) {
-                List<String> stateCodes = new ArrayList<>();
-                try {
-                    List<State> states = referenceService.retrieveStates(Integer.parseInt(region));
-                    for (State state : states) {
-                        stateCodes.add(state.getStateCode());
-                    }
-                    criteria.setSiteStateCodes(stateCodes);
-                } catch (NumberFormatException e) {
-                    logger.warn("Region was not in the expected format: " + region);
-                }
-            }
+            criteria.setSiteRegion(Long.parseLong(region));
         }
     }
 }
