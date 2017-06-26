@@ -66,8 +66,8 @@
     </bean>
     <bean id="abandonedDraftsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="abandonedDraftsJobDetail"/>
-        <!-- 9:00 am/pm -->
-        <property name="cronExpression" value="0 0 9,21 * * ?"/>
+        <!-- Monday 9:00 pm -->
+        <property name="cronExpression" value="0 0 21 ? * MON *"/>
     </bean>
     <!-- ====================================================================== -->
     <!-- ICIS Transaction Status Job -->
@@ -79,8 +79,8 @@
     <bean id="icisStatusTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="icisStatusJobDetail"/>
         <!-- every hour -->
-        <!--<property name="cronExpression" value="0 0 0/1 * * ?"/>-->
+        <property name="cronExpression" value="0 0 0/1 * * ?"/>
         <!-- every 5 minutes -->
-        <property name="cronExpression" value="0 */5 * * * ?"/>
+        <!--<property name="cronExpression" value="0 */5 * * * ?"/>-->
     </bean>
 </beans>

@@ -16,4 +16,6 @@ public interface UserInformationService {
     NewUserProfile retrieveCertifier(String certifierId) throws ApplicationException;
 
     Organization retrievePrimaryOrganization(String userId) throws ApplicationException;
+
+    List<NewUserProfile> retrieveUserById(String userId) throws ApplicationException;
 }
