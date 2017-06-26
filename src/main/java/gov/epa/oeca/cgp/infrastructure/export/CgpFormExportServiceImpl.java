@@ -523,7 +523,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 csvFilePrinter.printRecord(r35);
                 List r36 = Arrays.asList("SWPPP Contact", assembleContactString(swppp.getContactInformation()));
                 csvFilePrinter.printRecord(r36);
-                List r37 = Arrays.asList("Endangered Species Protection Criterion", espCrit.getValue());
+                List r37 = Arrays.asList("Endangered Species Protection Criterion", espCrit != null ? espCrit.getValue() : "");
                 csvFilePrinter.printRecord(r37);
                 List r38 = Arrays.asList("ESP Criterion Basis Summary", esp.getCriteriaSelectionSummary());
                 csvFilePrinter.printRecord(r38);
