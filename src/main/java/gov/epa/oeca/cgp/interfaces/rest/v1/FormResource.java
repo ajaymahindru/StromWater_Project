@@ -523,73 +523,87 @@ public class FormResource extends BaseResource {
     @Consumes("application/json")
     @ApiOperation(value = "Extracts a CSV format copy of forms for the specified criteria.")
     public Response extractFormsCsv(
-            @ApiParam(value = "The Master General Permit (MGP) of the form.")
-            @QueryParam("masterPermitNumber") String masterPermitNumber,
+            @ApiParam(value = "The owner user ID of the form.")
+            @QueryParam("owner") String owner,
             @ApiParam(value = "The NPDES ID of the form.")
             @QueryParam("npdesId") String npdesId,
+            @ApiParam(value = "The Master General Permit (MGP) of the form.")
+            @QueryParam("masterGeneralPermit") String masterGeneralPermit,
             @ApiParam(value = "The unique tracking number of the form.")
             @QueryParam("trackingNumber") String trackingNumber,
-            @ApiParam(value = "The application type.")
-            @QueryParam("applicationType") String applicationType,
-            @ApiParam(value = "The project's name.")
-            @QueryParam("projectSiteName") String projectSiteName,
+            @ApiParam(value = "The form type.")
+            @QueryParam("type") String type,
+            @ApiParam(value = "Form status.")
+            @QueryParam("status") String status,
             @ApiParam(value = "The name of the project operator.")
             @QueryParam("operatorName") String operatorName,
+            @ApiParam(value = "The project's name.")
+            @QueryParam("siteName") String siteName,
+            @ApiParam(value = "The project's region.")
+            @QueryParam("siteRegion") Long siteRegion,
             @ApiParam(value = "The two digit state code of the project site.")
-            @QueryParam("projectState") String projectState,
-            @ApiParam(value = "The county of the project site.")
-            @QueryParam("projectCounty") String projectCounty,
+            @QueryParam("siteStateCode") String siteStateCode,
             @ApiParam(value = "The city of the project site.")
-            @QueryParam("projectCity") String projectCity,
+            @QueryParam("siteCity") String siteCity,
             @ApiParam(value = "The zip code of the project site.")
-            @QueryParam("projectZip") String projectZip,
-            @ApiParam(value = "The status of the project")
-            @QueryParam("projectStatus") String projectStatus,
-            @ApiParam(value = "Indicator to search for federally operated facilities.")
-            @QueryParam("federalIndicator") Boolean federalIndicator,
+            @QueryParam("siteZipCode") String siteZipCode,
             @ApiParam(value = "Indicator to search for facilities on tribal lands.")
-            @QueryParam("tribalIndicator") Boolean tribalIndicator,
-            @ApiParam(value = "The name of a tribe to search by.")
-            @QueryParam("tribalName") String tribalName,
+            @QueryParam("siteIndianCountry") Boolean siteIndianCountry,
+            @ApiParam(value = "The name of Indian country lands to search by.")
+            @QueryParam("siteIndianCountryLands") String siteIndianCountryLands,
+            @ApiParam(value = "Indicator to search for federally operated facilities.")
+            @QueryParam("operatorFederal") Boolean operatorFederal,
+            @ApiParam(value = "An ISO 8601 formatted review expiration date.")
+            @QueryParam("reviewExpiration") String reviewExpiration,
             @ApiParam(value = "An ISO 8601 formatted date string.")
-            @QueryParam("submittedDateFrom") String submittedDateFrom,
+            @QueryParam("submittedFrom") String submittedFrom,
             @ApiParam(value = "An ISO 8601 formatted date string.")
-            @QueryParam("submittedDateTo") String submittedDateTo,
+            @QueryParam("submittedTo") String submittedTo,
             @ApiParam(value = "An ISO 8601 formatted date string.")
-            @QueryParam("updatedDateFrom") String updatedDateFrom,
+            @QueryParam("updatedFrom") String updatedFrom,
             @ApiParam(value = "An ISO 8601 formatted date string.")
-            @QueryParam("updatedDateTo") String updatedDateTo) {
+            @QueryParam("updatedTo") String updatedTo,
+            @ApiParam(value = "Active record search indicator.")
+            @QueryParam("activeRecord") Boolean activeRecord,
+            @ApiParam(value = "Result limit.")
+            @QueryParam("resultLimit") Long resultLimit) {
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
-            criteria.setTrackingNumber(trackingNumber);
+            criteria.setOwner(owner);
             criteria.setNpdesId(npdesId);
-            criteria.setMasterGeneralPermit(masterPermitNumber);
-            if (!StringUtils.isEmpty(applicationType)) {
-                FormType type = FormType.valueOf(applicationType);
-                criteria.setType(type);
+            criteria.setMasterGeneralPermit(masterGeneralPermit);
+            criteria.setTrackingNumber(trackingNumber);
+            if (!StringUtils.isEmpty(type)) {
+                FormType formType = FormType.valueOf(type);
+                criteria.setType(formType);
+            }
+            if (!StringUtils.isEmpty(status)) {
+                Status s = Status.valueOf(status);
+                criteria.setStatus(s);
             }
             criteria.setOperatorName(operatorName);
-            criteria.setSiteName(projectSiteName);
-            if (!StringUtils.isEmpty(projectState)) {
-                Validate.isTrue(projectState.length() == 2, "Project state should be a 2-digit code.");
-                criteria.setSiteStateCode(projectState);
+            criteria.setSiteName(siteName);
+            criteria.setSiteRegion(siteRegion);
+            if (!StringUtils.isEmpty(siteStateCode)) {
+                Validate.isTrue(siteStateCode.length() == 2, "Project state should be a 2-digit code.");
+                criteria.setSiteStateCode(siteStateCode);
             }
-            criteria.setSiteCity(projectCity);
-            criteria.setSiteZipCode(projectZip);
-            criteria.setSiteCounty(projectCounty);
-            if (!StringUtils.isEmpty(projectStatus)) {
-                Status status = Status.valueOf(projectStatus);
-                criteria.setStatus(status);
+            criteria.setSiteCity(siteCity);
+            criteria.setSiteZipCode(siteZipCode);
+            if (siteIndianCountry != null) {
+                criteria.setSiteIndianCountry(siteIndianCountry);
             }
-
-            criteria.setOperatorFederal(federalIndicator);
-            criteria.setSiteIndianCountry(tribalIndicator);
-            criteria.setSiteIndianCountryLands(tribalName);
-
-            criteria.setSubmittedFrom(applicationUtils.fromString(submittedDateFrom));
-            criteria.setSubmittedTo(applicationUtils.fromString(submittedDateTo));
-            criteria.setUpdatedFrom(applicationUtils.fromString(updatedDateFrom));
-            criteria.setUpdatedTo(applicationUtils.fromString(updatedDateTo));
+            criteria.setSiteIndianCountryLands(siteIndianCountryLands);
+            if (operatorFederal != null) {
+                criteria.setOperatorFederal(operatorFederal);
+            }
+            criteria.setReviewExpiration(applicationUtils.fromString(reviewExpiration));
+            criteria.setSubmittedFrom(applicationUtils.fromString(submittedFrom));
+            criteria.setSubmittedTo(applicationUtils.fromString(submittedTo));
+            criteria.setUpdatedFrom(applicationUtils.fromString(updatedFrom));
+            criteria.setUpdatedTo(applicationUtils.fromString(updatedTo));
+            criteria.setActiveRecord(activeRecord);
+            criteria.setResultLimit(resultLimit);
             List<CgpNoiForm> forms = cgpNoiFormService.retrieveForms(criteria);
 
             File csv = exportService.generateCsvExtract(forms);
