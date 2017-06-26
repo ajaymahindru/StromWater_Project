@@ -42,7 +42,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     private static final String NEW_LINE_SEPARATOR = "\n";
     //CSV file header
     private static final Object [] FORM_LIST_FILE_HEADER = {
-            "ID",
+            " ID",
             "Type",
             "NPDES ID",
             "Master Permit Number",
