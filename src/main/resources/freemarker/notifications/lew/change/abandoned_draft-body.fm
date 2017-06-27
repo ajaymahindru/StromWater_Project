@@ -5,7 +5,7 @@
            Dear ${form.formData.operatorInformation.preparer.firstName} ${form.formData.operatorInformation.preparer.lastName},
         </p>
         <p>
-            Our records indicate that you created a draft Change Low Erosivity Waiver (LEW) form 30 or more days ago. In
+            Our records indicate that you last modified a draft Change Low Erosivity Waiver (LEW) form 30 or more days ago. In
             order for these changes to become active, the form must be completed, signed by the Certifier
             (i.e., the entity at your organization authorized to sign/certify the LEW for your site), and submitted to EPA.
         </p>
