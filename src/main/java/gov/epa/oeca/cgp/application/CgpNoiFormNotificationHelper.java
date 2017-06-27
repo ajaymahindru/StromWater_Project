@@ -14,6 +14,7 @@ import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.document.Document;
 import gov.epa.oeca.common.domain.registration.NewUserProfile;
+import gov.epa.oeca.common.domain.registration.User;
 import gov.epa.oeca.common.infrastructure.notification.NotificationService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -337,11 +338,14 @@ public class CgpNoiFormNotificationHelper {
             String from = additionalMailConfiguration.get("DoNotReplyEmail");
             String owner = form.getFormSet().getOwner();
             String ownerEmail = userInformationService.retrievePrimaryOrganization(owner).getEmail();
+            User ownerProfile = userInformationService.retrieveUserById(owner).get(0).getUser();
             List<String> raEmails = getRaEmails(form);
             String ra = StringUtils.join(raEmails, ", ");
 
             // merge model
             Map<String, Object> model = new HashMap<>();
+            model.put("ownerFirstName", ownerProfile.getFirstName());
+            model.put("ownerLastName", ownerProfile.getLastName());
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("applicationLink", cgpExternalUrls.get("applicationLink"));

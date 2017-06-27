@@ -960,7 +960,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
             criteria.setStatus(Status.Draft);
-            criteria.setCreatedTo(ZonedDateTime.now().minusDays(30));
+            criteria.setUpdatedTo(ZonedDateTime.now().minusDays(30));
             List<CgpNoiForm> forms = formRepository.findAll(criteria);
             for (CgpNoiForm form : forms) {
                 notificationHelper.sendAbandonedDrafts(form);
