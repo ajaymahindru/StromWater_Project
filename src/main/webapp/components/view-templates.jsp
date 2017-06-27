@@ -269,6 +269,19 @@
                 </div>
 
                 <div data-bind="visible: $root.viewCor !== 'true'">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="control-label" for="preparer-name">Prepared By:</label>
+                                <span id="preparer-name">
+                                    <span data-bind="text: operatorInformation.preparer().name"></span>
+                                    <!-- ko if: operatorInformation.preparer().userId -->
+                                    (<span data-bind="text: operatorInformation.preparer().userId"></span>)
+                                    <!-- /ko -->
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <!-- ko if: operatorInformation.certifier() -->
                     <div class="row">
                         <div class="col-sm-12">
