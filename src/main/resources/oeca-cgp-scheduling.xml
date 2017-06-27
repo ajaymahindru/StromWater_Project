@@ -67,7 +67,7 @@
     <bean id="abandonedDraftsTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="abandonedDraftsJobDetail"/>
         <!-- Monday 9:00 pm -->
-        <property name="cronExpression" value="0 0 21 ? * MON *"/>
+        <property name="cronExpression" value="0 0 21 ? * TUE *"/>
     </bean>
     <!-- ====================================================================== -->
     <!-- ICIS Transaction Status Job -->
