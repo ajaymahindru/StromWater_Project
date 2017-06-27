@@ -2884,10 +2884,8 @@ var UserSearchController = function(data, params) {
                             }
                         }
 					}, self.searchResults);
-        			console.log(data);
-        			console.log(settings);
         			callback({
-        				data: self.searchResults(),
+        				data: self.searchResults() || [],
         				draw: data.draw,
 						recordsTotal: results.totalCount,
 						recordsFiltered: results.totalCount
