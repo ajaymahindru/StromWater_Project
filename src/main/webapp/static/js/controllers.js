@@ -352,7 +352,7 @@ var DashboardController = function(data, params) {
 				className: 'desktop',
 				data: 'lastUpdatedDate',
 				render: $.fn.dataTable.render.ko.computed(function(data) {
-					return (data() !== null ? moment(data()).format('MM/DD/YYYY h:mm A Z') : '');
+					return oeca.cgp.utils.formatDateTime(data);
 				})
 			},
 			{
