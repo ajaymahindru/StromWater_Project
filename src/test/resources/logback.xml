@@ -8,6 +8,7 @@
     <logger name="org.apache.cxf" level="warn"/>
     <logger name="org.springframework.security" level="debug"/>
     <logger name="org.flywaydb" level="info"/>
+    <logger name="org.hibernate.SQL" level="debug"/>
     <root level="info">
         <appender-ref ref="STDOUT"/>
     </root>

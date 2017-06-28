@@ -2,10 +2,10 @@
     <body>
         <p>${currentDate}</p>
         <p>
-           Dear ${form.formData.operatorInformation.preparer.firstName} ${form.formData.operatorInformation.preparer.lastName},
+           Dear ${ownerFirstName} ${ownerLastName},
         </p>
         <p>
-            Our records indicate that you created a draft Discontinue Low Erosivity Waiver (LEW) under the EPA
+            Our records indicate that you last modified a draft Discontinue Low Erosivity Waiver (LEW) under the EPA
             Construction General Permit (CGP) 30 or more days ago. For the LEW to be discontinued, your form must be
             completed, signed by the Certifier (i.e., the entity at your organization authorized to sign/certify the LEW
             for your site), and submitted to the EPA.

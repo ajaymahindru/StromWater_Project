@@ -3,6 +3,7 @@ package gov.epa.oeca.cgp.infrastructure.user;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.domain.registration.NewUserProfile;
 import gov.epa.oeca.common.domain.registration.Organization;
+import gov.epa.oeca.common.domain.registration.User;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,6 +19,10 @@ public class MockUserInformationServiceImpl implements UserInformationService {
         Organization org = new Organization();
         org.setEmail("david.fladung@cgifederal.com");
         result.setOrganization(org);
+        User user = new User();
+        user.setFirstName("David");
+        user.setLastName("Fladung");
+        result.setUser(user);
         return result;
     }
 
@@ -34,5 +39,10 @@ public class MockUserInformationServiceImpl implements UserInformationService {
     @Override
     public Organization retrievePrimaryOrganization(String userId) throws ApplicationException {
         return getTest().getOrganization();
+    }
+
+    @Override
+    public List<NewUserProfile> retrieveUserById(String userId) throws ApplicationException {
+        return Collections.singletonList(getTest());
     }
 }

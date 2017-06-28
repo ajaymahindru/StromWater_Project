@@ -172,6 +172,9 @@
 		</div>
 		<!-- /ko -->
 		<!-- /ko -->
+		<div class="btn-group btn-group-xs">
+			<button class="btn btn-primary-outline" data-bind="click: $parent.exportAction"><span class="fa fa-table"></span> CSV</button>
+		</div>
 		<!-- /ko -->
 	</script>
 </sec:authorize>
@@ -295,8 +298,8 @@
 					Location: <span data-bind="text: formData.projectSiteInformation.siteLocation.display"></span><br/>
 					Owner: <span data-bind="text: formSet.owner"></span><br/>
 					Status: <span data-bind="text: statusDisplay"></span><br/>
-					Date Certified: <span data-bind="text: certifiedDate() !== null ? moment(certifiedDate()).format('MM/DD/YYYY h:mm A') : ''"></span><br/>
-					Date Active: <span data-bind="text: reviewExpiration() !== null ? moment(reviewExpiration()).format('MM/DD/YYYY h:mm A') : ''"></span>
+					Date Certified: <span data-bind="text: oeca.cgp.utils.formatDateTime(certifiedDate())"></span><br/>
+					Date Active: <span data-bind="text: oeca.cgp.utils.formatDateTime(reviewExpiration())"></span>
 				</div>
 			</div>
 		</div>
@@ -316,7 +319,7 @@
 			<tr>
 				<td data-bind="text: trackingNumber"></td>
 				<td data-bind="text: statusDisplay"></td>
-				<td data-bind="text: lastUpdatedDate() !== null ? moment(lastUpdatedDate()).format('MM/DD/YYYY h:mm A') : ''"></td>
+				<td data-bind="text: oeca.cgp.utils.formatDateTime(lastUpdatedDate())"></td>
 				<td><div class="btn-group btn-group-xs"><button type="button" class="btn-primary-outline btn" data-bind="click: $parent.view"><span class="fa fa-search"></span> View</button></div></td>
 			</tr>
 			</tbody>

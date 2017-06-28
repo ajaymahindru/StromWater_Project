@@ -9,6 +9,7 @@ import gov.epa.oeca.cgp.domain.noi.Attachment;
 import gov.epa.oeca.cgp.domain.noi.CgpNoiForm;
 import gov.epa.oeca.cgp.domain.noi.FormType;
 import gov.epa.oeca.cgp.domain.noi.Status;
+import gov.epa.oeca.cgp.infrastructure.export.CgpFormExportService;
 import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
 import gov.epa.oeca.common.interfaces.rest.BaseResource;
@@ -23,9 +24,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.List;
 
 /**
@@ -46,6 +48,8 @@ public class PublicFormResource extends BaseResource {
     CgpNoiFormAssembler assembler;
     @Autowired
     ApplicationUtils applicationUtils;
+    @Autowired
+    CgpFormExportService exportService;
 
     @GET
     @Consumes("application/json")
@@ -146,7 +150,6 @@ public class PublicFormResource extends BaseResource {
             throw translateException(e);
         }
     }
-
 
     @GET
     @Path("/{formId}/attachment/{attachmentId}")

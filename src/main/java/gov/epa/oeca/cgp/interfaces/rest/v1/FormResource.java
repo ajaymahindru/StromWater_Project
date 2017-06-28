@@ -1,6 +1,7 @@
 package gov.epa.oeca.cgp.interfaces.rest.v1;
 
 import gov.epa.oeca.cgp.application.ApplicationUtils;
+import gov.epa.oeca.cgp.application.CgpNoiFormAssembler;
 import gov.epa.oeca.cgp.application.CgpNoiFormService;
 import gov.epa.oeca.cgp.domain.Contact;
 import gov.epa.oeca.cgp.domain.dto.CgpNoiFormSearchCriteria;
@@ -56,6 +57,11 @@ public class FormResource extends BaseResource {
     ApplicationSecurityUtils applicationSecurityUtils;
     @Autowired
     ApplicationUtils applicationUtils;
+    @Autowired
+    CgpNoiFormAssembler assembler;
+    @Autowired
+    CgpFormExportService exportService;
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -492,11 +498,13 @@ public class FormResource extends BaseResource {
             List<CgpNoiForm> formList = cgpNoiFormService.retrieveForms(criteria);
             if (EXCEL.equals(format)) {
                 File excel = cgpFormExportService.generateExcelExport(formList);
+                tracker.track(excel, excel);
                 return Response.ok(excel, MediaType.APPLICATION_OCTET_STREAM)
                         .header("Content-Disposition", "attachment; filename=\"" + excel.getName() + "\"")
                         .build();
             } else if (HTML.equals(format)) {
                 File html = cgpFormExportService.generateHtmlExport(formList);
+                tracker.track(html, html);
                 return Response.ok(html, MediaType.TEXT_HTML)
                         .header("Content-Disposition", "inline; filename=\"" + html.getName() + "\"")
                         .build();
@@ -505,6 +513,131 @@ public class FormResource extends BaseResource {
             }
 
         } catch (ApplicationException e) {
+            logger.error(e.getMessage(), e);
+            throw translateException(e);
+        }
+    }
+
+    @GET
+    @Path("/csv")
+    @Consumes("application/json")
+    @ApiOperation(value = "Extracts a CSV format copy of forms for the specified criteria.")
+    public Response extractFormsCsv(
+            @ApiParam(value = "The owner user ID of the form.")
+            @QueryParam("owner") String owner,
+            @ApiParam(value = "The NPDES ID of the form.")
+            @QueryParam("npdesId") String npdesId,
+            @ApiParam(value = "The Master General Permit (MGP) of the form.")
+            @QueryParam("masterGeneralPermit") String masterGeneralPermit,
+            @ApiParam(value = "The unique tracking number of the form.")
+            @QueryParam("trackingNumber") String trackingNumber,
+            @ApiParam(value = "The form type.")
+            @QueryParam("type") String type,
+            @ApiParam(value = "Form status.")
+            @QueryParam("status") String status,
+            @ApiParam(value = "The name of the project operator.")
+            @QueryParam("operatorName") String operatorName,
+            @ApiParam(value = "The project's name.")
+            @QueryParam("siteName") String siteName,
+            @ApiParam(value = "The project's region.")
+            @QueryParam("siteRegion") Long siteRegion,
+            @ApiParam(value = "The two digit state code of the project site.")
+            @QueryParam("siteStateCode") String siteStateCode,
+            @ApiParam(value = "The city of the project site.")
+            @QueryParam("siteCity") String siteCity,
+            @ApiParam(value = "The zip code of the project site.")
+            @QueryParam("siteZipCode") String siteZipCode,
+            @ApiParam(value = "Indicator to search for facilities on tribal lands.")
+            @QueryParam("siteIndianCountry") Boolean siteIndianCountry,
+            @ApiParam(value = "The name of Indian country lands to search by.")
+            @QueryParam("siteIndianCountryLands") String siteIndianCountryLands,
+            @ApiParam(value = "Indicator to search for federally operated facilities.")
+            @QueryParam("operatorFederal") Boolean operatorFederal,
+            @ApiParam(value = "An ISO 8601 formatted review expiration date.")
+            @QueryParam("reviewExpiration") String reviewExpiration,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("submittedFrom") String submittedFrom,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("submittedTo") String submittedTo,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("updatedFrom") String updatedFrom,
+            @ApiParam(value = "An ISO 8601 formatted date string.")
+            @QueryParam("updatedTo") String updatedTo,
+            @ApiParam(value = "Active record search indicator.")
+            @QueryParam("activeRecord") Boolean activeRecord,
+            @ApiParam(value = "Result limit.")
+            @QueryParam("resultLimit") Long resultLimit) {
+        try {
+            CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
+            criteria.setOwner(owner);
+            criteria.setNpdesId(npdesId);
+            criteria.setMasterGeneralPermit(masterGeneralPermit);
+            criteria.setTrackingNumber(trackingNumber);
+            if (!StringUtils.isEmpty(type)) {
+                FormType formType = FormType.valueOf(type);
+                criteria.setType(formType);
+            }
+            if (!StringUtils.isEmpty(status)) {
+                Status s = Status.valueOf(status);
+                criteria.setStatus(s);
+            }
+            criteria.setOperatorName(operatorName);
+            criteria.setSiteName(siteName);
+            criteria.setSiteRegion(siteRegion);
+            if (!StringUtils.isEmpty(siteStateCode)) {
+                Validate.isTrue(siteStateCode.length() == 2, "Project state should be a 2-digit code.");
+                criteria.setSiteStateCode(siteStateCode);
+            }
+            criteria.setSiteCity(siteCity);
+            criteria.setSiteZipCode(siteZipCode);
+            if (siteIndianCountry != null) {
+                criteria.setSiteIndianCountry(siteIndianCountry);
+            }
+            criteria.setSiteIndianCountryLands(siteIndianCountryLands);
+            if (operatorFederal != null) {
+                criteria.setOperatorFederal(operatorFederal);
+            }
+            criteria.setReviewExpiration(applicationUtils.fromString(reviewExpiration));
+            criteria.setSubmittedFrom(applicationUtils.fromString(submittedFrom));
+            criteria.setSubmittedTo(applicationUtils.fromString(submittedTo));
+            criteria.setUpdatedFrom(applicationUtils.fromString(updatedFrom));
+            criteria.setUpdatedTo(applicationUtils.fromString(updatedTo));
+            criteria.setActiveRecord(activeRecord);
+            criteria.setResultLimit(resultLimit);
+            List<CgpNoiForm> forms = cgpNoiFormService.retrieveForms(criteria);
+
+            File csv = exportService.generateCsvExtract(forms);
+            tracker.track(csv, csv);
+            return Response.ok(csv, MediaType.APPLICATION_OCTET_STREAM)
+                    .header("Content-Disposition", "inline; filename=\"" + csv.getName() + "\"")
+                    .build();
+
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage(), e);
+            throw translateException(new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage()));
+        }
+        catch (ApplicationException e) {
+            logger.error(e.getMessage(), e);
+            throw translateException(e);
+        }
+    }
+
+    @GET
+    @Path("/csv/{formId}")
+    @Consumes("application/json")
+    @ApiOperation(value = "Retrieves CSV data of a form with the specified ID.")
+    public Response retrieveFormCsv(
+            @ApiParam(value = "The tracking number of the form.")
+            @PathParam("formId") Long formId) {
+        try {
+            CgpNoiForm result = cgpNoiFormService.retrieveForm(formId);
+            File csv = exportService.generateFormCsv(result);
+            tracker.track(csv, csv);
+            return Response.ok(csv, MediaType.APPLICATION_OCTET_STREAM)
+                    .header("Content-Disposition", "inline; filename=\"" + csv.getName() + "\"")
+                    .build();
+        }
+        catch (ApplicationException e) {
             logger.error(e.getMessage(), e);
             throw translateException(e);
         }

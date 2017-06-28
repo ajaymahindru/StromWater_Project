@@ -14,4 +14,8 @@ public interface CgpFormExportService {
     File generateExcelExport(List<CgpNoiForm> formList) throws ApplicationException;
 
     File generateHtmlExport (List<CgpNoiForm> formList) throws ApplicationException;
+
+    File generateCsvExtract (List<CgpNoiForm> formList) throws ApplicationException;
+
+    File generateFormCsv (CgpNoiForm form) throws ApplicationException;
 }

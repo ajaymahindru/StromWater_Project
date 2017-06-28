@@ -40,18 +40,26 @@ var DashboardController = function(data, params) {
 			self.criteria.updatedTo(null);
 		}
 	});
-	self.applyFilter = function(showFilterAfter) {
+	self.applyFilter = function(showFilterAfter, resetPaging) {
 		console.log("loading form list");
 		if (showFilterAfter !== true) {
 			self.showFilter(false);
 		}
-		dt.ajax.reload(null,false);
+		dt.ajax.reload(null,resetPaging);
 	};
 
 	self.clearFilter = function() {
 		self.criteria.reset();
-		self.applyFilter(true);
+		self.applyFilter(true, true);
 	};
+
+	self.exportToCsvLink = function() {
+		return config.ctx + "/api/form/v1/csv?" + self.criteriaString();
+	}
+
+	self.exportCsvForm = function(form) {
+		window.window.open(config.ctx + "/api/form/v1/csv/" + form.id());
+	}
 
 	self.editForm = function(form) {
 		if(form.submitted()) {
@@ -176,10 +184,10 @@ var DashboardController = function(data, params) {
 	};
     //subscriptions
     self.postalSub = postal.channel('noi').subscribe('form.*.update.*', function() {
-    	self.applyFilter();
+    	self.applyFilter(null, false);
 	});
     self.postalSubNav = postal.channel('nav').subscribe('home.show', function() {
-    	self.applyFilter();
+    	self.applyFilter(null, false);
 	});
 
 	self.dispose = function() {
@@ -344,7 +352,7 @@ var DashboardController = function(data, params) {
 				className: 'desktop',
 				data: 'lastUpdatedDate',
 				render: $.fn.dataTable.render.ko.computed(function(data) {
-					return (data() !== null ? moment(data()).format('MM/DD/YYYY h:mm A') : '');
+					return oeca.cgp.utils.formatDateTime(data);
 				})
 			},
 			{
@@ -363,7 +371,8 @@ var DashboardController = function(data, params) {
 					releaseAction: self.releaseForm,
 					denyAction: self.denyForm,
 					viewAction: self.viewForm,
-					assignAction: self.assignForm
+					assignAction: self.assignForm,
+					exportAction: self.exportCsvForm
 				})
 			}
 		],
@@ -374,6 +383,15 @@ var DashboardController = function(data, params) {
 		dom: '<\'pull-left\'B><\'pull-right\'f><t><\'col-sm-8\'i><\'col-sm-2\'l><\'pull-right\'p>',
 		buttons: [
 			'colvis',
+			{
+				text: 'CSV',
+				action: function ( e, dt, node, config ) {
+					window.window.open(self.exportToCsvLink());
+				},
+				available: function ( dt, config ) {
+					return oeca.cgp.currentUser.roleId == 120440;
+				}
+			},
 			{
 				text: 'Excel',
 				action: function ( e, dt, node, config ) {
@@ -2771,67 +2789,142 @@ var UserSearchController = function(data, params) {
     });
     self.showInviteConfirm = oeca.cgp.utils.panelComputed(self.panel, 'inviteConfirm');
 	self.labels = params.titles;
+    self.type = ko.observable(params.type);
 	self.searchCriteria = ko.observable(params.defaultCriteria || new Contact({
 		organization: null,
-		address: null
+		address: null,
+        dataflow: 'NETEPACGP',
+    	roleId: (self.type() === 'Certifier' ? 120410 : (self.type() === 'Preparer' ? 120420 : ''))
 	}));
-	self.searchCriteria().userId = ko.observable('').extend({minLength: 3});
-	self.searchCriteria().lastName = ko.observable('').extend({required: true, minLength: 3});
-	self.searchCriteria().organization = ko.observable('').extend({minLength: 3});
-	self.searchCriteria().address = ko.observable('').extend({minLength: 3});
-	self.searchCriteria().errors = ko.validation.group(self.searchCriteria(), {deep: true});
-	self.type = ko.observable(params.type);
+	self.searchCriteria().userId = ko.observable(null).extend({minLength: 3});
+	self.searchCriteria().lastName = ko.observable(null).extend({minLength: 3});
+	self.searchCriteria().organization = ko.observable(null).extend({minLength: 3});
+	self.searchCriteria().address = ko.observable(null).extend({minLength: 3});
+	self.searchCriteria.extend({requiresOneOf: [
+				self.searchCriteria().userId,
+				self.searchCriteria().firstName,
+				self.searchCriteria().middleInitial,
+				self.searchCriteria().lastName,
+        		self.searchCriteria().organization,
+        		self.searchCriteria().address,
+				self.searchCriteria().email
+			]});
+	self.searchCriteria().errors = ko.validation.group(self.searchCriteria, {deep: true});
 	self.helpText = params.helpText;
 	self.showRoleColumn = params.showRoleColumn,
 	self.id = params.id;
 	if(!self.id) {
 		throw "id is required for user search component";
 	}
+	self.dtConfig = function () {
+        return {
+            columns: [
+                {
+                    name: 'action',
+                    orderable: false,
+                    render: $.fn.dataTable.render.ko.action('select', self.selectUser, 'btn-primary-outline', '#' + self.id + '-search-results')
+                },
+                {
+                    name: 'user.userId',
+                    'orderable': true,
+                    'data': 'userId',
+                    render: $.fn.dataTable.render.ko.observable()
+                },
+                {
+                    name: 'certifierName',
+                    'orderable': true,
+                    'data': 'nameLast',
+                    render: $.fn.dataTable.render.ko.observable()
+                },
+                {
+                    name: 'org',
+                    'orderable': true,
+                    'data': 'organization',
+                    render: $.fn.dataTable.render.ko.observable()
+                },
+                {
+                    name: 'role',
+                    'orderable': true,
+                    'data': 'role',
+                    visible: (self.showRoleColumn == true),
+                    render: $.fn.dataTable.render.ko.observable()
+                },
+                {
+                    name: 'address',
+                    'orderable': true,
+                    'data': 'address',
+                    render: $.fn.dataTable.render.ko.observable()
+                },
+                {
+                    name: 'email',
+                    'orderable': true,
+                    'data': 'email',
+                    render: $.fn.dataTable.render.ko.observable()
+                }
+            ],
+            searching: false,
+            processing: true,
+            serverSide: true,
+            responsive: true,
+            lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
+            ajax: function (data, callback, settings) {
+                var dtCriteria = {
+                    config: data,
+                    criteria: self.searchCriteria
+                };
+                var criteriaJson = ko.mapping.toJSON(dtCriteria);
+                $.ajax({
+                    url: config.registration.ctx + '/api/registration/v1/user/search',
+                    contentType: 'application/json',
+                    type: 'post',
+                    data: criteriaJson,
+                    dataType: 'json',
+                    beforeSend: oeca.xhrSettings.setJsonAcceptHeader,
+                    success: function (results) {
+                        ko.mapping.fromJS(results.results, {
+                            '': {
+                                create: function (options) {
+                                    return new Contact({
+                                        userId: options.data.user.userId,
+                                        firstName: options.data.user.firstName,
+                                        middleInitial: options.data.user.middleInitial,
+                                        lastName: options.data.user.lastName,
+                                        email: options.data.organization.email,
+                                        organization: options.data.organization.organizationName,
+                                        role: oeca.cgp.constants.roles[options.data.role.type.code],
+                                        address: options.data.organization.mailingAddress1 +
+                                        (options.data.organization.mailingAddress2 !== null ? ' ' + options.data.organization.mailingAddress2 : '') +
+                                        ', ' + options.data.organization.city +
+                                        ', ' + options.data.organization.state.code +
+                                        ' ' + options.data.organization.zip +
+                                        ', ' + options.data.organization.country.code
+                                    });
+                                }
+                            }
+                        }, self.searchResults);
+                        callback({
+                            data: self.searchResults() || [],
+                            draw: data.draw,
+                            recordsTotal: results.totalCount,
+                            recordsFiltered: results.totalCount
+                        });
+                    },
+                    error: function (res) {
+                        console.log("error searching for users");
+                        console.log(res);
+                    }
+                })
+            }
+        }
+    }
 	self.search = function(page) {
         var userSearchErrors = self.searchCriteria().errors;
         if (userSearchErrors().length > 0) {
             userSearchErrors.showAllMessages();
             return;
         }
-
-        //page.hideElementWrapper();
-		var dataflow = 'NETEPACGP';
-		var roleId = (self.type() === 'Certifier' ? 120410 : (self.type() === 'Preparer' ? 120420 : ''));
-        var criteriaString = 'userId=' + encodeURIComponent(self.searchCriteria().userId())
-			+ '&firstName=' + encodeURIComponent(self.searchCriteria().firstName())
-			+ '&middleInitial=' + self.searchCriteria().middleInitial()
-			+ '&lastName=' + encodeURIComponent(self.searchCriteria().lastName())
-			+ '&organizationName=' + encodeURIComponent(self.searchCriteria().organization())
-			+ '&organizationAddress=' + encodeURIComponent(self.searchCriteria().address())
-			+ '&email=' + encodeURIComponent(self.searchCriteria().email())
-			+ '&dataflow=' + dataflow + '&roleId=' + roleId;
-        oeca.blockUI.show();
         self.searchResults.removeAll();
-		$.getJSON(config.registration.ctx + '/api/registration/v1/user/search?' + criteriaString, function(data) {
-			ko.mapping.fromJS(data, {
-				'': {
-					create: function(options) {
-						return new Contact({
-						    userId: options.data.user.userId,
-						    firstName: options.data.user.firstName,
-						    middleInitial: options.data.user.middleInitial,
-						    lastName: options.data.user.lastName,
-						    email: options.data.organization.email,
-						    organization: options.data.organization.organizationName,
-						    role: oeca.cgp.constants.roles[options.data.role.type.code],
-						    address:
-						        options.data.organization.mailingAddress1 +
-						        (options.data.organization.mailingAddress2 !== null ? ' ' + options.data.organization.mailingAddress2 : '') +
-						        ', ' + options.data.organization.city +
-						        ', ' + options.data.organization.state.code +
-						        ' ' + options.data.organization.zip +
-						        ', ' + options.data.organization.country.code
-						});
-					}
-				}
-			}, self.searchResults);
-            self.showResults(true);
-		});
+        self.showResults(true);
 	};
 	self.selectedUser = ko.observable(null);
 	self.searchResults = ko.observableArray([]);
