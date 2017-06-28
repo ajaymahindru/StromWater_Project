@@ -40,17 +40,17 @@ var DashboardController = function(data, params) {
 			self.criteria.updatedTo(null);
 		}
 	});
-	self.applyFilter = function(showFilterAfter) {
+	self.applyFilter = function(showFilterAfter, resetPaging) {
 		console.log("loading form list");
 		if (showFilterAfter !== true) {
 			self.showFilter(false);
 		}
-		dt.ajax.reload(null,false);
+		dt.ajax.reload(null,resetPaging);
 	};
 
 	self.clearFilter = function() {
 		self.criteria.reset();
-		self.applyFilter(true);
+		self.applyFilter(true, true);
 	};
 
 	self.exportToCsvLink = function() {
@@ -184,10 +184,10 @@ var DashboardController = function(data, params) {
 	};
     //subscriptions
     self.postalSub = postal.channel('noi').subscribe('form.*.update.*', function() {
-    	self.applyFilter();
+    	self.applyFilter(null, false);
 	});
     self.postalSubNav = postal.channel('nav').subscribe('home.show', function() {
-    	self.applyFilter();
+    	self.applyFilter(null, false);
 	});
 
 	self.dispose = function() {
