@@ -2,7 +2,7 @@
     <body>
         <p>${currentDate}</p>
         <p>
-           Dear ${form.formData.operatorInformation.preparer.firstName} ${form.formData.operatorInformation.preparer.lastName},
+           Dear ${ownerFirstName} ${ownerLastName},
         </p>
         <p>
             Our records indicate that you last modified a draft Discontinue Low Erosivity Waiver (LEW) under the EPA
