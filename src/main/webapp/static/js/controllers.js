@@ -2748,6 +2748,7 @@ var UserSearchController = function(data, params) {
 			}
 		}
 	});
+	self.loadResults = ko.observable(null);
     self.showResults = ko.pureComputed({
         read: function() {
             return self.panel() == 'results';
@@ -2923,7 +2924,12 @@ var UserSearchController = function(data, params) {
             userSearchErrors.showAllMessages();
             return;
         }
-        self.searchResults.removeAll();
+        if(!self.loadResults()) {
+            self.loadResults(true);
+		}
+		else {
+        	$('#' + self.id + '-search-results').DataTable().ajax.reload(null,true);
+        }
         self.showResults(true);
 	};
 	self.selectedUser = ko.observable(null);
