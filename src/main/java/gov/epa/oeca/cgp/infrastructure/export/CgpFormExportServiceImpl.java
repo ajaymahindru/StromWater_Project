@@ -393,6 +393,8 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             csvFilePrinter.printRecord(r4);
             List r5 = Arrays.asList("Tracking Number", form.getTrackingNumber());
             csvFilePrinter.printRecord(r5);
+            List owner = Arrays.asList("Owner", form.getFormSet().getOwner());
+            csvFilePrinter.printRecord(owner);
             List r6 = Arrays.asList("Status", form.getStatus());
             csvFilePrinter.printRecord(r6);
             List r7 = Arrays.asList("Last Modified", getZonedDateString(form.getLastUpdatedDate()));
