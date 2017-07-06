@@ -69,7 +69,7 @@ public class ReferenceServiceImplTest {
     public void retrieveBiaTribes() throws Exception {
         try {
             List<BiaTribe> tribes = referenceService.retrieveBiaTribes();
-            assertEquals(tribes.size(), 578);
+            assertEquals(tribes.size(), 577);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());
