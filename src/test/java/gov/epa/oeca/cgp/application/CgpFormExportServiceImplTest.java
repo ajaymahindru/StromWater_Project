@@ -85,7 +85,7 @@ public class CgpFormExportServiceImplTest {
     }
 
     @Test
-     public void testExtractCsv() throws Exception {
+    public void testExtractCsv() throws Exception {
         try {
             applicationSecurityUtils.mockHelpDesk("LABIEVA34");
             CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
@@ -99,7 +99,30 @@ public class CgpFormExportServiceImplTest {
             formService.addAttachment(id, attachment);
 
             List<CgpNoiForm> forms = formService.retrieveForms(getCriteria());
-            File csv = exportService.generateCsvExtract(forms);
+            File csv = exportService.generateCsvExtract(forms, false);
+            assertTrue(csv.exists());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+     public void testExtractCsvByReceivingWater() throws Exception {
+        try {
+            applicationSecurityUtils.mockHelpDesk("LABIEVA34");
+            CgpNoiForm newForm = getForm("test-data/new-noi-form.json");
+            Long id = formService.createNewNoticeOfIntent(newForm).getId();
+            newForm = getForm("test-data/new-noi-form.json");
+            formService.updateForm(id, newForm);
+            Attachment attachment = new Attachment();
+            attachment.setName("logback.xml");
+            attachment.setCategory(AttachmentCategory.Default);
+            attachment.setData(loader.getResource("logback.xml").getFile());
+            formService.addAttachment(id, attachment);
+
+            List<CgpNoiForm> forms = formService.retrieveForms(getCriteria());
+            File csv = exportService.generateCsvExtract(forms, true);
             assertTrue(csv.exists());
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

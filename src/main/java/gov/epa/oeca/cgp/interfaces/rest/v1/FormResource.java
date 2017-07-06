@@ -523,6 +523,8 @@ public class FormResource extends BaseResource {
     @Consumes("application/json")
     @ApiOperation(value = "Extracts a CSV format copy of forms for the specified criteria.")
     public Response extractFormsCsv(
+            @ApiParam(value = "Include Discharge Information details?")
+            @QueryParam("includeDischarge") Boolean includeDischarge,
             @ApiParam(value = "The owner user ID of the form.")
             @QueryParam("owner") String owner,
             @ApiParam(value = "The NPDES ID of the form.")
@@ -606,7 +608,7 @@ public class FormResource extends BaseResource {
             criteria.setResultLimit(resultLimit);
             List<CgpNoiForm> forms = cgpNoiFormService.retrieveForms(criteria);
 
-            File csv = exportService.generateCsvExtract(forms);
+            File csv = exportService.generateCsvExtract(forms, includeDischarge);
             tracker.track(csv, csv);
             return Response.ok(csv, MediaType.APPLICATION_OCTET_STREAM)
                     .header("Content-Disposition", "inline; filename=\"" + csv.getName() + "\"")

@@ -40,76 +40,6 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     private static final Logger logger = LoggerFactory.getLogger(CgpFormExportServiceImpl.class);
 
     private static final String NEW_LINE_SEPARATOR = "\n";
-    //CSV file header
-    private static final Object [] FORM_LIST_FILE_HEADER = {
-            " ID",
-            "Type",
-            "NPDES ID",
-            "Master Permit Number",
-            "Tracking Number",
-            "Owner",
-            "Status",
-            "Last Modified",
-            "Created Date",
-            "Review Expiration Date",
-            "Certified Date",
-            "Submitted Date",
-            "Operator Name",
-            "Operator Address",
-            "Operator City",
-            "Operator State",
-            "Operator Zip",
-            "Operator County",
-            "Operator Point of Contact",
-            "Project/Site Name",
-            "Project/Site Address",
-            "Project/Site City",
-            "Project/Site State",
-            "Project/Site Zip",
-            "Project/Site County",
-            "Project Location Latitude",
-            "Project Location Longitude",
-            "Location Data Source",
-            "Location Horizontal Reference Datum",
-            "Project/Site Start Date",
-            "Project/Site End Date",
-            "P/S Area to be Disturbed (acres)",
-            "Type of Construction Site",
-            "Site Structure Demolition before 1980",
-            "Site Demolition before 1980 >=10k sq ft",
-            "Pre-development agricultural",
-            "Earth-disturbing activities",
-            "Emergency-related project",
-            "Previous NPDES ID",
-            "Site Indian Cultural Property",
-            "Site Cultural Significance Indian Tribe",
-            "Termination Reason",
-            "Discharge into MS4",
-            "Discharge: US Waters Within 50ft",
-            "Discharge Points",
-            "Treatment Chemicals Usage Y/N",
-            "Cationic Treatment Chemicals Y/N",
-            "Cationic Treatment Chem. Authorization",
-            "Treatment Chemicals",
-            "SWPPP Contact",
-            "Endangered Species Protection Criterion",
-            "ESP Criterion Basis Summary",
-            "Other Operator NPDES ID",
-            "Species/Habitat in Action Area",
-            "Species/Habitat Distance from Site (mi)",
-            "Historic Preservation Screening Completed",
-            "HP Step 1",
-            "HP Step 2",
-            "HP Step 3",
-            "HP Step 4",
-            "HP Step 4 Response",
-            "LEW Project Start Date",
-            "LEW Project End Date",
-            "LEW Area to be Disturbed",
-            "LEW R-Factor",
-            "R-Factor Calculation Method",
-            "Interim Site Stabilization Measures (Y/N)"
-    };
 
     private static final Object [] SINGLE_FORM_FILE_HEADER = {
             "Field Name",
@@ -259,7 +189,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
     @Override
     @Transactional
     @Secured({ApplicationSecurityUtils.helpdeskRoleName})
-    public File generateCsvExtract (List<CgpNoiForm> formList) throws ApplicationException {
+    public File generateCsvExtract (List<CgpNoiForm> formList, Boolean includeReceivingWater) throws ApplicationException {
         FileWriter fileWriter = null;
         CSVPrinter csvFilePrinter = null;
         try {
@@ -267,7 +197,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             fileWriter = new FileWriter(csvFile.getAbsolutePath());
             CSVFormat csvFileFormat = CSVFormat.DEFAULT.withRecordSeparator(NEW_LINE_SEPARATOR).withQuote('"');
             csvFilePrinter = new CSVPrinter(fileWriter, csvFileFormat);
-            csvFilePrinter.printRecord(FORM_LIST_FILE_HEADER);
+            csvFilePrinter.printRecord(generateCsvFileHeader(includeReceivingWater));
 
             for (CgpNoiForm form : formList) {
                 FormType type = form.getType();
@@ -276,82 +206,162 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                 ProjectSiteInformation site = form.getFormData().getProjectSiteInformation();
                 Location l = site.getSiteLocation();
                 DischargeInformation discharge = form.getFormData().getDischargeInformation();
+                List<PointOfDischarge> points = discharge.getDischargePoints();
                 ChemicalTreatmentInformation chem = form.getFormData().getChemicalTreatmentInformation();
                 StormwaterPollutionPreventionPlanInformation swppp = form.getFormData().getStormwaterPollutionPreventionPlanInformation();
                 EndangeredSpeciesProtectionInformation esp = form.getFormData().getEndangeredSpeciesProtectionInformation();
                 AppendixDCriterion espCrit = esp.getCriterion();
                 HistoricPreservation hp = form.getFormData().getHistoricPreservation();
                 LowErosivityWaiver lew = form.getFormData().getLowErosivityWaiver();
-                List formRecord = Arrays.asList(
-                        form.getId(),
-                        type.getValue(),
-                        form.getFormSet().getNpdesId(),
-                        form.getFormSet().getMasterPermitNumber(),
-                        form.getTrackingNumber(),
-                        form.getFormSet().getOwner(),
-                        form.getStatus().getValue(),
-                        getZonedDateString(form.getLastUpdatedDate()),
-                        getZonedDateString(form.getCreatedDate()),
-                        getZonedDateString(form.getReviewExpiration()),
-                        getZonedDateString(form.getCertifiedDate()),
-                        getZonedDateString(form.getSubmittedDate()),
-                        operator.getOperatorName(),
-                        operator.getOperatorAddress(),
-                        operator.getOperatorCity(),
-                        operator.getOperatorStateCode(),
-                        operator.getOperatorZipCode(),
-                        operator.getOperatorCounty(),
-                        assembleContactString(operator.getOperatorPointOfContact()),
-                        site.getSiteName(),
-                        site.getSiteAddress(),
-                        site.getSiteCity(),
-                        site.getSiteStateCode(),
-                        site.getSiteZipCode(),
-                        site.getSiteCounty(),
-                        l != null ? l.getLatitude() : "",
-                        l != null ? l.getLongitude() : "",
-                        l != null ? l.getLatLongDataSource() : "",
-                        l != null ? l.getHorizontalReferenceDatum() : "",
-                        noi ? getDateString(site.getSiteProjectStart()) : "N/A",
-                        noi ? getDateString(site.getSiteProjectEnd()) : "N/A",
-                        noi ? site.getSiteAreaDisturbed() : "N/A",
-                        noi ? assembleListString(site.getSiteConstructionTypes()) : "N/A",
-                        assembleYNString(site.getSiteStructureDemolitionBefore1980()),
-                        assembleYNString(site.getSiteStructureDemolitionBefore198010kSquareFeet()),
-                        assembleYNString(site.getSitePreDevelopmentAgricultural()),
-                        assembleYNString(site.getSiteEarthDisturbingActivitiesOccurrence()),
-                        assembleYNString(site.getSiteEmergencyRelated()),
-                        noi ? site.getSitePreviousNpdesPermitId()  : "N/A",
-                        noi ? site.getSiteIndianCulturalProperty()  : "N/A",
-                        noi ? site.getSiteIndianCulturalPropertyTribe() : "N/A",
-                        site.getSiteTerminationReason(),
-                        assembleYNString(discharge.getDischargeMunicipalSeparateStormSewerSystem()),
-                        assembleYNString(discharge.getDischargeUSWatersWithin50Feet()),
-                        assembleDischargePoints(discharge),
-                        assembleYNString(chem.getPolymersFlocculantsOtherTreatmentChemicals()),
-                        assembleYNString(chem.getCationicTreatmentChemicals()),
-                        assembleYNString(chem.getCationicTreatmentChemicalsAuthorization()),
-                        assembleListString(chem.getTreatmentChemicals()),
-                        assembleContactString(swppp.getContactInformation()),
-                        (noi && espCrit != null) ? espCrit.getValue() : "N/A",
-                        esp.getCriteriaSelectionSummary(),
-                        (AppendixDCriterion.Criterion_B.equals(espCrit) ? esp.getOtherOperatorNpdesId() : "N/A"),
-                        (AppendixDCriterion.Criterion_C.equals(espCrit) ? esp.getSpeciesAndHabitatInActionArea() : "N/A"),
-                        (AppendixDCriterion.Criterion_C.equals(espCrit) ? esp.getDistanceFromSite() : "N/A"),
-                        assembleYNString(hp.getScreeningCompleted()),
-                        assembleYNString(hp.getAppendexEStep1()),
-                        assembleYNString(hp.getAppendexEStep2()),
-                        assembleYNString(hp.getAppendexEStep3()),
-                        assembleYNString(hp.getAppendexEStep4()),
-                        hp.getAppendexEStep4Response(),
-                        getDateString(lew.getLewProjectStart()),
-                        getDateString(lew.getLewProjectEnd()),
-                        (!noi && lew.getLewAreaDisturbed() != null) ? lew.getLewAreaDisturbed().toString() : "N/A",
-                        (!noi && lew.getLewRFactor() != null) ? lew.getLewRFactor().toString() : "N/A",
-                        !noi ? lew.getLewRFactorCalculationMethod() : "N/A",
-                        assembleYNString(lew.getInterimSiteStabilizationMeasures())
-                );
-                csvFilePrinter.printRecord(formRecord);
+                if (includeReceivingWater) {
+                    for (PointOfDischarge p : points) {
+                        List formRecord = Arrays.asList(
+                                form.getId(),
+                                type.getValue(),
+                                form.getFormSet().getNpdesId(),
+                                form.getFormSet().getMasterPermitNumber(),
+                                form.getTrackingNumber(),
+                                form.getFormSet().getOwner(),
+                                form.getStatus().getValue(),
+                                getZonedDateString(form.getLastUpdatedDate()),
+                                getZonedDateString(form.getCreatedDate()),
+                                getZonedDateString(form.getReviewExpiration()),
+                                getZonedDateString(form.getCertifiedDate()),
+                                getZonedDateString(form.getSubmittedDate()),
+                                operator.getOperatorName(),
+                                operator.getOperatorAddress(),
+                                operator.getOperatorCity(),
+                                operator.getOperatorStateCode(),
+                                operator.getOperatorZipCode(),
+                                operator.getOperatorCounty(),
+                                assembleContactString(operator.getOperatorPointOfContact()),
+                                site.getSiteName(),
+                                site.getSiteAddress(),
+                                site.getSiteCity(),
+                                site.getSiteStateCode(),
+                                site.getSiteZipCode(),
+                                site.getSiteCounty(),
+                                l != null ? l.getLatitude() : "",
+                                l != null ? l.getLongitude() : "",
+                                l != null ? l.getLatLongDataSource() : "",
+                                l != null ? l.getHorizontalReferenceDatum() : "",
+                                noi ? getDateString(site.getSiteProjectStart()) : "N/A",
+                                noi ? getDateString(site.getSiteProjectEnd()) : "N/A",
+                                noi ? site.getSiteAreaDisturbed() : "N/A",
+                                noi ? assembleListString(site.getSiteConstructionTypes()) : "N/A",
+                                assembleYNString(site.getSiteStructureDemolitionBefore1980()),
+                                assembleYNString(site.getSiteStructureDemolitionBefore198010kSquareFeet()),
+                                assembleYNString(site.getSitePreDevelopmentAgricultural()),
+                                assembleYNString(site.getSiteEarthDisturbingActivitiesOccurrence()),
+                                assembleYNString(site.getSiteEmergencyRelated()),
+                                noi ? site.getSitePreviousNpdesPermitId() : "N/A",
+                                noi ? site.getSiteIndianCulturalProperty() : "N/A",
+                                noi ? site.getSiteIndianCulturalPropertyTribe() : "N/A",
+                                site.getSiteTerminationReason(),
+                                assembleYNString(discharge.getDischargeMunicipalSeparateStormSewerSystem()),
+                                assembleYNString(discharge.getDischargeUSWatersWithin50Feet()),
+                                p.getFirstWater() != null ? p.getFirstWater().getReceivingWaterName() : "",
+                                p.getTier() != null ? p.getTier().getValue() : "N/A",
+                                assembleYNString(p.getImpaired()),
+                                assembleYNString(p.getTmdlCompleted()),
+                                getPollutants(p.getFirstWater()),
+                                assembleYNString(chem.getPolymersFlocculantsOtherTreatmentChemicals()),
+                                assembleYNString(chem.getCationicTreatmentChemicals()),
+                                assembleYNString(chem.getCationicTreatmentChemicalsAuthorization()),
+                                assembleListString(chem.getTreatmentChemicals()),
+                                assembleContactString(swppp.getContactInformation()),
+                                (noi && espCrit != null) ? espCrit.getValue() : "N/A",
+                                esp.getCriteriaSelectionSummary(),
+                                (AppendixDCriterion.Criterion_B.equals(espCrit) ? esp.getOtherOperatorNpdesId() : "N/A"),
+                                (AppendixDCriterion.Criterion_C.equals(espCrit) ? esp.getSpeciesAndHabitatInActionArea() : "N/A"),
+                                (AppendixDCriterion.Criterion_C.equals(espCrit) ? esp.getDistanceFromSite() : "N/A"),
+                                assembleYNString(hp.getScreeningCompleted()),
+                                assembleYNString(hp.getAppendexEStep1()),
+                                assembleYNString(hp.getAppendexEStep2()),
+                                assembleYNString(hp.getAppendexEStep3()),
+                                assembleYNString(hp.getAppendexEStep4()),
+                                hp.getAppendexEStep4Response(),
+                                getDateString(lew.getLewProjectStart()),
+                                getDateString(lew.getLewProjectEnd()),
+                                (!noi && lew.getLewAreaDisturbed() != null) ? lew.getLewAreaDisturbed().toString() : "N/A",
+                                (!noi && lew.getLewRFactor() != null) ? lew.getLewRFactor().toString() : "N/A",
+                                !noi ? lew.getLewRFactorCalculationMethod() : "N/A",
+                                assembleYNString(lew.getInterimSiteStabilizationMeasures())
+                        );
+                        csvFilePrinter.printRecord(formRecord);
+                    }
+                } else {
+                    List formRecord = Arrays.asList(
+                            form.getId(),
+                            type.getValue(),
+                            form.getFormSet().getNpdesId(),
+                            form.getFormSet().getMasterPermitNumber(),
+                            form.getTrackingNumber(),
+                            form.getFormSet().getOwner(),
+                            form.getStatus().getValue(),
+                            getZonedDateString(form.getLastUpdatedDate()),
+                            getZonedDateString(form.getCreatedDate()),
+                            getZonedDateString(form.getReviewExpiration()),
+                            getZonedDateString(form.getCertifiedDate()),
+                            getZonedDateString(form.getSubmittedDate()),
+                            operator.getOperatorName(),
+                            operator.getOperatorAddress(),
+                            operator.getOperatorCity(),
+                            operator.getOperatorStateCode(),
+                            operator.getOperatorZipCode(),
+                            operator.getOperatorCounty(),
+                            assembleContactString(operator.getOperatorPointOfContact()),
+                            site.getSiteName(),
+                            site.getSiteAddress(),
+                            site.getSiteCity(),
+                            site.getSiteStateCode(),
+                            site.getSiteZipCode(),
+                            site.getSiteCounty(),
+                            l != null ? l.getLatitude() : "",
+                            l != null ? l.getLongitude() : "",
+                            l != null ? l.getLatLongDataSource() : "",
+                            l != null ? l.getHorizontalReferenceDatum() : "",
+                            noi ? getDateString(site.getSiteProjectStart()) : "N/A",
+                            noi ? getDateString(site.getSiteProjectEnd()) : "N/A",
+                            noi ? site.getSiteAreaDisturbed() : "N/A",
+                            noi ? assembleListString(site.getSiteConstructionTypes()) : "N/A",
+                            assembleYNString(site.getSiteStructureDemolitionBefore1980()),
+                            assembleYNString(site.getSiteStructureDemolitionBefore198010kSquareFeet()),
+                            assembleYNString(site.getSitePreDevelopmentAgricultural()),
+                            assembleYNString(site.getSiteEarthDisturbingActivitiesOccurrence()),
+                            assembleYNString(site.getSiteEmergencyRelated()),
+                            noi ? site.getSitePreviousNpdesPermitId() : "N/A",
+                            noi ? site.getSiteIndianCulturalProperty() : "N/A",
+                            noi ? site.getSiteIndianCulturalPropertyTribe() : "N/A",
+                            site.getSiteTerminationReason(),
+                            assembleYNString(discharge.getDischargeMunicipalSeparateStormSewerSystem()),
+                            assembleYNString(discharge.getDischargeUSWatersWithin50Feet()),
+                            assembleDischargePoints(discharge),
+                            assembleYNString(chem.getPolymersFlocculantsOtherTreatmentChemicals()),
+                            assembleYNString(chem.getCationicTreatmentChemicals()),
+                            assembleYNString(chem.getCationicTreatmentChemicalsAuthorization()),
+                            assembleListString(chem.getTreatmentChemicals()),
+                            assembleContactString(swppp.getContactInformation()),
+                            (noi && espCrit != null) ? espCrit.getValue() : "N/A",
+                            esp.getCriteriaSelectionSummary(),
+                            (AppendixDCriterion.Criterion_B.equals(espCrit) ? esp.getOtherOperatorNpdesId() : "N/A"),
+                            (AppendixDCriterion.Criterion_C.equals(espCrit) ? esp.getSpeciesAndHabitatInActionArea() : "N/A"),
+                            (AppendixDCriterion.Criterion_C.equals(espCrit) ? esp.getDistanceFromSite() : "N/A"),
+                            assembleYNString(hp.getScreeningCompleted()),
+                            assembleYNString(hp.getAppendexEStep1()),
+                            assembleYNString(hp.getAppendexEStep2()),
+                            assembleYNString(hp.getAppendexEStep3()),
+                            assembleYNString(hp.getAppendexEStep4()),
+                            hp.getAppendexEStep4Response(),
+                            getDateString(lew.getLewProjectStart()),
+                            getDateString(lew.getLewProjectEnd()),
+                            (!noi && lew.getLewAreaDisturbed() != null) ? lew.getLewAreaDisturbed().toString() : "N/A",
+                            (!noi && lew.getLewRFactor() != null) ? lew.getLewRFactor().toString() : "N/A",
+                            !noi ? lew.getLewRFactorCalculationMethod() : "N/A",
+                            assembleYNString(lew.getInterimSiteStabilizationMeasures())
+                    );
+                    csvFilePrinter.printRecord(formRecord);
+                }
             }
 
             return csvFile;
@@ -586,6 +596,91 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
 
     }
 
+    List<String> generateCsvFileHeader(Boolean groupByReceivingWater) {
+        List<String> headers = new ArrayList<>(Arrays.asList(
+                " ID",
+                "Type",
+                "NPDES ID",
+                "Master Permit Number",
+                "Tracking Number",
+                "Owner",
+                "Status",
+                "Last Modified",
+                "Created Date",
+                "Review Expiration Date",
+                "Certified Date",
+                "Submitted Date",
+                "Operator Name",
+                "Operator Address",
+                "Operator City",
+                "Operator State",
+                "Operator Zip",
+                "Operator County",
+                "Operator Point of Contact",
+                "Project/Site Name",
+                "Project/Site Address",
+                "Project/Site City",
+                "Project/Site State",
+                "Project/Site Zip",
+                "Project/Site County",
+                "Project Location Latitude",
+                "Project Location Longitude",
+                "Location Data Source",
+                "Location Horizontal Reference Datum",
+                "Project/Site Start Date",
+                "Project/Site End Date",
+                "P/S Area to be Disturbed (acres)",
+                "Type of Construction Site",
+                "Site Structure Demolition before 1980",
+                "Site Demolition before 1980 >=10k sq ft",
+                "Pre-development agricultural",
+                "Earth-disturbing activities",
+                "Emergency-related project",
+                "Previous NPDES ID",
+                "Site Indian Cultural Property",
+                "Site Cultural Significance Indian Tribe",
+                "Termination Reason",
+                "Discharge into MS4",
+                "Discharge: US Waters Within 50ft",
+                "Receiving Water",
+                "Tier",
+                "Impaired",
+                "TMDL Completed",
+                "Pollutants",
+                "Treatment Chemicals Usage Y/N",
+                "Cationic Treatment Chemicals Y/N",
+                "Cationic Treatment Chem. Authorization",
+                "Treatment Chemicals",
+                "SWPPP Contact",
+                "Endangered Species Protection Criterion",
+                "ESP Criterion Basis Summary",
+                "Other Operator NPDES ID",
+                "Species/Habitat in Action Area",
+                "Species/Habitat Distance from Site (mi)",
+                "Historic Preservation Screening Completed",
+                "HP Step 1",
+                "HP Step 2",
+                "HP Step 3",
+                "HP Step 4",
+                "HP Step 4 Response",
+                "LEW Project Start Date",
+                "LEW Project End Date",
+                "LEW Area to be Disturbed",
+                "LEW R-Factor",
+                "R-Factor Calculation Method",
+                "Interim Site Stabilization Measures (Y/N)"
+        ));
+
+        if (!groupByReceivingWater) {
+            headers.set(44, "Discharge Points");
+            headers.remove(45);
+            headers.remove(46);
+            headers.remove(47);
+            headers.remove(48);
+        }
+        return headers;
+    }
+
     String getZonedDateString(ZonedDateTime date) {
         return date != null ? DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm a").format(date) : "";
     }
@@ -630,6 +725,23 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
                         p.getId(), p.getFirstWater() != null ? p.getFirstWater().getReceivingWaterName() : "not specified", p.getTier() != null ? p.getTier().getValue() : "N/A"));
             }
             return sb.toString();
+        } else {
+            return "";
+        }
+    }
+
+    String getPollutants(ReceivingWater water) {
+        if (water != null) {
+            List<Pollutant> pollutants = water.getPollutants();
+            if (!CollectionUtils.isEmpty(pollutants)) {
+                StringBuilder sb = new StringBuilder();
+                for (Pollutant p : pollutants) {
+                    sb.append(p.getPollutantName() + ", ");
+                }
+                return sb.toString();
+            } else {
+                return "";
+            }
         } else {
             return "";
         }

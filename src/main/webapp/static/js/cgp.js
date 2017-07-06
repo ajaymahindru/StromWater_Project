@@ -427,6 +427,34 @@ oeca.cgp = {
 				]
 			})
 		},
+		csvIncludeDischarge: function(runCsvExport) {
+			oeca.cgp.notifications.infoAlert({
+				bodyTitle: 'CSV Extract Options',
+				message: 'Would you like to include Discharge Information Details in CSV extract?',
+				buttons: [
+					{
+						label: 'Yes',
+						cssClass: 'btn-success-outline',
+						action: function(dialog) {
+							dialog.close();
+							if (runCsvExport) {
+								runCsvExport(true);
+							}
+						}
+					},
+					{
+						label: 'No',
+						cssClass: 'btn-primary-outline',
+						action: function(dialog) {
+							dialog.close();
+							if (runCsvExport) {
+								runCsvExport(false);
+							}
+						}
+					}
+				]
+			})
+		},
         fieldLocked: function(field, cancelAction, terminateAction) {
 		    oeca.cgp.notifications.errorAlert({
 		        bodyTitle: 'Not Allowed',
