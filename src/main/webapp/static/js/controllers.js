@@ -53,8 +53,10 @@ var DashboardController = function(data, params) {
 		self.applyFilter(true, true);
 	};
 
-	self.exportToCsvLink = function() {
-		return config.ctx + "/api/form/v1/csv?" + self.criteriaString();
+	self.exportToCsv = function(includeDischarge) {
+		window.window.open(
+			config.ctx + "/api/form/v1/csv?" + "includeDischarge=" + includeDischarge + "&" + self.criteriaString()
+		);
 	}
 
 	self.exportCsvForm = function(form) {
@@ -386,7 +388,7 @@ var DashboardController = function(data, params) {
 			{
 				text: 'CSV',
 				action: function ( e, dt, node, config ) {
-					window.window.open(self.exportToCsvLink());
+					oeca.cgp.notifications.csvIncludeDischarge(self.exportToCsv);
 				},
 				available: function ( dt, config ) {
 					return oeca.cgp.currentUser.roleId == 120440;
