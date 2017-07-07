@@ -403,6 +403,8 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             csvFilePrinter.printRecord(r4);
             List r5 = Arrays.asList("Tracking Number", form.getTrackingNumber());
             csvFilePrinter.printRecord(r5);
+            List owner = Arrays.asList("Owner", form.getFormSet().getOwner());
+            csvFilePrinter.printRecord(owner);
             List r6 = Arrays.asList("Status", form.getStatus());
             csvFilePrinter.printRecord(r6);
             List r7 = Arrays.asList("Last Modified", getZonedDateString(form.getLastUpdatedDate()));
@@ -419,7 +421,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             csvFilePrinter.printRecord(opAd2);
             List opAd3 = Arrays.asList("Operator State", operator.getOperatorStateCode());
             csvFilePrinter.printRecord(opAd3);
-            List opAd4 = Arrays.asList("Operator Zip", operator.getOperatorZipCode());
+            List opAd4 = Arrays.asList("Operator Zip", "\t" + operator.getOperatorZipCode());
             csvFilePrinter.printRecord(opAd4);
             List opAd5 = Arrays.asList("Operator County", operator.getOperatorCounty());
             csvFilePrinter.printRecord(opAd5);
@@ -433,7 +435,7 @@ public class CgpFormExportServiceImpl implements CgpFormExportService {
             csvFilePrinter.printRecord(prAd2);
             List prAd3 = Arrays.asList("Project/Site State", site.getSiteStateCode());
             csvFilePrinter.printRecord(prAd3);
-            List prAd4 = Arrays.asList("Project/Site Zip", site.getSiteZipCode());
+            List prAd4 = Arrays.asList("Project/Site Zip", "\t" + site.getSiteZipCode());
             csvFilePrinter.printRecord(prAd4);
             List prAd5 = Arrays.asList("Project/Site County", site.getSiteCounty());
             csvFilePrinter.printRecord(prAd5);

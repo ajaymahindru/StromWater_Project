@@ -47,7 +47,7 @@ public class ReferenceServiceImplTest {
     public void retrieveTribes() throws Exception {
         try {
             List<Tribe> tribes = referenceService.retrieveTribes();
-            assertEquals(tribes.size(), 751);
+            assertEquals(tribes.size(), 753);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());
@@ -58,7 +58,7 @@ public class ReferenceServiceImplTest {
     public void retrieveTribesByState() throws Exception {
         try {
             List<Tribe> tribes = referenceService.retrieveTribes("CA");
-            assertEquals(tribes.size(), 126);
+            assertEquals(tribes.size(), 128);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());
@@ -69,7 +69,7 @@ public class ReferenceServiceImplTest {
     public void retrieveBiaTribes() throws Exception {
         try {
             List<BiaTribe> tribes = referenceService.retrieveBiaTribes();
-            assertEquals(tribes.size(), 576);
+            assertEquals(tribes.size(), 577);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());

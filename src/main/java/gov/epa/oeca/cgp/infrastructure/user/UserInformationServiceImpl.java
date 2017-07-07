@@ -105,6 +105,30 @@ public class UserInformationServiceImpl implements UserInformationService {
         }
     }
 
+    @Override
+    public List<NewUserProfile> retrieveUserById(String userId) throws ApplicationException {
+        try {
+            // validate
+            Validate.notNull(userId, "User ID is required.");
+
+            // get the CDX service configuration
+            URL url = new URL(helper.getStreamlinedRegistrationServiceEndpoint());
+            String token = getStreamlinedRegistrationToken(url);
+            RegistrationUserSearchCriteria criteria = new RegistrationUserSearchCriteria();
+            criteria.setUserId(userId);
+            List<NewUserProfile> results = assembler.assembleNewUserProfiles(
+                    streamlinedRegistrationClient.retrieveUsersByCriteria(url, token, criteria, null, null, null).getResults());
+            Validate.isTrue(results.size() >= 1, "Expecting at least one user result.");
+            return results;
+        } catch (IllegalArgumentException e) {
+            logger.error(e.getMessage(), e);
+            throw new ApplicationException(ApplicationErrorCode.E_InvalidArgument, e.getMessage());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            throw ApplicationException.asApplicationException(e);
+        }
+    }
+
     String getStreamlinedRegistrationToken(URL url) throws Exception {
         return streamlinedRegistrationClient.authenticate(
                 url,
