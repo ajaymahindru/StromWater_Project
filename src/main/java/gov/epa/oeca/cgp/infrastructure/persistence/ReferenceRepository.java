@@ -73,13 +73,13 @@ public class ReferenceRepository {
 
     @SuppressWarnings("unchecked")
     public List<Tribe> retrieveTribes() {
-        return (List<Tribe>) cgpSessionFactory.getCurrentSession().createQuery("from Tribe").getResultList();
+        return (List<Tribe>) cgpSessionFactory.getCurrentSession().createQuery("from Tribe order by tribalName").getResultList();
     }
 
     @SuppressWarnings("unchecked")
     public List<Tribe> retrieveTribes(String stateCode) {
         return (List<Tribe>) cgpSessionFactory.getCurrentSession()
-                .createQuery("select t from Tribe t join t.states ts where ts.stateCode = ?")
+                .createQuery("select t from Tribe t join t.states ts where ts.stateCode = ? order by t.tribalName")
                 .setParameter(0, stateCode)
                 .getResultList();
     }
@@ -87,7 +87,7 @@ public class ReferenceRepository {
     @SuppressWarnings("unchecked")
     public List<Tribe> retrieveTribesByLandName(String tribalLandName) {
         return (List<Tribe>) cgpSessionFactory.getCurrentSession()
-                .createQuery("from Tribe t where t.tribalName = ?")
+                .createQuery("from Tribe t where t.tribalName = ? order by t.tribalName")
                 .setParameter(0, tribalLandName)
                 .getResultList();
     }
@@ -95,7 +95,7 @@ public class ReferenceRepository {
     @SuppressWarnings("unchecked")
     public Tribe retrieveTribeByLandNameAndStateCode(String tribalLandName, String stateCode) {
         return (Tribe) cgpSessionFactory.getCurrentSession()
-                .createQuery("select t from Tribe t join t.states ts where t.tribalName = ? and ts.stateCode = ?")
+                .createQuery("select t from Tribe t join t.states ts where t.tribalName = ? and ts.stateCode = ? order by t.tribalName")
                 .setParameter(0, tribalLandName)
                 .setParameter(1, stateCode)
                 .getSingleResult();
