@@ -28,8 +28,7 @@
     </div>
     <p>This form provides notice to EPA that you, the project operator identified in Section II of this form, are
         certifying that construction activity at the project site identified in Section III, will take place during a
-        period when the rainfall erosivity factor is less than five <a href="JavaScript:">40 CFR 122.26(b)(15)(i)(A)
-            TODO</a>. By submitting a complete and accurate form, the otherwise applicable NPDES permitting requirements
+        period when the rainfall erosivity factor is less than five [40 CFR 122.26(b)(15)(i)(A)]. By submitting a complete and accurate form, the otherwise applicable NPDES permitting requirements
         for stormwater discharges associated with construction activity, are waived. Based on your certification, a
         waiver is granted for the period beginning on the date this Low Erosivity Waiver Form is mailed to EPA (i.e.,
         postmark date), or the project start date specified in Part IV of this form, whichever shall occur last, and
