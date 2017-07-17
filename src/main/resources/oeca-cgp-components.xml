@@ -47,6 +47,7 @@
         <entry key="holdPeriodSeconds" value="1209600"/>
         <entry key="corUrl" value="http://localhost:8080/oeca-cgp-web/action/secured/cor"/>
         <entry key="icisDataflow" value="ICIS-NPDES"/>
+        <entry key="environment" value=""/>
     </util:map>
     <!-- ====================================================================== -->
     <!-- Datasource Configuration  -->
