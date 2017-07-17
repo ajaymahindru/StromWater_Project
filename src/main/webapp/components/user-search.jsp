@@ -1,5 +1,4 @@
 <div data-bind="if: showSearch()">
-    <div class="h4">Search for <span data-bind="text: type() != null && type() != undefined ? type() : 'user'"></span></div>
         <span class="validationMessage" data-bind="validationMessage: searchCriteria"></span>
         <!-- ko with: searchCriteria -->
     	<div class="row">
