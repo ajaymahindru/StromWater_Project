@@ -25,13 +25,15 @@
 		<div class="row">
 			<div class="col-sm-12 form-group">
 				<label class="control-label" for="estimated-project-start-date">Estimated Project Start Date</label>
-				<input id="estimated-project-start-date" class="form-control" type="text" data-bind="value: lewProjectStart, datepicker" />
+				<input id="estimated-project-start-date" class="form-control" type="text"
+                       data-bind="maskedDate: lewProjectStart, datepicker" />
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-sm-12 form-group">
 				<label class="control-label" for="estimated-project-end-date">Estimated Project End Date</label>
-				<input id="estimated-project-end-date" class="form-control" type="text" data-bind="value: lewProjectEnd, datepicker" />
+				<input id="estimated-project-end-date" class="form-control" type="text"
+                       data-bind="maskedDate: lewProjectEnd, datepicker" />
 			</div>
 		</div>
 		<div class="row">
