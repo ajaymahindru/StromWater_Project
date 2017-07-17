@@ -116,11 +116,11 @@
 			<div class="row">
 				<div class="col-sm-4 form-group">
 					<label class="control-label" for="project-start-date">Project Start Date</label>
-					<input id="project-start-date" class="form-control" type="text" data-bind="value: siteProjectStart, datepicker" />
+					<input id="project-start-date" class="form-control" type="text" data-bind="maskedDate: siteProjectStart, datepicker" />
 				</div>
 				<div class="col-sm-4 form-group">
 					<label class="control-label" for="project-end-date">Estimated Project End Date</label>
-					<input id="project-end-date" class="form-control" type="text" data-bind="value: siteProjectEnd, datepicker" />
+					<input id="project-end-date" class="form-control" type="text" data-bind="maskedDate: siteProjectEnd, datepicker" />
 				</div>
 				<div class="col-sm-4 form-group">
 					<label class="control-label" for="estimated-area">Estimated Area to be Disturbed</label>

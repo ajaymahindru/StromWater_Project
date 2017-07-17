@@ -392,3 +392,14 @@ var fileInputKeydown = function(event, uniqueClass) {
         $("span." + uniqueClass).find('input').click();
     }
 };
+
+
+ko.bindingHandlers.maskedDate = {
+    init: function (element, valueAccessor, allBindingsAccessor, viewModel) {
+        var mask = allBindingsAccessor().mask || "99/99/9999";
+        ko.bindingHandlers.maskedInput.init(element, valueAccessor, allBindingsAccessor, viewModel, mask);
+    },
+    update: function (element, valueAccessor) {
+        ko.bindingHandlers.maskedInput.update(element, valueAccessor);
+    }
+};
