@@ -223,7 +223,7 @@ var DashboardController = function(data, params) {
 			+ (self.criteria.operatorFederal() !== null ? '&operatorFederal=' + self.criteria.operatorFederal() : '')
 			+ (self.criteria.siteIndianCountry() !== null ? '&siteIndianCountry=' + self.criteria.siteIndianCountry() :'')
 			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands())
-			+ '&resultLimit=' + 1000; //limit results to 1000 max
+			+ '&resultLimit=' + 5000; //limit results to 5000 max
 	});
 	var convertToIso = function(val) {
 		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
