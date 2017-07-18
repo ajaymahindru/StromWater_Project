@@ -1214,6 +1214,29 @@ var LewScreeningQuestionController = function(data, params) {
 	self.componentLoaded = function() {
 		params.onLoad(true);
 	};
+    /*
+     * when questions are changed mark subquestions null
+     */
+    var subscriptions = [];
+    //noinspection JSUnusedLocalSymbols
+    subscriptions.push(self.state.subscribe(function(newVal) {
+        self.biaCode(null);
+    }));
+    subscriptions.push(self.bia.subscribe(function(newVal) {
+        if(!newVal) {
+            self.biaCode(null);
+        }
+    }));
+    subscriptions.push(self.showCoverage.subscribe(function(newVal) {
+        if(!newVal) {
+            self.federalOperator(null);
+        }
+    }));
+    subscriptions.push(self.acresQuestion.subscribe(function(newVal) {
+        if(!newVal) {
+            self.rfactorQuestion(null);
+        }
+    }));
 	/*
 	 * CRUD operations
 	 */
@@ -1223,6 +1246,7 @@ var LewScreeningQuestionController = function(data, params) {
 		});
 	}
 	self.dispose = function() {
+        oeca.cgp.utils.disposeList(subscriptions);
 		oeca.cgp.utils.dispose(self.eligibilityChecker);
 	}
 };
