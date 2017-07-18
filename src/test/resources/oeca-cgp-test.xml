@@ -60,5 +60,7 @@
         <entry key="holdPeriodSeconds" value="1"/>
         <entry key="corUrl" value="http://localhost:8080/oeca-cgp-web/action/secured/cor"/>
         <entry key="icisDataflow" value="ICIS-AIR"/>
+        <!--environment is "" for PROD-->
+        <entry key="environment" value="(DEV)"/>
     </util:map>
 </beans>
