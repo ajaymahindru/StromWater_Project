@@ -369,6 +369,16 @@
 					<!-- /ko -->
 				</div>
 				<div class="panel-body" id="filter" data-bind="slideVisible: showFilter, with: criteria">
+                    <sec:authorize access="hasAnyRole('${actionBean.regAuthRole}', '${actionBean.helpdeskRole}')">
+                        <div class="row">
+                            <div class="col-sm-4 form-group">
+                                <label class="control-label" for="source">Source (Paper/Electronic)</label>
+                                <select id="source" class="form-control"
+                                        data-bind="value: source, options: $parent.formSources, optionsCaption: 'Select Source'">
+                                </select>
+                            </div>
+                        </div>
+                    </sec:authorize>
 					<div class="row">
 						<div class="col-sm-4 form-group">
 							<label class="control-label" for="npdes-id">NPDES ID</label>

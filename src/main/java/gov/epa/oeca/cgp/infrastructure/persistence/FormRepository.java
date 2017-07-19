@@ -241,6 +241,10 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
                     MatchMode.ANYWHERE).ignoreCase());
         }
 
+        if (criteria.getSource() != null) {
+            cr.add(Restrictions.eq("source", criteria.getSource()));
+        }
+
         // associated user
         if (!StringUtils.isEmpty(criteria.getAssociatedUser())) {
             cr.add(Restrictions.or(
