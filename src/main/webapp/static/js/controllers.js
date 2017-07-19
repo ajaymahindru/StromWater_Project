@@ -4,7 +4,7 @@ var DashboardController = function(data, params) {
 	self.data = ko.observableArray([]);
 	self.showFilter = ko.observable(false);
     self.recordsFilteredTotal = ko.observable(0);
-    self.resultLimit = 800;//this sets result limit on export buttons
+    self.resultLimit = 5000;//this sets result limit on export buttons
 	self.criteria = new NoiSearchCriteria({
 		activeRecord: true
 	});
