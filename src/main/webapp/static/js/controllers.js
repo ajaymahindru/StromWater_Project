@@ -3,6 +3,8 @@ var DashboardController = function(data, params) {
 	var self = this;
 	self.data = ko.observableArray([]);
 	self.showFilter = ko.observable(false);
+    self.recordsFilteredTotal = ko.observable(0);
+    self.resultLimit = 800;//this sets result limit on export buttons
 	self.criteria = new NoiSearchCriteria({
 		activeRecord: true
 	});
@@ -223,7 +225,7 @@ var DashboardController = function(data, params) {
 			+ (self.criteria.operatorFederal() !== null ? '&operatorFederal=' + self.criteria.operatorFederal() : '')
 			+ (self.criteria.siteIndianCountry() !== null ? '&siteIndianCountry=' + self.criteria.siteIndianCountry() :'')
 			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands())
-			+ '&resultLimit=' + 5000; //limit results to 5000 max
+			+ '&resultLimit=' + self.resultLimit;
 	});
 	var convertToIso = function(val) {
 		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
@@ -259,6 +261,7 @@ var DashboardController = function(data, params) {
 				"dataType": "json",
 				"beforeSend": oeca.xhrSettings.setJsonAcceptHeader,
 				success: function(result) {
+                    self.recordsFilteredTotal(result.recordsTotal);
 					ko.mapping.fromJS(result.data, {
 						'': {
 							create: function (options) {
@@ -388,7 +391,11 @@ var DashboardController = function(data, params) {
 			{
 				text: 'CSV',
 				action: function ( e, dt, node, config ) {
-					oeca.cgp.notifications.csvIncludeDischarge(self.exportToCsv);
+                    if(self.recordsFilteredTotal() <= self.resultLimit) {
+                        oeca.cgp.notifications.csvIncludeDischarge(self.exportToCsv);
+                    } else {
+                        oeca.cgp.notifications.resultsTotalAlert(self.resultLimit);
+                    }
 				},
 				available: function ( dt, config ) {
 					return oeca.cgp.currentUser.roleId == 120440;
@@ -397,13 +404,21 @@ var DashboardController = function(data, params) {
 			{
 				text: 'Excel',
 				action: function ( e, dt, node, config ) {
-					window.window.open(self.exportToExcelLink());
+                    if(self.recordsFilteredTotal() <= self.resultLimit) {
+                        window.window.open(self.exportToExcelLink());
+                    } else {
+                        oeca.cgp.notifications.resultsTotalAlert(self.resultLimit);
+                    }
 				}
 			},
 			{
 				text: 'Print',
 				action: function ( e, dt, node, config ) {
-					window.window.open(self.exportToHtmlLink());
+                    if(self.recordsFilteredTotal() <= self.resultLimit) {
+                        window.window.open(self.exportToHtmlLink());
+                    } else {
+                        oeca.cgp.notifications.resultsTotalAlert(self.resultLimit);
+                    }
 				}
 			}
 		],

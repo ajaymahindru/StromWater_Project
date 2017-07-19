@@ -374,7 +374,7 @@ oeca.cgp = {
 								  }
 				        	  }
 				          }
-				],
+				]
 			});
 		},
 		noiCreated: function(trackingNumber) {
@@ -455,6 +455,24 @@ oeca.cgp = {
 				]
 			})
 		},
+        resultsTotalAlert: function(resultLimit, cancelAction) {
+            oeca.notifications.errorAlert({
+                bodyTitle: "Export Error",
+                message: 'Your search returned over ' + resultLimit + ' records. Please refine you search criteria.',
+                buttons: [
+                    {
+                        label: 'Ok',
+                        action: function(dialogRef) {
+                            dialogRef.close();
+                            if(cancelAction) {
+                                cancelAction(dialogRef);
+                            }
+                        },
+                        cssClass: 'btn-danger-outline'
+                    }
+                ]
+            })
+        },
         fieldLocked: function(field, cancelAction, terminateAction) {
 		    oeca.cgp.notifications.errorAlert({
 		        bodyTitle: 'Not Allowed',
