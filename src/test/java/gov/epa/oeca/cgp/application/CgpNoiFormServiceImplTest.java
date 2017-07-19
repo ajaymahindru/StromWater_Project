@@ -708,7 +708,7 @@ public class CgpNoiFormServiceImplTest {
             formService.updateForm(id2, newForm2);
             formService.addAttachment(id2, attachment);
             //form 3
-            applicationSecurityUtils.mockCertifier("LABIEVA34", "linera.abieva@cgifederal.com", "Linera", "Abieva");
+            applicationSecurityUtils.mockHelpDesk("LABIEVA34");
             CgpNoiForm newForm3 = getForm("test-data/new-noi-form.json");
             Long id3 = formService.createNewNoticeOfIntent(newForm3).getId();
             newForm3 = getForm("test-data/new-noi-form.json");
@@ -882,6 +882,19 @@ public class CgpNoiFormServiceImplTest {
             assertEquals(6, formService.retrieveSearchResult(search).getData().size());
             criteria.setOperatorFederal(false);
             assertEquals(0, formService.retrieveSearchResult(search).getData().size());
+
+            // search by source
+            config = getDataTableConfig("test-data/noi-search-config.json");
+            config.setLength(10L);
+            criteria = new CgpNoiFormSearchCriteria();
+            criteria.setSource(Source.Paper);
+            search = new DataTableCriteria<>();
+            search.setConfig(config);
+            search.setCriteria(criteria);
+            assertEquals(4, formService.retrieveSearchResult(search).getData().size());
+            criteria.setSource(Source.Electronic);
+            search.setCriteria(criteria);
+            assertEquals(2, formService.retrieveSearchResult(search).getData().size());
 
         } catch (Exception e) {
             logger.error(e.getMessage(), e);

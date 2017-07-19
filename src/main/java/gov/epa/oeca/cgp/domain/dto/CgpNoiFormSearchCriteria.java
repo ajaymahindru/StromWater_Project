@@ -1,6 +1,7 @@
 package gov.epa.oeca.cgp.domain.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import gov.epa.oeca.cgp.domain.noi.Source;
 import gov.epa.oeca.cgp.domain.util.DatePickerZonedDateTimeDeserializer;
 import gov.epa.oeca.cgp.domain.noi.FormType;
 import gov.epa.oeca.cgp.domain.noi.Status;
@@ -54,6 +55,7 @@ public class CgpNoiFormSearchCriteria implements Serializable {
     private Boolean submittedToIcis;
     private Boolean icisSubmissionInProgress;
     private Long resultLimit;
+    private Source source;
 
     public CgpNoiFormSearchCriteria() {
 
@@ -305,6 +307,14 @@ public class CgpNoiFormSearchCriteria implements Serializable {
 
     public void setResultLimit(Long resultLimit) {
         this.resultLimit = resultLimit;
+    }
+
+    public Source getSource() {
+        return source;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 
     public String getSiteCounty() {

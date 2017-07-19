@@ -449,7 +449,9 @@ public class FormResource extends BaseResource {
             @ApiParam(value = "Active record search indicator.")
             @QueryParam("activeRecord") Boolean activeRecord,
             @ApiParam(value = "Result limit.")
-            @QueryParam("resultLimit") Long resultLimit
+            @QueryParam("resultLimit") Long resultLimit,
+            @ApiParam(value = "Form source: paper or electronic.")
+            @QueryParam("source") String source
     ) {
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
@@ -488,6 +490,10 @@ public class FormResource extends BaseResource {
             criteria.setUpdatedTo(applicationUtils.fromString(updatedTo));
             criteria.setActiveRecord(activeRecord);
             criteria.setResultLimit(resultLimit);
+            if (!StringUtils.isEmpty(source)) {
+                Source formSource = Source.valueOf(source);
+                criteria.setSource(formSource);
+            }
 
             if (applicationSecurityUtils.hasRole(ApplicationSecurityUtils.preparer, ApplicationSecurityUtils.certifier)) {
                 criteria.setAssociatedUser(applicationSecurityUtils.getCurrentUserId());
@@ -568,7 +574,10 @@ public class FormResource extends BaseResource {
             @ApiParam(value = "Active record search indicator.")
             @QueryParam("activeRecord") Boolean activeRecord,
             @ApiParam(value = "Result limit.")
-            @QueryParam("resultLimit") Long resultLimit) {
+            @QueryParam("resultLimit") Long resultLimit,
+            @ApiParam(value = "Form source: paper or electronic.")
+            @QueryParam("source") String source
+    ) {
         try {
             CgpNoiFormSearchCriteria criteria = new CgpNoiFormSearchCriteria();
             criteria.setOwner(owner);
@@ -606,6 +615,10 @@ public class FormResource extends BaseResource {
             criteria.setUpdatedTo(applicationUtils.fromString(updatedTo));
             criteria.setActiveRecord(activeRecord);
             criteria.setResultLimit(resultLimit);
+            if (!StringUtils.isEmpty(source)) {
+                Source formSource = Source.valueOf(source);
+                criteria.setSource(formSource);
+            }
             List<CgpNoiForm> forms = cgpNoiFormService.retrieveForms(criteria);
 
             File csv = exportService.generateCsvExtract(forms, includeDischarge);

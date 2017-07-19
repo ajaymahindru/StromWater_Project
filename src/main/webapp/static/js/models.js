@@ -38,7 +38,8 @@ var NoiSearchCriteria = function(data) {
 		activeRecord: null,
 		operatorFederal: null,
 		siteIndianCountry: null,
-		siteIndianCountryLands: null
+		siteIndianCountryLands: null,
+        source: null
 	}, data);
 	ko.mapping.fromJS(data, {}, self);
 	self.reset = function() {

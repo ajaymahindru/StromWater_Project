@@ -8,6 +8,7 @@ var DashboardController = function(data, params) {
 	self.criteria = new NoiSearchCriteria({
 		activeRecord: true
 	});
+    self.formSources = ko.observableArray(['Paper', 'Electronic']);
     self.criteria.submittedTo.extend({fromDate: {
         params: self.criteria.submittedFrom,
         message: "Invalid date range.",
@@ -225,7 +226,8 @@ var DashboardController = function(data, params) {
 			+ (self.criteria.operatorFederal() !== null ? '&operatorFederal=' + self.criteria.operatorFederal() : '')
 			+ (self.criteria.siteIndianCountry() !== null ? '&siteIndianCountry=' + self.criteria.siteIndianCountry() :'')
 			+ '&siteIndianCountryLands=' + convertToString(self.criteria.siteIndianCountryLands())
-			+ '&resultLimit=' + self.resultLimit;
+			+ '&resultLimit=' + self.resultLimit
+            + '&source=' + convertToString(self.criteria.source());
 	});
 	var convertToIso = function(val) {
 		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
