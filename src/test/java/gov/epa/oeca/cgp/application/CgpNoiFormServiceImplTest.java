@@ -282,7 +282,7 @@ public class CgpNoiFormServiceImplTest {
             assertEquals(attachment.getName(), "logback.xml");
             assertEquals(attachment.getCategory(), AttachmentCategory.Default);
             assertNull(attachment.getCromerrAttachmentId());
-            assertTrue(attachment.getCreatedDate().compareTo(start) > 0);
+            assertTrue(attachment.getCreatedDate().compareTo(start) >= 0);
             // test the content is correct
             File data = formService.retrieveAttachmentData(attachment.getId());
             File src = loader.getResource("logback.xml").getFile();
