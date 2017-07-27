@@ -28,19 +28,24 @@
                 </c:forEach>
 
                 oeca.cgp.ctx = "${pageContext.request.contextPath}";
+                oeca.cgp.config = {}
+                <c:forEach items="${actionBean.cgpConfig}" var="entry">
+                oeca.cgp.config['${entry.key}'] = "${entry.value }";
+                </c:forEach>
+
                 <c:choose>
                 <c:when test="${not empty actionBean.user}">
 					oeca.cgp.currentUser = {
 						username: "${actionBean.user.username}",
 						userRoleId: "${actionBean.user.userRoleId}",
-						roleId: "${actionBean.user.roleId}",
+						roleId: "${actionBean.user.roleId}"
 					};
                 </c:when>
                 <c:otherwise>
 					oeca.cgp.currentUser = {
 						username: null,
 						userRoleId: null,
-						roleId: null,
+						roleId: null
 					};
                 </c:otherwise>
                 </c:choose>

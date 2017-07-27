@@ -4,7 +4,7 @@ var DashboardController = function(data, params) {
 	self.data = ko.observableArray([]);
 	self.showFilter = ko.observable(false);
     self.recordsFilteredTotal = ko.observable(0);
-    self.resultLimit = 5000;//this sets result limit on export buttons
+    self.resultLimit = oeca.cgp.config.formExtractLimit;//this sets result limit on export buttons
 	self.criteria = new NoiSearchCriteria({
 		activeRecord: true
 	});
@@ -233,7 +233,7 @@ var DashboardController = function(data, params) {
 		return val !== null ? moment(val, "MM-DD-YYYY").toISOString() : '';
 	};
 	var convertToString = function(val) {
-		return val !== null ? encodeURIComponent(val) : "";
+		return val !== null && val !== undefined ? encodeURIComponent(val) : "";
 	}
 
 	self.exportToExcelLink = function() {

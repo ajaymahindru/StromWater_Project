@@ -37,4 +37,7 @@
 		<entry key="eReporting" value="https://www.epa.gov/npdes/stormwater-discharges-construction-activities#ereporting"/>
 		<entry key="stormwaterCgp" value="https://www.epa.gov/npdes/stormwater-discharges-construction-activities#cgp"/>
 	</util:map>
+    <util:map id="cgpConfiguration">
+        <entry key="formExtractLimit" value="5000"/>
+    </util:map>
 </beans>

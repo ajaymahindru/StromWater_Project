@@ -13,6 +13,7 @@
         <entry key="holdPeriodSeconds" value="1"/>
         <entry key="corUrl" value="http://localhost:9080/oeca-cgp-web/action/secured/cor"/>
         <entry key="icisDataflow" value="ICIS-AIR"/>
+        <entry key="environment" value=""/>
     </util:map>
     <!-- ====================================================================== -->
     <!-- ICIS Job -->
