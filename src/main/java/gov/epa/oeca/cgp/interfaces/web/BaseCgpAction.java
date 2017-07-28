@@ -12,6 +12,9 @@ public class BaseCgpAction extends BaseAction {
     @SpringBean("cgpExternalUrls")
     protected Map<String, String> cgpUrls;
 
+    @SpringBean("cgpConfiguration")
+    protected Map<String, String> cgpConfig;
+
     private String npdesId;
 
     @SpringBean
@@ -31,6 +34,14 @@ public class BaseCgpAction extends BaseAction {
 
     public void setCgpUrls(Map<String, String> cgpUrls) {
         this.cgpUrls = cgpUrls;
+    }
+
+    public Map<String, String> getCgpConfig() {
+        return cgpConfig;
+    }
+
+    public void setCgpConfig(Map<String, String> cgpConfig) {
+        this.cgpConfig = cgpConfig;
     }
 
     public String getNpdesId() {
