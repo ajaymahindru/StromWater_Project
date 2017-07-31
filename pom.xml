@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>gov.epa.oeca</groupId>
         <artifactId>oeca-commons-parent</artifactId>
-        <version>1.1.10-SNAPSHOT</version>
+        <version>1.1.10</version>
     </parent>
     <artifactId>oeca-cgp-web</artifactId>
     <version>1.1.7-SNAPSHOT</version>
@@ -21,21 +22,17 @@
     <!-- Distribution -->
     <!-- =============================================================================================== -->
     <distributionManagement>
-        <site>
-            <id>cvsprime.gotdns.com</id>
-            <url>scp://cvsprime.gotdns.com/data/maven-sites/oeca-cgp-web</url>
-        </site>
         <repository>
             <id>cvsprime.gotdns.com</id>
             <name>cdxmaven2repo</name>
-            <url>scp://cvsprime.gotdns.com/data/maven2</url>
+            <url>file:///F:/data/maven2</url>
         </repository>
     </distributionManagement>
     <!-- =============================================================================================== -->
     <!-- Properties -->
     <!-- =============================================================================================== -->
     <properties>
-        <parent.version>1.1.10-SNAPSHOT</parent.version>
+        <parent.version>1.1.10</parent.version>
     </properties>
     <dependencies>
         <!-- =============================================================================================== -->
