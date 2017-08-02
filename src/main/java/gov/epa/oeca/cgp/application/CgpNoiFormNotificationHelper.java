@@ -45,8 +45,6 @@ public class CgpNoiFormNotificationHelper {
     Map<String, String> cgpExternalUrls;
     @Resource(name = "additionalMailConfiguration")
     Map<String, String> additionalMailConfiguration;
-    @Resource(name = "oecaGeneralConfiguration")
-    Map<String, String> oecaGeneralConfiguration;
     @Autowired
     UserInformationService userInformationService;
     @Autowired
@@ -78,7 +76,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("applicationLink", cgpExternalUrls.get("applicationLink"));
@@ -114,7 +112,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("certifier", certifier);
@@ -144,7 +142,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("raEmail", ra);
@@ -182,7 +180,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("certifier", certifier);
@@ -211,7 +209,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("raEmail", ra);
@@ -251,7 +249,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("raEmail", ra);
@@ -279,7 +277,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("raEmail", ra);
@@ -315,7 +313,7 @@ public class CgpNoiFormNotificationHelper {
             }
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
             model.put("raEmail", ra);
@@ -354,7 +352,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("ownerFirstName", ownerProfile.getFirstName());
             model.put("ownerLastName", ownerProfile.getLastName());
             model.put("form", form);
@@ -385,7 +383,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
 
@@ -410,7 +408,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
 
@@ -435,7 +433,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
 
@@ -460,7 +458,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("form", form);
             model.put("currentDate", LocalDate.now().toString());
 
@@ -484,7 +482,7 @@ public class CgpNoiFormNotificationHelper {
 
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("invitedByFirstName", applicationSecurityUtils.getCurrentApplicationUser().getFirstName());
             model.put("invitedByLastName", applicationSecurityUtils.getCurrentApplicationUser().getLastName());
             model.put("invitedById", applicationSecurityUtils.getCurrentUserId());
@@ -517,7 +515,7 @@ public class CgpNoiFormNotificationHelper {
             }
             // merge model
             Map<String, Object> model = new HashMap<>();
-            model.put("environment", oecaGeneralConfiguration.get("environment"));
+            model.put("environment", additionalMailConfiguration.get("environment"));
             model.put("formType", form.getType().getValue());
             model.put("siteName", form.getFormData().getProjectSiteInformation().getSiteName());
             model.put("npdesId", form.getFormSet().getNpdesId());
