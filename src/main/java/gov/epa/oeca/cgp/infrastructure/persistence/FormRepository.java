@@ -132,7 +132,9 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
         }
         if (criteria.getSiteRegion() != null) {
             // search for all of the permits beginning with the state code of the states in the specified region
+            //or beginning with the specified region number
             List<String> statesInRegion = getStateCodesForRegion(criteria.getSiteRegion().intValue());
+            statesInRegion.add("0" + criteria.getSiteRegion().toString());
             Disjunction permitStates = Restrictions.or();
             for (String state : statesInRegion) {
                 permitStates.add(Restrictions.like("formSets.masterPermitNumber", state, MatchMode.START));
@@ -156,9 +158,11 @@ public class FormRepository extends BaseRepository<CgpNoiForm> {
             }
         } else if (BooleanUtils.isTrue(criteria.getRegulatoryAuthoritySearch())) {
             cr.add(Restrictions.in("status", ApplicationUtils.RA_STATUSES));
-        } else if (!CollectionUtils.isEmpty(criteria.getStatuses())) {
+        }
+        if (!CollectionUtils.isEmpty(criteria.getStatuses())) {
             cr.add(Restrictions.in("status", criteria.getStatuses()));
-        } else if (criteria.getStatus() != null) {
+        }
+        if (criteria.getStatus() != null) {
             cr.add(Restrictions.eq("status", criteria.getStatus()));
         }
         if (criteria.getActiveRecord() != null) {
