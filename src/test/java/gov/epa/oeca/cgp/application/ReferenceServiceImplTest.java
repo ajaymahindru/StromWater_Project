@@ -47,7 +47,7 @@ public class ReferenceServiceImplTest {
     public void retrieveTribes() throws Exception {
         try {
             List<Tribe> tribes = referenceService.retrieveTribes();
-            assertEquals(tribes.size(), 753);
+            assertEquals(tribes.size(), 754);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             fail(e.getMessage());
