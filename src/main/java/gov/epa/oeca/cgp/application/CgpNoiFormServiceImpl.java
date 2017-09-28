@@ -10,9 +10,10 @@ import gov.epa.oeca.cgp.domain.noi.*;
 import gov.epa.oeca.cgp.domain.noi.formsections.PointOfDischarge;
 import gov.epa.oeca.cgp.domain.noi.formsections.Pollutant;
 import gov.epa.oeca.cgp.domain.noi.formsections.Tier;
-import gov.epa.oeca.common.domain.document.Document;
-import gov.epa.oeca.common.domain.node.TransactionStatus;
-import gov.epa.oeca.cgp.domain.ref.*;
+import gov.epa.oeca.cgp.domain.ref.MgpRule;
+import gov.epa.oeca.cgp.domain.ref.NpdesSequence;
+import gov.epa.oeca.cgp.domain.ref.TribalOverride;
+import gov.epa.oeca.cgp.domain.ref.Tribe;
 import gov.epa.oeca.cgp.infrastructure.certification.CromerrService;
 import gov.epa.oeca.cgp.infrastructure.cor.CopyOfRecordGeneratorService;
 import gov.epa.oeca.cgp.infrastructure.icis.IcisSubmissionService;
@@ -23,6 +24,8 @@ import gov.epa.oeca.cgp.infrastructure.user.UserInformationService;
 import gov.epa.oeca.cgp.security.ApplicationSecurityUtils;
 import gov.epa.oeca.common.ApplicationErrorCode;
 import gov.epa.oeca.common.ApplicationException;
+import gov.epa.oeca.common.domain.document.Document;
+import gov.epa.oeca.common.domain.node.TransactionStatus;
 import gov.epa.oeca.common.infrastructure.notification.NotificationService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
@@ -693,6 +696,8 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             }
             // update the form
             formRepository.update(forCertification);
+            // update the index
+            updateFormDataIndex(forCertification);
 
             // send notifications
             //get copy of record
