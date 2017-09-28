@@ -694,10 +694,10 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
                 attachmentRepository.deleteData(a); // remove the blob since it's in CROMERR now
                 attachmentRepository.update(a); // save the cromerr document ID from certification
             }
-            // update the form
-            formRepository.update(forCertification);
             // update the index
             updateFormDataIndex(forCertification);
+            // update the form
+            formRepository.update(forCertification);
 
             // send notifications
             //get copy of record
