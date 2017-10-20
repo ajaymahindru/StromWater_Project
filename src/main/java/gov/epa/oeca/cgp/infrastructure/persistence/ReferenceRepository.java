@@ -4,12 +4,16 @@ package gov.epa.oeca.cgp.infrastructure.persistence;
 import gov.epa.oeca.cgp.domain.noi.formsections.Pollutant;
 import gov.epa.oeca.cgp.domain.noi.formsections.ReceivingWater;
 import gov.epa.oeca.cgp.domain.ref.*;
+
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
+import javax.persistence.LockModeType;
 
 /**
  * @author dfladung
@@ -19,6 +23,7 @@ public class ReferenceRepository {
 
     @Autowired
     SessionFactory cgpSessionFactory;
+    
     @Autowired
     JdbcTemplate jdbcTemplate;
 
@@ -33,15 +38,23 @@ public class ReferenceRepository {
                 .createQuery("from MgpRule where stateCode = ?")
                 .setParameter(0, stateCode).uniqueResult();
     }
-
-    public NpdesSequence retrieveNextNpdesSequence(String mgpNumber) {
-        return (NpdesSequence) cgpSessionFactory.getCurrentSession()
+    
+    public String generateNpdesId(String masterPermitNumber) {
+    	Session session = cgpSessionFactory.getCurrentSession();    	
+    	// Retrieve current sequence with FOR UPDATE pessimistic lock
+    	NpdesSequence seq = (NpdesSequence) cgpSessionFactory.getCurrentSession()
                 .createQuery("from NpdesSequence where mgpNumber = ?")
-                .setParameter(0, mgpNumber).uniqueResult();
-    }
-
-    public void updateNpdesSequence(NpdesSequence sequence) {
-        cgpSessionFactory.getCurrentSession().update(sequence);
+                .setLockMode(LockModeType.PESSIMISTIC_WRITE)
+                .setParameter(0, masterPermitNumber).uniqueResult();
+    	session.refresh(seq);
+    	// Calculate next id
+        String result = masterPermitNumber.substring(0, masterPermitNumber.length() - 3) + seq.getNpdesAlphaStart();
+        char[] str = seq.getNpdesAlphaStart().toCharArray();
+        seq.setNpdesAlphaStart(NpdesSequence.incrementNpdesSeq(str));    	
+        // Update sequence in db
+    	session.update(seq);
+    	session.flush();
+    	return result;
     }
 
     @SuppressWarnings("unchecked")
@@ -92,7 +105,6 @@ public class ReferenceRepository {
                 .getResultList();
     }
 
-    @SuppressWarnings("unchecked")
     public Tribe retrieveTribeByLandNameAndStateCode(String tribalLandName, String stateCode) {
         return (Tribe) cgpSessionFactory.getCurrentSession()
                 .createQuery("select t from Tribe t join t.states ts where t.tribalName = ? and ts.stateCode = ? order by t.tribalName")
