@@ -317,7 +317,8 @@ public class CgpNoiFormServiceImplTest {
             Thread.sleep(1500);// for the expiration period.
             CgpNoiForm certified = formService.retrieveForm(id);
             assertEquals(Status.Submitted, certified.getStatus());
-            assertEquals("MAR10I001", certified.getFormSet().getNpdesId());
+            //assertEquals("MAR10I001", certified.getFormSet().getNpdesId());
+            assertNotNull(certified.getFormSet().getNpdesId());
             assertTrue(certified.getCertifiedDate().compareTo(start) > 0);
             assertTrue(certified.getLastUpdatedDate().compareTo(start) > 0);
             assertTrue(certified.getReviewExpiration().compareTo(start) > 0);
@@ -393,7 +394,8 @@ public class CgpNoiFormServiceImplTest {
             formService.certifyForm(noticeOfTermination.getId(), noticeOfTermination.getCromerrActivityId());
             Thread.sleep(1500);// for the expiration period.
             assertEquals(Status.Submitted, noticeOfTermination.getStatus());
-            assertEquals("MAR10I001", noticeOfTermination.getFormSet().getNpdesId());
+            //assertEquals("MAR10I001", noticeOfTermination.getFormSet().getNpdesId());
+            assertNotNull(noticeOfTermination.getFormSet().getNpdesId());
             assertTrue(noticeOfTermination.getCertifiedDate().compareTo(start) > 0);
             assertTrue(noticeOfTermination.getLastUpdatedDate().compareTo(start) > 0);
             assertTrue(noticeOfTermination.getReviewExpiration().compareTo(start) > 0);
@@ -450,7 +452,8 @@ public class CgpNoiFormServiceImplTest {
             formService.certifyForm(lewDiscontinuation.getId(), lewDiscontinuation.getCromerrActivityId());
             Thread.sleep(1500);// for the expiration period.
             assertEquals(Status.Submitted, lewDiscontinuation.getStatus());
-            assertEquals("VAR10I178", lewDiscontinuation.getFormSet().getNpdesId());
+            //assertEquals("VAR10I178", lewDiscontinuation.getFormSet().getNpdesId());
+            assertNotNull(lewDiscontinuation.getFormSet().getNpdesId());
             assertTrue(lewDiscontinuation.getCertifiedDate().compareTo(start) > 0);
             assertTrue(lewDiscontinuation.getLastUpdatedDate().compareTo(start) > 0);
             assertTrue(lewDiscontinuation.getReviewExpiration().compareTo(start) > 0);
@@ -1134,7 +1137,8 @@ public class CgpNoiFormServiceImplTest {
             formService.certifyForm(changeNoi.getId(), activityId);
             Thread.sleep(1500);// for the expiration period.
             assertEquals(Status.Submitted, changeNoi.getStatus());
-            assertEquals("MAR10I001", changeNoi.getFormSet().getNpdesId());
+            //assertEquals("MAR10I001", changeNoi.getFormSet().getNpdesId());
+            assertNotNull(changeNoi.getFormSet().getNpdesId());
             assertTrue(changeNoi.getCertifiedDate().compareTo(start) > 0);
             assertTrue(changeNoi.getLastUpdatedDate().compareTo(start) > 0);
             assertTrue(changeNoi.getReviewExpiration().compareTo(start) > 0);
@@ -1266,7 +1270,8 @@ public class CgpNoiFormServiceImplTest {
             formService.certifyForm(noticeOfTermination.getId(), activityId);
             Thread.sleep(1500);// for the expiration period.
             assertEquals(Status.Submitted, noticeOfTermination.getStatus());
-            assertEquals("MAR10I001", noticeOfTermination.getFormSet().getNpdesId());
+            //assertEquals("MAR10I001", noticeOfTermination.getFormSet().getNpdesId());
+            assertNotNull(noticeOfTermination.getFormSet().getNpdesId());
             assertTrue(noticeOfTermination.getCertifiedDate().compareTo(start) > 0);
             assertTrue(noticeOfTermination.getLastUpdatedDate().compareTo(start) > 0);
             assertTrue(noticeOfTermination.getReviewExpiration().compareTo(start) > 0);
@@ -1336,7 +1341,8 @@ public class CgpNoiFormServiceImplTest {
             CgpNoiForm certified = formService.retrieveForm(id);
             assertEquals(Status.Submitted, certified.getStatus());
             assertNotNull(certified.getCromerrActivityId());
-            assertEquals("VAR10I178", certified.getFormSet().getNpdesId());
+            //assertEquals("VAR10I178", certified.getFormSet().getNpdesId());
+            assertNotNull(certified.getFormSet().getNpdesId());
             assertTrue(certified.getCertifiedDate().compareTo(start) > 0);
             assertTrue(certified.getLastUpdatedDate().compareTo(start) > 0);
             assertTrue(certified.getReviewExpiration().compareTo(start) > 0);
@@ -1448,7 +1454,8 @@ public class CgpNoiFormServiceImplTest {
             formService.certifyForm(changeLew.getId(), activityId);
             Thread.sleep(1500);// for the expiration period.
             assertEquals(Status.Submitted, changeLew.getStatus());
-            assertEquals("VAR10I178", changeLew.getFormSet().getNpdesId());
+            //assertEquals("VAR10I178", changeLew.getFormSet().getNpdesId());
+            assertNotNull(changeLew.getFormSet().getNpdesId());
             assertTrue(changeLew.getCertifiedDate().compareTo(start) > 0);
             assertTrue(changeLew.getLastUpdatedDate().compareTo(start) > 0);
             assertTrue(changeLew.getReviewExpiration().compareTo(start) > 0);
@@ -1468,4 +1475,24 @@ public class CgpNoiFormServiceImplTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    public void testCertifyNpdesGeneration() throws Exception {
+        try {
+            // setup
+            applicationSecurityUtils.mockCertifier("DFLADUNG", "david.fladung@cgifederal.com", "David", "Fladung");
+            CgpNoiForm newForm = getForm("test-data/new-noi-form-deterministic-npdesid.json");
+            Long id = formService.createNewNoticeOfIntent(newForm).getId();
+            // simulate the activity creation step
+            String activityId = cromerrService.createActivity(applicationSecurityUtils.getCurrentApplicationUser());
+            // certify the NOI
+            formService.certifyForm(id, activityId);
+            CgpNoiForm certified = formService.retrieveForm(id);
+            assertEquals("NMR10I001", certified.getFormSet().getNpdesId());
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            fail(e.getMessage());
+        }
+    }
+
 }
