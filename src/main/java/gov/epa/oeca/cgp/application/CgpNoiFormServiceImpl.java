@@ -657,12 +657,6 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             }
             Validate.notEmpty(activityId, "CROMERR activity ID must be created in advance.");
 
-            // assign a NPDES ID if it hasn't already been created
-            if (StringUtils.isEmpty(formSet.getNpdesId())) {
-                formSet.setNpdesId(referenceService.generateNpdesId(formSet.getMasterPermitNumber()));
-                formSetRepository.update(formSet);
-            }
-
             // update the form
             forCertification.setStatus(Status.Submitted);
             forCertification.setCertifiedDate(ZonedDateTime.now());
@@ -674,6 +668,12 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
                 validationHelper.validateNoiForCertification(forCertification);
             } else {
                 validationHelper.validateLewForCertification(forCertification);
+            }
+
+            // assign a NPDES ID if it hasn't already been created
+            if (StringUtils.isEmpty(formSet.getNpdesId())) {
+                formSet.setNpdesId(referenceService.generateNpdesId(formSet.getMasterPermitNumber()));
+                formSetRepository.update(formSet);
             }
 
             // add CoR as an attachment
@@ -829,12 +829,6 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
                     Status.Draft.equals(toSubmit.getStatus()),
                     "Only drafts can be submitted.");
 
-            // assign a NPDES ID if it hasn't already been created
-            if (StringUtils.isEmpty(formSet.getNpdesId())) {
-                formSet.setNpdesId(referenceService.generateNpdesId(formSet.getMasterPermitNumber()));
-                formSetRepository.update(formSet);
-            }
-
             // update the form
             toSubmit.setStatus(Status.Submitted);
             toSubmit.setLastUpdatedDate(ZonedDateTime.now());
@@ -844,6 +838,13 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             } else {
                 validationHelper.validateLewForSubmission(toSubmit);
             }
+
+            // assign a NPDES ID if it hasn't already been created
+            if (StringUtils.isEmpty(formSet.getNpdesId())) {
+                formSet.setNpdesId(referenceService.generateNpdesId(formSet.getMasterPermitNumber()));
+                formSetRepository.update(formSet);
+            }
+
             formRepository.update(toSubmit);
 
             // send notifications
