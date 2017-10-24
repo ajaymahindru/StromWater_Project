@@ -42,8 +42,7 @@ public class ReferenceRepository {
     public String generateNpdesId(String masterPermitNumber) {
     	Session session = cgpSessionFactory.getCurrentSession();    	
     	// Retrieve current sequence with FOR UPDATE pessimistic lock
-    	NpdesSequence seq = (NpdesSequence) cgpSessionFactory.getCurrentSession()
-                .createQuery("from NpdesSequence where mgpNumber = ?")
+    	NpdesSequence seq = (NpdesSequence) session.createQuery("from NpdesSequence where mgpNumber = ?")
                 .setLockMode(LockModeType.PESSIMISTIC_WRITE)
                 .setParameter(0, masterPermitNumber).uniqueResult();
     	session.refresh(seq);
