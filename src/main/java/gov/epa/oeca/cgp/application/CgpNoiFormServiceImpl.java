@@ -659,7 +659,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
 
             // assign a NPDES ID if it hasn't already been created
             if (StringUtils.isEmpty(formSet.getNpdesId())) {
-                formSet.setNpdesId(generateNpdesId(formSet.getMasterPermitNumber()));
+                formSet.setNpdesId(referenceService.generateNpdesId(formSet.getMasterPermitNumber()));
                 formSetRepository.update(formSet);
             }
 
@@ -831,7 +831,7 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
 
             // assign a NPDES ID if it hasn't already been created
             if (StringUtils.isEmpty(formSet.getNpdesId())) {
-                formSet.setNpdesId(generateNpdesId(formSet.getMasterPermitNumber()));
+                formSet.setNpdesId(referenceService.generateNpdesId(formSet.getMasterPermitNumber()));
                 formSetRepository.update(formSet);
             }
 
@@ -1213,15 +1213,6 @@ public class CgpNoiFormServiceImpl implements CgpNoiFormService {
             logger.error(e.getMessage(), e);
             throw ApplicationException.asApplicationException(e);
         }
-    }
-
-    String generateNpdesId(String masterPermitNumber) {
-        NpdesSequence seq = referenceService.retrieveNextNpdesSequence(masterPermitNumber);
-        String result = masterPermitNumber.substring(0, masterPermitNumber.length() - 3) + seq.getNpdesAlphaStart();
-        char[] str = seq.getNpdesAlphaStart().toCharArray();
-        seq.setNpdesAlphaStart(NpdesSequence.incrementNpdesSeq(str));
-        referenceService.updateNpdesSequence(seq);
-        return result;
     }
 
     String determineMasterPermitNumber(CgpNoiForm form) {

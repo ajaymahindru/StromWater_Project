@@ -45,9 +45,7 @@ public interface ReferenceService {
 
     MgpRule retrieveRule(String stateCode) throws ApplicationException;
 
-    NpdesSequence retrieveNextNpdesSequence(String mgpNumber) throws ApplicationException;
-
-    void updateNpdesSequence(NpdesSequence sequence) throws ApplicationException;
+    String generateNpdesId(String masterPermitNumber) throws ApplicationException;
 
     List<Subscriber> retrieveSubscribers() throws ApplicationException;
 

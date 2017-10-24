@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -269,24 +271,14 @@ public class ReferenceServiceImpl implements ReferenceService {
     }
 
     @Override
-    public NpdesSequence retrieveNextNpdesSequence(String mgpNumber) throws ApplicationException {
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, isolation = Isolation.READ_COMMITTED)
+	public String generateNpdesId(String masterPermitNumber) throws ApplicationException {
         try {
-            return referenceRepository.retrieveNextNpdesSequence(mgpNumber);
+        	return referenceRepository.generateNpdesId(masterPermitNumber);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             throw ApplicationException.asApplicationException(e);
-        }
-    }
-
-    @Override
-    @Transactional
-    public void updateNpdesSequence(NpdesSequence sequence) throws ApplicationException {
-        try {
-            referenceRepository.updateNpdesSequence(sequence);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            throw ApplicationException.asApplicationException(e);
-        }
+        }    	
     }
 
     @Override
