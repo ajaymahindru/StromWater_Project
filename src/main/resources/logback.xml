@@ -3,7 +3,6 @@
         <file>${log.home}/@project.artifactId@/@project.artifactId@.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.home}/@project.artifactId@/@project.artifactId@.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss,SSS} %-5p [%c] %m%n</pattern>
@@ -14,7 +13,6 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${log.home}/@project.artifactId@/@project.artifactId@-security.%d{yyyy-MM-dd}.log
             </fileNamePattern>
-            <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss,SSS} %-5p [%c] %m%n</pattern>
