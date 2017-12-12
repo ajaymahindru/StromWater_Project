@@ -935,7 +935,7 @@
                                             <div class="checkbox">
                                                 <label>
                                                     <input type="checkbox" id="termsCheck" value="1" data-bind="checked: termsCheck">
-                                                    Agree to the
+                                                    I am this registrant. I will not share my account, and I accept the
                                                     <a role="button" data-toggle="modal" data-target="#termsModal">Terms and Conditions</a>
                                                 </label>
                                             </div>
