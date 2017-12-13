@@ -18,6 +18,9 @@ public class ServiceEvent extends BaseEntity implements Serializable {
 	@Column(name = "user_id", nullable = false)
 	protected String userId;
 
+    @Column(name = "form_id")
+    protected Long formId;
+
 	@Column(name = "service", nullable = false)
 	protected String service;
 
@@ -62,7 +65,15 @@ public class ServiceEvent extends BaseEntity implements Serializable {
 		this.userId = userId;
 	}
 
-	public String getMethod() {
+    public Long getFormId() {
+        return formId;
+    }
+
+    public void setFormId(Long formId) {
+        this.formId = formId;
+    }
+
+    public String getMethod() {
 		return method;
 	}
 

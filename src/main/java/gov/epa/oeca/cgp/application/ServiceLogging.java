@@ -95,8 +95,14 @@ public class ServiceLogging {
             event.setStatus(status);
             event.setErrorCode(errorCode);
             event.setErrorMessage(errorMessage);
+            for (int i = 0; i < signature.getParameterNames().length; i++) {
+                if(StringUtils.containsIgnoreCase(signature.getParameterNames()[i], "formid")) {
+                    Long formId = pjp.getArgs()[i] == null ? null : Long.parseLong(pjp.getArgs()[i].toString());
+                    event.setFormId(formId);
+                    break;
+                }
+            }
             serviceLoggingRepository.createServiceEvent(event);
         }
     }
-
 }
